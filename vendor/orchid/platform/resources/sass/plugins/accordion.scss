@@ -1,0 +1,15 @@
+.accordion-heading {
+    .btn:hover {
+        text-decoration: none;
+    }
+
+    svg {
+       transition: all 340ms;
+    }
+
+    &:not(.collapsed) {
+        svg {
+            transform: rotate(90deg);
+        }
+    }
+}

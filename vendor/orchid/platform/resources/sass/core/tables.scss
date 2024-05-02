@@ -1,0 +1,76 @@
+.table {
+    @extend .rounded;
+    overflow: hidden;
+  thead {
+    tr {
+      th {
+        font-weight: 600;
+        font-size: 0.9em;
+        vertical-align: baseline;
+		border-top: 0;
+        color: fade-out($dark, .45);
+        &:first-child {
+          padding-left: 1.5rem !important;
+        }
+        &:last-child {
+            padding-right: 1.5rem !important;
+        }
+        .form-group.row {
+            select.form-control {
+                padding-left: 0.6rem;
+            }
+            input.form-control {
+                padding: 0 0.3rem;
+            }
+        }
+        .btn-link {
+            &:hover, &:focus {
+                text-decoration: initial !important;
+            }
+        }
+        .dropdown{
+          position: inherit;
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        border-top: 0;
+        padding: 0.8rem 1rem;
+        font-size: $font-size-sm;
+        vertical-align: middle;
+        word-break: break-all;
+          &:first-child {
+              padding-left: 1.5rem !important;
+          }
+          &:last-child {
+              padding-right: 1.5rem !important;
+          }
+          > div > .form-group > .btn {
+              display: inline-flex;
+              width: auto;
+              @extend .btn-sm;
+          }
+      }
+    }
+  }
+}
+
+.table-compact {
+  // stylelint-disable-next-line selector-max-universal
+  > :not(caption) > * > * {
+    padding: $table-cell-padding-y-sm $table-cell-padding-x-sm !important;
+  }
+}
+
+.fht-table {
+  margin-bottom: 0 !important;
+}
+
+.table-notification {
+    .table tbody tr td {
+        padding: 0!important
+    }
+}

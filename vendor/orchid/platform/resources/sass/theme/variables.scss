@@ -1,0 +1,173 @@
+// Colors
+$orchid-color: #007bff; //#ac5ca0;
+
+
+$white: #ffffff;
+$black: #15141a;
+
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #28a745 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+
+$primary: $orchid-color;
+$secondary: #6c757d !default;
+$light: #f8f9fa !default;
+$dark: #1c1b22;
+$grey: #495057;
+
+$grey-light: mix($grey, #ffffff, 10%);
+
+$body-bg: #edeef0; //lighten($light, 1%);
+$text-color: #394247;
+$text-muted: lighten($text-color, 20%);
+
+$font-size-root:              .925rem;
+$font-size-base:              1rem;
+$font-size-sm:                $font-size-base * .875;
+$font-size-lg:                $font-size-base * 1.25;
+
+
+$link-color: darken($text-color, 15%);
+$link-hover-color: darken($text-color, 30%);
+
+$dropdown-bg: $white;
+$dropdown-border-radius: 0.35rem;
+$border-radius-base: 0.2rem;
+$border-color: darken($light, 5%);
+
+
+// Buttons
+// -------------------------
+
+$btn-default-color: $text-color;
+$btn-default-bg: lighten($light, 5%);
+$btn-default-border: $border-color;
+$btn-border-radius: $border-radius-base;
+$btn-close-focus-shadow: none;
+
+$input-height: 2.45rem;
+$input-border: darken($border-color, 5%);
+$input-border-focus: $cyan;
+$input-border-radius: $border-radius-base;
+$input-group-addon-border-color: $border-color;
+
+$panel-bg: #ffffff;
+$panel-border: $border-color;
+$panel-heading-border: lighten($border-color, 5%);
+$panel-list-group-border: lighten($border-color, 5%);
+$panel-border-radius: $border-radius-base;
+$panel-heading-bg: lighten($light, 3%);
+$panel-footer-bg: #ffffff;
+
+$nav-bg: lighten($light, 3%);
+$nav-bg-black: #313d4f;
+$badge-bg: darken($light, 10%);
+
+$list-group-bg: $white;
+$list-group-item-border: lighten($border-color, 3%);
+$list-group-item-hover: lighten($light, 3%);
+$list-group-item-focus: darken($light, 3%);
+$list-group-select-color: #dbeef9;
+$list-group-active-color: $cyan;
+
+
+$table-bg: $white;
+$table-border-color: lighten($border-color, 2%);
+$table-group-separator-color: lighten($border-color, 2%);
+$table-striped-color: lighten($dark, 4.5%);
+$table-hover-bg: rgba($dark, .045) !default;
+
+$app-aside-min-width: 20em;
+$app-aside-width: 280px;
+$aside-wrap-main-width: 0px;
+$app-aside-nav-height: 40px; //2,857rem;
+$app-aside-folded-width: 60px;
+$app-aside-folded-nav-height: 50px; //3.57rem;
+$app-aside-dock-media: 992px;
+
+$scroll-bar-width: 17px;
+$butterbar-height: 3px;
+$butterbar-time: 0.75s;
+
+$off-screen-width: 75%;
+
+$menu-bezier: 0.05, 0.74, 0.27, 0.99;
+$menu-light: #fafafa;
+
+//Forms
+$form-height: 35px;
+$form-group-height: 54px;
+$form-control-border-color: fade-out($black, 0.9);
+$input-padding-y: .5rem;
+$input-padding-x: .75rem;
+$form-check-input-width: 1.2em;
+
+$tablet: 768px;
+$desktop: 1280px;
+$widescreen: 1600px;
+
+//DateTimePicker
+$btn-primary-color: #ffffff;
+$btn-primary-bg: $primary;
+$gray-lighter: #eeeeee;
+$gray-light: #777777;
+
+$screen-sm-min: 480px;
+$screen-md-min: 768px;
+$screen-lg-min: 1024px;
+
+//Bootstrap
+$enable-caret: false;
+
+//Border
+$border-radius: .5rem;
+$border-radius-lg: 0.685rem;
+$border-radius-sm: .35rem;
+
+// Pagination
+$pagination-bg: $white;
+$pagination-disabled-bg: $white;
+$pagination-disabled-color: $text-muted;
+
+
+// Responsive font sizes
+$enable-responsive-font-sizes: true;
+
+
+// Navigation
+$nav-link-padding-y: .625rem;
+
+// Breadcrumbs
+$breadcrumb-active-color: #495057;
+
+// modals
+
+$modal-content-bg: $white;
+$modal-backdrop-opacity: .75;
+$modal-content-border-width: 0;
+
+
+$popover-bg: $white;
+
+
+$utilities: (
+    'line-clamp': (
+        property: -webkit-line-clamp,
+        class: line-clamp,
+        responsive: true,
+        values: (
+            1: 1,
+            2: 2,
+            3: 3,
+            4: 4,
+            5: 5,
+        ),
+    ),
+);

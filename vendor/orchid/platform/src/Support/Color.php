@@ -1,0 +1,62 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Orchid\Support;
+
+/**
+ * This class represents a list of colors.
+ */
+enum Color
+{
+    // All available colors
+    case INFO;
+    case SUCCESS;
+    case WARNING;
+    case BASIC;
+    case DEFAULT;
+    case DANGER;
+    case PRIMARY;
+    case SECONDARY;
+    case LIGHT;
+    case DARK;
+    case LINK;
+    case ERROR;
+
+    /**
+     * This method returns the name of the given color.
+     *
+     * @return string
+     */
+    public function name(): string
+    {
+        return match ($this) {
+            Color::INFO    => 'info',
+            Color::SUCCESS => 'success',
+            Color::WARNING => 'warning',
+            Color::BASIC, Color::DEFAULT => 'default',
+            Color::DANGER, Color::ERROR => 'danger',
+            Color::PRIMARY   => 'primary',
+            Color::SECONDARY => 'secondary',
+            Color::LIGHT     => 'light',
+            Color::DARK      => 'dark',
+            Color::LINK      => 'link',
+        };
+    }
+
+    /**
+     * This method returns the color based on the given name.
+     * It is used to maintain backwards compatibility to 13.0.
+     *
+     * @param string $name
+     * @param array  $arguments
+     *
+     * @return \Closure|\Orchid\Support\Color
+     */
+    public static function __callStatic($name, $arguments)
+    {
+        return collect(Color::cases())
+            ->filter(fn (Color $color) => $color->name === $name)
+            ->first() ?? Color::BASIC;
+    }
+}
