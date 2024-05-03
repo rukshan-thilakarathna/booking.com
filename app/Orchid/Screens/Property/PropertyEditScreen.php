@@ -6,11 +6,17 @@ use App\Orchid\Layouts\Property\ContactEditLayout;
 use App\Orchid\Layouts\Property\PropertyEditLayout;
 use App\Orchid\Layouts\Property\SocialMediaEditLayout;
 use App\Orchid\Layouts\User\UserEditLayout;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
+use Orchid\Support\Facades\Toast;
 
 class PropertyEditScreen extends Screen
 {
@@ -60,6 +66,7 @@ class PropertyEditScreen extends Screen
      */
     public function layout(): array
     {
+
         return [
             \Orchid\Support\Facades\Layout::block(PropertyEditLayout::class)
             ->title(__('Property Information'))
@@ -72,7 +79,13 @@ class PropertyEditScreen extends Screen
             \Orchid\Support\Facades\Layout::block(SocialMediaEditLayout::class)
                 ->title(__('Social Media Information'))
                 ->description(__('Update your account\'s profile information and email address.')),
-
         ];
+
+    }
+
+    public function save(Request $request)
+    {
+        dd($request);
+        return redirect()->route('platform.systems.users');
     }
 }
