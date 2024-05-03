@@ -41,8 +41,6 @@
                     @includeWhen(Auth::check(), 'platform::partials.profile')
                 </div>
 
-
-
             </footer>
         </nav>
     </div>

@@ -18,7 +18,29 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'mobile_number',
+        'nic_or_passport_number',
+        'profile_image',
+        'status',
     ];
+
+    public function bookings()
+    {
+        return $this->hasMany(Bookings::class);
+    }
+    public function payament()
+    {
+        return $this->hasMany(Payment::class);
+    }
+    public function properties()
+    {
+        return $this->hasMany(Properties::class);
+    }
+    public function userPoint()
+    {
+        return $this->hasMany(Users_Point::class);
+    }
 
     /**
      * The attributes excluded from the model's JSON form.
