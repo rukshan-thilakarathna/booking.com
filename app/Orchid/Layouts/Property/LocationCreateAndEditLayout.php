@@ -17,7 +17,7 @@ use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
 
-class LocationEditLayout extends Rows
+class LocationCreateAndEditLayout extends Rows
 {
     /**
      * The screen's layout elements.
@@ -27,17 +27,17 @@ class LocationEditLayout extends Rows
     public function fields(): array
     {
         return [
-            Relation::make('main_location')
+            Relation::make('property.main_location')
                 ->fromModel(Districts::class, 'name_en')
                 ->required()
                 ->title(__('Distric')),
 
-            Relation::make('sub_location')
+            Relation::make('property.sub_location')
                 ->fromModel(Cities::class, 'name_en')
                 ->required()
                 ->title(__('City')),
 
-            Input::make('address')
+            Input::make('property.address')
                 ->type('text')
                 ->title('Address'),
         ];

@@ -15,7 +15,7 @@ use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
 
-class PropertyUserEditLayout extends Rows
+class PropertyAddUserLayout extends Rows
 {
     /**
      * The screen's layout elements.
@@ -27,7 +27,7 @@ class PropertyUserEditLayout extends Rows
         $property_owners = User::where('role', 'property-owner')->get()->pluck('name', 'id');
 
         return [
-            Select::make('user_id')
+            Select::make('property.user_id')
                 ->options($property_owners)
                 ->title(__('Property Owner'))
                 ->required(),

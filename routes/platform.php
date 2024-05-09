@@ -12,7 +12,7 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
-use App\Orchid\Screens\Property\PropertyCreateScreen;
+use App\Orchid\Screens\Property\PropertyCreateAndEditScreen;
 use App\Orchid\Screens\Property\PropertyListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -85,14 +85,12 @@ Route::screen('roles/create', RoleEditScreen::class)
         ->parent('platform.systems.roles')
         ->push(__('Create'), route('platform.systems.roles.create')));
 
-
 // Platform > System > Roles
 Route::screen('roles', RoleListScreen::class)
     ->name('platform.systems.roles')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push(__('Roles'), route('platform.systems.roles')));
-
 
 //properties
 Route::screen('properties',PropertyListScreen::class)
@@ -101,11 +99,17 @@ Route::screen('properties',PropertyListScreen::class)
         ->parent('platform.index')
         ->push(__('properties'), route('properties')));
 
-Route::screen('property/create',PropertyCreateScreen::class)
+Route::screen('property/create',PropertyCreateAndEditScreen::class)
     ->name('property.create')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('properties')
         ->push(__('Create'), route('property.create')));
+
+Route::screen('property/{property}/edit',PropertyCreateAndEditScreen::class)
+    ->name('property.edit')
+    ->breadcrumbs(fn (Trail $trail, $property) => $trail
+        ->parent('properties')
+        ->push($property->name, route('property.edit', $property)));
 
 
 

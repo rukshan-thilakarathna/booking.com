@@ -77,7 +77,7 @@ class PropertiesListLayout extends Table
                     ->icon('bs.three-dots-vertical')
                     ->list([
                         Link::make(__('Edit'))
-                            ->route('platform.systems.users.edit', $properties->id)
+                            ->route('property.edit', $properties->id)
                             ->icon('bs.pencil'),
 
                         ModalToggle::make('View')

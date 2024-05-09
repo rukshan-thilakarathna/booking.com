@@ -12,7 +12,7 @@ use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
 
-class ContactEditLayout extends Rows
+class ContactCreateAndEditLayout extends Rows
 {
     /**
      * The screen's layout elements.
@@ -22,8 +22,7 @@ class ContactEditLayout extends Rows
     public function fields(): array
     {
         return [
-
-            Input::make('email')
+            Input::make('property.email')
                 ->type('email')
                 ->title('Email')
                 ->required()
@@ -31,20 +30,18 @@ class ContactEditLayout extends Rows
                 ->placeholder('example@example.com')
                 ->help('Enter your email address.'),
 
-            Input::make('contact_number')
+            Input::make('property.contact_number')
                 ->type('tel')
                 ->title('Contact Number')
                 ->required()
                 ->placeholder('Enter phone number')
                 ->help('Enter your phone number.'),
 
-            Input::make('whatsapp_numner')
+            Input::make('property.whatsapp_numner')
                 ->type('tel')
                 ->title('Whatsapp Number')
                 ->placeholder('Enter Whatsapp Number')
                 ->help('Enter your Whatsapp Number.'),
-
-
         ];
     }
 }

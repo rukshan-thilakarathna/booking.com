@@ -11,7 +11,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Rows;
 
-class SocialMediaEditLayout extends Rows
+class SocialMediaCreateAndEditLayout extends Rows
 {
     /**
      * The screen's layout elements.
@@ -21,31 +21,31 @@ class SocialMediaEditLayout extends Rows
     public function fields(): array
     {
         return [
-            Input::make('facebook_link')
+            Input::make('property.facebook_link')
                 ->type('url')
                 ->title('Facebook Link')
                 ->placeholder('https://example.com')
                 ->help('Enter your facebook profile link.'),
 
-            Input::make('tiktok_link')
+            Input::make('property.tiktok_link')
                 ->type('url')
                 ->title('Tiktok Link')
                 ->placeholder('https://example.com')
                 ->help('Enter your tiktok profile link.'),
 
-            Input::make('linkedin_link')
+            Input::make('property.linkedin_link')
                 ->type('url')
                 ->title('Linkedin Link')
                 ->placeholder('https://example.com')
                 ->help('Enter your Linkedin profile link.'),
 
-            Input::make('instagram_link')
+            Input::make('property.instagram_link')
                 ->type('url')
                 ->title('Instagram Link')
                 ->placeholder('https://example.com')
                 ->help('Enter your Instagram profile link.'),
 
-            Input::make('twitter_link')
+            Input::make('property.twitter_link')
                 ->type('url')
                 ->title('Twitter Link')
                 ->placeholder('https://example.com')

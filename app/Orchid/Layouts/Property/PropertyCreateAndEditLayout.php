@@ -14,7 +14,7 @@ use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
 
-class PropertyEditLayout extends Rows
+class PropertyCreateAndEditLayout extends Rows
 {
     /**
      * The screen's layout elements.
@@ -24,19 +24,19 @@ class PropertyEditLayout extends Rows
     public function fields(): array
     {
         return [
-            Select::make('type')
+            Select::make('property.type')
                 ->fromModel(PropertyType::class, 'name')
                 ->title(__('Property Type'))
                 ->required(),
 
-               Input::make('name')
+               Input::make('property.name')
                    ->type('text')
                    ->max(255)
                    ->required()
-                   ->title(__('Property Name'))
+                   ->title(__('property Name'))
                    ->placeholder(__('Name')),
 
-               TextArea::make('description')
+               TextArea::make('property.description')
                    ->title('Example Description')
                    ->rows(6),
 

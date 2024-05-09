@@ -3,6 +3,7 @@ namespace App\Orchid\Screens\Property;
 
 use App\Models\Properties;
 use App\Orchid\Layouts\Property\PropertiesListLayout;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -11,6 +12,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class PropertyListScreen extends Screen
 {
@@ -78,5 +80,12 @@ class PropertyListScreen extends Screen
         return [
            PropertiesListLayout::class
         ];
+    }
+
+    public function remove(Request $request): void
+    {
+        Properties::findOrFail($request->get('id'))->delete();
+
+        Toast::info(__('Property was removed'));
     }
 }
