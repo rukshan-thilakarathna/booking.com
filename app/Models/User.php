@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
 use Orchid\Filters\Types\WhereDateStartEnd;
@@ -16,9 +17,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'url',
         'email',
+        'main_location',
+        'sub_location',
+        'address',
         'password',
-        'username',
+        'role',
         'mobile_number',
         'nic_or_passport_number',
         'profile_image',
@@ -63,29 +68,17 @@ class User extends Authenticatable
         'email_verified_at'    => 'datetime',
     ];
 
-    /**
-     * The attributes for which you can use filters in url.
-     *
-     * @var array
-     */
-    protected $allowedFilters = [
-           'id'         => Where::class,
-           'name'       => Like::class,
-           'email'      => Like::class,
-           'updated_at' => WhereDateStartEnd::class,
-           'created_at' => WhereDateStartEnd::class,
-    ];
+    public function IsIsRoot()
+    {
+        $userId = Auth::id();
 
-    /**
-     * The attributes for which can use sort in url.
-     *
-     * @var array
-     */
-    protected $allowedSorts = [
-        'id',
-        'name',
-        'email',
-        'updated_at',
-        'created_at',
-    ];
+            $role = UserHasRoles::where('user_id', $userId)->first();
+            if ($role->role_id == 1) {
+                return true;
+            } else {
+                return false;
+            }
+
+    }
+
 }

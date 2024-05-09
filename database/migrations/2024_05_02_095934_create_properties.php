@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('type')->nullable();
             $table->string('email')->nullable();
             $table->unsignedBigInteger('review_id')->nullable();
-            $table->unsignedBigInteger('booking')->nullable();
             $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->string('contact_number')->nullable();
@@ -28,6 +27,7 @@ return new class extends Migration
             $table->string('linkedin_link')->nullable();
             $table->string('instagram_link')->nullable();
             $table->string('twitter_link')->nullable();
+            $table->unsignedBigInteger('added_user')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
         });

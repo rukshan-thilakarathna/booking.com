@@ -10,6 +10,7 @@ use App\Orchid\Layouts\User\UserPasswordLayout;
 use App\Orchid\Layouts\User\UserRoleLayout;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Orchid\Access\Impersonation;
@@ -51,6 +52,7 @@ class UserEditScreen extends Screen
         return $this->user->exists ? 'Edit User' : 'Create User';
     }
 
+
     /**
      * Display header description.
      */
@@ -62,7 +64,7 @@ class UserEditScreen extends Screen
     public function permission(): ?iterable
     {
         return [
-            'platform.systems.users',
+            'user.edite.permissions'
         ];
     }
 
@@ -73,18 +75,14 @@ class UserEditScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [
-            Button::make(__('Impersonate user'))
-                ->icon('bg.box-arrow-in-right')
-                ->confirm(__('You can revert to your original state by logging out.'))
-                ->method('loginAs')
-                ->canSee($this->user->exists && $this->user->id !== \request()->user()->id),
 
+        $user = \App\Models\User::find((Auth::user())->id);
+        return [
             Button::make(__('Remove'))
                 ->icon('bs.trash3')
                 ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                 ->method('remove')
-                ->canSee($this->user->exists),
+                ->canSee($user->hasAnyAccess(['user.delete.permissions',])),
 
             Button::make(__('Save'))
                 ->icon('bs.check-circle')
@@ -97,8 +95,8 @@ class UserEditScreen extends Screen
      */
     public function layout(): iterable
     {
+        $user = \App\Models\User::find((Auth::user())->id);
         return [
-
             Layout::block(UserEditLayout::class)
                 ->title(__('Profile Information'))
                 ->description(__('Update your account\'s profile information and email address.'))
@@ -110,21 +108,22 @@ class UserEditScreen extends Screen
                         ->method('save')
                 ),
 
-
             Layout::block(UserPasswordLayout::class)
                 ->title(__('Password'))
+                ->canSee($user->hasAnyAccess(['user.update_password.permissions']))
                 ->description(__('Ensure your account is using a long, random password to stay secure.'))
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::BASIC)
                         ->icon('bs.check-circle')
-                        ->canSee($this->user->exists)
+
                         ->method('save')
                 ),
 
             Layout::block(UserRoleLayout::class)
                 ->title(__('Roles'))
                 ->description(__('A Role defines a set of tasks a user assigned the role is allowed to perform.'))
+                ->canSee(auth()->user()->IsIsRoot())
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::BASIC)
@@ -136,6 +135,7 @@ class UserEditScreen extends Screen
             Layout::block(RolePermissionLayout::class)
                 ->title(__('Permissions'))
                 ->description(__('Allow the user to perform some actions that are not provided for by his roles'))
+                ->canSee(auth()->user()->IsIsRoot())
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::BASIC)

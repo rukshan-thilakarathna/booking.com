@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\User;
 
+use App\Models\UserHasRoles;
 use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\UserFiltersLayout;
 use App\Orchid\Layouts\User\UserListLayout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Actions\ModalToggle;
+use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
 class UserListScreen extends Screen
 {
+
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -24,12 +29,25 @@ class UserListScreen extends Screen
      */
     public function query(): iterable
     {
-        return [
-            'users' => User::with('roles')
-                ->filters(UserFiltersLayout::class)
-                ->defaultSort('id', 'desc')
-                ->paginate(),
-        ];
+
+        if (auth()->user()->IsIsRoot()) {
+            return [
+
+                'users' => User::with('roles')
+                    ->filters(UserFiltersLayout::class)
+                    ->defaultSort('id', 'desc')
+                    ->paginate(),
+            ];
+        }else{
+            return [
+                'users' => User::with('roles')
+                    ->filters(UserFiltersLayout::class)
+                    ->where('role' ,'!=','root')
+                    ->defaultSort('id', 'desc')
+                    ->paginate(),
+            ];
+        }
+
     }
 
     /**
@@ -51,7 +69,8 @@ class UserListScreen extends Screen
     public function permission(): ?iterable
     {
         return [
-            'platform.systems.users',
+            'user.all.permissions',
+            'user.view.permissions'
         ];
     }
 
@@ -62,9 +81,11 @@ class UserListScreen extends Screen
      */
     public function commandBar(): iterable
     {
+        $user = \App\Models\User::find((Auth::user())->id);
         return [
             Link::make(__('Add'))
                 ->icon('bs.plus-circle')
+                ->canSee($user->hasAnyAccess(['user.create.permissions']))
                 ->route('platform.systems.users.create'),
         ];
     }
@@ -74,6 +95,7 @@ class UserListScreen extends Screen
      *
      * @return string[]|\Orchid\Screen\Layout[]
      */
+
     public function layout(): iterable
     {
         return [
@@ -82,6 +104,19 @@ class UserListScreen extends Screen
 
             Layout::modal('asyncEditUserModal', UserEditLayout::class)
                 ->async('asyncGetUser'),
+
+            Layout::modal('View User',Layout::rows([
+                Input::make('user.name')
+                    ->type('text')
+                    ->title(__('Name')),
+                Input::make('user.url')
+                    ->type('text')
+                    ->title(__('Url')),
+                Input::make('user.email')
+                    ->type('text')
+                    ->title(__('Email')),
+            ]))->withoutApplyButton(true)->async('asyncGetUser')
+
         ];
     }
 

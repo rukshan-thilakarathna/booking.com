@@ -24,17 +24,17 @@ class PropertyEditLayout extends Rows
     public function fields(): array
     {
         return [
+            Select::make('type')
+                ->fromModel(PropertyType::class, 'name')
+                ->title(__('Property Type'))
+                ->required(),
+
                Input::make('name')
                    ->type('text')
                    ->max(255)
                    ->required()
                    ->title(__('Property Name'))
                    ->placeholder(__('Name')),
-
-               Select::make('type')
-                   ->fromModel(PropertyType::class, 'name')
-                   ->title(__('Property Type'))
-                   ->required(),
 
                TextArea::make('description')
                    ->title('Example Description')

@@ -12,7 +12,7 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
-use App\Orchid\Screens\Property\PropertyEditScreen;
+use App\Orchid\Screens\Property\PropertyCreateScreen;
 use App\Orchid\Screens\Property\PropertyListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -51,6 +51,12 @@ Route::screen('users/{user}/edit', UserEditScreen::class)
         ->parent('platform.systems.users')
         ->push($user->name, route('platform.systems.users.edit', $user)));
 
+Route::screen('users/{user}/view', UserEditScreen::class)
+    ->name('platform.systems.users.view')
+    ->breadcrumbs(fn (Trail $trail, $user) => $trail
+        ->parent('platform.systems.view')
+        ->push($user->name, route('platform.systems.users.view', $user)));
+
 // Platform > System > Users > Create
 Route::screen('users/create', UserEditScreen::class)
     ->name('platform.systems.users.create')
@@ -79,6 +85,7 @@ Route::screen('roles/create', RoleEditScreen::class)
         ->parent('platform.systems.roles')
         ->push(__('Create'), route('platform.systems.roles.create')));
 
+
 // Platform > System > Roles
 Route::screen('roles', RoleListScreen::class)
     ->name('platform.systems.roles')
@@ -87,9 +94,18 @@ Route::screen('roles', RoleListScreen::class)
         ->push(__('Roles'), route('platform.systems.roles')));
 
 
-// Platform > System > Users
-Route::screen('properties',PropertyListScreen::class)->name('properties');
-Route::screen('property/create',PropertyEditScreen::class)->name('property.create');
+//properties
+Route::screen('properties',PropertyListScreen::class)
+    ->name('properties')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('properties'), route('properties')));
+
+Route::screen('property/create',PropertyCreateScreen::class)
+    ->name('property.create')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('properties')
+        ->push(__('Create'), route('property.create')));
 
 
 

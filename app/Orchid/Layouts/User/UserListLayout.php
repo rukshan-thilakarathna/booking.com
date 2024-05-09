@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\User;
 
+use Illuminate\Support\Facades\Auth;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
@@ -27,6 +28,7 @@ class UserListLayout extends Table
      */
     public function columns(): array
     {
+        $cuser = \App\Models\User::find((Auth::user())->id);
         return [
             TD::make('name', __('Name'))
                 ->sort()
@@ -37,14 +39,7 @@ class UserListLayout extends Table
             TD::make('email', __('Email'))
                 ->sort()
                 ->cantHide()
-                ->filter(Input::make())
-                ->render(fn (User $user) => ModalToggle::make($user->email)
-                    ->modal('asyncEditUserModal')
-                    ->modalTitle($user->presenter()->title())
-                    ->method('saveUser')
-                    ->asyncParameters([
-                        'user' => $user->id,
-                    ])),
+                ->filter(Input::make()),
 
             TD::make('created_at', __('Created'))
                 ->usingComponent(DateTimeSplit::class)
@@ -66,10 +61,21 @@ class UserListLayout extends Table
 
                         Link::make(__('Edit'))
                             ->route('platform.systems.users.edit', $user->id)
+                            ->canSee($cuser->hasAnyAccess(['user.edite.permissions']))
                             ->icon('bs.pencil'),
+
+                        ModalToggle::make('View')
+                            ->canSee($cuser->hasAnyAccess(['user.view.permissions']))
+                            ->modal('View User')
+                            ->method('action')
+                            ->icon('bs.eye')
+                        ->asyncParameters([
+                            'user'=>$user->id
+                        ]),
 
                         Button::make(__('Delete'))
                             ->icon('bs.trash3')
+                            ->canSee($cuser->hasAnyAccess(['user.delete.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('remove', [
                                 'id' => $user->id,

@@ -33,22 +33,23 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
-
-
             Menu::make(__('Properties'))
                 ->icon('bs.people')
+                ->permission('property.view.permissions')
                 ->route('properties'),
+
 
             Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')
-                ->permission('platform.systems.users')
+                ->permission(['user.all.permissions','user.view.permissions'])
                 ->title(__('Access Controls')),
+
 
             Menu::make(__('Roles'))
                 ->icon('bs.shield')
                 ->route('platform.systems.roles')
-                ->permission('platform.systems.roles')
+                ->permission('role.permissions')
                 ->divider(),
 
         ];
@@ -62,9 +63,25 @@ class PlatformProvider extends OrchidServiceProvider
     public function permissions(): array
     {
         return [
-            ItemPermission::group(__('System'))
-                ->addPermission('platform.systems.roles', __('Roles'))
-                ->addPermission('platform.systems.users', __('Users')),
+            ItemPermission::group(__('Roles Permissions Manage'))
+                ->addPermission('role.permissions', __('Manage Roles')),
+
+            ItemPermission::group(__('Users Permissions Manage'))
+                ->addPermission('user.create.permissions', __('Create Users'))
+                ->addPermission('user.edite.permissions', __('Edit Users'))
+                ->addPermission('user.update_password.permissions', __('Update User Password '))
+                ->addPermission('user.view.permissions', __('View Users'))
+                ->addPermission('user.delete.permissions', __('Delete Users')),
+
+
+            ItemPermission::group(__('Property Permissions Manage'))
+                ->addPermission('property.create.permissions', __('Create Property'))
+                ->addPermission('property.edite.permissions', __('Edit Property'))
+                ->addPermission('property.status.permissions', __('Update Status Property'))
+                ->addPermission('property.admin_create.permissions', __('Admin Create Property'))
+                ->addPermission('property.view.permissions', __('View Property'))
+                ->addPermission('property.delete.permissions', __('Delete Property')),
+
         ];
     }
 }

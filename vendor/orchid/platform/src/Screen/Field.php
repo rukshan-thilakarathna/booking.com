@@ -45,7 +45,6 @@ class Field implements Fieldable, Htmlable
      * @var Closure[]
      */
     private $beforeRender = [];
-
     /**
      * View template show.
      *
