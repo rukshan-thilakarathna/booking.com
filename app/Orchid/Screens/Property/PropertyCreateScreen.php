@@ -110,6 +110,9 @@ class PropertyCreateScreen extends Screen
         $property = new Properties();
         $property->user_id = $request->user_id ??  Auth::user()->id;
         $property->name = $request->name;
+        $property->main_location = $request->main_location;
+        $property->sub_location = $request->sub_location;
+        $property->address = $request->address;
         $property->type = $request->type;
         $property->email = $request->email;
         $property->review_id = $request->review_id ?? 0;

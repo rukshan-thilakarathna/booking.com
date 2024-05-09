@@ -11,6 +11,7 @@ use App\Models\User;
 use Orchid\Platform\Models\Role;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Upload;
@@ -26,15 +27,15 @@ class LocationEditLayout extends Rows
     public function fields(): array
     {
         return [
-            Select::make('main_location')
+            Relation::make('main_location')
                 ->fromModel(Districts::class, 'name_en')
-                ->title(__('Distric'))
-                ->required(),
+                ->required()
+                ->title(__('Distric')),
 
-            Select::make('sub_location')
+            Relation::make('sub_location')
                 ->fromModel(Cities::class, 'name_en')
-                ->title(__('City'))
-                ->required(),
+                ->required()
+                ->title(__('City')),
 
             Input::make('address')
                 ->type('text')
