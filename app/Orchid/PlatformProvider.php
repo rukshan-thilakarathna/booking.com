@@ -77,7 +77,9 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('Property Permissions Manage'))
                 ->addPermission('property.create.permissions', __('Create Property'))
                 ->addPermission('property.edite.permissions', __('Edit Property'))
-                ->addPermission('property.status.permissions', __('Update Status Property'))
+                ->addPermission('property.approve.permissions', __('Approve Property'))
+                ->addPermission('property.suspend.permissions', __('Suspend Property'))
+                ->addPermission('property.status.permissions', __('status Change Property'))
                 ->addPermission('property.admin_create.permissions', __('Admin Create Property'))
                 ->addPermission('property.view.permissions', __('View Property'))
                 ->addPermission('property.delete.permissions', __('Delete Property')),

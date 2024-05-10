@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Property;
 
 use App\Models\Properties;
+use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -30,6 +31,7 @@ class PropertiesListLayout extends Table
      */
     protected function columns(): iterable
     {
+        $user = \App\Models\User::find((Auth::user())->id);
         return [
             TD::make('id', __('Property Id'))
                 ->filter()
@@ -77,21 +79,63 @@ class PropertiesListLayout extends Table
                     ->icon('bs.three-dots-vertical')
                     ->list([
                         Link::make(__('Edit'))
+                            ->canSee($user->hasAnyAccess(['property.edite.permissions']))
                             ->route('property.edit', $properties->id)
                             ->icon('bs.pencil'),
 
                         ModalToggle::make('View')
-                            ->modal('View User')
-                            ->method('action')
+                            ->canSee($user->hasAnyAccess(['property.view.permissions']))
+                            ->modal('View Property')
                             ->icon('bs.eye')
                             ->asyncParameters([
-                                'user'=>$properties->id
+                                'property'=>$properties->id
                             ]),
 
                         Button::make(__('Delete'))
                             ->icon('bs.trash3')
+                            ->canSee($user->hasAnyAccess(['property.delete.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('remove', [
+                                'id' => $properties->id,
+                            ]),
+
+                        Button::make(__('Approve this property'))
+                            ->icon('bs.trash3')
+                            ->canSee($properties->status == 2 && $user->hasAnyAccess(['property.approve.permissions']))
+                            ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                            ->method('actve', [
+                                'id' => $properties->id,
+                            ]),
+
+                        Button::make(__('Suspend this property'))
+                            ->icon('bs.trash3')
+                            ->canSee($user->hasAnyAccess(['property.suspend.permissions']))
+                            ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                            ->method('suspend', [
+                                'id' => $properties->id,
+                            ]),
+
+                        Button::make(__('Remove Suspend this property'))
+                            ->icon('bs.trash3')
+                            ->canSee(($properties->status == 4) && $user->hasAnyAccess(['property.suspend.permissions']))
+                            ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                            ->method('actve', [
+                                'id' => $properties->id,
+                            ]),
+
+                        Button::make(__('Hold this property'))
+                            ->icon('bs.trash3')
+                            ->canSee($properties->status == 1 && $user->hasAnyAccess(['property.status.permissions']))
+                            ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                            ->method('hold', [
+                                'id' => $properties->id,
+                            ]),
+
+                        Button::make(__('Release this property'))
+                            ->icon('bs.trash3')
+                            ->canSee($properties->status == 3 && $user->hasAnyAccess(['property.status.permissions']))
+                            ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                            ->method('actve', [
                                 'id' => $properties->id,
                             ]),
                     ])),

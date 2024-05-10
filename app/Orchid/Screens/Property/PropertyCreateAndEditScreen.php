@@ -53,6 +53,15 @@ class PropertyCreateAndEditScreen extends Screen
         return 'Welcome to your Orchid application.';
     }
 
+    public function permission(): ?iterable
+    {
+        return [
+            'property.edite.permissions',
+            'property.admin_create.permissions',
+            'property.create.permissions'
+        ];
+    }
+
     /**
      * The screen's action buttons.
      *

@@ -67,7 +67,6 @@ class UserListLayout extends Table
                         ModalToggle::make('View')
                             ->canSee($cuser->hasAnyAccess(['user.view.permissions']))
                             ->modal('View User')
-                            ->method('action')
                             ->icon('bs.eye')
                         ->asyncParameters([
                             'user'=>$user->id

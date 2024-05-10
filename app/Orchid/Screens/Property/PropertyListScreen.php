@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\Property;
 use App\Models\Properties;
 use App\Orchid\Layouts\Property\PropertiesListLayout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -24,7 +25,7 @@ class PropertyListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'properties' => Properties::filters()->orderBy('id', 'desc')->paginate(12),
+            'properties' => Properties::with('propertyType','propertyOwner','district','city')->filters()->orderBy('id', 'desc')->paginate(12),
         ];
     }
 
@@ -60,11 +61,13 @@ class PropertyListScreen extends Screen
      */
     public function commandBar(): iterable
     {
+        $user = \App\Models\User::find((Auth::user())->id);
         return [
-
             Link::make(__('Create New'))
                 ->icon('bs.plus-circle')
+                ->canSee($user->hasAnyAccess(['property.create.permissions']) || $user->hasAnyAccess(['property.admin_create.permissions']))
                 ->href(route('property.create')),
+
 
         ];
     }
@@ -78,7 +81,57 @@ class PropertyListScreen extends Screen
     public function layout(): iterable
     {
         return [
-           PropertiesListLayout::class
+           PropertiesListLayout::class,
+             Layout::modal('View Property',Layout::rows([
+                 Input::make('property.propertyType.name')
+                     ->type('text')
+                     ->title(__('Property Type')),
+
+                 Input::make('property.propertyOwner.name')
+                     ->type('text')
+                     ->title(__('Property Owner Name')),
+
+                 Input::make('property.email')
+                     ->type('text')
+                     ->title(__('Email')),
+
+                 Input::make('property.address')
+                     ->type('text')
+                     ->title(__('Address')),
+
+                 Input::make('property.name')
+                     ->type('text')
+                     ->title(__('Name')),
+
+                 Input::make('property.description')
+                     ->type('text')
+                     ->title(__('Description')),
+
+                 Input::make('property.contact_number')
+                     ->type('text')
+                     ->title(__('Contact Number')),
+
+                 Input::make('property.whatsapp_numner')
+                     ->type('text')
+                     ->title(__('Whatsapp Numner')),
+
+                 Input::make('property.district.name_en')
+                     ->type('text')
+                     ->title(__('district')),
+
+                 Input::make('property.city.name_en')
+                     ->type('text')
+                     ->title(__('City')),
+
+             ]))->withoutApplyButton(true)->async('asyncGetProperty')
+        ];
+    }
+
+    public function asyncGetProperty(Properties $property): iterable
+    {
+
+        return [
+            'property' => $property,
         ];
     }
 
@@ -88,4 +141,34 @@ class PropertyListScreen extends Screen
 
         Toast::info(__('Property was removed'));
     }
+
+
+    public function suspend(Request $request): void
+    {
+        $property = Properties::findOrFail($request->get('id')); // Find the property by ID
+        $property->status = 4; // Set the status to 1
+        $property->save();
+
+        Toast::info(__('Property was suspended'));
+    }
+
+    public function actve(Request $request): void
+    {
+        $property = Properties::findOrFail($request->get('id')); // Find the property by ID
+        $property->status = 1; // Set the status to 1
+        $property->save();
+
+        Toast::info(__('Property was Actve'));
+    }
+
+    public function hold(Request $request): void
+    {
+        $property = Properties::findOrFail($request->get('id')); // Find the property by ID
+        $property->status = 3; // Set the status to 1
+        $property->save();
+
+        Toast::info(__('Property was suspended'));
+    }
+
+
 }

@@ -68,13 +68,24 @@ class Properties extends Model
 //		return $this->hasMany(Reviews::class);
 //	}
 //
-//   public function userss()
-//   {
-//	   return $this->belongsTo(User::class, 'user_id');
-//   }
-//
-//   public function propertyType()
-//   {
-//	   return $this->belongsTo(PropertyType::class, 'type');
-//   }
+
+    public function propertyOwner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+   public function district()
+   {
+	   return $this->belongsTo(Districts::class, 'main_location');
+   }
+
+    public function city()
+    {
+        return $this->belongsTo(Cities::class, 'sub_location');
+    }
+
+   public function propertyType()
+   {
+	   return $this->belongsTo(PropertyType::class, 'type');
+   }
 }
