@@ -109,7 +109,7 @@ class PropertiesListLayout extends Table
 
                         Button::make(__('Suspend this property'))
                             ->icon('bs.trash3')
-                            ->canSee($user->hasAnyAccess(['property.suspend.permissions']))
+                            ->canSee($properties->status == 4 && $user->hasAnyAccess(['property.suspend.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('suspend', [
                                 'id' => $properties->id,

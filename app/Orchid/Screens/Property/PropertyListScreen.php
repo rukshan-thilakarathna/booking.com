@@ -24,8 +24,24 @@ class PropertyListScreen extends Screen
      */
     public function query(): iterable
     {
+        // Get the authenticated user
+        $user = \App\Models\User::find(auth()->user()->id);
+
+        // Retrieve properties with eager loading and filters
+        $properties = Properties::with('propertyType', 'propertyOwner', 'district', 'city')
+            ->filters()
+            ->orderBy('id', 'desc');
+
+        // If the user is a property owner, filter properties by their user_id
+        if ($user->role === 'property-owner') {
+            $properties->where('user_id', $user->id);
+        }
+
+        // Paginate the properties
+        $properties = $properties->paginate(12);
+
         return [
-            'properties' => Properties::with('propertyType','propertyOwner','district','city')->filters()->orderBy('id', 'desc')->paginate(12),
+            'properties' => $properties,
         ];
     }
 

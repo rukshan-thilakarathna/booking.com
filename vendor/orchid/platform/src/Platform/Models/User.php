@@ -71,6 +71,7 @@ class User extends Authenticatable implements UserInterface
     protected $allowedFilters = [
         'id'         => Where::class,
         'name'       => Like::class,
+        'role'       => Like::class,
         'email'      => Like::class,
         'updated_at' => WhereDateStartEnd::class,
         'created_at' => WhereDateStartEnd::class,
@@ -85,6 +86,8 @@ class User extends Authenticatable implements UserInterface
         'id',
         'name',
         'email',
+        'profile_verified',
+        'status',
         'updated_at',
         'created_at',
     ];

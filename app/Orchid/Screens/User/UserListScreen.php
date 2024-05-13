@@ -8,6 +8,7 @@ use App\Models\UserHasRoles;
 use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\UserFiltersLayout;
 use App\Orchid\Layouts\User\UserListLayout;
+use http\Exception\RuntimeException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -15,6 +16,7 @@ use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Repository;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
@@ -149,5 +151,18 @@ class UserListScreen extends Screen
         User::findOrFail($request->get('id'))->delete();
 
         Toast::info(__('User was removed'));
+    }
+
+    public function StatusChange( Request $request)
+    {
+        $users = \App\Models\User::find($request->get('id'));
+
+        $userData = [
+            'profile_verified' => $request->get('status'),
+        ];
+
+        $users->update($userData);
+
+        Toast::info(__(config('constants.PropertyOwnerVerificationStatus')[$request->get('status')]));
     }
 }

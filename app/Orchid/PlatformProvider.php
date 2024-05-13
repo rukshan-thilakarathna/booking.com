@@ -38,13 +38,15 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('property.view.permissions')
                 ->route('properties'),
 
+            Menu::make(__('Profile'))
+                ->icon('bs.people')
+                ->route('platform.profile'),
 
             Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')
                 ->permission(['user.all.permissions','user.view.permissions'])
                 ->title(__('Access Controls')),
-
 
             Menu::make(__('Roles'))
                 ->icon('bs.shield')
@@ -69,6 +71,7 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('Users Permissions Manage'))
                 ->addPermission('user.create.permissions', __('Create Users'))
                 ->addPermission('user.edite.permissions', __('Edit Users'))
+                ->addPermission('user.verification.permissions', __('Verification Users'))
                 ->addPermission('user.update_password.permissions', __('Update User Password '))
                 ->addPermission('user.view.permissions', __('View Users'))
                 ->addPermission('user.delete.permissions', __('Delete Users')),
