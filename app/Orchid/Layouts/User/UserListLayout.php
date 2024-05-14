@@ -49,7 +49,7 @@ class UserListLayout extends Table
                 ->sort()
                 ->canSee($cuser->hasAnyAccess(['user.verification.permissions']))
                 ->render(function (User $user){
-                    if ($user->profile_verified == 2 ){
+                    if ($user->profile_verified != 0 ){
                         return   DropDown::make(config('constants.PropertyOwnerVerificationStatus')[$user->profile_verified])
                             ->icon('bs.three-dots-vertical')
                             ->list([

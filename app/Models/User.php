@@ -51,6 +51,8 @@ class User extends Authenticatable
         return $this->hasMany(Users_Point::class);
     }
 
+
+
     /**
      * The attributes excluded from the model's JSON form.
      *

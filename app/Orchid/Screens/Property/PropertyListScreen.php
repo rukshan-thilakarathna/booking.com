@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Actions\Menu;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
@@ -83,8 +84,6 @@ class PropertyListScreen extends Screen
                 ->icon('bs.plus-circle')
                 ->canSee($user->hasAnyAccess(['property.create.permissions']) || $user->hasAnyAccess(['property.admin_create.permissions']))
                 ->href(route('property.create')),
-
-
         ];
     }
 
@@ -96,9 +95,12 @@ class PropertyListScreen extends Screen
 
     public function layout(): iterable
     {
+
         return [
+
            PropertiesListLayout::class,
              Layout::modal('View Property',Layout::rows([
+
                  Input::make('property.propertyType.name')
                      ->type('text')
                      ->title(__('Property Type')),
@@ -138,6 +140,26 @@ class PropertyListScreen extends Screen
                  Input::make('property.city.name_en')
                      ->type('text')
                      ->title(__('City')),
+
+                 Input::make('property.facebook_link')
+                     ->type('text')
+                     ->title(__('Facebook Link')),
+
+                 Input::make('property.tiktok_link')
+                     ->type('text')
+                     ->title(__('Tiktok Link')),
+
+                 Input::make('property.linkedin_link')
+                     ->type('text')
+                     ->title(__('Linkedin Link')),
+
+                 Input::make('property.instagram_link')
+                     ->type('text')
+                     ->title(__('Instagram Link')),
+
+                 Input::make('property.twitter_link')
+                     ->type('text')
+                     ->title(__('Twitter Link')),
 
              ]))->withoutApplyButton(true)->async('asyncGetProperty')
         ];

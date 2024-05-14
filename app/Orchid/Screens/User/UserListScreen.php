@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Actions\Menu;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Repository;
@@ -35,14 +36,14 @@ class UserListScreen extends Screen
         if (auth()->user()->IsIsRoot()) {
             return [
 
-                'users' => User::with('roles')
+                'users' => User::with('roles', 'district', 'city')
                     ->filters(UserFiltersLayout::class)
                     ->defaultSort('id', 'desc')
                     ->paginate(),
             ];
         }else{
             return [
-                'users' => User::with('roles')
+                'users' => User::with('roles', 'district', 'city')
                     ->filters(UserFiltersLayout::class)
                     ->where('role' ,'!=','root')
                     ->defaultSort('id', 'desc')
@@ -111,14 +112,37 @@ class UserListScreen extends Screen
                 Input::make('user.name')
                     ->type('text')
                     ->title(__('Name')),
+
                 Input::make('user.url')
                     ->type('text')
                     ->title(__('Url')),
+
                 Input::make('user.email')
                     ->type('text')
                     ->title(__('Email')),
-            ]))->withoutApplyButton(true)->async('asyncGetUser')
 
+                Input::make('user.mobile_number')
+                    ->type('text')
+                    ->title(__('Mobile Number')),
+
+                Input::make('user.district.name_en')
+                    ->type('text')
+                    ->title(__('district')),
+
+                Input::make('user.city.name_en')
+                    ->type('text')
+                    ->title(__('City')),
+
+                Input::make('user.address')
+                    ->type('text')
+                    ->title(__('Address')),
+
+                Input::make('user.address')
+                    ->type('text')
+                    ->title(__('Address')),
+
+
+            ]))->withoutApplyButton(true)->async('asyncGetUser')
         ];
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
+use Illuminate\Support\Facades\Auth;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
@@ -32,9 +33,11 @@ class PlatformProvider extends OrchidServiceProvider
      */
     public function menu(): array
     {
+        $user = \App\Models\User::find((Auth::user())->id);
         return [
             Menu::make(__('Properties'))
                 ->icon('bs.people')
+                ->canSee($user->profile_verified == 1 || ($user->role == 'root' || $user->role == 'admin' || $user->role == 'superadmin '))
                 ->permission('property.view.permissions')
                 ->route('properties'),
 

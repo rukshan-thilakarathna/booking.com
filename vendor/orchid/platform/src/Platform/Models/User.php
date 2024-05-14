@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Orchid\Platform\Models;
 
+use App\Models\Cities;
+use App\Models\Districts;
 use App\Orchid\Presenters\UserPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -62,6 +64,16 @@ class User extends Authenticatable implements UserInterface
         'permissions'          => 'array',
         'email_verified_at'    => 'datetime',
     ];
+
+    public function district()
+    {
+        return $this->belongsTo(Districts::class, 'main_location');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(Cities::class, 'sub_location');
+    }
 
     /**
      * The attributes for which you can use filters in url.

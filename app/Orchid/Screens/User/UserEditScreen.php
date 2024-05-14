@@ -123,7 +123,6 @@ class UserEditScreen extends Screen
 
 
 
-
 //            Layout::block(RolePermissionLayout::class)
 //                ->title(__('Permissions'))
 //                ->description(__('Allow the user to perform some actions that are not provided for by his roles'))

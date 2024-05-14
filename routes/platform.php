@@ -19,6 +19,7 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use App\Orchid\Screens\User\UserVerificationScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -50,6 +51,13 @@ Route::screen('users/{user}/edit', UserEditScreen::class)
     ->breadcrumbs(fn (Trail $trail, $user) => $trail
         ->parent('platform.systems.users')
         ->push($user->name, route('platform.systems.users.edit', $user)));
+
+Route::screen('users/{user}/verification',UserVerificationScreen::class)
+    ->name('platform.systems.users.verification')
+    ->breadcrumbs(fn (Trail $trail, $user) => $trail
+        ->parent('platform.profile')
+        ->push('Verification', route('platform.systems.users.verification', $user)));
+
 
 Route::screen('users/{user}/view', UserEditScreen::class)
     ->name('platform.systems.users.view')

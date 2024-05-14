@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\User;
 
+use App\Orchid\Layouts\User\ContactLayout;
 use App\Orchid\Layouts\User\LegalDocumen02tLayout;
 use App\Orchid\Layouts\User\LegalDocument01Layout;
+use App\Orchid\Layouts\User\LocationLayout;
 use App\Orchid\Layouts\User\ProfilePasswordLayout;
 use App\Orchid\Layouts\User\UserEditLayout;
+use App\Orchid\Layouts\User\VerifiedLayout;
 use App\Orchid\Layouts\User\VerifyPendingLayout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +20,7 @@ use Orchid\Access\Impersonation;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
@@ -30,6 +34,8 @@ class UserProfileScreen extends Screen
      *
      * @return array
      */
+
+
     public function query(Request $request): iterable
     {
         return [
@@ -62,11 +68,16 @@ class UserProfileScreen extends Screen
     {
         $user = \App\Models\User::find((Auth::user())->id);
         return [
-            Button::make(__('Verify Your Account'))
-                ->type(Color::BASIC)
-                ->canSee($user->profile_verified == 0)
-                ->icon('bs.check-circle')
-                ->method('Verify'),
+
+            Link::make(__('Verify Your Account'))
+                ->route('platform.systems.users.verification',[$user->url])
+                ->canSee($user->profile_verified == 0),
+
+
+            Button::make(config('constants.PropertyOwnerVerificationStatus')[$user->profile_verified])
+                ->novalidate()
+                ->canSee(  $user->profile_verified != 0)
+                ->method('otherStatus'),
 
             Button::make('Sign out')
                 ->novalidate()
@@ -80,7 +91,7 @@ class UserProfileScreen extends Screen
      */
     public function layout(): iterable
     {
-        $user = \App\Models\User::find((Auth::user())->id);
+
         return [
 
             Layout::block(UserEditLayout::class)
@@ -93,6 +104,26 @@ class UserProfileScreen extends Screen
                         ->method('save')
                 ),
 
+            Layout::block(LocationLayout::class)
+                ->title(__('Location Information'))
+                ->description(__("Update your account's profile information and email address."))
+                ->commands(
+                    Button::make(__('Save'))
+                        ->type(Color::BASIC())
+                        ->icon('bs.check-circle')
+                        ->method('SaveLocation')
+                ),
+
+            Layout::block(ContactLayout::class)
+                ->title(__('Contact Information'))
+                ->description(__("Update your account's profile information and email address."))
+                ->commands(
+                    Button::make(__('Save'))
+                        ->type(Color::BASIC())
+                        ->icon('bs.check-circle')
+                        ->method('SaveLocation')
+                ),
+
             Layout::block(ProfilePasswordLayout::class)
                 ->title(__('Update Password'))
                 ->description(__('Ensure your account is using a long, random password to stay secure.'))
@@ -103,90 +134,23 @@ class UserProfileScreen extends Screen
                         ->method('changePassword')
                 ),
 
-            Layout::block(LegalDocument01Layout::class)
-                ->title(__('User Verify'))
-                ->canSee($user->profile_verified == 0)
-                ->description(__('A Role defines a set of tasks a user assigned the role is allowed to perform.'))
-                ->commands(
-                    Button::make(__('Verify Your Account'))
-                        ->type(Color::BASIC)
-                        ->icon('bs.check-circle')
-                        ->method('Verify')
-                ),
 
-            Layout::block(LegalDocumen02tLayout::class)
-                ->title(__('Business Verify'))
-                ->canSee($user->profile_verified == 0 && $user->role == 'property-owner' )
-                ->description(__('A Role defines a set of tasks a user assigned the role is allowed to perform.'))
-                ->commands(
-                    Button::make(__('Verify Your Account'))
-                        ->type(Color::BASIC)
-                        ->icon('bs.check-circle')
-                        ->method('Verify')
-                ),
-
-            Layout::block(VerifyPendingLayout::class)
-                ->title(__('Verify Legal Document'))
-                ->canSee($user->profile_verified == 2)
-                ->description(__('A Role defines a set of tasks a user assigned the role is allowed to perform.')),
         ];
     }
 
-    public function Verify(Request $request): void
+    public function SaveLocation(Request $request): void
     {
         $users = \App\Models\User::find($request->input('user.id'));
-
-        $rules = [
-            'user.profile_image' => 'required|image',
-            'user.nic_or_passport_front_image' => 'required|image',
-            'user.nic_or_passport_back_image' => 'required|image',
-        ];
-
-
-        $BusinessVerify = [
-            'user.br_image' => 'required|image',
-        ];
-
-
-        if($users->role == 'property-owner'){
-            $rules += $BusinessVerify;
-        }
-
-        $request->validate($rules);
-
-        // profile Image
-        $profile_image = $request->file('user.profile_image');
-        $profile_image_db = $this->storeImage($profile_image,'ProfileImage');
-
-        if($users->role == 'property-owner'){
-            $br_image = $request->file('user.br_image');
-            $br_image_db = $this->storeImage($br_image,'BusinessRegistrationDocument');
-        }
-        // profile Image
-
-
-        // profile Image
-        $nic_or_passport_front_image = $request->file('user.nic_or_passport_front_image');
-        $nic_or_passport_front_image_db = $this->storeImage($nic_or_passport_front_image,'NIC');
-
-        // profile Image
-        $nic_or_passport_back_image = $request->file('user.nic_or_passport_back_image');
-        $nic_or_passport_back_image_db = $this->storeImage($nic_or_passport_back_image,'NIC');
-
-
-        $users = \App\Models\User::find($request->input('user.id'));
-
         $userData = [
-            'br_image' => $br_image_db ?? 0,
-            'nic_or_passport_front_image' => $nic_or_passport_front_image_db,
-            'nic_or_passport_back_image' => $nic_or_passport_back_image_db ,
-            'profile_image' => $profile_image_db,
-            'profile_verified' => 2,
+            'main_location' => $request->input('user.main_location') ?? '' ,
+            'sub_location' => $request->input('user.sub_location') ?? '' ,
+            'address' => $request->input('user.address') ?? '' ,
+            'mobile_number' => $request->input('user.mobile_number') ?? '' ,
         ];
 
         $users->update($userData);
 
-        Toast::info(__('Verify request sended.'));
+        Toast::info(__(' saved'));
     }
 
     public function save(Request $request): void
@@ -208,27 +172,11 @@ class UserProfileScreen extends Screen
         Toast::info(__('Profile updated.'));
     }
 
-    private function storeImage($image,$place)
+    public function otherStatus()
     {
-        $imageName = time() . random_int(1, 100) . '.' . $image->extension();
-
-        switch ($place) {
-            case 'ProfileImage':
-                $image->move(public_path('User/ProfileImage'), $imageName);
-                break;
-            case 'BusinessRegistrationDocument':
-                $image->move(public_path('User/BusinessRegistrationDocument'), $imageName);
-                break;
-            case 'NIC':
-                $image->move(public_path('User/NIC'), $imageName);
-                break;
-        }
-
-
-        return $imageName;
-
+        $user = \App\Models\User::find((Auth::user())->id);
+        Toast::info(__(config('constants.PropertyOwnerVerificationStatus')[$user->profile_verified].' Your Account'));
     }
-
     public function changePassword(Request $request): void
     {
         $guard = config('platform.guard', 'web');
