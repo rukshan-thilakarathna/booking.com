@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('point_transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('from_user_id')->nullable();
-            $table->unsignedBigInteger('to_user_id')->nullable();
+            $table->unsignedBigInteger('from')->nullable();
+            $table->unsignedBigInteger('to')->nullable();
             $table->string('point_count')->nullable();
-            $table->string('discount')->nullable();
-            $table->string('description')->nullable();
+            $table->string('discount_amount')->nullable();
+            $table->string('discount_percentage')->nullable();
             $table->string('amount')->nullable();
+            $table->string('description')->nullable();
             $table->dateTime('transaction_date')->nullable();
-            $table->integer('point_status')->nullable();
-
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

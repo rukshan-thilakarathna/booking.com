@@ -19,9 +19,16 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('mobile_number')->nullable();
+            $table->string('br_image')->nullable();
+            $table->string('nic_or_passport_front_image')->nullable();
+            $table->string('nic_or_passport_back_image')->nullable();
+            $table->string('profile_verified')->default(0);
+            $table->unsignedBigInteger('main_location')->nullable();
+            $table->unsignedBigInteger('sub_location')->nullable();
+            $table->string('address')->nullable();
             $table->string('nic_or_passport_number')->nullable();
             $table->string('profile_image')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

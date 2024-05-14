@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_point', function (Blueprint $table) {
+        Schema::create('point_storts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('point_count')->nullable();
-            $table->string('amount')->nullable();
-            $table->integer('point_status')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_point');
+        Schema::dropIfExists('point_storts');
     }
 };

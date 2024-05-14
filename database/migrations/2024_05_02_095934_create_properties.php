@@ -28,6 +28,9 @@ return new class extends Migration
             $table->string('instagram_link')->nullable();
             $table->string('twitter_link')->nullable();
             $table->unsignedBigInteger('added_user')->nullable();
+            $table->unsignedBigInteger('main_location')->nullable();
+            $table->unsignedBigInteger('sub_location')->nullable();
+            $table->string('address')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
         });

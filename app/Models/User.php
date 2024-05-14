@@ -34,6 +34,7 @@ class User extends Authenticatable
         'status',
     ];
 
+
     public function bookings()
     {
         return $this->hasMany(Bookings::class);
