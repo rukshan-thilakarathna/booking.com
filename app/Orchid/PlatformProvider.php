@@ -41,6 +41,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('property.view.permissions')
                 ->route('properties'),
 
+            Menu::make(__('Points'))
+                ->icon('bs.people')
+                ->route('points'),
+
             Menu::make(__('Profile'))
                 ->icon('bs.people')
                 ->route('platform.profile'),

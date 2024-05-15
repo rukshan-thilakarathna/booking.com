@@ -12,6 +12,7 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Pount\PointListScreen;
 use App\Orchid\Screens\Property\PropertyCreateAndEditScreen;
 use App\Orchid\Screens\Property\PropertyListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
@@ -45,7 +46,7 @@ Route::screen('profile', UserProfileScreen::class)
         ->parent('platform.index')
         ->push(__('Profile'), route('platform.profile')));
 
-// Platform > System > Users > User
+//user//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::screen('users/{user}/edit', UserEditScreen::class)
     ->name('platform.systems.users.edit')
     ->breadcrumbs(fn (Trail $trail, $user) => $trail
@@ -58,49 +59,46 @@ Route::screen('users/{user}/verification',UserVerificationScreen::class)
         ->parent('platform.profile')
         ->push('Verification', route('platform.systems.users.verification', $user)));
 
-
 Route::screen('users/{user}/view', UserEditScreen::class)
     ->name('platform.systems.users.view')
     ->breadcrumbs(fn (Trail $trail, $user) => $trail
         ->parent('platform.systems.view')
         ->push($user->name, route('platform.systems.users.view', $user)));
 
-// Platform > System > Users > Create
 Route::screen('users/create', UserEditScreen::class)
     ->name('platform.systems.users.create')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.systems.users')
         ->push(__('Create'), route('platform.systems.users.create')));
 
-// Platform > System > Users
 Route::screen('users', UserListScreen::class)
     ->name('platform.systems.users')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push(__('Users'), route('platform.systems.users')));
 
-// Platform > System > Roles > Role
+
+//role//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::screen('roles/{role}/edit', RoleEditScreen::class)
     ->name('platform.systems.roles.edit')
     ->breadcrumbs(fn (Trail $trail, $role) => $trail
         ->parent('platform.systems.roles')
         ->push($role->name, route('platform.systems.roles.edit', $role)));
 
-// Platform > System > Roles > Create
 Route::screen('roles/create', RoleEditScreen::class)
     ->name('platform.systems.roles.create')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.systems.roles')
         ->push(__('Create'), route('platform.systems.roles.create')));
 
-// Platform > System > Roles
 Route::screen('roles', RoleListScreen::class)
     ->name('platform.systems.roles')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push(__('Roles'), route('platform.systems.roles')));
 
-//properties
+
+//properties////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::screen('properties',PropertyListScreen::class)
     ->name('properties')
     ->breadcrumbs(fn (Trail $trail) => $trail
@@ -118,6 +116,14 @@ Route::screen('property/{property}/edit',PropertyCreateAndEditScreen::class)
     ->breadcrumbs(fn (Trail $trail, $property) => $trail
         ->parent('properties')
         ->push($property->name, route('property.edit', $property)));
+
+
+//Points////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::screen('points',PointListScreen::class)
+    ->name('points')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('points'), route('points')));
 
 
 

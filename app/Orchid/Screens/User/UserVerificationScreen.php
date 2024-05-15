@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\User;
 
+use App\Models\PointStort;
 use App\Orchid\Layouts\User\LegalDocumen02tLayout;
 use App\Orchid\Layouts\User\LegalDocument01Layout;
 use App\Orchid\Layouts\User\LocationLayout;
@@ -150,7 +151,6 @@ class UserVerificationScreen extends Screen
         }
         // profile Image
 
-
         // profile Image
         $nic_or_passport_front_image = $request->file('user.nic_or_passport_front_image');
         $nic_or_passport_front_image_db = $this->storeImage($nic_or_passport_front_image,'NIC');
@@ -158,7 +158,6 @@ class UserVerificationScreen extends Screen
         // profile Image
         $nic_or_passport_back_image = $request->file('user.nic_or_passport_back_image');
         $nic_or_passport_back_image_db = $this->storeImage($nic_or_passport_back_image,'NIC');
-
 
         $users = \App\Models\User::find($request->input('user.id'));
 
@@ -172,7 +171,15 @@ class UserVerificationScreen extends Screen
 
         $users->update($userData);
 
-        Toast::info(__('Verify request sended.'));
+        $point = new PointStort();
+
+        $point->user_id = $users->id;
+        $point->point_count = 100;
+
+        $point->save();
+
+
+        Toast::info(__('Verify request sended. And sended point 100. '));
     }
 
     private function storeImage($image,$place)
