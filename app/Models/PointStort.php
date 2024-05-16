@@ -14,7 +14,7 @@ class PointStort extends Model
     use Filterable;
 
     protected $table='point_storts';
-    protected $fillable = ['user_id', 'point_count'];
+    protected $fillable = ['user_id', 'point_count','locked_points'];
 
     public function user()
     {

@@ -12,7 +12,9 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
-use App\Orchid\Screens\Pount\PointListScreen;
+use App\Orchid\Screens\Point\DonationsListScreen;
+use App\Orchid\Screens\Point\PointListScreen;
+use App\Orchid\Screens\Point\SellListScreen;
 use App\Orchid\Screens\Property\PropertyCreateAndEditScreen;
 use App\Orchid\Screens\Property\PropertyListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
@@ -124,6 +126,18 @@ Route::screen('points',PointListScreen::class)
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push(__('points'), route('points')));
+
+Route::screen('donations-points',DonationsListScreen::class)
+    ->name('point.donations')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('points')
+        ->push(__('Donations'), route('points')));
+
+Route::screen('sell-points',SellListScreen::class)
+    ->name('point.sell')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('points')
+        ->push(__('Sell Your Points'), route('points')));
 
 
 

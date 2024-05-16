@@ -1,9 +1,14 @@
 <?php
 
-namespace App\Orchid\Screens\Pount;
+namespace App\Orchid\Screens\Point;
 
+use App\Models\Point_transactions;
 use App\Models\PointStort;
+use App\Orchid\Layouts\Point\AllTransectionsListLayout;
+use App\Orchid\Layouts\Point\PointCountLayout;
+use App\Orchid\Layouts\User\VerifyPendingLayout;
 use Illuminate\Support\Facades\Auth;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 
@@ -18,8 +23,11 @@ class PointListScreen extends Screen
     {
         $user = \App\Models\User::find((Auth::user())->id);
         $points = PointStort::with('user')->where('user_id',$user->id)->first();
+        $transections =Point_transactions::filters()->with('ToUser','FromUser')->where('from',$user->id)->orwhere('to',$user->id)->paginate(5);
+
         return [
-            'points' => $points
+            'points' => $points,
+            'transections'=>$transections
         ];
     }
 
@@ -40,7 +48,13 @@ class PointListScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make(__('Donations'))
+            ->href(route('point.donations')),
+
+            Link::make(__('Sell Your Points'))
+                ->href(route('point.sell'))
+        ];
     }
 
     /**
@@ -50,9 +64,14 @@ class PointListScreen extends Screen
      */
     public function layout(): iterable
     {
-        $template = Layout::view('platform::dummy.block');
-        return [
 
+        return [
+            Layout::block(PointCountLayout::class)
+                ->title(__('Your Point Count'))
+                ->description(__('A Role defines a set of tasks a user assigned the role is allowed to perform.')),
+
+
+            AllTransectionsListLayout::class
 
         ];
     }
