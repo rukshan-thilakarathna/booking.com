@@ -22,6 +22,7 @@ class User extends Authenticatable
         'main_location',
         'sub_location',
         'address',
+        'service',
         'password',
         'br_image',
         'nic_or_passport_front_image',

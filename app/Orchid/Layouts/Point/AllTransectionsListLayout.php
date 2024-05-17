@@ -81,7 +81,12 @@ class AllTransectionsListLayout extends Table
 
             TD::make('status', __('Status'))
                 ->render(function (Point_transactions $transactions){
-                    return $transactions->status == 1 ? "Successful" : "Unsuccessful" ;
+                    if ($transactions->status == 2){
+                        return "Pending";
+                    }else{
+                        return $transactions->status == 1 ? "Successful" : "Unsuccessful" ;
+                    }
+
                 })
                 ->sort()
                 ->filter(),

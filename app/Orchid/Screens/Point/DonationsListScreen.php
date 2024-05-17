@@ -30,12 +30,28 @@ class DonationsListScreen extends Screen
     public function query(): iterable
     {
         $user = \App\Models\User::find((Auth::user())->id);
-        $transections =Point_transactions::filters()->with('ToUser','FromUser')->where('from',$user->id)->orwhere('to',$user->id)->where('donations',1)->paginate(5);
+        $transections =Point_transactions::filters()
+            ->where(function ($query) use ($user) {
+                $query->orWhere('to', '=', $user->id)
+                    ->orWhere('from', '=', $user->id);
+            })
+            ->with('ToUser', 'FromUser')
+            ->where('donations', 1)
+            ->paginate(5);
 
         return [
             'transections'=>$transections
         ];
     }
+
+
+    public function permission(): ?iterable
+    {
+        return [
+            'point.donations.permissions'
+        ];
+    }
+
 
     /**
      * The name of the screen displayed in the header.

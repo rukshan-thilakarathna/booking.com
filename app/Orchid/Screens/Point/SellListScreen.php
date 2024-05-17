@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Point;
 
 use App\Models\Point_transactions;
+use App\Models\PointPrice;
 use App\Models\PointStort;
 use App\Orchid\Layouts\Point\AllTransectionsListLayout;
 use App\Orchid\Layouts\Point\DonationFormLayout;
@@ -27,7 +28,27 @@ class SellListScreen extends Screen
      */
     public function query(): iterable
     {
-        return [];
+        $user = \App\Models\User::find((Auth::user())->id);
+        $transactions = Point_transactions::filters()
+            ->where(function ($query) use ($user) {
+                $query->orWhere('to', '=', $user->id)
+                    ->orWhere('from', '=', $user->id);
+            })
+            ->with('ToUser', 'FromUser')
+            ->where('donations', '=', 0)
+            ->paginate(5);
+
+
+        return [
+            'transections'=>$transactions
+        ];
+    }
+
+    public function permission(): ?iterable
+    {
+        return [
+            'point.Sell.permissions'
+        ];
     }
 
     /**
@@ -91,38 +112,43 @@ class SellListScreen extends Screen
 
 
         if (Hash::check($request->password, $user->password)) {
-//            $FromUserPointCount = PointStort::where('user_id', $user->id)->value('point_count');
-//            $ToUserPointCount = PointStort::where('user_id', $request->user)->value('point_count');
-//
-//            if ($FromUserPointCount >= $request->point_count) {
-//                $AfterFromUserPointCountF = $FromUserPointCount - $request->point_count;
-//                $AfterToUserPointCountF = $ToUserPointCount + $request->point_count;
-//
-//                PointStort::where('user_id', $user->id)->update(['point_count' => $AfterFromUserPointCountF]);
-//
-//                $pointStort = PointStort::where('user_id', $request->user)->firstOrNew();
-//                $pointStort->point_count = $AfterToUserPointCountF;
-//                $pointStort->user_id = $request->user;
-//                $pointStort->save();
-//
-//                $point_transactions = New Point_transactions();
-//
-//                $point_transactions->from = $user->id;
-//                $point_transactions->to = $request->user;
-//                $point_transactions->point_count = $request->point_count;
-//                $point_transactions->discount_amount = 00.00;
-//                $point_transactions->discount_percentage = 0;
-//                $point_transactions->amount = 00.00;
-//                $point_transactions->donations = 1;
-//                $point_transactions->transaction_date = Carbon::now();
-//                $point_transactions->status = 1;
-//
-//                $point_transactions->save();
-//
-//                Toast::success(__('Donation Successful'));
-//            } else {
-//                Toast::error(__('Point Not Found'));
-//            }
+            $FromUserPointCount = PointStort::where('user_id', $user->id)->value('point_count');
+
+            if ($FromUserPointCount >= $request->point_count) {
+                $pointPrice = PointPrice::where('id',1)->first();
+                $pointPrice = $pointPrice->price;
+                $RealPointAmount = $request->point_count * $pointPrice;
+
+                if($RealPointAmount >= $request->Price){
+                    $AfterFromUserPointCountF = $FromUserPointCount - $request->point_count;
+
+                    PointStort::where('user_id', $user->id)->update(['point_count' => $AfterFromUserPointCountF,'locked_points' => $request->point_count]);
+
+                    $discount_amount =$RealPointAmount - $request->Price;
+                    $discount_percentage = ($request->Price / $RealPointAmount)*100;
+
+                    $point_transactions = New Point_transactions();
+
+                    $point_transactions->from = $user->id;
+                    $point_transactions->to = 0;
+                    $point_transactions->point_count = $request->point_count;
+                    $point_transactions->discount_amount = $discount_amount.'.00';
+                    $point_transactions->discount_percentage = $discount_percentage;
+                    $point_transactions->amount = $request->Price.'.00';
+                    $point_transactions->donations = 0;
+                    $point_transactions->selling_status = 2;
+                    $point_transactions->transaction_date = Carbon::now();
+                    $point_transactions->status = 2;
+
+                    $point_transactions->save();
+                    Toast::success(__('Successful Release to Market'));
+                }else {
+                    Toast::error(__('Max Point Amount '.$RealPointAmount.' USD'));
+                }
+
+            } else {
+                Toast::error(__('Point Not Found'));
+            }
         }else{
             Toast::error(__('Password Not Match'));
         }

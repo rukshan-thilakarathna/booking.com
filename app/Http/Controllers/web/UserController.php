@@ -16,7 +16,7 @@ class UserController extends Controller
     public function registration($role)
     {
         // Define an array of valid roles
-        $validRoles = ['user', 'property-owner'];
+        $validRoles = ['user', 'property-owner','worker'];
 
         // Check if the role exists in the array of valid roles
         if (in_array($role, $validRoles)) {

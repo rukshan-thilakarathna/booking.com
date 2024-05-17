@@ -1,34 +1,21 @@
 <?php
 namespace App\Models;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
 
-class PointPrice extends Migration
+class PointPrice extends Model
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('point_prices', function (Blueprint $table) {
-            $table->id();
-            $table->string('point_count')->nullable();
-            $table->string('price')->nullable();
-            $table->string('currency')->nullable();
-            $table->timestamps();
-        });
-    }
+    use HasFactory;
+    use AsSource;
+    use Filterable;
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('point_prices');
-    }
+    protected $table='PointPrice';
+    protected $fillable = ['point_count', 'price','currency'];
+
+
 }

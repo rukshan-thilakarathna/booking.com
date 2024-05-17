@@ -23,7 +23,13 @@ class PointListScreen extends Screen
     {
         $user = \App\Models\User::find((Auth::user())->id);
         $points = PointStort::with('user')->where('user_id',$user->id)->first();
-        $transections =Point_transactions::filters()->with('ToUser','FromUser')->where('from',$user->id)->orwhere('to',$user->id)->paginate(5);
+        $transections =Point_transactions::filters()
+            ->where(function ($query) use ($user) {
+                $query->orWhere('to', '=', $user->id)
+                    ->orWhere('from', '=', $user->id);
+            })
+            ->with('ToUser', 'FromUser')
+            ->paginate(5);
 
         return [
             'points' => $points,
@@ -48,12 +54,22 @@ class PointListScreen extends Screen
      */
     public function commandBar(): iterable
     {
+        $user = \App\Models\User::find((Auth::user())->id);
         return [
             Link::make(__('Donations'))
+                ->canSee($user->hasAnyAccess(['point.donations.permissions']))
             ->href(route('point.donations')),
 
             Link::make(__('Sell Your Points'))
+                ->canSee($user->hasAnyAccess(['point.Sell.permissions']))
                 ->href(route('point.sell'))
+        ];
+    }
+
+    public function permission(): ?iterable
+    {
+        return [
+            'point.permissions'
         ];
     }
 

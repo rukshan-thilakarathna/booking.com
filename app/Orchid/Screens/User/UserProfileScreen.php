@@ -9,6 +9,7 @@ use App\Orchid\Layouts\User\LegalDocumen02tLayout;
 use App\Orchid\Layouts\User\LegalDocument01Layout;
 use App\Orchid\Layouts\User\LocationLayout;
 use App\Orchid\Layouts\User\ProfilePasswordLayout;
+use App\Orchid\Layouts\User\ServiceLayout;
 use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\VerifiedLayout;
 use App\Orchid\Layouts\User\VerifyPendingLayout;
@@ -91,7 +92,7 @@ class UserProfileScreen extends Screen
      */
     public function layout(): iterable
     {
-
+        $user = \App\Models\User::find((Auth::user())->id);
         return [
 
             Layout::block(UserEditLayout::class)
@@ -102,6 +103,18 @@ class UserProfileScreen extends Screen
                         ->type(Color::BASIC())
                         ->icon('bs.check-circle')
                         ->method('save')
+                ),
+
+
+            Layout::block(ServiceLayout::class)
+                ->title(__('Service Information'))
+                ->description(__("Update your account's profile information and email address."))
+                ->canSee($user->role=='worker')
+                ->commands(
+                    Button::make(__('Save'))
+                        ->type(Color::BASIC())
+                        ->icon('bs.check-circle')
+                        ->method('SaveLocation')
                 ),
 
             Layout::block(LocationLayout::class)
@@ -146,6 +159,7 @@ class UserProfileScreen extends Screen
             'sub_location' => $request->input('user.sub_location') ?? '' ,
             'address' => $request->input('user.address') ?? '' ,
             'mobile_number' => $request->input('user.mobile_number') ?? '' ,
+            'service' => $request->input('user.service') ?? '' ,
         ];
 
         $users->update($userData);

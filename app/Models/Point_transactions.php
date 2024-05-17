@@ -27,6 +27,7 @@ class Point_transactions extends Model
             'to',
             'point_count',
             'discount_amount',
+            'selling_status',
             'discount_percentage',
             'donations',
             'description',

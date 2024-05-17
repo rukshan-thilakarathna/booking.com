@@ -117,6 +117,10 @@ class UserListScreen extends Screen
                     ->type('text')
                     ->title(__('Url')),
 
+                Input::make('user.service')
+                    ->type('text')
+                    ->title(__('Service')),
+
                 Input::make('user.email')
                     ->type('text')
                     ->title(__('Email')),

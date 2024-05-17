@@ -43,6 +43,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make(__('Points'))
                 ->icon('bs.people')
+                ->permission('point.permissions')
                 ->route('points'),
 
             Menu::make(__('Profile'))
@@ -82,6 +83,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('user.update_password.permissions', __('Update User Password '))
                 ->addPermission('user.view.permissions', __('View Users'))
                 ->addPermission('user.delete.permissions', __('Delete Users')),
+
+            ItemPermission::group(__('Points Permissions Manage'))
+                ->addPermission('point.permissions', __('Use Point'))
+                ->addPermission('point.donations.permissions', __('Point Donations'))
+                ->addPermission('point.Sell.permissions', __('Point Sell')),
+
 
 
             ItemPermission::group(__('Property Permissions Manage'))
