@@ -35,33 +35,37 @@ class PlatformProvider extends OrchidServiceProvider
     {
         $user = \App\Models\User::find((Auth::user())->id);
         return [
-            Menu::make(__('Properties Manage'))
+            Menu::make(__('Properties'))
                 ->icon('bs.people')
                 ->canSee($user->profile_verified == 1 || ($user->role == 'root' || $user->role == 'admin' || $user->role == 'superadmin '))
                 ->permission('property.view.permissions')
                 ->route('properties'),
 
-            Menu::make(__('Points Manage'))
+            Menu::make(__('Points'))
                 ->icon('bs.people')
                 ->permission('point.permissions')
                 ->route('points'),
 
-            Menu::make(__('Review Manage'))
+            Menu::make(__('Reviews'))
                 ->icon('bs.people')
                 ->permission('review.permissions')
                 ->route('reviews'),
 
-            Menu::make(__('Profile Manage'))
+            Menu::make(__('Profile'))
                 ->icon('bs.people')
                 ->route('platform.profile'),
 
-            Menu::make(__('Users Manage'))
+            Menu::make(__('Messages'))
+                ->icon('bs.people')
+                ->route('platform.profile'),
+
+            Menu::make(__('Users'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')
                 ->permission(['user.all.permissions','user.view.permissions'])
                 ->title(__('Access Controls')),
 
-            Menu::make(__('Roles Manage'))
+            Menu::make(__('Roles'))
                 ->icon('bs.shield')
                 ->route('platform.systems.roles')
                 ->permission('role.permissions')

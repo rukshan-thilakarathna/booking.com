@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/telescope": "^5.0",
         "laravel/tinker": "^2.8",
+        "munafio/chatify": "^1.6",
         "orchid/platform": "^14.23"
     },
     "require-dev": {
