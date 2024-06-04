@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('property_id')->nullable();
+            $table->unsignedBigInteger('sub_property_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->integer('rating')->nullable();
             $table->dateTime('review_date')->nullable();
-            $table->string('text')->nullable();
+            $table->dateTime('reply_date')->nullable();
+            $table->text('text')->nullable();
+            $table->text('reply_text')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
         });

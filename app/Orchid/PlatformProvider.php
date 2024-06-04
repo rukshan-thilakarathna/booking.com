@@ -35,28 +35,33 @@ class PlatformProvider extends OrchidServiceProvider
     {
         $user = \App\Models\User::find((Auth::user())->id);
         return [
-            Menu::make(__('Properties'))
+            Menu::make(__('Properties Manage'))
                 ->icon('bs.people')
                 ->canSee($user->profile_verified == 1 || ($user->role == 'root' || $user->role == 'admin' || $user->role == 'superadmin '))
                 ->permission('property.view.permissions')
                 ->route('properties'),
 
-            Menu::make(__('Points'))
+            Menu::make(__('Points Manage'))
                 ->icon('bs.people')
                 ->permission('point.permissions')
                 ->route('points'),
 
-            Menu::make(__('Profile'))
+            Menu::make(__('Review Manage'))
+                ->icon('bs.people')
+                ->permission('review.permissions')
+                ->route('reviews'),
+
+            Menu::make(__('Profile Manage'))
                 ->icon('bs.people')
                 ->route('platform.profile'),
 
-            Menu::make(__('Users'))
+            Menu::make(__('Users Manage'))
                 ->icon('bs.people')
                 ->route('platform.systems.users')
                 ->permission(['user.all.permissions','user.view.permissions'])
                 ->title(__('Access Controls')),
 
-            Menu::make(__('Roles'))
+            Menu::make(__('Roles Manage'))
                 ->icon('bs.shield')
                 ->route('platform.systems.roles')
                 ->permission('role.permissions')
@@ -89,7 +94,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('point.donations.permissions', __('Point Donations'))
                 ->addPermission('point.Sell.permissions', __('Point Sell')),
 
-
+            ItemPermission::group(__('Review Permissions Manage'))
+                ->addPermission('review.permissions', __('review'))
+                ->addPermission('review.reply.permissions', __('Review Reply'))
+                ->addPermission('review.show.hidden.permissions', __('Review Show And Hidden')),
 
             ItemPermission::group(__('Property Permissions Manage'))
                 ->addPermission('property.create.permissions', __('Create Property'))

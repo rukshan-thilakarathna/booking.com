@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('point_storts', function (Blueprint $table) {
+        Schema::create('pointStorts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('point_count')->nullable();
+            $table->string('locked_points')->nullable();
             $table->timestamps();
         });
     }

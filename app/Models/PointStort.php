@@ -13,7 +13,7 @@ class PointStort extends Model
     use AsSource;
     use Filterable;
 
-    protected $table='point_storts';
+    protected $table='pointStorts';
     protected $fillable = ['user_id', 'point_count','locked_points'];
 
     public function user()

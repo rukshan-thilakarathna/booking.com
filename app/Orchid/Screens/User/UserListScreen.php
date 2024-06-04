@@ -82,6 +82,7 @@ class UserListScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
+
     public function commandBar(): iterable
     {
         $user = \App\Models\User::find((Auth::user())->id);

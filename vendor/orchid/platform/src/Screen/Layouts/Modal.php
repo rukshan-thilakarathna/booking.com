@@ -238,4 +238,8 @@ class Modal extends Layout
             'template' => $this->getSlug(),
         ]);
     }
+
+    public function applyButtonName(string $string)
+    {
+    }
 }

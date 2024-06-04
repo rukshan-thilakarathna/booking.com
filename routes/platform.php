@@ -17,6 +17,7 @@ use App\Orchid\Screens\Point\PointListScreen;
 use App\Orchid\Screens\Point\SellListScreen;
 use App\Orchid\Screens\Property\PropertyCreateAndEditScreen;
 use App\Orchid\Screens\Property\PropertyListScreen;
+use App\Orchid\Screens\Review\ReviewListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -139,6 +140,13 @@ Route::screen('sell-points',SellListScreen::class)
         ->parent('points')
         ->push(__('Sell Your Points'), route('points')));
 
+
+//Reviews////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::screen('reviews',ReviewListScreen::class)
+    ->name('reviews')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('reviews'), route('reviews')));
 
 
 
