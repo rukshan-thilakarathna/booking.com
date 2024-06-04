@@ -14,7 +14,7 @@ use Orchid\Screen\Components\Cells\DateTimeSplit;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class ReviewListLayout extends Table
+class PropertyReviewListLayout extends Table
 {
     /**
      * Data source.
@@ -46,36 +46,36 @@ class ReviewListLayout extends Table
             TD::make('review_date', __('Review Date'))
                 ->usingComponent(DateTimeSplit::class),
 
+            TD::make('publish_date', __('Publish Date'))
+                ->usingComponent(DateTimeSplit::class),
+
             TD::make('status', __('Display Status'))
                 ->render(function (Reviews $reviews){
-                    return config('constants.ReviewStatus')[$reviews->status] ;
+                    return config('constants.ReviewStatus')[$reviews->status];
                 })
                 ->sort(),
+
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
                 ->render(fn (Reviews $reviews) => DropDown::make()
                     ->icon('bs.three-dots-vertical')
                     ->list([
-
                             ModalToggle::make('View Review')
                                 ->modal('Review')
+                                ->canSee($reviews->status == 1)
                                 ->asyncParameters([
                                     'review'=>$reviews->id
                                 ]),
 
-                            ModalToggle::make('View Reply')
-                                ->canSee($reviews->reply_text != null)
-                                ->modal('Reply')
-                                ->asyncParameters([
-                                    'review'=>$reviews->id
-                                ]),
-
-                            ModalToggle::make('Send Reply')
-                                ->modal('Send Reply')
-                                ->canSee($reviews->reply_text == null && $user->hasAnyAccess(['review.reply.permissions']))
-                                ->method('SendReply', [
-                                    'id' => $reviews->id,
+                            ModalToggle::make('Send Guest Review')
+                                ->modal('Send Guest Review')
+                                ->canSee($reviews->status == 2)
+                                ->method('SendGuestReview', [
+                                    'review_id' => $reviews->id,
+                                    'property_id' => $reviews->property_id,
+                                    'sub_property_id' => $reviews->sub_property_id,
+                                    'guest_id' => $reviews->user_id,
                                 ]),
 
                             Button::make(__('Show On WebSite'))

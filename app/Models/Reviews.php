@@ -18,10 +18,10 @@ class Reviews extends Model
             'property_id',
             'user_id',
             'sub_property_id',
-            'reply_text',
+            'guest_id',
+            'publish_date',
             'rating',
             'review_date',
-            'reply_date',
             'text',
             'status'
     ];
@@ -34,6 +34,11 @@ class Reviews extends Model
     public function postedUser()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function guesrUser()
+    {
+        return $this->belongsTo(User::class, 'guest_id');
     }
 
 
