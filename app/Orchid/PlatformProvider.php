@@ -57,7 +57,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make(__('Messages'))
                 ->icon('bs.people')
-                ->route('platform.profile'),
+                ->route('user.messages'),
 
             Menu::make(__('Users'))
                 ->icon('bs.people')

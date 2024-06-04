@@ -20,4 +20,7 @@ Route::get('/', function () {
 
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
 Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name('user.store');
+Route::get('/messages', function () {
+    return redirect('/chatify');
+})->name('user.messages');
 
