@@ -17,6 +17,7 @@ use App\Orchid\Screens\Point\PointListScreen;
 use App\Orchid\Screens\Point\SellListScreen;
 use App\Orchid\Screens\Property\PropertyCreateAndEditScreen;
 use App\Orchid\Screens\Property\PropertyListScreen;
+use App\Orchid\Screens\Review\GuesrReviewListScreen;
 use App\Orchid\Screens\Review\PropertyReviewListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -142,11 +143,17 @@ Route::screen('sell-points',SellListScreen::class)
 
 
 //Reviews////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Route::screen('reviews',PropertyReviewListScreen::class)
+Route::screen('reviews-for-your-property',PropertyReviewListScreen::class)
     ->name('reviews')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
-        ->push(__('reviews'), route('reviews')));
+        ->push(__('Reviews for your property'), route('reviews')));
+
+Route::screen('the-reviews-you-leave-for-guests',GuesrReviewListScreen::class)
+    ->name('guest-reviews')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('The reviews you leave for guests'), route('reviews')));
 
 
 

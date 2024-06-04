@@ -17,7 +17,7 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
-class PropertyReviewListScreen extends Screen
+class GuesrReviewListScreen extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -29,18 +29,17 @@ class PropertyReviewListScreen extends Screen
         // Get the authenticated user and their role
         $user = \App\Models\User::find(Auth::user()->id);
         $user_role = $user->role;
-        $user_property = Properties::where('user_id', $user->id)->pluck('id')->all();
 
         // Start the review query
         $reviewQuery = \App\Models\Reviews::with('propertyName', 'postedUser')
-            ->where('guest_id', '=', null)
+            ->where('guest_id', '!=', null)
             ->defaultSort('id', 'desc');
 
         // Modify the query if the user role is 'root'
         if ($user_role == 'property-owner') {
-            $reviewQuery = $reviewQuery->wherein('property_id', $user_property);
-        }elseif ($user_role == 'user') {
             $reviewQuery = $reviewQuery->where('user_id', $user->id);
+        }elseif ($user_role == 'user') {
+            $reviewQuery = $reviewQuery->where('guest_id', $user->id);
         }
 
         // Paginate the results
@@ -64,13 +63,12 @@ class PropertyReviewListScreen extends Screen
         $user_role = $user->role;
 
         if ($user_role == 'property-owner') {
-            return 'Reviews for your property';
+            return 'Your reviews for your guests';
         }elseif ($user_role == 'user') {
-            return "Reviews you've made of properties you've used";
+            return "Reviews that came to you";
         }elseif ($user_role == 'admin' || $user_role == 'super-admin' || $user_role == 'root') {
-            return "All Proprerty Reviews";
+            return "All Gust Reviews";
         }
-
     }
 
     /**
@@ -86,18 +84,18 @@ class PropertyReviewListScreen extends Screen
 
         if ($user_role == 'property-owner') {
             return [
-                Link::make(__('Your reviews for your guests'))
-                    ->route('guest-reviews'),
+                Link::make(__('Reviews for your property'))
+                    ->route('reviews'),
             ];
         }elseif ($user_role == 'user') {
             return [
-                Link::make(__('Reviews that came to you'))
-                    ->route('guest-reviews'),
+                Link::make(__("Reviews you've made of properties you've used"))
+                    ->route('reviews'),
             ];
         }elseif ($user_role == 'admin' || $user_role == 'super-admin' || $user_role == 'root') {
             return [
-                Link::make(__('All Gust Reviews'))
-                    ->route('guest-reviews'),
+                Link::make(__('All Proprerty Reviews'))
+                    ->route('reviews'),
             ];
         }
 
@@ -105,7 +103,6 @@ class PropertyReviewListScreen extends Screen
 
     public function permission(): ?iterable
     {
-
         return [
             'review.permissions',
         ];
