@@ -19,6 +19,7 @@ class Reviews extends Model
             'user_id',
             'sub_property_id',
             'guest_id',
+            'booking_id',
             'publish_date',
             'rating',
             'review_date',

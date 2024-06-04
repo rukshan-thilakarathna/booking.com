@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\Review;
 
 use App\Models\Properties;
 use App\Models\Reviews;
+use App\Orchid\Layouts\Review\GuestReviewListLayout;
 use App\Orchid\Layouts\Review\PropertyReviewListLayout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -27,11 +28,11 @@ class GuesrReviewListScreen extends Screen
     public function query(): iterable
     {
         // Get the authenticated user and their role
-        $user = \App\Models\User::find(Auth::user()->id);
+        $user = User::find(Auth::user()->id);
         $user_role = $user->role;
 
         // Start the review query
-        $reviewQuery = \App\Models\Reviews::with('propertyName', 'postedUser')
+        $reviewQuery = Reviews::with('propertyName', 'postedUser', 'guesrUser')
             ->where('guest_id', '!=', null)
             ->defaultSort('id', 'desc');
 
@@ -116,7 +117,7 @@ class GuesrReviewListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            PropertyReviewListLayout::class,
+            GuestReviewListLayout::class,
 
             Layout::modal('Review',Layout::rows([
                 TextArea::make('review.text')
@@ -130,7 +131,7 @@ class GuesrReviewListScreen extends Screen
                     ->rows(10),
             ]))->withoutApplyButton(true)->async('asyncGetReview'),
 
-            Layout::modal('Send Guest Review',Layout::rows([
+            Layout::modal('Send Property Review',Layout::rows([
                 TextArea::make('text')
                     ->rows(10),
             ]))
@@ -171,7 +172,7 @@ class GuesrReviewListScreen extends Screen
         Toast::info('Send successfully');
     }
 
-    public function SendGuestReview( Request $request)
+    public function SendPropertyReview( Request $request)
     {
         $user = \App\Models\User::find((Auth::user())->id);
 
@@ -179,12 +180,12 @@ class GuesrReviewListScreen extends Screen
             'property_id' => $request->get('property_id'),
             'user_id' => $user->id,
             'sub_property_id' => $request->get('sub_property_id'),
-            'guest_id' => $request->get('guest_id'),
             'text' => $request->get('text'),
             'review_date' => Carbon::now()->toDateTimeString(),
             'publish_date' => Carbon::now()->toDateTimeString(),
             'status' => 1,
         ]);
+
         $newGuestReview->save();
         if ($newGuestReview) {
             $updateReview = Reviews::find($request->get('review_id'));

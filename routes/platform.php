@@ -123,6 +123,7 @@ Route::screen('property/{property}/edit',PropertyCreateAndEditScreen::class)
 
 
 //Points////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Route::screen('points',PointListScreen::class)
     ->name('points')
     ->breadcrumbs(fn (Trail $trail) => $trail
