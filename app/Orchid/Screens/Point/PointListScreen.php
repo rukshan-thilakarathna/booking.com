@@ -55,13 +55,15 @@ class PointListScreen extends Screen
     public function commandBar(): iterable
     {
         $user = \App\Models\User::find((Auth::user())->id);
+        $points = PointStort::with('user')->where('user_id',$user->id)->first();
+
         return [
             Link::make(__('Donations'))
-                ->canSee($user->hasAnyAccess(['point.donations.permissions']))
+                ->canSee($user->hasAnyAccess(['point.donations.permissions']) && $points->point_count > 100)
             ->href(route('point.donations')),
 
             Link::make(__('Sell Your Points'))
-                ->canSee($user->hasAnyAccess(['point.Sell.permissions']))
+                ->canSee($user->hasAnyAccess(['point.Sell.permissions']) && $points->point_count > 100)
                 ->href(route('point.sell'))
         ];
     }

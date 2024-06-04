@@ -105,6 +105,7 @@ class DonationsListScreen extends Screen
         {
             // Fetch the authenticated user
             $user = \App\Models\User::find((Auth::user())->id);
+            $user_role = $user->role;
 
             // Validate the request data
             $request->validate([
@@ -118,7 +119,13 @@ class DonationsListScreen extends Screen
                     $FromUserPointCount = PointStort::where('user_id', $user->id)->value('point_count');
                     $ToUserPointCount = PointStort::where('user_id', $request->user)->value('point_count');
 
-                    if ($FromUserPointCount >= $request->point_count) {
+                        $FromUserPointCount = PointStort::where('user_id', $user->id)->value('point_count');
+
+                        if ($user_role == 'property-owner') {
+                            $FromUserPointCountq = $FromUserPointCount-100;
+                        }
+
+                    if ($FromUserPointCountq >= $request->point_count) {
                         $AfterFromUserPointCountF = $FromUserPointCount - $request->point_count;
                         $AfterToUserPointCountF = $ToUserPointCount + $request->point_count;
 
@@ -145,6 +152,7 @@ class DonationsListScreen extends Screen
                         $point_transactions->save();
 
                         Toast::success(__('Donation Successful'));
+
                     } else {
                         Toast::error(__('Point Not Found'));
                     }
