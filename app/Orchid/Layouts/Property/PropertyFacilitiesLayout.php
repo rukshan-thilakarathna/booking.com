@@ -16,7 +16,7 @@ use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
 
-class PropertyCreateAndEditLayout extends Rows
+class PropertyFacilitiesLayout extends Rows
 {
     /**
      * The screen's layout elements.
