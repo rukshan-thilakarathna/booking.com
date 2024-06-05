@@ -31,6 +31,7 @@ class Properties extends Model
         'sub_location',
         'address',
         'description',
+        'description',
         'image',
         'contact_number',
         'whatsapp_number',

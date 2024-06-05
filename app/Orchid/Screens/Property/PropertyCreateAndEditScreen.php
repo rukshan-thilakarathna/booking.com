@@ -7,6 +7,7 @@ use App\Orchid\Layouts\Property\ContactCreateAndEditLayout;
 use App\Orchid\Layouts\Property\PropertyCreateAndEditLayout;
 use App\Orchid\Layouts\Property\LocationCreateAndEditLayout;
 use App\Orchid\Layouts\Property\PropertyAddUserLayout;
+use App\Orchid\Layouts\Property\PropertyFacilitiesLayout;
 use App\Orchid\Layouts\Property\SocialMediaCreateAndEditLayout;
 use App\Orchid\Layouts\User\UserEditLayout;
 use Illuminate\Database\Eloquent\Builder;
@@ -86,6 +87,10 @@ class PropertyCreateAndEditScreen extends Screen
         $user = \App\Models\User::find((Auth::user())->id);
         return [
 
+            \Orchid\Support\Facades\Layout::block(PropertyFacilitiesLayout::class)
+                ->title(__('Property Owner Information'))
+                ->description(__('Update your account\'s profile information and email address.')),
+
             \Orchid\Support\Facades\Layout::block(PropertyAddUserLayout::class)
                 ->title(__('Property Owner Information'))
                 ->canSee($user->hasAnyAccess(['property.admin_create.permissions']))
@@ -107,11 +112,11 @@ class PropertyCreateAndEditScreen extends Screen
                 ->title(__('Social Media Information'))
                 ->description(__('Update your account\'s profile information and email address.')),
         ];
-
     }
 
     public function save(Request $request , $property = null)
     {
+
         if ($this->property->exists && $property != null){
             $request->validate([
                 'property.type'     => 'required',
@@ -119,6 +124,17 @@ class PropertyCreateAndEditScreen extends Screen
                 'property.email'   => 'required|email',
                 'property.contact_number' => 'required|string|regex:/^0[1-9]\d{8}$/',
             ]);
+
+            $facilities_list = '';
+            $facilities = $request->input('facilities');
+
+            if (!empty($facilities)) {
+                // Ensure each facility item is converted to a string using htmlspecialchars
+                $sanitized_facilities = array_map('htmlspecialchars', $facilities);
+                $facilities_list = implode(', ', $sanitized_facilities);
+            }
+
+
 
             $propertyq = Properties::find($property);
 
