@@ -31,7 +31,8 @@ class Properties extends Model
         'sub_location',
         'address',
         'description',
-        'description',
+        'facilities',
+        'open_for_booking',
         'image',
         'contact_number',
         'whatsapp_number',
@@ -54,6 +55,8 @@ class Properties extends Model
     protected $allowedSorts = [
         'status',
         'id',
+        'type',
+        'open_for_booking',
         'publish_at',
         'contact_number' ,
         'created_at',

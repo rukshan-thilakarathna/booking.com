@@ -26,10 +26,10 @@ class PropertyCreateAndEditLayout extends Rows
     public function fields(): array
     {
         return [
-            Select::make('property.type')
-                ->fromModel(PropertyType::class, 'name')
-                ->title(__('Property Type'))
-                ->required(),
+                Select::make('property.type')
+                    ->fromModel(PropertyType::class, 'name')
+                    ->title(__('Property Type'))
+                    ->required(),
 
                Input::make('property.name')
                    ->type('text')
@@ -42,12 +42,6 @@ class PropertyCreateAndEditLayout extends Rows
                    ->title('Example Description')
                    ->rows(6),
 
-
-//            CheckBox::make('free')
-//                ->value(1)
-//                ->title('Free')
-//                ->placeholder('Event for free')
-//                ->help('Event for free'),
 
                 Upload::make('image')
                     ->title('Upload images'),

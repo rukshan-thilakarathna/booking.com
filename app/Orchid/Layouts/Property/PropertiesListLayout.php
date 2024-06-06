@@ -37,6 +37,8 @@ class PropertiesListLayout extends Table
                 ->filter()
                 ->sort(),
 
+            TD::make('propertyType.name', __('Property Type')),
+
 
             TD::make('name', __('Property Name'))
                 ->filter()
@@ -50,6 +52,12 @@ class PropertiesListLayout extends Table
 
             TD::make('contact_number', __('Property Contact Number'))
                 ->filter()
+                ->sort(),
+
+            TD::make('open_for_booking', __('Open For Booking'))
+                ->render(function (Properties $properties){
+                    return config('constants.OpenForBooking')[$properties->open_for_booking] ;
+                })
                 ->sort(),
 
 
@@ -80,19 +88,16 @@ class PropertiesListLayout extends Table
                     ->list([
                         Link::make(__('Edit'))
                             ->canSee($user->hasAnyAccess(['property.edite.permissions']))
-                            ->route('property.edit', $properties->id)
-                            ->icon('bs.pencil'),
+                            ->route('property.edit', $properties->id),
 
                         ModalToggle::make('View')
                             ->canSee($user->hasAnyAccess(['property.view.permissions']))
                             ->modal('View Property')
-                            ->icon('bs.eye')
                             ->asyncParameters([
                                 'property'=>$properties->id
                             ]),
 
                         Button::make(__('Delete'))
-                            ->icon('bs.trash3')
                             ->canSee($user->hasAnyAccess(['property.delete.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('remove', [
@@ -100,7 +105,6 @@ class PropertiesListLayout extends Table
                             ]),
 
                         Button::make(__('Approve this property'))
-                            ->icon('bs.trash3')
                             ->canSee($properties->status == 2 && $user->hasAnyAccess(['property.approve.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('actve', [
@@ -108,7 +112,6 @@ class PropertiesListLayout extends Table
                             ]),
 
                         Button::make(__('Suspend this property'))
-                            ->icon('bs.trash3')
                             ->canSee($properties->status == 4 && $user->hasAnyAccess(['property.suspend.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('suspend', [
@@ -116,7 +119,6 @@ class PropertiesListLayout extends Table
                             ]),
 
                         Button::make(__('Remove Suspend this property'))
-                            ->icon('bs.trash3')
                             ->canSee(($properties->status == 4) && $user->hasAnyAccess(['property.suspend.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('actve', [
@@ -124,7 +126,6 @@ class PropertiesListLayout extends Table
                             ]),
 
                         Button::make(__('Hold this property'))
-                            ->icon('bs.trash3')
                             ->canSee($properties->status == 1 && $user->hasAnyAccess(['property.status.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('hold', [
@@ -132,7 +133,6 @@ class PropertiesListLayout extends Table
                             ]),
 
                         Button::make(__('Release this property'))
-                            ->icon('bs.trash3')
                             ->canSee($properties->status == 3 && $user->hasAnyAccess(['property.status.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('actve', [

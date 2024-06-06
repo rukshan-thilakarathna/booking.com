@@ -87,10 +87,6 @@ class PropertyCreateAndEditScreen extends Screen
         $user = \App\Models\User::find((Auth::user())->id);
         return [
 
-            \Orchid\Support\Facades\Layout::block(PropertyFacilitiesLayout::class)
-                ->title(__('Property Owner Information'))
-                ->description(__('Update your account\'s profile information and email address.')),
-
             \Orchid\Support\Facades\Layout::block(PropertyAddUserLayout::class)
                 ->title(__('Property Owner Information'))
                 ->canSee($user->hasAnyAccess(['property.admin_create.permissions']))
@@ -106,6 +102,10 @@ class PropertyCreateAndEditScreen extends Screen
 
             \Orchid\Support\Facades\Layout::block(LocationCreateAndEditLayout::class)
                 ->title(__('Location Information'))
+                ->description(__('Update your account\'s profile information and email address.')),
+
+            \Orchid\Support\Facades\Layout::block(PropertyFacilitiesLayout::class)
+                ->title(__('Property Facilities'))
                 ->description(__('Update your account\'s profile information and email address.')),
 
             \Orchid\Support\Facades\Layout::block(SocialMediaCreateAndEditLayout::class)
@@ -128,13 +128,14 @@ class PropertyCreateAndEditScreen extends Screen
             $facilities_list = '';
             $facilities = $request->input('facilities');
 
+            $facilities_list = '';
+            $facilities = $request->input('facilities');
+
             if (!empty($facilities)) {
                 // Ensure each facility item is converted to a string using htmlspecialchars
                 $sanitized_facilities = array_map('htmlspecialchars', $facilities);
                 $facilities_list = implode(', ', $sanitized_facilities);
             }
-
-
 
             $propertyq = Properties::find($property);
 
@@ -148,6 +149,7 @@ class PropertyCreateAndEditScreen extends Screen
                 'email' => $request->input('property.email'),
                 'review_id' => $request->input('property.review_id', 0),
                 'description' => $request->input('property.description'),
+                'facilities' => $facilities_list,
                 'image' => $request->input('property.image', ''),
                 'contact_number' => $request->input('property.contact_number'),
                 'whatsapp_numner' => $request->input('property.whatsapp_number'),
@@ -168,6 +170,15 @@ class PropertyCreateAndEditScreen extends Screen
                 'property.contact_number' => 'required|string|regex:/^0[1-9]\d{8}$/',
             ]);
 
+            $facilities_list = '';
+            $facilities = $request->input('facilities');
+
+            if (!empty($facilities)) {
+                // Ensure each facility item is converted to a string using htmlspecialchars
+                $sanitized_facilities = array_map('htmlspecialchars', $facilities);
+                $facilities_list = implode(', ', $sanitized_facilities);
+            }
+
             $property = new Properties();
             $property->user_id = $request->property['user_id'] ??  Auth::user()->id;
             $property->name = $request->property['name'];
@@ -178,6 +189,7 @@ class PropertyCreateAndEditScreen extends Screen
             $property->email = $request->property['email'];
             $property->review_id = $request->property['review_id'] ?? 0;
             $property->description = $request->property['description'];
+            $property->facilities = $facilities_list;
             $property->image = $request->property['image'] ?? "";
             $property->contact_number = $request->property['contact_number'];
             $property->whatsapp_numner = $request->property['whatsapp_numner'];

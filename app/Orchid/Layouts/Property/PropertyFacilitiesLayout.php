@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Property;
 
+use App\Models\Properties;
 use App\Models\PropertyType;
 use App\Models\User;
 use Orchid\Platform\Models\Role;
@@ -18,6 +19,7 @@ use Orchid\Screen\Layouts\Rows;
 
 class PropertyFacilitiesLayout extends Rows
 {
+
     /**
      * The screen's layout elements.
      *
