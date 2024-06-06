@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Property;
 
 use App\Models\Properties;
+use App\Models\Reviews;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
@@ -60,7 +61,6 @@ class PropertiesListLayout extends Table
                 })
                 ->sort(),
 
-
             TD::make('status', __('status'))
                 ->render(function (Properties $properties){
                     return config('constants.PropertyStatus')[$properties->status] ;
@@ -90,6 +90,8 @@ class PropertiesListLayout extends Table
                             ->canSee($user->hasAnyAccess(['property.edite.permissions']))
                             ->route('property.edit', $properties->id),
 
+
+
                         ModalToggle::make('View')
                             ->canSee($user->hasAnyAccess(['property.view.permissions']))
                             ->modal('View Property')
@@ -108,6 +110,13 @@ class PropertiesListLayout extends Table
                             ->canSee($properties->status == 2 && $user->hasAnyAccess(['property.approve.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('actve', [
+                                'id' => $properties->id,
+                            ]),
+
+                        ModalToggle::make('Change Open For Booking ')
+                            ->modal('Open For Booking')
+                            ->canSee($user->role =='property-owner' && $properties->type != 1)
+                            ->method('OpenForBooking', [
                                 'id' => $properties->id,
                             ]),
 

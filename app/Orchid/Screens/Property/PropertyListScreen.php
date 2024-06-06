@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\Property;
 use App\Models\Properties;
 use App\Orchid\Layouts\Property\PropertiesListLayout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
@@ -11,6 +12,8 @@ use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\Menu;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
@@ -161,7 +164,11 @@ class PropertyListScreen extends Screen
                      ->type('text')
                      ->title(__('Twitter Link')),
 
-             ]))->withoutApplyButton(true)->async('asyncGetProperty')
+             ]))->withoutApplyButton(true)->async('asyncGetProperty'),
+                Layout::modal('Open For Booking',Layout::rows([
+                    Select::make('open_for_booking')
+                        ->options(config('constants.OpenForBooking'))
+                ]))
         ];
     }
 
@@ -206,6 +213,14 @@ class PropertyListScreen extends Screen
         $property->save();
 
         Toast::info(__('Property was suspended'));
+    }
+
+    public function OpenForBooking( Request $request)
+    {
+        $property = Properties::find($request->get('id'));
+        $property->open_for_booking = $request->get('open_for_booking');
+        $property->save();
+        Toast::info('Send successfully');
     }
 
 

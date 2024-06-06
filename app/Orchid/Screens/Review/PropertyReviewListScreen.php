@@ -192,7 +192,7 @@ class PropertyReviewListScreen extends Screen
         if ($newGuestReview) {
             $updateReview = Reviews::find($request->get('review_id'));
             $updateReview->publish_date = Carbon::now()->toDateTimeString();
-            $updateReview->status = 1;
+            $updateReview->$request->get('text');
             $updateReview->save();
         }
         Toast::info('Send successfully');
