@@ -21,6 +21,8 @@ use App\Orchid\Screens\Review\GuesrReviewListScreen;
 use App\Orchid\Screens\Review\PropertyReviewListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\RoomType\RoomTypesEditScreen;
+use App\Orchid\Screens\RoomType\RoomTypesListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -155,6 +157,23 @@ Route::screen('the-reviews-you-leave-for-guests',GuesrReviewListScreen::class)
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push(__('The reviews you leave for guests'), route('reviews')));
+
+
+//Reviews////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::screen('room-types',RoomTypesListScreen::class)
+    ->name('room-types')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('Room Types'), route('room-types')));
+
+Route::screen('room-type/create',RoomTypesEditScreen::class)
+    ->name('room-type.create')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('room-types')
+        ->push(__('Create'), route('room-type.create')));
+
+
+
 
 
 

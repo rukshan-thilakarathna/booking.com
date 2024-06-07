@@ -33,7 +33,8 @@ class PointCountLayout extends Rows
                     ->placeholder(0)
                     ->style('border: none; font-size: 35px; background: white; color: black;font-weight: bold;')
                     ->title('Point Value (USD)')
-            ]),
+            ],),
+
 
 
         ];

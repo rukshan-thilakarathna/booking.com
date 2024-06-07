@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('images')->nullable();
             $table->string('room_size')->nullable();
             $table->string('bathroom_facilities')->nullable();
+            $table->string('bathroom_facilities')->nullable();
+            $table->string('bathroom_facilities')->nullable();
+            $table->string('bathroom_facilities')->nullable();
+            $table->string('kitchen_facilities')->nullable();
+            $table->text('disription')->nullable();
             $table->string('room_facilities')->nullable();
             $table->string('view')->nullable();
             $table->integer('smoking')->default(0);
