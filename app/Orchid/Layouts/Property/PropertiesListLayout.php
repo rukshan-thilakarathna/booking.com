@@ -123,9 +123,9 @@ class PropertiesListLayout extends Table
                             ->modal('Create Room Type')
                             ->method('CreateRoomType', [
                                 'id' => $properties->id,
+                            ])->asyncParameters([
+                                'property'=>$properties->id
                             ]),
-
-
 
                         Button::make(__('Suspend this property'))
                             ->canSee($properties->status == 4 && $user->hasAnyAccess(['property.suspend.permissions']))

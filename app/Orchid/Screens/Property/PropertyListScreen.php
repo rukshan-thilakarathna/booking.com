@@ -208,13 +208,12 @@ class PropertyListScreen extends Screen
                     ->title(__('Kitchen Facilities'))
                     ->vertical()
                     ->description(__('Update your account\'s profile information and email address.')),]
-            )
+            )->async('asyncGetProperty'),
         ];
     }
 
     public function asyncGetProperty(Properties $property): iterable
     {
-
         return [
             'property' => $property,
         ];
@@ -262,17 +261,83 @@ class PropertyListScreen extends Screen
         $property->save();
         Toast::info('Send successfully');
     }
+
     public function CreateRoomType( Request $request)
     {
+
+        dd($request);
+
+
         $validatedData = $request->validate([
             'name' => 'nullable|string|max:255',
         ]);
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $bathroom_facilities_list = '';
+        $bathroom_facilities = $request->input('bathroomfacilities');
+
+        if (!empty($bathroom_facilities)) {
+            // Ensure each facility item is converted to a string using htmlspecialchars
+            $bathroom_sanitized_facilities = array_map('htmlspecialchars', $bathroom_facilities);
+            $bathroom_facilities_list = implode(', ', $bathroom_sanitized_facilities);
+        }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $room_facilities_list = '';
+        $room_facilities = $request->input('roomfacilities');
+
+        if (!empty($room_facilities)) {
+            // Ensure each facility item is converted to a string using htmlspecialchars
+            $room_sanitized_facilities = array_map('htmlspecialchars', $room_facilities);
+            $room_facilities_list = implode(', ', $room_sanitized_facilities);
+        }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $kitchen_facilities_list = '';
+        $kitchen_facilities = $request->input('kitchenfacilities');
+
+        if (!empty($kitchen_facilities)) {
+            // Ensure each facility item is converted to a string using htmlspecialchars
+            $kitchen_sanitized_facilities = array_map('htmlspecialchars', $kitchen_facilities);
+            $kitchen_facilities_list = implode(', ', $kitchen_sanitized_facilities);
+        }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $view_facilities_list = '';
+        $view_facilities = $request->input('viewfacilities');
+
+        if (!empty($view_facilities)) {
+            // Ensure each facility item is converted to a string using htmlspecialchars
+            $view_sanitized_facilities = array_map('htmlspecialchars', $view_facilities);
+            $view_facilities_list = implode(', ', $view_sanitized_facilities);
+        }
+
+
+
+
+
+
+
 
         // Create a new RoomType instance
         $roomtype = new RoomType();
 
         // Assign validated data to the RoomType instance
-        $roomtype->fill($validatedData);
+        $roomtype->name = $validatedData['name'];
+        $roomtype->images = $validatedData['images'];
+        $roomtype->room_size = $validatedData['room_size'];
+        $roomtype->bathroom_facilities = $validatedData['bathroom_facilities'];
+        $roomtype->bathroom_count = $validatedData['name'];
+        $roomtype->washroom_count = $validatedData['name'];
+        $roomtype->kitchen_count = $validatedData['name'];
+        $roomtype->kitchen_facilities = $validatedData['name'];
+        $roomtype->description = $validatedData['name'];
+        $roomtype->property_type = $validatedData['name'];
+        $roomtype->room_facilities = $validatedData['name'];
+        $roomtype->view_facilities = $validatedData['name'];
+        $roomtype->smoking = $validatedData['name'];
+        $roomtype->status = $validatedData['name'];
 
         // Save the RoomType instance to the database
         $roomtype->save();

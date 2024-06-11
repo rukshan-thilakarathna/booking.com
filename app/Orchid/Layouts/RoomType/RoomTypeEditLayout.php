@@ -10,6 +10,7 @@ use Orchid\Platform\Models\Role;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\SimpleMDE;
 use Orchid\Screen\Fields\TextArea;
@@ -39,8 +40,10 @@ class RoomTypeEditLayout extends Rows
                 ->title(__('Room Size'))
                 ->placeholder(__('Room Size')),
 
+
             Upload::make('image')
                 ->title('Upload images'),
+
 
             TextArea::make('roomtype.description')
                 ->title(' Description')
