@@ -166,11 +166,11 @@ Route::screen('room-types',RoomTypesListScreen::class)
         ->parent('platform.index')
         ->push(__('Room Types'), route('room-types')));
 
-Route::screen('room-type/create',RoomTypesEditScreen::class)
+Route::screen('room-type/{property_type}/create',RoomTypesEditScreen::class)
     ->name('room-type.create')
-    ->breadcrumbs(fn (Trail $trail) => $trail
+    ->breadcrumbs(fn (Trail $trail, $property) => $trail
         ->parent('room-types')
-        ->push(__('Create'), route('room-type.create')));
+        ->push(__('Create'), route('room-type.create',$property)));
 
 
 

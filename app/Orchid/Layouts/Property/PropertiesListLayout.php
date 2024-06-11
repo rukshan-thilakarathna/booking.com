@@ -91,7 +91,6 @@ class PropertiesListLayout extends Table
                             ->route('property.edit', $properties->id),
 
 
-
                         ModalToggle::make('View')
                             ->canSee($user->hasAnyAccess(['property.view.permissions']))
                             ->modal('View Property')
@@ -119,6 +118,14 @@ class PropertiesListLayout extends Table
                             ->method('OpenForBooking', [
                                 'id' => $properties->id,
                             ]),
+
+                        ModalToggle::make('Create Room Type')
+                            ->modal('Create Room Type')
+                            ->method('CreateRoomType', [
+                                'id' => $properties->id,
+                            ]),
+
+
 
                         Button::make(__('Suspend this property'))
                             ->canSee($properties->status == 4 && $user->hasAnyAccess(['property.suspend.permissions']))

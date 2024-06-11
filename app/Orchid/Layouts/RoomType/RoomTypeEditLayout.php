@@ -30,7 +30,7 @@ class RoomTypeEditLayout extends Rows
                 ->type('text')
                 ->max(255)
                 ->required()
-                ->title(__('property Name'))
+                ->title(__('Name'))
                 ->placeholder(__('Name')),
 
             Input::make('roomtype.room_size')
@@ -44,6 +44,7 @@ class RoomTypeEditLayout extends Rows
 
             TextArea::make('roomtype.description')
                 ->title(' Description')
+                ->required()
                 ->rows(6),
 
             CheckBox::make('smoking')

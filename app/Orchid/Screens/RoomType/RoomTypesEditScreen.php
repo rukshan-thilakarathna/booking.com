@@ -8,17 +8,22 @@ use App\Orchid\Layouts\RoomType\RoomTypeEditLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeKitchenFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeRoomFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeViewFacilitiesLayout;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class RoomTypesEditScreen extends Screen
 {
+
     /**
      * Fetch data to be displayed on the screen.
      *
      * @return array
      */
+
     public function query(): iterable
     {
         return [];
@@ -29,6 +34,7 @@ class RoomTypesEditScreen extends Screen
      *
      * @return string|null
      */
+
     public function name(): ?string
     {
         return 'RoomTypesEditScreen';
@@ -39,9 +45,14 @@ class RoomTypesEditScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
+
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Button::make(__('Save'))
+                ->icon('bs.check-circle')
+                ->method('save'),
+        ];
     }
 
     /**$user = \App\Models\User::find((Auth::user())->id);
@@ -49,6 +60,7 @@ class RoomTypesEditScreen extends Screen
      *
      * @return \Orchid\Screen\Layout[]|string[]
      */
+
     public function layout(): iterable
     {
         $user = \App\Models\User::find((Auth::user())->id);
@@ -77,5 +89,10 @@ class RoomTypesEditScreen extends Screen
                 ->title(__('Kitchen Facilities'))
                 ->description(__('Update your account\'s profile information and email address.')),
         ];
+    }
+
+    public function save(Request $request)
+    {
+        Toast::info(__('  was saved.'));
     }
 }

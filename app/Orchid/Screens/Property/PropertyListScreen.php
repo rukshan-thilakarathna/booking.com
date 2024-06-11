@@ -2,7 +2,14 @@
 namespace App\Orchid\Screens\Property;
 
 use App\Models\Properties;
+use App\Models\RoomType;
 use App\Orchid\Layouts\Property\PropertiesListLayout;
+use App\Orchid\Layouts\RoomType\FullPropertyFacilitiesLayout;
+use App\Orchid\Layouts\RoomType\RoomTypeBathRoomFacilitiesLayout;
+use App\Orchid\Layouts\RoomType\RoomTypeEditLayout;
+use App\Orchid\Layouts\RoomType\RoomTypeKitchenFacilitiesLayout;
+use App\Orchid\Layouts\RoomType\RoomTypeRoomFacilitiesLayout;
+use App\Orchid\Layouts\RoomType\RoomTypeViewFacilitiesLayout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -165,10 +172,43 @@ class PropertyListScreen extends Screen
                      ->title(__('Twitter Link')),
 
              ]))->withoutApplyButton(true)->async('asyncGetProperty'),
-                Layout::modal('Open For Booking',Layout::rows([
-                    Select::make('open_for_booking')
-                        ->options(config('constants.OpenForBooking'))
-                ]))
+
+            Layout::modal('Open For Booking',Layout::rows([
+                Select::make('open_for_booking')
+                    ->options(config('constants.OpenForBooking'))
+            ])),
+
+            Layout::modal('Create Room Type',
+                [Layout::block(RoomTypeEditLayout::class)
+                    ->title(__(' Information'))
+                    ->vertical()
+                    ->description(__('Update your account\'s profile information and email address.')),
+
+                Layout::block(FullPropertyFacilitiesLayout::class)
+                    ->title(__(' Full Property Facilities'))
+                    ->vertical()
+                    ->description(__('Update your account\'s profile information and email address.')),
+
+                Layout::block(RoomTypeRoomFacilitiesLayout::class)
+                    ->title(__('Room Facilities'))
+                    ->vertical()
+                    ->description(__('Update your account\'s profile information and email address.')),
+
+                Layout::block(RoomTypeBathRoomFacilitiesLayout::class)
+                    ->title(__('BathRoom Facilities'))
+                    ->vertical()
+                    ->description(__('Update your account\'s profile information and email address.')),
+
+                Layout::block(RoomTypeViewFacilitiesLayout::class)
+                    ->title(__('View Facilities'))
+                    ->vertical()
+                    ->description(__('Update your account\'s profile information and email address.')),
+
+                Layout::block(RoomTypeKitchenFacilitiesLayout::class)
+                    ->title(__('Kitchen Facilities'))
+                    ->vertical()
+                    ->description(__('Update your account\'s profile information and email address.')),]
+            )
         ];
     }
 
@@ -221,6 +261,22 @@ class PropertyListScreen extends Screen
         $property->open_for_booking = $request->get('open_for_booking');
         $property->save();
         Toast::info('Send successfully');
+    }
+    public function CreateRoomType( Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'nullable|string|max:255',
+        ]);
+
+        // Create a new RoomType instance
+        $roomtype = new RoomType();
+
+        // Assign validated data to the RoomType instance
+        $roomtype->fill($validatedData);
+
+        // Save the RoomType instance to the database
+        $roomtype->save();
+
     }
 
 

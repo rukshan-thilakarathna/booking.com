@@ -17,13 +17,14 @@ return new class extends Migration
             $table->string('images')->nullable();
             $table->string('room_size')->nullable();
             $table->string('bathroom_facilities')->nullable();
-            $table->string('bathroom_facilities')->nullable();
-            $table->string('bathroom_facilities')->nullable();
-            $table->string('bathroom_facilities')->nullable();
+            $table->string('bathroom_count')->nullable();
+            $table->string('washroom_count')->nullable();
+            $table->string('kitchen_count')->nullable();
             $table->string('kitchen_facilities')->nullable();
             $table->text('disription')->nullable();
+            $table->integer('property_type')->nullable();
             $table->string('room_facilities')->nullable();
-            $table->string('view')->nullable();
+            $table->string('view_facilities')->nullable();
             $table->integer('smoking')->default(0);
             $table->integer('status')->default(1);
             $table->timestamps();

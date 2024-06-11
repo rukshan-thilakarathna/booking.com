@@ -3,7 +3,9 @@
 namespace App\Orchid\Screens\RoomType;
 
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Layout;
 
 class RoomTypesListScreen extends Screen
 {
@@ -35,8 +37,7 @@ class RoomTypesListScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Link::make('Add New Room Type')
-            ->route('room-type.create')
+
         ];
     }
 
@@ -47,6 +48,8 @@ class RoomTypesListScreen extends Screen
      */
     public function layout(): iterable
     {
-        return [];
+        return [
+
+        ];
     }
 }
