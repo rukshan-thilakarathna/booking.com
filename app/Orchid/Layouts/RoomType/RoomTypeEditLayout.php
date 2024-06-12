@@ -40,8 +40,10 @@ class RoomTypeEditLayout extends Rows
                 ->title(__('Room Size'))
                 ->placeholder(__('Room Size')),
 
-            Upload::make('image')
-                ->title('Upload images'),
+            Input::make('raw_files')
+                ->type('file')
+                ->title('Multiple files input example')
+                ->multiple(),
 
             TextArea::make('roomtype.description')
                 ->title(' Description')
