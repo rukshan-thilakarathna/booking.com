@@ -265,13 +265,9 @@ class PropertyListScreen extends Screen
     public function CreateRoomType( Request $request)
     {
 
-        dd($request);
-
-
         $validatedData = $request->validate([
             'name' => 'nullable|string|max:255',
         ]);
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $bathroom_facilities_list = '';
@@ -313,6 +309,8 @@ class PropertyListScreen extends Screen
             $view_facilities_list = implode(', ', $view_sanitized_facilities);
         }
 
+        $image =$this->store($request->file('images'));
+
 
 
 
@@ -342,6 +340,24 @@ class PropertyListScreen extends Screen
         // Save the RoomType instance to the database
         $roomtype->save();
 
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'images.*' => 'required|mimes:jpg,jpeg,png,bmp|max:20000'
+        ]);
+
+        if($request->hasfile('images'))
+        {
+            foreach($request->file('images') as $file)
+            {
+                $name = time() . '-' . $file->getClientOriginalName();
+                $file->move(public_path('images'), $name);
+            }
+        }
+
+        return back()->with('success', 'Images uploaded successfully');
     }
 
 

@@ -19,7 +19,7 @@
                     <div class="d2">
                         <img class="i1" src="{{asset('web/img/icons/login-logout.svg')}}" alt="Login-Logout">
                         @if(isset(Session::get('user')['id']))
-                            <a class="a1" href="{{route('web.dashboard')}}">{{Session::get('user')['name']}} </a>
+                            <a class="a1" href="{{route('web.dashboard')}}">{{Session::get('user')['name']}} <span style=" font-size: 12px;" >({{Session::get('user')['role']}})</span></a>
                         @else
                             <a class="a1" href="{{route('web.login')}}">Sign in  |  Sign Up</a>
                         @endif
@@ -40,4 +40,6 @@
             <button class="bt1">List your property</button>
         </div>
     </div>
+
+
 </header>
