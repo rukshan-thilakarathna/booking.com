@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Orchid\Platform\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Contracts\Auth\Guard;
@@ -86,11 +87,13 @@ class LoginController extends Controller
      */
     protected function sendLoginResponse(Request $request)
     {
-        $request->session()->regenerate();
 
-        return $request->wantsJson()
-            ? new JsonResponse([], 204)
-            : redirect()->intended(route(config('platform.index')));
+        $request->session()->regenerate();
+        $user = User::find($this->guard->user()->id);
+
+        session(['user' => $user]);
+
+        return $request->wantsJson()? new JsonResponse([], 204) : redirect()->intended(route(config('platform.index')));
     }
 
     /**

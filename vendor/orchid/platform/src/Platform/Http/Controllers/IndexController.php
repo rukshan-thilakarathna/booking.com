@@ -21,8 +21,8 @@ class IndexController extends Controller
     /**
      * @return Factory|View
      */
-    public function fallback()
-    {
-        return view('platform::errors.404');
-    }
+//    public function fallback()
+//    {
+//        return view('platform::errors.404');
+//    }
 }

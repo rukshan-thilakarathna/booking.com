@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\web\UserController;
 use Illuminate\Support\Facades\Route;
+use Orchid\Platform\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,12 @@ Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name(
 Route::get('/messages', function () {
     return redirect('/chatify');
 })->name('user.messages');
+
+Route::get('/web/login', function () {
+    return redirect('/dashboard/login');
+})->name('web.login');
+
+Route::get('/web/dashboard', function () {
+    return redirect('/dashboard/main');
+})->name('web.dashboard');
 

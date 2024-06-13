@@ -1,6 +1,9 @@
 @extends('web.Blocks.layout')
 
 @section('content')
+
+{{--{{dd(Session::get('user'))}}--}}
+
     <section id="zse1">
         <div class="zd1">
             <h1 class="zh1">Find Your Ideal Stay in <br> Paradise</h1>
@@ -16,6 +19,8 @@
             </div>
         </div>
     </section>
+
+
 
     <section id="z2se2">
         <div class="w">
