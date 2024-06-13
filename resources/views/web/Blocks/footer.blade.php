@@ -1,7 +1,7 @@
 <footer id="ft">
     <div class="w fsb">
         <div class="d100">
-            <img src="{{asset('Web/img/icons/Logo.svg')}}" alt="" id="i100">
+            <img src="{{asset('web/img/icons/Logo.svg')}}" alt="" id="i100">
             <p class="p100">Stay up to date with our latest news, receive exclusive deals and more.</p>
         </div>
         <div class="d101">

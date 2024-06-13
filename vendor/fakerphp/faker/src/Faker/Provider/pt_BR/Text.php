@@ -3397,7 +3397,7 @@ EOT;
     any statements concerning tax treatment of donations received from
     outside the United States. U.S. laws alone swamp our small staff.
 
-    Please check the Project Gutenberg Web pages for current donation
+    Please check the Project Gutenberg web pages for current donation
     methods and addresses. Donations are accepted in a number of other
     ways including checks, online payments and credit card donations. To
     donate, please visit: www.gutenberg.org/donate
@@ -3416,10 +3416,10 @@ EOT;
     necessarily keep eBooks in compliance with any particular paper
     edition.
 
-    Most people start at our Web site which has the main PG search
+    Most people start at our web site which has the main PG search
     facility: www.gutenberg.org
 
-    This Web site includes information about Project Gutenberg-tm,
+    This web site includes information about Project Gutenberg-tm,
     including how to make donations to the Project Gutenberg Literary
     Archive Foundation, how to help produce our new eBooks, and how to
     subscribe to our email newsletter to hear about new eBooks.

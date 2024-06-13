@@ -17,7 +17,7 @@
                     </select>
 
                     <div class="d2">
-                        <img class="i1" src="{{asset('Web/img/icons/login-logout.svg')}}" alt="Login-Logout">
+                        <img class="i1" src="{{asset('web/img/icons/login-logout.svg')}}" alt="Login-Logout">
                         <a class="a1" href="">Sign in  |  Sign Up</a>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
     </div>
     <div class="w">
         <div class="fsb">
-            <img class="i2" src="{{asset('Web/img/icons/Logo.svg')}}" alt="Logo">
+            <img class="i2" src="{{asset('web/img/icons/Logo.svg')}}" alt="Logo">
             <nav class="n">
                 <a href="#" class="a2">About Us</a>
                 <a href="#" class="a2">Destinations</a>

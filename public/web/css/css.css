@@ -1,0 +1,15 @@
+*{margin: 0;padding: 0;box-sizing: border-box;font-family: "DM Sans", sans-serif;}
+.w{width: 1200px;margin: 0 auto}
+.fsb{display: flex;align-items: center;justify-content: space-between}
+p {color: white;font-size: 15px;padding: 10px;line-height: 1.5;letter-spacing: 0.5px;}
+
+.d0 {background: #16BECB;padding: 15px 0;}
+.d1 {width: 320px;}
+.a1 {text-decoration: none;color: white;margin-right: 40px;font-size: 14px;}
+.sl1 {background: none;border: none;color: white;outline: none;}
+.d2 {display: flex;align-items: center;}
+.i1 {width: 20px;margin-right: 7px;}
+.i2 {width: 100px;}
+.n {display: flex;align-items: center;}
+.a2 {margin: 0 15px;text-decoration: none;color: #000000;}
+.bt1 {border: none;padding: 14px 32px;background: #ACD24B;color: white;border-radius: 30px;font-size: 15px;}

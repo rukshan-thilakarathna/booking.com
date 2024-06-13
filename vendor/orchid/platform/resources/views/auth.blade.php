@@ -50,7 +50,7 @@
     @endif
     <style>
         .rik_login{
-            background:url({{asset('Web/img/bg_login.jpg')}});
+            background:url({{asset('web/img/bg_login.jpg')}});
         }
     </style>
 </head>

@@ -2,7 +2,7 @@
 
 <title>Document</title>
 <style>
-    #zse1 {background: url({{asset('Web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.png')}});height: 70vh;background-size: cover;position: relative;}
+    #zse1 {background: url({{asset('web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.png')}});height: 70vh;background-size: cover;position: relative;}
     .zd1 {position: absolute;width: 50%;display: flex;flex-direction: column;text-align: center;margin: auto;top: 33%;right: 0;left: 0;}
     .zh1 {color: white;font-size: 60px;font-weight:bold;font-family: "Cormorant Garamond", serif;}
 
@@ -23,7 +23,7 @@
     .z2d4 {text-align: left;padding: 20px;position: absolute;bottom: 0;left: 0;}
     .z2h2 {color: white;}
     .z2s1 {color: white;font-weight: 500;}
-    .z2d2::before {content: "";display: block;width: 100%;height: 100%;background:url({{asset('Web/img/effect/top-destination-effect.png')}});border-radius: 10px;background-size: cover;background-position-y: 300px;}
+    .z2d2::before {content: "";display: block;width: 100%;height: 100%;background:url({{asset('web/img/effect/top-destination-effect.png')}});border-radius: 10px;background-size: cover;background-position-y: 300px;}
 
     #z3se1 {text-align: center;margin-bottom: 50px;}
     .z3h1 {font-size: 35px;font-weight: 400;margin-bottom: 50px;}
@@ -31,7 +31,7 @@
     .z3i1 {width: 100%;}
     .z3h2 {font-size: 20px;font-weight: 400;margin: 6px 0;}
 
-    #z4se1 {background: url({{asset('Web/img/section-image/Earn-and-Spend-Points-on-Your-Next-Getaway.png')}});margin-top: 80px;padding: 55px 0;background-size: cover;}
+    #z4se1 {background: url({{asset('web/img/section-image/Earn-and-Spend-Points-on-Your-Next-Getaway.png')}});margin-top: 80px;padding: 55px 0;background-size: cover;}
     .z4d1 {width: 36%;height: 500px;display: flex;flex-direction: column;justify-content: space-around;}
     #z4p1 {padding: 15px 0 4px;font-size: 15px;}
     #z4h1 {color: white;font-size: 35px;letter-spacing: 1px;margin: 0;}
@@ -55,7 +55,7 @@
     .x1d4 {display: flex;justify-content: space-between;position: relative;z-index: 10;}
     .xis2 {color: white;text-align: left;font-weight: 600;}
     .x1i2 {width: 90px;height: 23px;margin-top: 20px;}
-    .x1d2::before {content: "";background: url({{assert('Web/img/effect/top-destination-effect.png')}});position: absolute;left: 0;width: 100%;height: 100%;bottom: 0;z-index: 0;}
+    .x1d2::before {content: "";background: url({{assert('web/img/effect/top-destination-effect.png')}});position: absolute;left: 0;width: 100%;height: 100%;bottom: 0;z-index: 0;}
     .x1s4 {color: #7b7b7b;margin-left: 20px;position: relative;}
     .x1h2 {font-weight: 500;}
     .xid5 {background: #F2F1F1;border-radius: 0 0 10px 10px;padding: 15px;text-align: left;border: 1px solid #eeebeb;}
@@ -63,8 +63,8 @@
     #z7se1 {height: 300px;display: flex;justify-content: center;}
     #z7se1::before {content: "";background: #00000061;height: 300px;background-size: cover;position: absolute;width: 100%;left: 0;z-index: 0;}
     .z7d1 {width: 50%;height: 100%;display: flex;align-items: center;justify-content: center;}
-    #z7d2{background: url({{assert('Web/img/section-image/Cheers.png')}});background-size: cover;}
-    #z7d3{background: url({{assert('Web/img/section-image/Honeymoon.png')}});background-size: cover;}
+    #z7d2{background: url({{assert('web/img/section-image/Cheers.png')}});background-size: cover;}
+    #z7d3{background: url({{assert('web/img/section-image/Honeymoon.png')}});background-size: cover;}
     .z7h1 {color: white;font-size: 45px;}
     .z7p1 {padding: 0 0;font-size: 15px;}
     .z7d4 {position: relative;z-index: 3;}

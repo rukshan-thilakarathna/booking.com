@@ -1,4 +1,4 @@
-@extends('Web.Blocks.layout')
+@extends('web.Blocks.layout')
 
 @section('content')
     <section id="zse1">
@@ -22,21 +22,21 @@
             <h1 class="z2h1">Top Destinations</h1>
             <div class="z2d1">
                 <div class="z2d2 z2d1-1"
-                     style="background: url({{asset('Web/img/Top-Destinations-section-images/Sigiriya.png')}});background-size: cover;background-position: center;">
+                     style="background: url({{asset('web/img/Top-Destinations-section-images/Sigiriya.png')}});background-size: cover;background-position: center;">
                     <div class="z2d4">
                         <h2 class="z2h2">Sigiriya</h2>
                         <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
                     </div>
                 </div>
                 <div class="z2d2 z2d1-2"
-                     style="background: url({{asset('Web/img/Top-Destinations-section-images/Galle.png')}});background-size: cover;background-position: center;">
+                     style="background: url({{asset('web/img/Top-Destinations-section-images/Galle.png')}});background-size: cover;background-position: center;">
                     <div class="z2d4">
                         <h2 class="z2h2">Galle</h2>
                         <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
                     </div>
                 </div>
                 <div class="z2d2 z2d1-3"
-                     style="background: url({{asset('Web/img/Top-Destinations-section-images/Colombo.png')}});background-size: cover;background-position: center;">
+                     style="background: url({{asset('web/img/Top-Destinations-section-images/Colombo.png')}});background-size: cover;background-position: center;">
                     <div class="z2d4">
                         <h2 class="z2h2">Colombo</h2>
                         <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
@@ -46,21 +46,21 @@
 
             <div class="z2d1" id="z2d3">
                 <div class="z2d2 z2d1-1"
-                     style="background: url({{asset('Web/img/Top-Destinations-section-images/Anuradhapura.png')}});background-size: cover;background-position: center;">
+                     style="background: url({{asset('web/img/Top-Destinations-section-images/Anuradhapura.png')}});background-size: cover;background-position: center;">
                     <div class="z2d4">
                         <h2 class="z2h2">Anuradhapura</h2>
                         <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
                     </div>
                 </div>
                 <div class="z2d2 z2d1-2"
-                     style="background: url({{asset('Web/img/Top-Destinations-section-images/Kandy.png')}});background-size: cover;background-position: center;">
+                     style="background: url({{asset('web/img/Top-Destinations-section-images/Kandy.png')}});background-size: cover;background-position: center;">
                     <div class="z2d4">
                         <h2 class="z2h2">Kandy</h2>
                         <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
                     </div>
                 </div>
                 <div class="z2d2 z2d1-3"
-                     style="background: url({{asset('Web/img/Top-Destinations-section-images/Mathara.png')}});background-size: cover;background-position: center;">
+                     style="background: url({{asset('web/img/Top-Destinations-section-images/Mathara.png')}});background-size: cover;background-position: center;">
                     <div class="z2d4">
                         <h2 class="z2h2">Mathara</h2>
                         <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
@@ -75,25 +75,25 @@
             <h1 class="z3h1">Find Your Perfect Accommodation</h1>
             <div class="fsb">
                 <div class="z3d1">
-                    <img class="z3i1" src="{{asset('Web/img/Find-Your-Perfect-Accommodation/Hotels.png')}}"
+                    <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Hotels.png')}}"
                          alt="Find-Your-Perfect-Accommodation-Hotels">
                     <h2 class="z3h2">Hotels</h2>
                 </div>
 
                 <div class="z3d1">
-                    <img class="z3i1" src="{{asset('Web/img/Find-Your-Perfect-Accommodation/Villas.png')}}"
+                    <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Villas.png')}}"
                          alt="Find-Your-Perfect-Accommodation-Villas">
                     <h2 class="z3h2">Villas</h2>
                 </div>
 
                 <div class="z3d1">
-                    <img class="z3i1" src="{{asset('Web/img/Find-Your-Perfect-Accommodation/Guest-Houses.png')}}"
+                    <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Guest-Houses.png')}}"
                          alt="Find-Your-Perfect-Accommodation-Guest Houses">
                     <h2 class="z3h2">Guest Houses</h2>
                 </div>
 
                 <div class="z3d1">
-                    <img class="z3i1" src="{{asset('Web/img/Find-Your-Perfect-Accommodation/holiday bungalow .png')}}"
+                    <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/holiday bungalow .png')}}"
                          alt="Find-Your-Perfect-Accommodation-holiday bungalow ">
                     <h2 class="z3h2">Holiday Bungalow </h2>
                 </div>
@@ -118,19 +118,19 @@
             <h1 class="z5h1">Why Choose Barterbed</h1>
             <div class="z5d1">
                 <div class="zd5d2">
-                    <img src="{{asset('Web/img/icons/Extensive-Selection.svg')}}" alt="Extensive Selection"
+                    <img src="{{asset('web/img/icons/Extensive-Selection.svg')}}" alt="Extensive Selection"
                          class="z5i1">
                     <h2 class="z5h2">Extensive Selection</h2>
                     <p class="z5p1">Lorem Ipsum is simply dummy text of the printing ages and.</p>
                 </div>
                 <div class="zd5d2">
-                    <img src="{{asset('Web/img/icons/Secure-and-Convenient-Booking.svg')}}"
+                    <img src="{{asset('web/img/icons/Secure-and-Convenient-Booking.svg')}}"
                          alt="Secure and Convenient Booking" class="z5i1">
                     <h2 class="z5h2">Extensive Selection</h2>
                     <p class="z5p1">Lorem Ipsum is simply dummy text of the printing ages and.</p>
                 </div>
                 <div class="zd5d2">
-                    <img src="{{asset('Web/img/icons/Personalized-Recommendations.svg')}}"
+                    <img src="{{asset('web/img/icons/Personalized-Recommendations.svg')}}"
                          alt="Personalized Recommendations" class="z5i1">
                     <h2 class="z5h2">Extensive Selection</h2>
                     <p class="z5p1">Lorem Ipsum is simply dummy text of the printing ages and.</p>
@@ -145,14 +145,14 @@
             <div class="z6d1">
                 <div class="x1d1">
                     <div class="x1d2"
-                         style="background: url({{asset('Web/img/Discover-the-Latest-Hits/2.png')}});  background-size: cover;">
+                         style="background: url({{asset('web/img/Discover-the-Latest-Hits/2.png')}});  background-size: cover;">
                         <div class="x1d3">
                             <span class="x1s1">15%</span>
-                            <img src="{{asset('Web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
                         </div>
                         <div class="x1d4">
                             <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('Web/img/icons/start.png')}}" alt="hart" class="x1i2">
+                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
                         </div>
                     </div>
                     <div class="xid5">
@@ -163,14 +163,14 @@
 
                 <div class="x1d1">
                     <div class="x1d2"
-                         style="background: url({{asset('Web/img/Discover-the-Latest-Hits/1.png')}});  background-size: cover;">
+                         style="background: url({{asset('web/img/Discover-the-Latest-Hits/1.png')}});  background-size: cover;">
                         <div class="x1d3">
                             <span class="x1s1">15%</span>
-                            <img src="{{asset('Web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
                         </div>
                         <div class="x1d4">
                             <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('Web/img/icons/start.png')}}" alt="hart" class="x1i2">
+                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
                         </div>
                     </div>
                     <div class="xid5">
@@ -181,14 +181,14 @@
 
                 <div class="x1d1">
                     <div class="x1d2"
-                         style="background: url({{asset('Web/img/Discover-the-Latest-Hits/3.png')}});  background-size: cover;">
+                         style="background: url({{asset('web/img/Discover-the-Latest-Hits/3.png')}});  background-size: cover;">
                         <div class="x1d3">
                             <span class="x1s1">15%</span>
-                            <img src="{{asset('Web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
                         </div>
                         <div class="x1d4">
                             <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('Web/img/icons/start.png')}}" alt="hart" class="x1i2">
+                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
                         </div>
                     </div>
                     <div class="xid5">
@@ -223,14 +223,14 @@
             <div class="z8d1">
                 <div class="x1d1">
                     <div class="x1d2"
-                         style="background: url({{asset('Web/img/Explore-Our-Top-rated-Stays/2.png')}});  background-size: cover;">
+                         style="background: url({{asset('web/img/Explore-Our-Top-rated-Stays/2.png')}});  background-size: cover;">
                         <div class="x1d3">
                             <span class="x1s1">15%</span>
-                            <img src="{{asset('Web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
                         </div>
                         <div class="x1d4">
                             <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('Web/img/icons/start.png')}}" alt="hart" class="x1i2">
+                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
                         </div>
                     </div>
                     <div class="xid5">
@@ -241,14 +241,14 @@
 
                 <div class="x1d1">
                     <div class="x1d2"
-                         style="background: url({{asset('Web/img/Explore-Our-Top-rated-Stays/3.png')}});  background-size: cover;">
+                         style="background: url({{asset('web/img/Explore-Our-Top-rated-Stays/3.png')}});  background-size: cover;">
                         <div class="x1d3">
                             <span class="x1s1">15%</span>
-                            <img src="{{asset('Web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
                         </div>
                         <div class="x1d4">
                             <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('Web/img/icons/start.png')}}" alt="hart" class="x1i2">
+                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
                         </div>
                     </div>
                     <div class="xid5">
@@ -259,14 +259,14 @@
 
                 <div class="x1d1">
                     <div class="x1d2"
-                         style="background: url({{asset('Web/img/Explore-Our-Top-rated-Stays/1.png')}});  background-size: cover;">
+                         style="background: url({{asset('web/img/Explore-Our-Top-rated-Stays/1.png')}});  background-size: cover;">
                         <div class="x1d3">
                             <span class="x1s1">15%</span>
-                            <img src="{{asset('Web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
                         </div>
                         <div class="x1d4">
                             <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('Web/img/icons/start.png')}}" alt="hart" class="x1i2">
+                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
                         </div>
                     </div>
                     <div class="xid5">
