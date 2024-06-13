@@ -19,7 +19,7 @@
     @endauth
 
 
-    <p class="my-0 {{ auth()->check() ? 'd-none d-xl-block' : '' }}">
+    <p style="color: white;font-weight: 700;" class="my-0 {{ auth()->check() ? 'd-none d-xl-block' : '' }}">
         {{ config('app.name') }}
         <small class="align-top opacity">Satasme</small>
     </p>
