@@ -19,7 +19,7 @@
                     <div class="d2">
                         <img class="i1" src="{{asset('web/img/icons/login-logout.svg')}}" alt="Login-Logout">
                         @if(isset(Session::get('user')['id']))
-                            <a class="a1" href="{{route('web.dashboard')}}">{{Session::get('user')['name']}}</a>
+                            <a class="a1" href="{{route('web.dashboard')}}">{{Session::get('user')['name']}} </a>
                         @else
                             <a class="a1" href="{{route('web.login')}}">Sign in  |  Sign Up</a>
                         @endif
