@@ -90,8 +90,11 @@ class PropertyListScreen extends Screen
     {
         $user = \App\Models\User::find((Auth::user())->id);
         return [
-            Link::make(__('Create New'))
-                ->icon('bs.plus-circle')
+
+            Link::make(__('Manage Room Types'))
+                ->href(route('room-types')),
+
+            Link::make(__('Create New Property'))
                 ->canSee($user->hasAnyAccess(['property.create.permissions']) || $user->hasAnyAccess(['property.admin_create.permissions']))
                 ->href(route('property.create')),
         ];
@@ -266,7 +269,7 @@ class PropertyListScreen extends Screen
     {
 
         $validatedData = $request->validate([
-            'name' => 'nullable|string|max:255',
+            'roomtype.name' => 'nullable|string|max:255',
         ]);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -309,33 +312,27 @@ class PropertyListScreen extends Screen
             $view_facilities_list = implode(', ', $view_sanitized_facilities);
         }
 
-        $image =$this->store($request->file('images'));
-
-
-
-
-
-
+        $image =$this->store($request);
 
 
         // Create a new RoomType instance
         $roomtype = new RoomType();
 
         // Assign validated data to the RoomType instance
-        $roomtype->name = $validatedData['name'];
-        $roomtype->images = $validatedData['images'];
-        $roomtype->room_size = $validatedData['room_size'];
-        $roomtype->bathroom_facilities = $validatedData['bathroom_facilities'];
-        $roomtype->bathroom_count = $validatedData['name'];
-        $roomtype->washroom_count = $validatedData['name'];
-        $roomtype->kitchen_count = $validatedData['name'];
-        $roomtype->kitchen_facilities = $validatedData['name'];
-        $roomtype->description = $validatedData['name'];
-        $roomtype->property_type = $validatedData['name'];
-        $roomtype->room_facilities = $validatedData['name'];
-        $roomtype->view_facilities = $validatedData['name'];
-        $roomtype->smoking = $validatedData['name'];
-        $roomtype->status = $validatedData['name'];
+        $roomtype->name = $request['roomtype.name'];
+        $roomtype->images = $image;
+        $roomtype->room_size = $request['roomtype.room_size'];
+        $roomtype->bathroom_facilities = $bathroom_facilities_list;
+        $roomtype->bathroom_count = $request['roomtype.bedroom_count'];
+        $roomtype->washroom_count = $request['roomtype.wshroom_count'];
+        $roomtype->kitchen_count = $request['roomtype.kitchen_count'];
+        $roomtype->kitchen_facilities = $kitchen_facilities_list;
+        $roomtype->disription = $request['roomtype.description'];
+        $roomtype->property_type = 1;
+        $roomtype->room_facilities = $room_facilities_list;
+        $roomtype->view_facilities = $view_facilities_list;
+        $roomtype->smoking = $request['roomtype.smoking'] ?? 0;
+        $roomtype->status = $request['roomtype.status'] ?? 1;
 
         // Save the RoomType instance to the database
         $roomtype->save();
@@ -350,14 +347,17 @@ class PropertyListScreen extends Screen
 
         if($request->hasfile('images'))
         {
+
+            $gb_image_name = '';
             foreach($request->file('images') as $file)
             {
-                $name = time() . '-' . $file->getClientOriginalName();
-                $file->move(public_path('images'), $name);
+                $name =time() . random_int(1, 100) . '.' . $file->extension();
+                $file->move(public_path('Property/RoomType'), $name);
+                $gb_image_name .= $name . ',';
             }
         }
 
-        return back()->with('success', 'Images uploaded successfully');
+        return $gb_image_name;
     }
 
 

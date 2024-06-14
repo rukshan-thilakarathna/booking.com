@@ -242,4 +242,8 @@ class Modal extends Layout
     public function applyButtonName(string $string)
     {
     }
+
+    public function style(string $string)
+    {
+    }
 }

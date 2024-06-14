@@ -40,7 +40,7 @@ class RoomTypeEditLayout extends Rows
                 ->title(__('Room Size'))
                 ->placeholder(__('Room Size')),
 
-            Input::make('raw_files')
+            Input::make('images')
                 ->type('file')
                 ->title('Multiple files input example')
                 ->multiple(),
@@ -51,7 +51,7 @@ class RoomTypeEditLayout extends Rows
                 ->rows(6),
 
             CheckBox::make('smoking')
-                ->value(2)
+                ->value(1)
                 ->title('Smoking')
                 ->checked(false)
                 ->placeholder('ok'),
