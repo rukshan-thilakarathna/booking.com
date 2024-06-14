@@ -32,6 +32,7 @@ class PropertyCreateAndEditScreen extends Screen
      *
      * @return array
      */
+
     public function query(Properties $property): iterable
     {
         return [

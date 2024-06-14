@@ -4,10 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Filters\Filterable;
+use Orchid\Filters\Types\Like;
+use Orchid\Filters\Types\Where;
+use Orchid\Screen\AsSource;
 
 class RoomType extends Model
 {
     use HasFactory;
+    use AsSource;
+    use Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -39,6 +45,18 @@ class RoomType extends Model
     protected $casts = [
         'smoking' => 'boolean',
         'status' => 'boolean',
+    ];
+
+    protected $allowedFilters = [
+        'id'            => Where::class,
+        'name'          => Like::class,
+        'created_at'    => Like::class,
+        'updated_at'    => Like::class,
+    ];
+    protected $allowedSorts = [
+        'id',
+        'name',
+        'created_at',
     ];
 
     /**

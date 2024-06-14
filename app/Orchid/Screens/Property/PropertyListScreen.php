@@ -21,6 +21,7 @@ use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
+use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
@@ -187,10 +188,6 @@ class PropertyListScreen extends Screen
                     ->vertical()
                     ->description(__('Update your account\'s profile information and email address.')),
 
-                Layout::block(FullPropertyFacilitiesLayout::class)
-                    ->title(__(' Full Property Facilities'))
-                    ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.')),
 
                 Layout::block(RoomTypeRoomFacilitiesLayout::class)
                     ->title(__('Room Facilities'))
@@ -211,7 +208,39 @@ class PropertyListScreen extends Screen
                     ->title(__('Kitchen Facilities'))
                     ->vertical()
                     ->description(__('Update your account\'s profile information and email address.')),]
-            )->async('asyncGetProperty'),
+            )->size(Modal::SIZE_LG),
+
+            Layout::modal('Create Full Property Room Type',
+                [Layout::block(RoomTypeEditLayout::class)
+                    ->title(__(' Information'))
+                    ->vertical()
+                    ->description(__('Update your account\'s profile information and email address.')),
+
+                    Layout::block(FullPropertyFacilitiesLayout::class)
+                        ->title(__(' Full Property Facilities'))
+                        ->vertical()
+                        ->description(__('Update your account\'s profile information and email address.')),
+
+                    Layout::block(RoomTypeRoomFacilitiesLayout::class)
+                        ->title(__('Room Facilities'))
+                        ->vertical()
+                        ->description(__('Update your account\'s profile information and email address.')),
+
+                    Layout::block(RoomTypeBathRoomFacilitiesLayout::class)
+                        ->title(__('BathRoom Facilities'))
+                        ->vertical()
+                        ->description(__('Update your account\'s profile information and email address.')),
+
+                    Layout::block(RoomTypeViewFacilitiesLayout::class)
+                        ->title(__('View Facilities'))
+                        ->vertical()
+                        ->description(__('Update your account\'s profile information and email address.')),
+
+                    Layout::block(RoomTypeKitchenFacilitiesLayout::class)
+                        ->title(__('Kitchen Facilities'))
+                        ->vertical()
+                        ->description(__('Update your account\'s profile information and email address.')),]
+            )->size(Modal::SIZE_LG),
         ];
     }
 
@@ -228,7 +257,6 @@ class PropertyListScreen extends Screen
 
         Toast::info(__('Property was removed'));
     }
-
 
     public function suspend(Request $request): void
     {
@@ -323,12 +351,12 @@ class PropertyListScreen extends Screen
         $roomtype->images = $image;
         $roomtype->room_size = $request['roomtype.room_size'];
         $roomtype->bathroom_facilities = $bathroom_facilities_list;
-        $roomtype->bathroom_count = $request['roomtype.bedroom_count'];
-        $roomtype->washroom_count = $request['roomtype.wshroom_count'];
-        $roomtype->kitchen_count = $request['roomtype.kitchen_count'];
+        $roomtype->bathroom_count = $request['roomtype.bedroom_count'] ?? 0;
+        $roomtype->washroom_count = $request['roomtype.wshroom_count'] ?? 0;
+        $roomtype->kitchen_count = $request['roomtype.kitchen_count'] ?? 0;
         $roomtype->kitchen_facilities = $kitchen_facilities_list;
         $roomtype->disription = $request['roomtype.description'];
-        $roomtype->property_type = 1;
+        $roomtype->property_type = $request->get('id');
         $roomtype->room_facilities = $room_facilities_list;
         $roomtype->view_facilities = $view_facilities_list;
         $roomtype->smoking = $request['roomtype.smoking'] ?? 0;

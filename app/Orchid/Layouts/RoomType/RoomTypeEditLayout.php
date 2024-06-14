@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\RoomType;
 
 use App\Models\PropertyType;
+use App\Models\RoomType;
 use App\Models\User;
+use http\QueryString;
 use Orchid\Platform\Models\Role;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
@@ -24,6 +26,7 @@ class RoomTypeEditLayout extends Rows
      *
      * @return Field[]
      */
+
     public function fields(): array
     {
         return [
@@ -53,7 +56,7 @@ class RoomTypeEditLayout extends Rows
             CheckBox::make('smoking')
                 ->value(1)
                 ->title('Smoking')
-                ->checked(false)
+
                 ->placeholder('ok'),
         ];
     }

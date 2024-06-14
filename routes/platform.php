@@ -163,14 +163,9 @@ Route::screen('the-reviews-you-leave-for-guests',GuesrReviewListScreen::class)
 Route::screen('room-types',RoomTypesListScreen::class)
     ->name('room-types')
     ->breadcrumbs(fn (Trail $trail) => $trail
-        ->parent('platform.index')
+        ->parent('properties')
         ->push(__('Room Types'), route('room-types')));
 
-Route::screen('room-type/{property_type}/create',RoomTypesEditScreen::class)
-    ->name('room-type.create')
-    ->breadcrumbs(fn (Trail $trail, $property) => $trail
-        ->parent('room-types')
-        ->push(__('Create'), route('room-type.create',$property)));
 
 
 

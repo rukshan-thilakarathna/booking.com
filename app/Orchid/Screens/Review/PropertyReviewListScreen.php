@@ -140,12 +140,7 @@ class PropertyReviewListScreen extends Screen
         ];
     }
 
-    public function asyncGetReview(Reviews $review): iterable
-    {
-        return [
-            'review' => $review,
-        ];
-    }
+// 9
 
     public function ChangeStatus( Request $request)
     {

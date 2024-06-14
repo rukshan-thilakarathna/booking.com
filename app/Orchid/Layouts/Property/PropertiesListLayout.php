@@ -121,10 +121,16 @@ class PropertiesListLayout extends Table
 
                         ModalToggle::make('Create Room Type')
                             ->modal('Create Room Type')
+                            ->canSee($properties->type == 1)
                             ->method('CreateRoomType', [
                                 'id' => $properties->id,
-                            ])->asyncParameters([
-                                'property'=>$properties->id
+                            ]),
+
+                        ModalToggle::make('Create Full Property Room Type')
+                            ->modal('Create Full Property Room Type')
+                            ->canSee($properties->type != 1)
+                            ->method('CreateRoomType', [
+                                'id' => $properties->id,
                             ]),
 
                         Button::make(__('Suspend this property'))

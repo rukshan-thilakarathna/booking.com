@@ -41,12 +41,6 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('property.view.permissions')
                 ->route('properties'),
 
-            Menu::make(__('Room Types'))
-                ->icon('bs.people')
-                ->canSee($user->profile_verified == 1 || ($user->role == 'root' || $user->role == 'admin' || $user->role == 'superadmin '))
-                ->permission('property.view.permissions')
-                ->route('room-types'),
-
             Menu::make(__('Points'))
                 ->icon('bs.people')
                 ->permission('point.permissions')
