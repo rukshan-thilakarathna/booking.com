@@ -142,6 +142,13 @@ class PropertyReviewListScreen extends Screen
 
 // 9
 
+    public function asyncGetReview(Reviews $review): iterable
+    {
+        return [
+            'review' => $review,
+        ];
+    }
+
     public function ChangeStatus( Request $request)
     {
         $review = \App\Models\Reviews::find($request->get('id'));

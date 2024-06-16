@@ -88,7 +88,8 @@ class RoomTypesListScreen extends Screen
                 Layout::block(RoomTypeKitchenFacilitiesLayout::class)
                     ->title(__('Kitchen Facilities'))
                     ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.')),])->size(Modal::SIZE_LG)->withoutApplyButton(true)->async('asyncGetRoomType'),
+                    ->description(__('Update your account\'s profile information and email address.')),
+                ])->size(Modal::SIZE_LG)->withoutApplyButton(true)->async('asyncGetRoomType'),
         ];
     }
 
