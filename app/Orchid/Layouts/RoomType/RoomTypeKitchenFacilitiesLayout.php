@@ -28,66 +28,66 @@ class RoomTypeKitchenFacilitiesLayout extends Rows
         return [
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Refrigerator')
                     ->checked(false)
                     ->placeholder('Refrigerator'),
 
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Microwave')
                     ->checked(false)
                     ->placeholder('Microwave'),
 
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Electric kettle')
                     ->checked(false)
                     ->placeholder('Electric kettle'),
             ],),
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Outdoor dining area')
                     ->checked(false)
                     ->placeholder('Outdoor dining area'),
 
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Stovetop')
                     ->checked(false)
                     ->placeholder('Stovetop'),
 
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Dining area')
                     ->checked(false)
                     ->placeholder('Dining area'),
             ],),
 
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Oven')
                     ->checked(false)
                     ->placeholder('Oven'),
 
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Toaster')
                     ->checked(false)
                     ->placeholder('Toaster'),
 
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Dining table')
                     ->checked(false)
                     ->placeholder('Dining table'),
             ],),
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Tea/Coffee maker')
                     ->checked(false)
                     ->placeholder('Tea/Coffee maker'),
 
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Kitchenware')
                     ->checked(false)
                     ->placeholder('Kitchenware'),
 
                 CheckBox::make('kitchenfacilities[]')
-                    ->value(0)
+                    ->value('Outdoor furniture')
                     ->checked(false)
                     ->placeholder('Outdoor furniture'),
             ],),

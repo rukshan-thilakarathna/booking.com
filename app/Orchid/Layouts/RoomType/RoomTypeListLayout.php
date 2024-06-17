@@ -51,12 +51,7 @@ class RoomTypeListLayout extends Table
                 ->render(fn (RoomType $roomType) => DropDown::make()
                     ->icon('bs.three-dots-vertical')
                     ->list([
-
-                        ModalToggle::make('Room Type View')
-                            ->modal('Room Type View')
-                            ->asyncParameters([
-                                'roomtype'=>3
-                            ]),
+                        Link::make(__('View'))->route('room-types-view', $roomType->id),
                     ])),
 
         ];

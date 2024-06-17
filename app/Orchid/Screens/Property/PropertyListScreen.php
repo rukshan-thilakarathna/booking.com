@@ -351,8 +351,8 @@ class PropertyListScreen extends Screen
         $roomtype->images = $image;
         $roomtype->room_size = $request['roomtype.room_size'];
         $roomtype->bathroom_facilities = $bathroom_facilities_list;
-        $roomtype->bathroom_count = $request['roomtype.bedroom_count'] ?? 0;
-        $roomtype->washroom_count = $request['roomtype.wshroom_count'] ?? 0;
+        $roomtype->bathroom_count = $request['roomtype.bedroom_count'] ?? 1;
+        $roomtype->washroom_count = $request['roomtype.wshroom_count'] ?? 1;
         $roomtype->kitchen_count = $request['roomtype.kitchen_count'] ?? 0;
         $roomtype->kitchen_facilities = $kitchen_facilities_list;
         $roomtype->disription = $request['roomtype.description'];

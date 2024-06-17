@@ -28,40 +28,40 @@ class RoomTypeBathRoomFacilitiesLayout extends Rows
         return [
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('bathroomfacilities[]')
-                    ->value(0)
+                    ->value('Free toiletries')
                     ->checked(false)
                     ->placeholder('Free toiletries'),
 
                 CheckBox::make('bathroomfacilities[]')
-                    ->value(0)
+                    ->value('Slippers')
                     ->checked(false)
                     ->placeholder('Slippers'),
 
                 CheckBox::make('bathroomfacilities[]')
-                    ->value(0)
+                    ->value('Bathrobe')
                     ->checked(false)
                     ->placeholder('Bathrobe'),
             ],),
             \Orchid\Screen\Fields\Group::make([
 
                 CheckBox::make('bathroomfacilities[]')
-                    ->value(0)
+                    ->value('Spa bath')
                     ->checked(false)
                     ->placeholder('Spa bath'),
 
                 CheckBox::make('bathroomfacilities[]')
-                    ->value(0)
+                    ->value('Bidet')
                     ->checked(false)
                     ->placeholder('Bidet'),
 
                 CheckBox::make('bathroomfacilities[]')
-                    ->value(0)
+                    ->value('Bath or shower')
                     ->checked(false)
                     ->placeholder('Bath or shower'),
             ],),
 
             CheckBox::make('bathroomfacilities[]')
-                ->value(0)
+                ->value('Toilet paper')
                 ->checked(false)
                 ->placeholder('Toilet paper'),
 

@@ -28,133 +28,140 @@ class RoomTypeRoomFacilitiesLayout extends Rows
         return [
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Air conditioning')
                     ->checked(false)
                     ->placeholder('Air conditioning'),
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Private pool')
                     ->checked(false)
                     ->placeholder('Private pool'),
+
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Private bathroom')
                     ->checked(false)
                     ->placeholder('Private bathroom'),
             ],),
             \Orchid\Screen\Fields\Group::make([
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Kitchen/kitchenette')
                     ->checked(false)
                     ->placeholder('Kitchen/kitchenette'),
+
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Balcony')
                     ->checked(false)
                     ->placeholder('Balcony'),
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Shower')
                     ->checked(false)
                     ->placeholder('Shower'),
             ],),
 
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Refrigerator')
                     ->checked(false)
                     ->placeholder('Refrigerator'),
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('TV')
                     ->checked(false)
                     ->placeholder('TV'),
+
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Toilet')
                     ->checked(false)
                     ->placeholder('Toilet'),
             ],),
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Hot tub')
                     ->checked(false)
                     ->placeholder('Hot tub'),
+
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Terrace')
                     ->checked(false)
                     ->placeholder('Terrace'),
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Towels')
                     ->checked(false)
                     ->placeholder('Towels'),
             ],),
 
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Toilet paper')
                     ->checked(false)
                     ->placeholder('Toilet paper'),
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Flat-screen TV')
                     ->checked(false)
                     ->placeholder('Flat-screen TV'),
+
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Bath')
                     ->checked(false)
                     ->placeholder('Bath'),
             ],),
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Heating')
                     ->checked(false)
                     ->placeholder('Heating'),
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Coffee/tea maker')
                     ->checked(false)
                     ->placeholder('Coffee/tea maker'),
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('View')
                     ->checked(false)
                     ->placeholder('View'),
             ],),
 
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Hairdryer')
                     ->checked(false)
                     ->placeholder('Hairdryer'),
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Washing machine')
                     ->checked(false)
                     ->placeholder('Washing machine'),
+
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Coffee machine')
                     ->checked(false)
                     ->placeholder('Coffee machine'),
             ],),
             \Orchid\Screen\Fields\Group::make([
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Spa bath')
                     ->checked(false)
                     ->placeholder('Spa bath'),
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Kitchen')
                     ->checked(false)
                     ->placeholder('Kitchen'),
+
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Socket near the bed')
                     ->checked(false)
                     ->placeholder('Socket near the bed'),
             ],),
 
                 CheckBox::make('roomfacilities[]')
-                    ->value(0)
+                    ->value('Sofa')
                     ->checked(false)
                     ->placeholder('Sofa'),
 
