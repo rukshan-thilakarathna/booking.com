@@ -121,16 +121,16 @@ class PropertiesListLayout extends Table
 
                         ModalToggle::make('Create Room Type')
                             ->modal('Create Room Type')
-                            ->canSee($properties->type == 1)
+                            ->canSee($properties->type == 1 && $user->hasAnyAccess(['create.room.type.permissions']))
                             ->method('CreateRoomType', [
-                                'id' => $properties->id,
+                                'id' => $properties->type,
                             ]),
 
                         ModalToggle::make('Create Full Property Room Type')
                             ->modal('Create Full Property Room Type')
-                            ->canSee($properties->type != 1)
+                            ->canSee($properties->type != 1 && $user->hasAnyAccess(['create.room.type.permissions']))
                             ->method('CreateRoomType', [
-                                'id' => $properties->id,
+                                'id' => $properties->type,
                             ]),
 
                         Button::make(__('Suspend this property'))

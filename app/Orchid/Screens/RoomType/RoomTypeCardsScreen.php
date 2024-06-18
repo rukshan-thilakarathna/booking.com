@@ -34,7 +34,7 @@ class RoomTypeCardsScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Cards';
+        return 'Room Type View Cards';
     }
 
     /**
@@ -43,6 +43,13 @@ class RoomTypeCardsScreen extends Screen
     public function description(): ?string
     {
         return 'A comprehensive guide to the design and implementation of cards, including basic and advanced features.';
+    }
+
+    public function permission(): ?iterable
+    {
+        return [
+            'create.room.type.permissions'
+        ];
     }
 
     /**
@@ -68,9 +75,9 @@ class RoomTypeCardsScreen extends Screen
     {
         return [
             Layout::legend('roomtype', [
-                Sight::make('name'),
+                Sight::make('name' ),
                 Sight::make('disription'),
-                Sight::make('room_size' , 'Room Size'),
+                Sight::make('room_size' , 'Room Size (m²)'),
                 Sight::make('bathroom_facilities' , 'Bathroom Facilities'),
                 Sight::make('kitchen_facilities' , 'Kitchen Facilities'),
                 Sight::make('room_facilities' , 'Room Facilities'),
@@ -79,8 +86,8 @@ class RoomTypeCardsScreen extends Screen
                 Sight::make('washroom_count' , 'Washroom Count'),
                 Sight::make('kitchen_count' , 'Kitchen Size'),
                 Sight::make('smoking', 'Smoking')->render(fn (RoomType $roomType) => $roomType->smoking == 0
-                    ? 'Ok'
-                    : 'No'),
+                    ? 'No'
+                    : 'Ok'),
 
                 Sight::make('images', 'Images')->render(function (RoomType $roomType) {
                     if ($roomType->images != null) {
@@ -100,9 +107,7 @@ class RoomTypeCardsScreen extends Screen
                 }),
                 Sight::make('created_at', 'Created'),
                 Sight::make('updated_at', 'Updated'),
-                Sight::make('status', 'Status')->render(fn (RoomType $roomType) => $roomType->status == 0
-                    ? 'Ok'
-                    : 'No'),
+                Sight::make('status', 'Status')->render(fn (RoomType $roomType) =>  config('constants.RoomTypeStatus')[$roomType->status]),
 
             ]),
         ];

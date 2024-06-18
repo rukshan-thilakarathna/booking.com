@@ -29,6 +29,7 @@ class RoomTypeKitchenFacilitiesLayout extends Rows
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('kitchenfacilities[]')
                     ->value('Refrigerator')
+
                     ->checked(false)
                     ->placeholder('Refrigerator'),
 

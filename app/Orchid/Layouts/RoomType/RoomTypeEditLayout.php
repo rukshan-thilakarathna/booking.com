@@ -43,20 +43,22 @@ class RoomTypeEditLayout extends Rows
                 ->title(__('Room Size'))
                 ->placeholder(__('Room Size')),
 
+            Input::make('roomtype.id')
+                ->type('hidden'),
+
             Input::make('images')
                 ->type('file')
                 ->title('Multiple files input example')
                 ->multiple(),
 
-            TextArea::make('roomtype.description')
+            TextArea::make('roomtype.disription')
                 ->title(' Description')
                 ->required()
                 ->rows(6),
 
-            CheckBox::make('smoking')
+            CheckBox::make('roomtype.smoking')
                 ->value(1)
                 ->title('Smoking')
-
                 ->placeholder('ok'),
         ];
     }

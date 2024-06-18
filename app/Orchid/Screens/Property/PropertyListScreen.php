@@ -93,6 +93,7 @@ class PropertyListScreen extends Screen
         return [
 
             Link::make(__('Manage Room Types'))
+                ->canSee($user->hasAnyAccess(['create.room.type.permissions']))
                 ->href(route('room-types')),
 
             Link::make(__('Create New Property'))
@@ -349,15 +350,16 @@ class PropertyListScreen extends Screen
         // Assign validated data to the RoomType instance
         $roomtype->name = $request['roomtype.name'];
         $roomtype->images = $image;
+        $roomtype->user_id = Auth::user()->id;
         $roomtype->room_size = $request['roomtype.room_size'];
         $roomtype->bathroom_facilities = $bathroom_facilities_list;
-        $roomtype->bathroom_count = $request['roomtype.bedroom_count'] ?? 1;
+        $roomtype->bedroom_count = $request['roomtype.bedroom_count'] ?? 1;
         $roomtype->washroom_count = $request['roomtype.wshroom_count'] ?? 1;
         $roomtype->kitchen_count = $request['roomtype.kitchen_count'] ?? 0;
         $roomtype->kitchen_facilities = $kitchen_facilities_list;
-        $roomtype->disription = $request['roomtype.description'];
+        $roomtype->disription = $request['roomtype.disription'];
         $roomtype->property_type = $request->get('id');
-        $roomtype->room_facilities = $room_facilities_list;
+        $roomtype->room_facilities = $room_facilities_list ;
         $roomtype->view_facilities = $view_facilities_list;
         $roomtype->smoking = $request['roomtype.smoking'] ?? 0;
         $roomtype->status = $request['roomtype.status'] ?? 1;

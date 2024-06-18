@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\RoomType;
 
 use App\Models\PropertyType;
+use App\Models\RoomType;
 use App\Models\User;
 use Orchid\Platform\Models\Role;
 use Orchid\Screen\Field;
@@ -29,7 +30,7 @@ class RoomTypeRoomFacilitiesLayout extends Rows
             \Orchid\Screen\Fields\Group::make([
                 CheckBox::make('roomfacilities[]')
                     ->value('Air conditioning')
-                    ->checked(false)
+                   ->checked(false)
                     ->placeholder('Air conditioning'),
 
                 CheckBox::make('roomfacilities[]')

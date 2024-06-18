@@ -103,6 +103,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('review.reply.permissions', __('Review Reply'))
                 ->addPermission('review.show.hidden.permissions', __('Review Show And Hidden')),
 
+            ItemPermission::group(__('Room Type Permissions Manage'))
+                ->addPermission('create.room.type.permissions', __('Create,View,Edit And Delete')),
+
             ItemPermission::group(__('Property Permissions Manage'))
                 ->addPermission('property.create.permissions', __('Create Property'))
                 ->addPermission('property.edite.permissions', __('Edit Property'))

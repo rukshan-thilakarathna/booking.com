@@ -24,7 +24,7 @@ class RoomType extends Model
     protected $fillable = [
         'name',
         'images',
-        'room_size',
+        'room_size','user_id',
         'bathroom_facilities',
         'bathroom_count',
         'washroom_count',
@@ -80,5 +80,15 @@ class RoomType extends Model
     public function setImagesAttribute($value)
     {
         $this->attributes['images'] = json_encode($value);
+    }
+
+    public function propertyName()
+    {
+        return $this->belongsTo(PropertyType::class, 'property_type');
+    }
+
+    public function postedUser()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

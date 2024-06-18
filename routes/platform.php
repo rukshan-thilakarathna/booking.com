@@ -167,9 +167,17 @@ Route::screen('room-types',RoomTypesListScreen::class)
         ->parent('properties')
         ->push(__('Room Types'), route('room-types')));
 
-
 Route::screen('room-types/{room_type_id}/view',RoomTypeCardsScreen::class)
-    ->name('room-types-view');
+    ->name('room-types-view')
+    ->breadcrumbs(fn (Trail $trail, $room_type_id) => $trail
+        ->parent('room-types')
+        ->push('View', route('room-types-view', $room_type_id)));
+
+Route::screen('room-type/{room_type}/edit',RoomTypesEditScreen::class)
+    ->name('room-types-edit')
+    ->breadcrumbs(fn (Trail $trail, $room_type) => $trail
+        ->parent('room-types')
+        ->push('Edit', route('room-types-edit', $room_type)));
 
 
 

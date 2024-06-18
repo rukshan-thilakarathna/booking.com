@@ -32,7 +32,7 @@ class FullPropertyFacilitiesLayout extends Rows
                 ->title(__('Number of Bedroom'))
                 ->placeholder(__('Number of Bedroom')),
 
-            Input::make('roomtype.wshroom_count')
+            Input::make('roomtype.washroom_count')
                 ->type('number')
                 ->required()
                 ->title(__('Number of Washroom'))
