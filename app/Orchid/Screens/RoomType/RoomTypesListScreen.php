@@ -3,7 +3,9 @@
 namespace App\Orchid\Screens\RoomType;
 
 use App\Models\Reviews;
+use App\Models\Rooms;
 use App\Models\RoomType;
+use App\Orchid\Layouts\Rooms\RoomCreateAndUpdateLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeBathRoomFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeEditLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeKitchenFacilitiesLayout;
@@ -78,7 +80,12 @@ class RoomTypesListScreen extends Screen
     {
         return [
             RoomTypeListLayout::class,
-
+            Layout::modal('Create Room',
+                [Layout::block(RoomCreateAndUpdateLayout::class)
+                    ->title(__(' Information'))
+                    ->vertical()
+                    ->description(__('Update your account\'s profile information and email address.'))]
+            )->size(Modal::SIZE_LG),
         ];
     }
 
@@ -88,5 +95,58 @@ class RoomTypesListScreen extends Screen
 
         Toast::info(__('Room Type was removed'));
     }
+
+    public function statusChange(Request $request): void
+    {
+        $roomtype = RoomType::findOrFail($request->get('id'));
+
+        $status = $request->get('status') == 1 ? 0 : 1;
+        $roomtype->status = $status;
+        $roomtype->save();
+        Toast::info(__('Room Type Status was Changed'));
+    }
+
+    public function CreateRoom(Request $request): void
+    {
+        $newRoom = New Rooms;
+
+
+        if ($request->hasFile('room.images'))
+        {
+            // Get the uploaded file
+            $file = $request->file('room.images');
+
+            // Generate a unique name for the file
+            $name = time() . random_int(1, 100) . '.' . $file->extension();
+
+            // Move the file to the 'Property/Rooms' directory
+            $file->move(public_path('Property/Rooms'), $name);
+
+            // Set the generated file name
+            $gb_image_name = $name;
+        }
+
+        $newRoom->room_type_id = $request->get('room_type_id');;
+        $newRoom->property_id = $request->get('property_id');;
+        $newRoom->number = $request['room.number'];
+        $newRoom->price = $request['room.price'];
+        $newRoom->point_price = $request['room.point_price'];
+        $newRoom->Children = $request['room.Children'] ?? 1;
+        $newRoom->display_price = $request['room.display_price'];
+        $newRoom->user_choice = $request['room.user_choice'] ?? 1;
+        $newRoom->open_point_or_cash = $request['room.open_point_or_cash'] ?? 1;
+        $newRoom->first_payment_price = $request['room.first_payment_price'];
+        $newRoom->image = $gb_image_name ?? 0;
+        $newRoom->status = 1;
+
+        $newRoom->save();
+
+        $roomtype = RoomType::findOrFail($request->get('room_type_id'));
+        $roomtype->rooms_added = 1;
+        $roomtype->save();
+        Toast::info(__('Room was Created'));
+    }
+
+
 
 }

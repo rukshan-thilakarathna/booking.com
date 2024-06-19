@@ -8,6 +8,7 @@ $property_status = ["N/A","Actve","Waiting Approval","Hold","Suspend"];
 $property_owner_verification_status = ["Unverified","Verified","Pending","Black List","Suspend"];
 $user_status = ["N/A","Actve"];
 $room_type_status = ["N/A","Actve"];
+$room_status = ["N/A","Booking Available",'Booked'];
 $review_status = ["Pending","Display web","Not Display web"];
 $open_for_booking = ["Only Rooms","Full Property"];
 
@@ -17,6 +18,7 @@ return[
     'PropertyOwnerVerificationStatus'=>$property_owner_verification_status,
     'UserStatus'=>$user_status,
     'RoomTypeStatus'=>$room_type_status,
+    'RoomStatus'=>$room_status,
     'ReviewStatus'=>$review_status,
 ];
 

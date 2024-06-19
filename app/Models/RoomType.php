@@ -23,13 +23,13 @@ class RoomType extends Model
      */
     protected $fillable = [
         'name',
-        'images',
+        'images', 'property_id',
         'room_size','user_id',
         'bathroom_facilities',
         'bathroom_count',
         'washroom_count',
         'kitchen_count',
-        'kitchen_facilities',
+        'kitchen_facilities','rooms_added',
         'description',
         'property_type',
         'room_facilities',

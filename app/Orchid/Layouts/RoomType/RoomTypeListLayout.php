@@ -37,6 +37,11 @@ class RoomTypeListLayout extends Table
 
             TD::make('postedUser.name', __('User Name')),
 
+            TD::make('status', __('Status'))->render(function (RoomType $roomType){
+                return config('constants.RoomTypeStatus')[$roomType->status];
+
+            }),
+
 
             TD::make('created_at', __('Created'))
                 ->usingComponent(DateTimeSplit::class)
@@ -62,6 +67,21 @@ class RoomTypeListLayout extends Table
                             ->method('remove', [
                                 'id' => $roomType->id,
                             ]),
+
+                        Button::make(__('Change Status'))
+                            ->method('statusChange', [
+                                'id' => $roomType->id,
+                                'status' => $roomType->status,
+                            ]),
+
+                        ModalToggle::make('Create Room')
+                            ->modal('Create Room')
+                            ->method('CreateRoom', [
+                                'room_type_id' => $roomType->id,
+                                'property_id' => $roomType->property_id,
+                            ]),
+                        Link::make(__('Manage Rooms'))->route('room', $roomType->id)->canSee($roomType->rooms_added == 1),
+
                     ]),
                 ),
 

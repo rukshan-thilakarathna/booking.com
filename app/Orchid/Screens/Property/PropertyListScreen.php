@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\Property;
 use App\Models\Properties;
 use App\Models\RoomType;
 use App\Orchid\Layouts\Property\PropertiesListLayout;
+use App\Orchid\Layouts\Rooms\RoomCreateAndUpdateLayout;
 use App\Orchid\Layouts\RoomType\FullPropertyFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeBathRoomFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeEditLayout;
@@ -242,6 +243,13 @@ class PropertyListScreen extends Screen
                         ->vertical()
                         ->description(__('Update your account\'s profile information and email address.')),]
             )->size(Modal::SIZE_LG),
+
+            Layout::modal('Create Room',
+                [Layout::block(RoomCreateAndUpdateLayout::class)
+                    ->title(__(' Information'))
+                    ->vertical()
+                    ->description(__('Update your account\'s profile information and email address.'))]
+            )->size(Modal::SIZE_LG),
         ];
     }
 
@@ -359,6 +367,7 @@ class PropertyListScreen extends Screen
         $roomtype->kitchen_facilities = $kitchen_facilities_list;
         $roomtype->disription = $request['roomtype.disription'];
         $roomtype->property_type = $request->get('id');
+        $roomtype->property_id = $request->get('property_id');
         $roomtype->room_facilities = $room_facilities_list ;
         $roomtype->view_facilities = $view_facilities_list;
         $roomtype->smoking = $request['roomtype.smoking'] ?? 0;
@@ -366,7 +375,7 @@ class PropertyListScreen extends Screen
 
         // Save the RoomType instance to the database
         $roomtype->save();
-
+        Toast::info(__('Room Type was Created'));
     }
 
     public function store(Request $request)
