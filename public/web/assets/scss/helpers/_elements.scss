@@ -1,0 +1,82 @@
+a { @include transition(.2s ease-in-out); color: $color-default; text-decoration: none;
+  &:hover, &:active, &:focus { color: darken($color-default, 15%); outline: none !important; text-decoration: none; }
+  &.link { font-size: 10px; font-weight: bold; text-transform: uppercase;
+    &:hover, &:active, &:focus { color: darken($color-default, 5%);
+      &.icon {
+        i { color: $color-dark; }
+      }
+    }
+    &.icon {
+      i { @include transit; font-size: 12px; margin-left: 5px; position: relative; top: 1px; }
+    }
+  }
+  &.icon {
+    i { margin: 0 5px; }
+  }
+}
+
+body { background-color: $color-neutral; color: $color-dark; font-size: 14px; font-family: 'Lato', sans-serif; position: relative; }
+.blockquote-carousel { @include shadow; background-color: #fff; position: relative;
+  &:after { @include font-awesome; content: "\f075"; color: $color-default; position: absolute; right: 30px; top: -15px; font-size: 30px; }
+  blockquote { border: none; padding: 30px; font-size: 14px; margin-bottom: 0;
+    p { @include opacity(1); font-style: italic; }
+    footer { font-weight: bold; font-size: 100%; }
+  }
+  .owl-nav { position: absolute; right: 10px; bottom: 20px;
+    .owl-next, .owl-prev { width: 20px; height: 20px;
+      &:after { @include font-awesome; font-size: 12px; }
+    }
+    .owl-next { float: right;
+      &:after { content: "\f054"; }
+    }
+    .owl-prev { float: left;
+      &:after { content: "\f053"; }
+    }
+  }
+}
+
+dl { margin-bottom: 0;
+  dt { float: left; padding: 2px 0; }
+  dd { text-align: right; padding: 2px 0; }
+  &.info {
+    dt { width: 200px; padding: 10px 0; }
+    dd { border-bottom: 1px solid rgba(#000,.1); padding: 10px 0; text-align: left; }
+  }
+}
+
+h1 { @include transit();
+  a { color: $color-dark;
+    &:hover { color: $color-dark; }
+  }
+  &.inactive { @include opacity(.3);
+    &:hover { @include opacity(.8); }
+  }
+}
+h2 { @include opacity(.8); font-size: 24px; }
+hr { border-top: 1px solid #e4e4e4; margin-top: 25px; margin-bottom: 25px; }
+
+html, body { height: 100%; }
+
+p { @include opacity(.6); line-height: 18px; }
+
+ul { color: rgba($color-dark, .8); padding-left: 15px;
+  &.bullets { list-style: none; padding-left: 0px; line-height: 25px;
+    li {
+      &:before { @include font-awesome; content: "\f111"; color: $color-default; font-size: 7px; position: relative; top: -4px; margin-right: 12px; }
+    }
+  }
+  &.checkboxes { list-style: none; padding-left: 0;
+    label { font-weight: normal;
+      span { @include opacity(.6); float: right; font-size: 10px; line-height: 20px; }
+    }
+    &.inline {
+      li { width: 24%; float: left; }
+      &.half {
+        li { width: 50%; }
+      }
+    }
+  }
+  &.half {
+    li { width: 49%; display: inline-block; }
+  }
+}

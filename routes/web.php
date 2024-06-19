@@ -18,6 +18,13 @@ use Orchid\Platform\Http\Controllers\LoginController;
 Route::get('/', function () {
     return view('web.index');
 });
+Route::get('about-us', function () {
+    return view('web.about-us');
+})->name('about-us');
+
+Route::get('contact-us', function () {
+    return view('web.contact-us');
+})->name('contact-us');
 
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
 Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name('user.store');

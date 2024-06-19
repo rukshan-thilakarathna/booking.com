@@ -1,0 +1,86 @@
+#page-header {
+  header { @include shadow; background-color: #fff; position: relative; z-index: 999; }
+  hr { margin: 0; }
+  .left { display: table-cell; vertical-align: middle; }
+  .right { display: table-cell; text-align: right; vertical-align: middle; }
+  .secondary-nav { width: 100%;
+    nav { display: table; width: 100%; }
+    .left { font-size: 12px;
+      a { color: $color-dark; margin-right: 15px;
+        i { margin-right: 5px; }
+      }
+    }
+    .right {
+      .element { display: inline-block; border-left: 1px solid rgba($color-dark, .1); margin-right: -2px;
+        &:last-child { border-right: 1px solid rgba($color-dark, .1); }
+      }
+      a { @include uppercase; color: $color-dark; display: inline-block; padding-top: 17px; padding-bottom: 15px; padding-left: 15px; padding-right: 15px;
+        &:hover { background-color: rgba($color-dark, .05); }
+      }
+      select { @include border-radius(3px); font-size: 12px; font-weight: bold; padding-top: 10px; padding-left: 10px; padding-bottom: 10px; padding-right: 30px; margin-top: 0;
+        &:hover { background-color: rgba($color-dark, .05); }
+      }
+    }
+  }
+  .primary-nav { display: table; width: 100%; padding: 25px 0;
+    #brand { display: block; padding: 10px 10px 10px 0; }
+    .left { position: relative;
+      .nav-trigger { position: absolute; top: 0; bottom: 0; margin: auto; right: 0; font-size: 16px; height: 18px; display: none; }
+    }
+    nav {
+      > ul { list-style: none; margin-bottom: 0; position: relative;
+        li { display: inline-block;
+          &:hover {
+            .child-nav { @include opacity(1); @include transform( translateY(0) ); pointer-events: auto; }
+          }
+          &:last-child {
+            a { padding-right: 0; }
+          }
+          &.active {
+            > a { color: $color-default; @include border-radius(3px); border: 1px solid rgba(#000, .1); }
+          }
+          &.submit {
+            a { position: relative; padding-left: 50px;
+              &:hover {
+                i { border: 2px solid rgba(#000, .3); }
+              }
+            }
+            span { display: none; }
+            i { @include transit; @include border-radius(50%); border: 2px solid rgba(#000, .1); font-size: 0px; height: 36px; width: 36px; display: inline-block; position: absolute; top: -2px; bottom: 0; margin: auto; right: 0;
+              img { position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; margin: auto; }
+            }
+          }
+          a { border: 1px solid transparent; padding: 7px 8px 8px 8px; color: $color-dark; font-weight: bold;
+            &:hover { color: $color-default; }
+            &.has-child { position: relative;
+              &:after { @include font-awesome; content: "\f111"; color: $color-default; font-size: 6px; top: -2px; position: relative; margin-left: 5px;  }
+            }
+          }
+          .child-nav { @include opacity(0); @include transition(.3s ease);  @include transform( translateY(5px) ); min-width: 170px; pointer-events: none; list-style: none; padding: 0; padding-top: 10px; position: absolute; top: 100%; margin-top: 5px; //overflow: hidden; //border: 1px solid rgba(#000, .1);
+            &:hover { pointer-events: auto; }
+            li { @include shadow;  background-color: #fff; display: block; text-align: left; border-bottom: 1px solid rgba(#000, .1);  position: relative;
+              &:last-child { border: none; }
+              &:hover {
+                .child-nav { @include opacity(1); @include transform( translateX(0px) ); pointer-events: auto; }
+              }
+              a { padding: 8px 12px; display: block; font-weight: normal;
+                &:hover { background-color: $color-default; color: #fff;
+                  &.has-child {
+                    &:after { color: #fff; }
+                  }
+                }
+                &.has-child {
+                  &:after { @include transit; @include font-awesome; content: "\f054"; color: $color-default; font-size: 10px; bottom: 0; margin: auto; top: 0px; right: 10px; position: absolute; margin-left: 5px; height: 10px; }
+                }
+              }
+              .child-nav { @include opacity(0); @include transform( translateY(0px) ); @include transform( translateX(-5px) ); pointer-events: none; left: 100%; top: 0;  padding-top: 0; margin-top: 0; }
+            }
+          }
+        }
+      }
+    }
+  }
+  .nav-trigger { text-align: right;
+    a { display: none; padding: 6px 0px 6px 10px; }
+  }
+}

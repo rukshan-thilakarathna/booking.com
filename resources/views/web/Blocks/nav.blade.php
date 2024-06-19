@@ -1,4 +1,4 @@
-<header>
+<header style="background: white">
     <div class="d0">
         <div class="w">
             <div class="fsb">
@@ -32,10 +32,10 @@
         <div class="fsb">
             <img class="i2" src="{{asset('web/img/icons/Logo.svg')}}" alt="Logo">
             <nav class="n">
-                <a href="#" class="a2">About Us</a>
+                <a href="{{route('about-us')}}" class="a2">About Us</a>
                 <a href="#" class="a2">Destinations</a>
                 <a href="#" class="a2">Accommodations</a>
-                <a href="#" class="a2">Contact Us</a>
+                <a href="{{route('contact-us')}}" class="a2">Contact Us</a>
             </nav>
             <button class="bt1">List your property</button>
         </div>

@@ -1,0 +1,226 @@
+input[type="text"],input[type="email"], input[type="date"], input[type="time"], input[type="search"], input[type="password"],
+input[type="number"], input[type="tel"], textarea.form-control, input[type="date"], input[type="number"] {
+  @include box-shadow(0px 0px 0px 2px rgba(#000, .1), inset 1px 0 5px rgba(#000, .03)); @include border-radius(1px); @include transition(.3s); -webkit-appearance: none; background-color: #fff; border: none;  font-size: 14px; font-weight: 400; outline: none !important; padding-top: 8px; padding-bottom: 8px; width: 100%; height: inherit;
+  &:active, &:focus { @include box-shadow(0px 0px 0px 2px rgba(#000, .2), inset 1px 0 5px rgba(#000, .0)); }
+  &:hover { @include box-shadow(0px 0px 0px 2px rgba(#000, .2), inset 1px 0 5px rgba(#000, .0)); }
+  &.input-dark { background-color: rgba(#000, .3); color: #fff; }
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+::-webkit-inner-spin-button { -webkit-appearance: none;}
+::-webkit-outer-spin-button { -webkit-appearance: none;}
+
+.input-group {
+  input { min-height: 38px; }
+  button { @include border-radius(0px); border: none; min-height: 38px;
+    i { font-size: 20px;
+       }
+  }
+}
+
+.input-number { position: relative;
+  .change-button { @include opacity(.5); @include transit; cursor: pointer; position: absolute; right: 0; height: 50%; background-color: transparent; color: $color-dark; width: 20px; font-size: 12px;
+    &:hover { @include opacity(1); background-color: rgba(#000, .05); }
+    i { position: absolute; top: 0; left: 0; bottom: 0; right: 0; margin: auto; width: 7px; height: 14px; }
+    &.plus { top: 0; }
+    &.minus { bottom: 0; }
+  }
+}
+
+.form-group { position: relative;
+  button {
+    &.width-100 { width: 100%; }
+  }
+}
+
+#form-hero { @include transform( translateY(0) ); @include transition( .8s ease );
+  &.switch { @include transform( translateY(-110%) ); }
+}
+
+.form-group-inline { display: table; width: 100%; margin-bottom: 15px;
+  &.vertical-align-middle {
+    .form-group { vertical-align: middle; }
+  }
+  .form-group { display: table-cell; padding-right: 20px; vertical-align: top;
+    &:last-child { padding-right: 0; }
+  }
+}
+
+.form-reservations { @include shadow; background-color: #fff; padding: 30px;
+  form { margin: 0; border-bottom: 1px solid rgba(#000, .1);
+    &:last-child { border: none; }
+  }
+  table { margin-bottom: 0;
+    thead {
+      tr {
+        th { padding-top: 0; padding-bottom: 15px; width: 10%;
+          &:first-child { padding-left: 0; width: 50%; }
+          &:last-child { padding-right: 0; width: 20%; }
+        }
+      }
+    }
+    tbody {
+      tr {
+        td { padding: 15px; border-top: none; width: 10%;
+          &:first-child { padding-left: 0; width: 50%; }
+          &:last-child { text-align: right; padding-right: 0; width: 20%; }
+          &.price { font-weight: bold; font-size: 16px; }
+          i { @include opacity(.4); margin: 0 4px; }
+          p { font-size: 12px; }
+          h3 { font-size: 18px; font-weight: bold; display: inline-block; }
+          ul { list-style: none; padding-left: 0;
+            li { line-height: 24px;
+              &:before { @include font-awesome; color: $color-default; content: "\f00c"; margin-right: 8px; }
+            }
+          }
+          .label { position: relative; bottom: 3px; margin-left: 10px; }
+        }
+      }
+    }
+  }
+  select { margin-top: 0; }
+}
+
+.form-submit {
+  h3 { margin-bottom: 20px; margin-top: 10px; }
+}
+
+.label-inline { display: table; width: 100%;
+  label, select, input { display: table-cell; vertical-align: middle; }
+}
+
+label { cursor: pointer; margin-bottom: 8px; width: 100%; }
+
+form { margin: 10px 0; position: relative;
+  &.labels-uppercase {
+    .form-group {
+      label { text-transform: uppercase; font-size: 10px; font-weight: bold; }
+      &.label-inline {
+        label { font-size: 14px; text-transform: none; font-weight: normal; }
+      }
+    }
+  }
+  .alert { position: absolute; padding: 15px 40px; width: 50%; left: 25%; top: 50%; z-index: 1; }
+  .title { margin-bottom: 20px; }
+}
+
+textarea { resize: vertical; }
+
+button { outline: none !important;
+  &:hover, &:active, &:focus { outline: none !important; }
+}
+
+.btn[disabled] { @include opacity(.5); }
+
+.btn { @include transit; outline: none !important; border: none; font-weight: bold; padding: 4px 12px 6px 12px;
+  &:hover, &:active, &:focus { outline: none !important; }
+  &.time-radio { @include box-shadow(none); @include border-radius(0px); border-bottom: 1px solid rgba(#000, .1); display: block; background-color: transparent; width: 100%; margin-left: 0px !important; text-align: left; position: relative; font-size: 12px; color: rgba(#000, .6); padding: 10px 8px;
+    &.active { background-color: $color-default; color: #fff; }
+    &.not-available { background-color: rgba(#000, .02); color: rgba(#000, .1); pointer-events: none;
+      span { color: rgba(#000, .1); }
+    }
+    span { color: rgba(#000, .2); position: absolute; font-size: 10px; font-weight: bold; top: 0; bottom: 0; margin: auto; height: 15px; right: 5px; }
+  }
+  &.btn-rounded { @include border-radius(50px); }
+  &.btn-framed { border-width: 2px; background-color: transparent; border-style: solid;
+    &.btn-primary { border-color: $color-default; color: $color-default; background-color: transparent;
+      &:hover { border-color: darken($color-default, 20%); background-color: transparent; }
+    }
+    &.btn-default { border-color: rgba($color-dark, .2); color: $color-dark;
+      &:hover { border-color: rgba($color-dark, .5); }
+    }
+    &.btn-small { @include border-radius(14px); font-size: 10px; font-weight: bold; text-transform: uppercase; padding: 4px 10px; }
+    &.btn-white { background-color: transparent; color: #fff; border-color: #fff;
+      &:hover { border-color: #fff; }
+    }
+  }
+  &.btn-default {}
+  &.btn-white { background-color: #fff; color: $color-default; }
+  &.btn-primary { background-color: $color-default; color: #fff;
+    &:hover, &:active, &:focus { background-color: darken($color-default, 5%); }
+  }
+  &.btn-large { padding: 10px 20px 11px 20px; font-size: 16px; }
+  &.btn-xlarge { padding: 20px 30px 21px 30px; font-size: 24px; }
+  &.btn-circle { color: $color-dark;
+    i { @include border-radius(50%); border: 2px solid rgba(#000, .1); width: 30px; height: 30px; text-align: center; line-height: 26px; color: $color-default; }
+  }
+}
+
+
+.icheckbox { @include box-shadow(inset 0px 0px 0px 2px rgba(#000,.2)); @include border-radius(2px); position: relative; display: inline-block; vertical-align: middle; background-color: #fff; display: inline-block; height: 20px; margin-right: 10px; position: relative; width: 20px; top: -1px;
+  &:after { @include transition(.3s); @include opacity(0); @include font-awesome; color: $color-dark; content: "\f00c"; position: absolute;  line-height: 20px; font-size: 10px; left: 5.5px;  }
+  &.checked {
+    &:after { @include opacity(1); }
+  }
+}
+
+.hero-section {
+  form { @include box-shadow(1px 1px 8px rgba(0,0,0,.2)); margin-bottom: 0; z-index: 2; position: relative; margin-top: 0;
+    ::-webkit-input-placeholder {
+      color: rgba(#fff, .6);
+    }
+    :-moz-placeholder {
+      color: rgba(#fff, .6);
+    }
+    ::-moz-placeholder {
+      color: rgba(#fff, .6);
+    }
+    :-ms-input-placeholder {
+      color: rgba(#fff, .6);
+    }
+    label { font-weight: normal; }
+    input { background-color: $color-default; padding: 30px; width: 100%; font-size: 18px; @include box-shadow(0px 0px 0px 0px rgba(#000, .1), inset 1px 1px 16px rgba(#000, .2)); //box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.2) inset;
+      //&[type="text"], [type="number"], [type="date"] { box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.2) inset; }
+      &:hover, &:active, &:focus { background-color: darken( $color-default, 1% ); @include box-shadow(0px 0px 0px 0px rgba(#000, .1), inset 1px 1px 16px rgba(#000, .3));
+        //&[type="text"], [type="number"], [type="date"] { @include box-shadow(0px 0px 0px 0px rgba(#000, .1), inset 1px 1px 16px rgba(#000, .2)); }
+      }
+    }
+    .checkboxes { color: #fff; }
+    .input-number {
+      .change-button { width: 40px;
+        i {
+          &:before { color: #fff; }
+        }
+      }
+    }
+    .label-on-input { @include opacity(.3); text-transform: uppercase; font-size: 10px; font-weight: bold; color: #fff; position: absolute; top: 15px; left: 30px; width: auto; z-index: 1; }
+    .form-group { position: relative; margin-bottom: 0;
+      &:after { background-color: rgba(#000, .05); content: ""; width: 1px; height: 100%; position: absolute; top: 0; right: 0; }
+    }
+    .form-control { color: #fff; margin-bottom: 0; }
+    .btn { @include border-radius(0); border: none; background-color: $color-default; color: #fff; padding: 30px; text-transform: none; width: 100%; font-size: 18px; font-weight: normal;
+      &:hover, &:focus, &:active { border: none; }
+      &[type="submit"]{ background-color: darken( $color-default, 10% ); }
+    }
+    .favorite-search { background-color: rgba(#000, .4); color: #fff; font-size: 12px; padding: 10px 30px;
+      span { font-weight: bold; margin-right: 10px; }
+      a { color: #fff; margin-right: 3px;
+        &:hover { text-decoration: underline; }
+        &:after { content: ","; }
+      }
+    }
+    .icheckbox { background-color: transparent; @include box-shadow(inset 0px 0px 0px 2px rgba(#fff,.3));
+      &:after { color: #fff; }
+    }
+  }
+}
+
+.form-control { @include border-radius(3px); }
+
+.marketing-form {
+  .left { float: left; width: 50%; }
+  .right { float: right; width: 50%; }
+}
+
+select { @include transit; @include appearance(none); @include border-radius(0px); border: none; cursor: pointer; background: url("../img/caret-down.png") no-repeat 100% center; margin-top: 0px; min-width: 40px;
+  &.framed { @include box-shadow(0 1px 2px rgba(#000, .1)); @include border-radius(3px); background-color: #fff; border-width: 2px; border-style: solid; border-color: rgba(#000, .25); position: relative; top: -2px; padding: 3px;
+    &.white { color: #fff; border-color: #fff; background: url("../img/caret-down-white.png") no-repeat 100% center; background-color: transparent;
+      option { color: $color-dark; }
+    }
+    option[value=""] { color: rgba(#000, .5); }
+  }
+  option { background-color: #fff; padding: 5px; }
+}

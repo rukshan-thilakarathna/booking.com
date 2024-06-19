@@ -1,6 +1,9 @@
 @extends('web.Blocks.layout')
 
 @section('content')
+    <style>
+        p{color: white}
+    </style>
 
 {{--{{dd(Session::get('user'))}}--}}
 

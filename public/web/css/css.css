@@ -1,7 +1,7 @@
 *{margin: 0;padding: 0;box-sizing: border-box;font-family: "DM Sans", sans-serif;}
 .w{width: 1200px;margin: 0 auto}
 .fsb{display: flex;align-items: center;justify-content: space-between}
-p {color: white;font-size: 15px;padding: 10px;line-height: 1.5;letter-spacing: 0.5px;}
+p {font-size: 15px;padding: 10px;line-height: 1.5;letter-spacing: 0.5px;}
 
 .d0 {background: #16BECB;padding: 15px 0;}
 .d1 {width: 320px;}

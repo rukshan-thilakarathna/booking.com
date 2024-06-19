@@ -1,0 +1,6 @@
+@mixin elegant-font { @include text-shadow(none); -webkit-font-smoothing: antialiased; font-family: 'ElegantIcons'; speak: none; font-weight: normal; font-variant: normal; line-height: 1; text-transform: none; }
+@mixin font-awesome { @include text-shadow(none); -webkit-font-smoothing: antialiased; font-family: 'fontawesome'; speak: none; font-weight: normal; font-variant: normal; line-height: 1; text-transform: none; }
+//@mixin transit { @include transition( 0.3s cubic-bezier(.65,.05,.36,1) ); }
+@mixin transit { @include transition( 0.3s ease ); }
+@mixin shadow { @include box-shadow(1px 1px 8px rgba(0,0,0,.07)); }
+@mixin uppercase { text-transform: uppercase; font-size: 10px; font-weight: 700; }
