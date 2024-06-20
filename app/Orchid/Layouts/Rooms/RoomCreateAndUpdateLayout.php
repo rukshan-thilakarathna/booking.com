@@ -23,6 +23,10 @@ class RoomCreateAndUpdateLayout extends Rows
      *
      * @return Field[]
      */
+
+    public $target = 'room';
+
+
     public function fields(): array
     {
         return [
@@ -31,6 +35,9 @@ class RoomCreateAndUpdateLayout extends Rows
                 ->required()
                 ->title(__('Room Number'))
                 ->placeholder(__('Room Number')),
+
+            Input::make('room.id')
+                ->type('hidden'),
 
             Input::make('room.price')
                 ->type('string')
@@ -59,12 +66,6 @@ class RoomCreateAndUpdateLayout extends Rows
                 ->type('string')
                 ->title(__('Dicecount'))
                 ->placeholder(__('Dicecount')),
-
-            Input::make('room.display_price')
-                ->type('string')
-                ->required()
-                ->title(__('Display Price'))
-                ->placeholder(__('Display Price')),
 
             TextArea::make('room.user_choice')
                 ->rows(5)

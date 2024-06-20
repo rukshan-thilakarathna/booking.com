@@ -6,10 +6,13 @@ use App\Models\Rooms;
 use App\Models\RoomType;
 use App\Orchid\Layouts\Rooms\RoomsListLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeListLayout;
+use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Components\Cells\DateTimeSplit;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
+use Orchid\Support\Facades\Toast;
 
 class RoomsListScreen extends Screen
 {
@@ -43,7 +46,9 @@ class RoomsListScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make('Back')->route('room-types')
+        ];
     }
 
     /**
@@ -56,5 +61,12 @@ class RoomsListScreen extends Screen
         return [
             RoomsListLayout::class
         ];
+    }
+
+    public function remove(Request $request): void
+    {
+        Rooms::findOrFail($request->get('id'))->delete();
+
+        Toast::info(__('Room was removed'));
     }
 }

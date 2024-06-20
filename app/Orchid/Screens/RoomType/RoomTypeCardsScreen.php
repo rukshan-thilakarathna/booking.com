@@ -9,6 +9,7 @@ use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Components\Cells\DateTimeSplit;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Sight;
 use Orchid\Support\Color;
@@ -105,8 +106,8 @@ class RoomTypeCardsScreen extends Screen
                         return 'No Image';
                     }
                 }),
-                Sight::make('created_at', 'Created'),
-                Sight::make('updated_at', 'Updated'),
+                Sight::make('created_at', 'Created') ->usingComponent(DateTimeSplit::class),
+                Sight::make('updated_at', 'Updated') ->usingComponent(DateTimeSplit::class),
                 Sight::make('status', 'Status')->render(fn (RoomType $roomType) =>  config('constants.RoomTypeStatus')[$roomType->status]),
 
             ]),

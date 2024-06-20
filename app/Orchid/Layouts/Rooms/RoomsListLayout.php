@@ -38,7 +38,9 @@ class RoomsListLayout extends Table
             TD::make('roomType.name', __('Room Type')),
             TD::make('property.name', __('Property Name')),
             TD::make('price', __('Price'))->filter()->sort(),
-            TD::make('point_price', __('Point Price'))->filter()->sort(),
+            TD::make('dicecount', __('Discount (%)'))->filter()->sort(),
+            TD::make('display_price', __('Total Price'))->filter()->sort(),
+            TD::make('point_price', __('Point Price'))->filter()->sort()->defaultHidden(),
             TD::make('status', __('Availability'))->sort()->filter()->render(function (Rooms $rooms){
                 return config('constants.RoomStatus')[$rooms->status];
             }),
@@ -46,6 +48,7 @@ class RoomsListLayout extends Table
                 ->usingComponent(DateTimeSplit::class)
                 ->filter()
                 ->sort()
+                ->defaultHidden()
                 ->align(TD::ALIGN_RIGHT),
 
             TD::make('updated_at', __('Last edit'))
@@ -61,7 +64,14 @@ class RoomsListLayout extends Table
                     ->icon('bs.three-dots-vertical')
                     ->list([
                         Link::make(__('Edit'))
-                            ->route('property.edit', $room->id),
+                            ->route('room-edit', $room->id),
+                        Link::make(__('View'))
+                            ->route('room-view', $room->id),
+                        Button::make(__('Delete'))
+                            ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                            ->method('remove', [
+                                'id' => $room->id,
+                            ]),
 
                     ])),
         ];

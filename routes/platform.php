@@ -21,6 +21,8 @@ use App\Orchid\Screens\Review\GuesrReviewListScreen;
 use App\Orchid\Screens\Review\PropertyReviewListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\Rooms\RoomCardsScreen;
+use App\Orchid\Screens\Rooms\RoomEditScreen;
 use App\Orchid\Screens\Rooms\RoomsListScreen;
 use App\Orchid\Screens\RoomType\RoomTypeCardsScreen;
 use App\Orchid\Screens\RoomType\RoomTypesEditScreen;
@@ -187,6 +189,12 @@ Route::screen('room-types/{room_type_id}/rooms',RoomsListScreen::class)
     ->breadcrumbs(fn (Trail $trail, $room_type_id) => $trail
         ->parent('room-types')
         ->push('Rooms', route('room', $room_type_id)));
+
+Route::screen('room/{room_id}/view',RoomCardsScreen::class)
+    ->name('room-view');
+
+Route::screen('room/{room_id}/edit',RoomEditScreen::class)
+    ->name('room-edit');
 
 
 

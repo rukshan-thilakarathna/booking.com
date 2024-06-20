@@ -1,44 +1,40 @@
 <?php
 
-namespace App\Orchid\Screens\RoomType;
+namespace App\Orchid\Screens\Rooms;
 
-use App\Models\Reviews;
 use App\Models\Rooms;
 use App\Models\RoomType;
+use App\Orchid\Layouts\Role\RoleEditLayout;
 use App\Orchid\Layouts\Rooms\RoomCreateAndUpdateLayout;
+use App\Orchid\Layouts\RoomType\FullPropertyFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeBathRoomFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeEditLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeKitchenFacilitiesLayout;
-use App\Orchid\Layouts\RoomType\RoomTypeListLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeRoomFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeViewFacilitiesLayout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Orchid\Platform\Models\Role;
-use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Screen;
-use Orchid\Screen\Sight;
-use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
-class RoomTypesListScreen extends Screen
+class RoomEditScreen extends Screen
 {
+    public $room;
     /**
      * Fetch data to be displayed on the screen.
      *
      * @return array
      */
-    public function query(): iterable
+
+    public function query(Rooms $room_id): iterable
     {
+        $this->room = $room_id;
+//        dd($room_id);
         return [
-            'room_types' => RoomType::filters()->with('propertyName', 'postedUser')->orderBy('id', 'desc')->where('user_id' ,Auth::user()->id)->paginate(12),
+            'room' => $room_id
         ];
     }
 
@@ -47,21 +43,10 @@ class RoomTypesListScreen extends Screen
      *
      * @return string|null
      */
+
     public function name(): ?string
     {
-        return 'Room Types';
-    }
-
-    /**
-     * The screen's action buttons.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
-    public function commandBar(): iterable
-    {
-        return [
-
-        ];
+        return 'Room Edit Screen';
     }
 
     public function permission(): ?iterable
@@ -72,44 +57,43 @@ class RoomTypesListScreen extends Screen
     }
 
     /**
+     * The screen's action buttons.
+     *
+     * @return \Orchid\Screen\Action[]
+     */
+
+    public function commandBar(): iterable
+    {
+        return [
+            Link::make('Back')->route('room',$this->room->room_type_id),
+            Button::make(__('Save'))
+                ->icon('bs.check-circle')
+                ->method('save'),
+        ];
+    }
+
+    /**$user = \App\Models\User::find((Auth::user())->id);
      * The screen's layout elements.
      *
      * @return \Orchid\Screen\Layout[]|string[]
      */
+
     public function layout(): iterable
     {
+        $user = \App\Models\User::find((Auth::user())->id);
         return [
-            RoomTypeListLayout::class,
-            Layout::modal('Create Room',
-                [Layout::block(RoomCreateAndUpdateLayout::class)
-                    ->title(__(' Information'))
-                    ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.'))]
-            )->size(Modal::SIZE_LG),
+
+            Layout::block([
+                RoomCreateAndUpdateLayout::class
+            ]) ->title(__('Edit Room Information'))
+                ->description(__('Update your account\'s profile information and email address.')),
         ];
     }
 
-    public function remove(Request $request): void
+
+    public function save(Request $request)
     {
-        RoomType::findOrFail($request->get('id'))->delete();
-
-        Toast::info(__('Room Type was removed'));
-    }
-
-    public function statusChange(Request $request): void
-    {
-        $roomtype = RoomType::findOrFail($request->get('id'));
-
-        $status = $request->get('status') == 1 ? 0 : 1;
-        $roomtype->status = $status;
-        $roomtype->save();
-        Toast::info(__('Room Type Status was Changed'));
-    }
-
-    public function CreateRoom(Request $request): void
-    {
-        $newRoom = New Rooms;
-
+        $newRoom = Rooms::findOrFail($request['room.id']);
 
         if ($request->hasFile('room.images'))
         {
@@ -125,12 +109,15 @@ class RoomTypesListScreen extends Screen
             // Set the generated file name
             $gb_image_name = $name;
         }
+
+
         $fullprice = $request['room.price'];
         if(!empty($request['room.dicecount'])){
             $fullprice =  $fullprice-(($fullprice*$request['room.dicecount'])/100);
         }
         $first_payment_price = ($fullprice*10)/100;
 
+        // Assign validated data to the RoomType instance
         $newRoom->room_type_id = $request->get('room_type_id');;
         $newRoom->property_id = $request->get('property_id');;
         $newRoom->number = $request['room.number'];
@@ -145,14 +132,8 @@ class RoomTypesListScreen extends Screen
         $newRoom->image = $gb_image_name ?? 0;
         $newRoom->status = 1;
 
+        // Save the RoomType instance to the database
         $newRoom->save();
-
-        $roomtype = RoomType::findOrFail($request->get('room_type_id'));
-        $roomtype->rooms_added = 1;
-        $roomtype->save();
-        Toast::info(__('Room was Created'));
+        Toast::info(__('Room  was updated'));
     }
-
-
-
 }
