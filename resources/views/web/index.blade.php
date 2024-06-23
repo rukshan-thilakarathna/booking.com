@@ -27,53 +27,38 @@
 
     <section id="z2se2">
         <div class="w">
-            <h1 class="z2h1">Top Destinations</h1>
+            <h1 class="z2h1">Destinations</h1>
+            <p class="z2p1">The top destinations around the world</p>
+            @php
+                $class = [1,2,3,1,2,3];
+            @endphp
             <div class="z2d1">
-                <div class="z2d2 z2d1-1"
-                     style="background: url({{asset('web/img/Top-Destinations-section-images/Sigiriya.png')}});background-size: cover;background-position: center;">
-                    <div class="z2d4">
-                        <h2 class="z2h2">Sigiriya</h2>
-                        <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
-                    </div>
-                </div>
-                <div class="z2d2 z2d1-2"
-                     style="background: url({{asset('web/img/Top-Destinations-section-images/Galle.png')}});background-size: cover;background-position: center;">
-                    <div class="z2d4">
-                        <h2 class="z2h2">Galle</h2>
-                        <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
-                    </div>
-                </div>
-                <div class="z2d2 z2d1-3"
-                     style="background: url({{asset('web/img/Top-Destinations-section-images/Colombo.png')}});background-size: cover;background-position: center;">
-                    <div class="z2d4">
-                        <h2 class="z2h2">Colombo</h2>
-                        <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
-                    </div>
-                </div>
+                @foreach($propertiesDestinations as $key => $PropertyDestination)
+                    @if($key <= 2)
+                        <div class="z2d2 z2d1-{{$class[$key]}}"
+                             style="background: url({{asset('web/img/Top-Destinations-section-images/Sigiriya.png')}});background-size: cover;background-position: center;">
+                            <div class="z2d4">
+                                <h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2>
+                                <span class="z2s1">{{$uniquePropertyCount[$PropertyDestination->main_location]}} Properties</span>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
-
             <div class="z2d1" id="z2d3">
-                <div class="z2d2 z2d1-1"
-                     style="background: url({{asset('web/img/Top-Destinations-section-images/Anuradhapura.png')}});background-size: cover;background-position: center;">
-                    <div class="z2d4">
-                        <h2 class="z2h2">Anuradhapura</h2>
-                        <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
-                    </div>
-                </div>
-                <div class="z2d2 z2d1-2"
-                     style="background: url({{asset('web/img/Top-Destinations-section-images/Kandy.png')}});background-size: cover;background-position: center;">
-                    <div class="z2d4">
-                        <h2 class="z2h2">Kandy</h2>
-                        <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
-                    </div>
-                </div>
-                <div class="z2d2 z2d1-3"
-                     style="background: url({{asset('web/img/Top-Destinations-section-images/Mathara.png')}});background-size: cover;background-position: center;">
-                    <div class="z2d4">
-                        <h2 class="z2h2">Mathara</h2>
-                        <span class="z2s1">40 Hotels <span class="z2s2">40 Villas</span></span>
-                    </div>
-                </div>
+
+                @foreach($propertiesDestinations as $key => $PropertyDestination)
+
+                    @if( $key > 2 && $key <= 5)
+                        <div class="z2d2 z2d1-{{$class[$key]}}"
+                             style="background: url({{asset('web/img/Top-Destinations-section-images/Sigiriya.png')}});background-size: cover;background-position: center;">
+                            <div class="z2d4">
+                                <h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2>
+                                <span class="z2s1">{{$uniquePropertyCount[$PropertyDestination->main_location]}} Properties</span>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </div>
     </section>
@@ -82,29 +67,13 @@
         <div class="w">
             <h1 class="z3h1">Find Your Perfect Accommodation</h1>
             <div class="fsb">
-                <div class="z3d1">
-                    <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Hotels.png')}}"
-                         alt="Find-Your-Perfect-Accommodation-Hotels">
-                    <h2 class="z3h2">Hotels</h2>
-                </div>
-
-                <div class="z3d1">
-                    <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Villas.png')}}"
-                         alt="Find-Your-Perfect-Accommodation-Villas">
-                    <h2 class="z3h2">Villas</h2>
-                </div>
-
-                <div class="z3d1">
-                    <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Guest-Houses.png')}}"
-                         alt="Find-Your-Perfect-Accommodation-Guest Houses">
-                    <h2 class="z3h2">Guest Houses</h2>
-                </div>
-
-                <div class="z3d1">
-                    <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/holiday bungalow .png')}}"
-                         alt="Find-Your-Perfect-Accommodation-holiday bungalow ">
-                    <h2 class="z3h2">Holiday Bungalow </h2>
-                </div>
+                @foreach($propertyTypes as $key => $PropertyType)
+                    <div class="z3d1">
+                        <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Hotels.png')}}"
+                             alt="Find-Your-Perfect-Accommodation-Hotels">
+                        <h2 class="z3h2">{{$PropertyType->name}}</h2>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

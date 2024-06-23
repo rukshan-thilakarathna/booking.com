@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\web\DestinationsController;
+use App\Http\Controllers\web\page\IndexController;
 use App\Http\Controllers\web\UserController;
 use Illuminate\Support\Facades\Route;
 use Orchid\Platform\Http\Controllers\LoginController;
@@ -15,9 +17,8 @@ use Orchid\Platform\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('web.index');
-});
+Route::get('/',[IndexController::class ,'index'])->name('web.page.index');
+
 Route::get('about-us', function () {
     return view('web.about-us');
 })->name('about-us');
