@@ -42,9 +42,10 @@ class PropertyCreateAndEditLayout extends Rows
                    ->title('Example Description')
                    ->rows(6),
 
-
-                Upload::make('image')
-                    ->title('Upload images'),
+            Input::make('image')
+                ->type('file')
+                ->title('Multiple files input example')
+                ->multiple(),
         ];
     }
 }

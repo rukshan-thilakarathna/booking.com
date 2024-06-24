@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\web\DestinationsController;
 use App\Http\Controllers\web\page\IndexController;
+use App\Http\Controllers\web\page\ListController;
 use App\Http\Controllers\web\UserController;
 use Illuminate\Support\Facades\Route;
 use Orchid\Platform\Http\Controllers\LoginController;
@@ -27,7 +28,7 @@ Route::get('contact-us', function () {
     return view('web.contact-us');
 })->name('contact-us');
 
-Route::get('list',[IndexController::class ,'index'])->name('web.page.list');
+Route::get('list',[ListController::class ,'index'])->name('web.page.list');
 
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
 Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name('user.store');

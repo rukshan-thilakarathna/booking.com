@@ -33,7 +33,7 @@
             <img class="i2" src="{{asset('web/img/icons/Logo.svg')}}" alt="Logo">
             <nav class="n">
                 <a href="{{route('about-us')}}" class="a2">About Us</a>
-                <a href="#" class="a2">Destinations</a>
+                <a href="{{route('web.page.list')}}" class="a2">Destinations</a>
                 <a href="#" class="a2">Accommodations</a>
                 <a href="{{route('contact-us')}}" class="a2">Contact Us</a>
             </nav>

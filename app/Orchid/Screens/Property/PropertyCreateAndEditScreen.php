@@ -137,6 +137,9 @@ class PropertyCreateAndEditScreen extends Screen
                 $sanitized_facilities = array_map('htmlspecialchars', $facilities);
                 $facilities_list = implode(', ', $sanitized_facilities);
             }
+            if($request->hasfile('image')) {
+                $image = $this->store($request);
+            }
 
             $propertyq = Properties::find($property);
 
@@ -151,14 +154,13 @@ class PropertyCreateAndEditScreen extends Screen
                 'review_id' => $request->input('property.review_id', 0),
                 'description' => $request->input('property.description'),
                 'facilities' => $facilities_list,
-                'image' => $request->input('property.image', ''),
+                'image' => $image ?? $propertyq->image,
                 'contact_number' => $request->input('property.contact_number'),
                 'whatsapp_numner' => $request->input('property.whatsapp_number'),
                 'facebook_link' => $request->input('property.facebook_link'),
                 'tiktok_link' => $request->input('property.tiktok_link'),
                 'linkedin_link' => $request->input('property.linkedin_link'),
                 'twitter_link' => $request->input('property.twitter_link'),
-                'status' => $request->input('property.status', 2),
                 'added_user' => Auth::id(),
             ];
 
@@ -180,6 +182,10 @@ class PropertyCreateAndEditScreen extends Screen
                 $facilities_list = implode(', ', $sanitized_facilities);
             }
 
+            if($request->hasfile('image')) {
+                $image = $this->store($request);
+            }
+
             $property = new Properties();
             $property->user_id = $request->property['user_id'] ??  Auth::user()->id;
             $property->name = $request->property['name'];
@@ -191,7 +197,7 @@ class PropertyCreateAndEditScreen extends Screen
             $property->review_id = $request->property['review_id'] ?? 0;
             $property->description = $request->property['description'];
             $property->facilities = $facilities_list;
-            $property->image = $request->property['image'] ?? "";
+            $property->image = $image ?? "";
             $property->contact_number = $request->property['contact_number'];
             $property->whatsapp_numner = $request->property['whatsapp_numner'];
             $property->facebook_link = $request->property['facebook_link'];
@@ -213,5 +219,26 @@ class PropertyCreateAndEditScreen extends Screen
 
 
 
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'images.*' => 'mimes:jpg,jpeg,png,bmp|max:20000'
+        ]);
+
+        if($request->hasfile('image'))
+        {
+
+            $gb_image_name = '';
+            foreach($request->file('image') as $file)
+            {
+                $name =time() . random_int(1, 100) . '.' . $file->extension();
+                $file->move(public_path('Property/Images'), $name);
+                $gb_image_name .= $name . ',';
+            }
+        }
+
+        return $gb_image_name;
     }
 }

@@ -11,6 +11,7 @@ $room_type_status = ["N/A","Actve"];
 $room_status = ["N/A","Booking Available",'Booked'];
 $review_status = ["Pending","Display web","Not Display web"];
 $open_for_booking = ["Only Rooms","Full Property"];
+$Property_Facility = ["Parking","Free Wifi","Restaurant","Pet friendly","Room service","24-hour front desk","Fitness center","Non-smoking rooms","Airport shuttle","Family rooms","Spa","Electric vehicle charging station","Wheelchair accessible","Swimming pool"];
 
 return[
     'PropertyStatus'=>$property_status,
@@ -19,6 +20,7 @@ return[
     'UserStatus'=>$user_status,
     'RoomTypeStatus'=>$room_type_status,
     'RoomStatus'=>$room_status,
+    'PropertyFacility'=>$Property_Facility,
     'ReviewStatus'=>$review_status,
 ];
 
