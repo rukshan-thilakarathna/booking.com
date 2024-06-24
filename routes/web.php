@@ -29,6 +29,7 @@ Route::get('contact-us', function () {
 })->name('contact-us');
 
 Route::get('list',[ListController::class ,'index'])->name('web.page.list');
+Route::get('detail',[ListController::class ,'index'])->name('web.page.detail');
 
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
 Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name('user.store');
