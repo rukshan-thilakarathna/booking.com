@@ -23,7 +23,7 @@ class IndexController extends Controller
         $propertyType = PropertyType::all();
 
 
-        return view('web.list')->with([
+        return view('web.index')->with([
             'propertiesDestinations' => $propertiesDestinations,
             'propertyTypes' => $propertyType,
             'uniquePropertyCount' =>$uniquePropertyCount

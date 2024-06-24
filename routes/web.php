@@ -27,8 +27,11 @@ Route::get('contact-us', function () {
     return view('web.contact-us');
 })->name('contact-us');
 
+Route::get('list',[IndexController::class ,'index'])->name('web.page.list');
+
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
 Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name('user.store');
+
 Route::get('/messages', function () {
     return redirect('/chatify');
 })->name('user.messages');
