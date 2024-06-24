@@ -131,7 +131,6 @@
                         <!--end title-->
                         <section id="gallery">
                             <div class="gallery-detail">
-                                <div class="ribbon"><div class="offer-number">20%</div><figure>Off Today!</figure></div>
                                 <div class="one-item-carousel">
                                     <div class="image">
                                         <a href="#reviews" class="review scroll">
@@ -146,7 +145,7 @@
                                                 </p>
                                             </div>
                                         </a>
-                                        <img src="assets/img/items/01_b.jpg" alt="">
+                                        <img src="{{asset('web/assets/img/items/01_b.jpg')}}" alt="">
                                     </div>
                                     <div class="image">
                                         <a href="#reviews" class="review scroll">
@@ -160,7 +159,7 @@
                                                 </p>
                                             </div>
                                         </a>
-                                        <img src="assets/img/items/02_b.jpg" alt="">
+                                        <img src="{{asset('web/assets/img/items/02_b.jpg')}}" alt="">
                                     </div>
                                     <div class="image">
                                         <a href="#reviews" class="review scroll">
@@ -175,7 +174,7 @@
                                                 </p>
                                             </div>
                                         </a>
-                                        <img src="assets/img/items/03_b.jpg" alt="">
+                                        <img src="{{asset('web/assets/img/items/03_b.jpg')}}" alt="">
                                     </div>
                                 </div>
                             </div>

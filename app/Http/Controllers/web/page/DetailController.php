@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class DetailController extends Controller
 {
-    public function index()
+    public function index($id)
     {
         return view('web.detail');
     }

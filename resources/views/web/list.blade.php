@@ -114,7 +114,7 @@
                                         <figure class="location">{{$item->district->name_en}}</figure>
                                         <figure class="label label-info">{{$item->propertyType->name}}</figure>
                                         <p>{{$item->description}}</p>
-                                        <a href="detail.html" class="btn btn-rounded btn-default btn-framed btn-small">View detail</a>
+                                        <a href="{{route('web.page.detail',$item->id)}}" class="btn btn-rounded btn-default btn-framed btn-small">View detail</a>
                                     </div>
                                     <!--end info-->
                                 </div>
