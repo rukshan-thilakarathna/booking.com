@@ -1,3 +1,4 @@
+@php use App\Models\Rooms; @endphp
 @extends('web.Blocks.layout')
 
 @section('content')
@@ -10,102 +11,7 @@
             </ol>
             <!--end breadcrumb-->
             <div class="row">
-                <div class="col-md-3 col-sm-4">
-                    <div class="sidebar">
-                        <div class="box filter">
-                            <h2>Search</h2>
-                            <form id="form-filter" class="labels-uppercase">
-                                <div class="form-group">
-                                    <label for="form-filter-destination">Destination</label>
-                                    <input type="text" class="form-control" id="form-filter-destination" name="destination" placeholder="Destination">
-                                </div>
-                                <!--end form-group-->
-                                <div class="form-group-inline">
-                                    <div class="form-group">
-                                        <label for="form-filter-check-in">Check In</label>
-                                        <input type="text" class="form-control date" id="form-filter-check-in" name="check-in" placeholder="Check In">
-                                    </div>
-                                    <!--end form-group-->
-                                    <div class="form-group">
-                                        <label for="form-filter-check-out">Nights</label>
-                                        <input type="number" class="form-control" id="form-filter-check-out" name="check-out">
-                                    </div>
-                                    <!--end form-group-->
-                                </div>
-                                <!--end form-group-inline-->
-                                <div class="center">
-                                    <a href="#filter-advanced-search" class="link icon" data-toggle="collapse" aria-expanded="false" aria-controls="filter-advanced-search">Advanced Search<i class="fa fa-plus"></i></a>
-                                </div>
-                                <div class="collapse" id="filter-advanced-search">
-                                    <div class="wrapper">
-                                        <section>
-                                            <h3>Rate (per night)</h3>
-                                            <ul class="checkboxes list-unstyled">
-                                                <li><label><input type="checkbox" name="hotel">$0 - $50<span>12</span></label></li>
-                                                <li><label><input type="checkbox" name="apartment">$50 - $100<span>48</span></label></li>
-                                                <li><label><input type="checkbox" name="breakfast-only">$150 - $150<span>36</span></label></li>
-                                                <li><label><input type="checkbox" name="spa-wellness">$150+<span>56</span></label></li>
-                                            </ul>
-                                            <!--end checkboxes-->
-                                        </section>
-                                        <!--end section-->
-                                        <section>
-                                            <h3>Property Type </h3>
-                                            <ul class="checkboxes">
-                                                <li><label><input type="checkbox" name="hotel">Apartmets<span>67</span></label></li>
-                                                <li><label><input type="checkbox" name="apartment">Hotels<span>31</span></label></li>
-                                                <li><label><input type="checkbox" name="breakfast-only">Boats<span>68</span></label></li>
-                                                <li><label><input type="checkbox" name="spa-wellness">Villas<span>52</span></label></li>
-                                            </ul>
-                                            <div class="collapse" id="all-property-types">
-                                                <ul class="checkboxes">
-                                                    <li><label><input type="checkbox" name="ski-center">Ski Center<span>67</span></label></li>
-                                                    <li><label><input type="checkbox" name="cottage">Cottage<span>31</span></label></li>
-                                                    <li><label><input type="checkbox" name="hostel">Hostel<span>68</span></label></li>
-                                                    <li><label><input type="checkbox" name="boat">Boat<span>52</span></label></li>
-                                                </ul>
-                                            </div>
-                                            <!--end checkboxes-->
-                                            <a href="#all-property-types" class="link" data-toggle="collapse" aria-expanded="false" aria-controls="all-property-types">Show all</a>
-                                        </section>
-                                        <!--end section-->
-                                        <section>
-                                            <h3>Property Facility</h3>
-                                            <ul class="checkboxes no-bottom-margin">
-                                                <li><label><input type="checkbox" name="wi-fi">Wi-fi<span>12</span></label></li>
-                                                <li><label><input type="checkbox" name="free-parking">Free Parking<span>48</span></label></li>
-                                                <li><label><input type="checkbox" name="airport">Airport Shuttle<span>36</span></label></li>
-                                                <li><label><input type="checkbox" name="family-rooms">Family Rooms<span>56</span></label></li>
-                                            </ul>
-                                            <!--end checkboxes-->
-                                        </section>
-                                        <!--end section-->
-                                    </div>
-                                    <!--end filter-advanced-search-->
-                                </div>
-                                <!--end collapse-->
-                                <div class="form-group center">
-                                    <button type="submit" class="btn btn-primary btn-rounded form-control">Search</button>
-                                </div>
-                            </form>
-                            <!--end form-filter-->
-                        </div>
-                        <!--end filter-->
-                        <div class="box">
-                            <h2>Weather in Destination</h2>
-                            <div id="weather" class="weather weather-detail"></div>
-                            <!--end weather-->
-                        </div>
-                        <!--end box-->
-                        <a href="#" class="advertising-banner">
-                            <span class="banner-badge">Advertising</span>
-                            <img src="assets/img/ad-banner-02.jpg" alt="">
-                        </a>
-                    </div>
-                    <!--end sidebar-->
-                </div>
-                <!--end col-md-3-->
-                <div class="col-md-9 col-sm-8">
+                <div class="col-md-12 col-sm-12">
                     <div class="quick-navigation" data-fixed-after-touch="">
                         <div class="wrapper">
                             <ul>
@@ -120,8 +26,8 @@
                     <div class="main-content">
                         <div class="title">
                             <div class="left">
-                                <h1>Mountain Paradise<span class="rating"><i class="fa fa-star"></i>9.9</span></h1>
-                                <h3><a href="#">Austria</a> (63 properties)</h3>
+                                <h1>{{$property->name}}<span class="rating"><i class="fa fa-star"></i>9.9</span></h1>
+                                <h3><a href="#">{{$property->district->name_en}}</a></h3>
                             </div>
                             <div class="right">
                                 <a href="#map" class="icon scroll"><i class="fa fa-map-marker"></i>See on the map</a>
@@ -132,169 +38,51 @@
                         <section id="gallery">
                             <div class="gallery-detail">
                                 <div class="one-item-carousel">
-                                    <div class="image">
-                                        <a href="#reviews" class="review scroll">
-                                            <div class="rating">
-                                                <div class="rating-title">
-                                                    <figure class="rating">9.8</figure>
-                                                    <h4>Very Good Hotel</h4>
-                                                </div>
-                                                <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod. Suspendisse
-                                                    at dui sit amet felis commodo dictum. Class aptent taciti sociosqu ad litora
-                                                    torquent per conubia nostra, per inceptos
-                                                </p>
+                                    @php
+                                        $image_array = explode(',', $property->image);
+                                    @endphp
+                                    <img {{count($image_array)}} src="{{asset('Property/Images/'.$image_array[0])}}" alt="">
+
+                                    @foreach($image_array as $key => $image)
+                                        @if($key>0)
+                                            <div class="image">
+                                                <img src="{{asset('Property/Images/'.$image)}}" alt="">
                                             </div>
-                                        </a>
-                                        <img src="{{asset('web/assets/img/items/01_b.jpg')}}" alt="">
-                                    </div>
-                                    <div class="image">
-                                        <a href="#reviews" class="review scroll">
-                                            <div class="rating">
-                                                <div class="rating-title">
-                                                    <figure class="rating">9.9</figure>
-                                                    <h4>Beautiful Holiday</h4>
-                                                </div>
-                                                <p>Class aptent taciti sociosqu ad litora
-                                                    torquent per conubia nostra, per inceptos
-                                                </p>
-                                            </div>
-                                        </a>
-                                        <img src="{{asset('web/assets/img/items/02_b.jpg')}}" alt="">
-                                    </div>
-                                    <div class="image">
-                                        <a href="#reviews" class="review scroll">
-                                            <div class="rating">
-                                                <div class="rating-title">
-                                                    <figure class="rating">9.8</figure>
-                                                    <h4>Very Good Hotel</h4>
-                                                </div>
-                                                <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod. Suspendisse
-                                                    at dui sit amet felis commodo dictum. Class aptent taciti sociosqu ad litora
-                                                    torquent per conubia nostra, per inceptos
-                                                </p>
-                                            </div>
-                                        </a>
-                                        <img src="{{asset('web/assets/img/items/03_b.jpg')}}" alt="">
-                                    </div>
+                                        @endif
+                                    @endforeach
+
                                 </div>
                             </div>
                         </section>
                         <h2>Description</h2>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <section id="description">
-                                    <h3>Spend Great Time in Our Hotel!</h3>
-                                    <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod. Suspendisse
-                                        at dui sit amet felis commodo dictum. Class aptent taciti sociosqu ad litora
-                                        torquent per conubia nostra, per inceptos himenaeos. Integer commodo eleifend erat,
-                                        vitae tincidunt urna volutpat et. Mauris laoreet, sem ut sodales sodales,
-                                        massa turpis posuere lectus, non aliquet massa nisl ac orci.
-                                    </p>
-                                    <p>Aenean non dapibus neque. Praesent tempus aliquet felis, auctor aliquet ligula bibendum
-                                        id. Phasellus ut finibus ligula. Suspendisse sodales lacus vel viverra egestas. Donec
-                                        eu interdum sem, sed tempus odio. Interdum et malesuada fames ac ante ipsum primis in
-                                        faucibus. In ut ante lacinia, interdum ante eu, posuere ex. Donec iaculis elit
-                                        consectetur nisi finibus, a vestibulum nibh mattis. Aliquam erat volutpat.
-                                    </p>
+                                    <p>{{$property->description}}</p>
                                 </section>
                                 <section id="facilities">
                                     <h2>Facilities</h2>
                                     <ul class="bullets half">
-                                        <li>Sauna</li>
-                                        <li>Fireplace or fire pit</li>
-                                        <li>Outdoor Kitchen</li>
-                                        <li>Tennis Courts</li>
-                                        <li>Trees and Landscaping</li>
-                                        <li>Sun Room</li>
-                                        <li>Family Room</li>
-                                        <li>Concrete Flooring</li>
+                                        @php
+                                            $facilities_array = explode(',', $property->facilities);
+                                        @endphp
+                                        @foreach(config('constants.PropertyFacility') as $key => $PropertyFacility)
+                                            @if(in_array($key,$facilities_array))
+                                                <li>{{$PropertyFacility}}</li>
+                                            @endif
+                                        @endforeach
                                     </ul>
                                 </section>
                                 <section id="map">
                                     <h2>Map</h2>
                                     <div id="map-item" class="map height-300 box"></div>
-                                    <!--end map-->
                                 </section>
                             </div>
                             <!--end col-md-8-->
-                            <div class="col-md-4">
-                                <div class="sidebar">
-                                    <aside class="box">
-                                        <dl>
-                                            <dt>1-Bed Rooms:</dt>
-                                            <dd>23</dd>
-                                            <dt>2-Bed Rooms:</dt>
-                                            <dd>48</dd>
-                                            <dt>Apartments:</dt>
-                                            <dd>12</dd>
-                                            <dt>Parking:</dt>
-                                            <dd>Free</dd>
-                                            <dt>Swimming:</dt>
-                                            <dd>Yes</dd>
-                                            <dt>Ski Center:</dt>
-                                            <dd>2km</dd>
-                                        </dl>
-                                    </aside>
-                                    <aside>
-                                        <h2>Contact</h2>
-                                        <address>
-                                            <strong>Your Company</strong><br>
-                                            4877 Spruce Drive<br>
-                                            West Newton, PA 15089<br>
-                                            <br>
-                                            +1 (734) 123-4567<br>
-                                            <a href="#">hello@example.com</a><br>
-                                            <strong>skype:</strong> your.company
-                                        </address>
-                                    </aside>
-                                </div>
-                                <!--end sidebar-->
-                            </div>
-                            <!--end col-md-4-->
+
                         </div>
                         <!--end row-->
-                        <section>
-                            <h2>Why Choose This Hotel?</h2>
-                            <div class="row">
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="feature">
-                                        <aside class="circle">
-                                            <i class="icon_box-checked"></i>
-                                        </aside>
-                                        <figure>
-                                            <h3>200+ Reviews</h3>
-                                        </figure>
-                                    </div>
-                                    <!--end feature-->
-                                </div>
-                                <!--end col-md-4-->
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="feature">
-                                        <aside class="circle">
-                                            <i class="icon_box-checked"></i>
-                                        </aside>
-                                        <figure>
-                                            <h3>Low Prices</h3>
-                                        </figure>
-                                    </div>
-                                    <!--end feature-->
-                                </div>
-                                <!--end col-md-4-->
-                                <div class="col-md-4 col-sm-4">
-                                    <div class="feature">
-                                        <aside class="circle">
-                                            <i class="icon_box-checked"></i>
-                                        </aside>
-                                        <figure>
-                                            <h3>Great Position</h3>
-                                        </figure>
-                                    </div>
-                                    <!--end feature-->
-                                </div>
-                                <!--end col-md-4-->
-                            </div>
-                            <!--end row-->
-                        </section>
+
                         <section id="availability">
                             <h2>Availability</h2>
                             <form class="labels-uppercase" id="form-availability">
@@ -324,149 +112,63 @@
                                 <!--end row-->
                             </form>
 
-                            <div class="form-reservations">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th>Room Type</th>
-                                            <th>Persons</th>
-                                            <th>Price</th>
-                                            <th>Rooms</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                    </table>
+                            @foreach($roomTypes as $key => $roomType)
+                                <h2>Room Type 0{{$key+1}} <a href="#write-a-review" class="btn btn-primary btn-rounded pull-right scroll">More Information</a></h2>
+
+                                <h3>{{$roomType->name}}</h3>
+                            @php
+                                $rooms = Rooms::where('room_type_id',$roomType->id)->get();
+                            @endphp
+                                <div style="margin-bottom: 30px" class="form-reservations">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Number of Room</th>
+                                                <th>Number of guests</th>
+                                                <th>Today's price</th>
+                                                <th>Your choices</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    @foreach($rooms as $key => $room)
+                                        <table class="table">
+                                            <tbody>
+                                            <tr class="room">
+                                                <td class="persons">{{$room->number}}</td>
+                                                <td class="persons">
+                                                    <ul>
+                                                        <li>Adults - {{$room->adults}}<i class="fa fa-user"></i></li>
+                                                        <li>Children - {{$room->Children}}<i class="fa fa-user"></i></li>
+                                                    </ul>
+                                                </td>
+                                                <td class="price">$96</td>
+                                                <td class="rooms">
+                                                    <select class="framed" name="room_1_nights">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary btn-rounded">Reserve Now</button>
+                                                    </div>
+                                                    <!--end form-group-->
+                                                </td>
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    @endforeach
+
                                 </div>
-                                <form id="room_1">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr class="room">
-                                            <td class="room-type">
-                                                <a href=""><h3>Double Room</h3><figure class="label label-danger">1 Room Left!</figure></a>
-                                                <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod.
-                                                    Suspendisse at dui sit amet felis commodo dictum.
-                                                </p>
-                                                <ul class="info">
-                                                    <li>Breakfast Included</li>
-                                                    <li>VAT Included</li>
-                                                </ul>
-                                            </td>
-                                            <td class="persons">2<i class="fa fa-user"></i></td>
-                                            <td class="price">$96</td>
-                                            <td class="rooms">
-                                                <select class="framed" name="room_1_nights">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-rounded">Reserve Now</button>
-                                                </div>
-                                                <!--end form-group-->
-                                            </td>
-                                        </tr>
-                                        <!--end tr.room-->
-                                        </tbody>
-                                    </table>
-                                    <!--end table-->
-                                </form>
-                                <!--edn form#room_1-->
-                                <form id="room_2">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr class="room">
-                                            <td class="room-type">
-                                                <a href=""><h3>Family Suite</h3></a>
-                                                <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod.
-                                                    Suspendisse at dui sit amet felis commodo dictum.
-                                                </p>
-                                                <ul class="info">
-                                                    <li>Breakfast Included</li>
-                                                    <li>VAT Included</li>
-                                                </ul>
-                                            </td>
-                                            <td class="persons">4+1<i class="fa fa-user"></i></td>
-                                            <td class="price">$176</td>
-                                            <td class="rooms">
-                                                <select class="framed" name="room_2_nights">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-rounded">Reserve Now</button>
-                                                </div>
-                                                <!--end form-group-->
-                                            </td>
-                                        </tr>
-                                        <!--end tr.room-->
-                                        </tbody>
-                                    </table>
-                                    <!--end table-->
-                                </form>
-                                <!--edn form#room_2-->
-                                <form id="room_3">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr class="room">
-                                            <td class="room-type">
-                                                <a href=""><h3>Apartment</h3></a>
-                                                <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod.
-                                                    Suspendisse at dui sit amet felis commodo dictum.
-                                                </p>
-                                                <ul class="info">
-                                                    <li>Breakfast Included</li>
-                                                    <li>VAT Included</li>
-                                                </ul>
-                                            </td>
-                                            <td class="persons">2+2<i class="fa fa-user"></i></td>
-                                            <td class="price">$250</td>
-                                            <td class="rooms">
-                                                <select class="framed" name="room_3_nights">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-rounded">Reserve Now</button>
-                                                </div>
-                                                <!--end form-group-->
-                                            </td>
-                                        </tr>
-                                        <!--end tr.room-->
-                                        </tbody>
-                                    </table>
-                                    <!--end table-->
-                                </form>
-                                <!--edn form#room_3-->
-                            </div>
+                            @endforeach
                             <!--end form-reservations-->
-                        </section>
-                        <section id="additional-information">
-                            <h2>Additional Information</h2>
-                            <dl class="info">
-                                <dt>Check-in:</dt>
-                                <dd>14:00 - 00:00</dd>
-                                <dt>Check-out:</dt>
-                                <dd><strong>Late Check-out: until 12:00 </strong></dd>
-                                <dt>Cancellation:</dt>
-                                <dd>Cancellation and prepayment policies vary according to room type.</dd>
-                                <dt>Children:</dt>
-                                <dd>All children are welcome.</dd>
-                                <dt>Pets:</dt>
-                                <dd>Pets are not allowed</dd>
-                            </dl>
-                            <!--end info-->
                         </section>
                         <section id="reviews">
                             <div class="title">
