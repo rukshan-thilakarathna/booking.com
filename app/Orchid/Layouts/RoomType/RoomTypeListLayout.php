@@ -33,7 +33,9 @@ class RoomTypeListLayout extends Table
             ->filter()
             ->sort(),
 
-            TD::make('propertyName.name', __('Property Type Name')),
+            TD::make('propertyName.name', __('Property  Name')),
+
+            TD::make('property.name', __('Property Type Name')),
 
             TD::make('postedUser.name', __('User Name')),
 

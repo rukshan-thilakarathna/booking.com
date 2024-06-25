@@ -22,7 +22,6 @@ class IndexController extends Controller
 
         $propertyType = PropertyType::all();
 
-
         return view('web.index')->with([
             'propertiesDestinations' => $propertiesDestinations,
             'propertyTypes' => $propertyType,

@@ -13,7 +13,7 @@ class DetailController extends Controller
     {
         $property = Properties::with('propertyType','district','city')->find($id);
 
-        $roomTypes = RoomType::where('property_id', $id)->get();
+        $roomTypes = RoomType::where('property_id', $id)->where('status', 1)->get();
 
 
 

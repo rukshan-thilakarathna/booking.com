@@ -118,13 +118,12 @@ class RoomEditScreen extends Screen
         $first_payment_price = ($fullprice*10)/100;
 
         // Assign validated data to the RoomType instance
-        $newRoom->room_type_id = $request->get('room_type_id');;
-        $newRoom->property_id = $request->get('property_id');;
         $newRoom->number = $request['room.number'];
         $newRoom->price = $request['room.price'];
         $newRoom->dicecount = $request['room.dicecount'];
         $newRoom->point_price = $request['room.point_price'];
-        $newRoom->Children = $request['room.Children'] ?? 1;
+        $newRoom->adults = $request['room.adults'] ?? 1;
+        $newRoom->Children = $request['room.Children'] ?? 0;
         $newRoom->display_price = $fullprice;
         $newRoom->user_choice = $request['room.user_choice'] ?? 1;
         $newRoom->open_point_or_cash = $request['room.open_point_or_cash'] ?? 1;

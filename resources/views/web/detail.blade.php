@@ -78,6 +78,7 @@
                                     <div id="map-item" class="map height-300 box"></div>
                                 </section>
                             </div>
+
                             <!--end col-md-8-->
 
                         </div>
@@ -85,7 +86,7 @@
 
                         <section id="availability">
                             <h2>Availability</h2>
-                            <form class="labels-uppercase" id="form-availability">
+                            <form style="margin-bottom: 50px; class="labels-uppercase" id="form-availability">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -113,12 +114,16 @@
                             </form>
 
                             @foreach($roomTypes as $key => $roomType)
-                                <h2>Room Type 0{{$key+1}} <a href="#write-a-review" class="btn btn-primary btn-rounded pull-right scroll">More Information</a></h2>
-
-                                <h3>{{$roomType->name}}</h3>
-                            @php
-                                $rooms = Rooms::where('room_type_id',$roomType->id)->get();
-                            @endphp
+                                @php
+                                    $isHasRooms = Rooms::where('room_type_id',$roomType->id)->count();
+                                @endphp
+                            @if($isHasRooms > 0)
+                                <div style="margin-bottom: 27px;background: #07393f;padding: 26px;color: white;">
+                                    <h3>{{$roomType->name}}<a target="_blank" href="{{route('web.page.property-type-detail',$roomType->id)}}" class="btn btn-primary btn-rounded pull-right scroll">More Information</a></h3>
+                                </div>
+                                @php
+                                    $rooms = Rooms::where('room_type_id',$roomType->id)->get();
+                                @endphp
                                 <div style="margin-bottom: 30px" class="form-reservations">
                                     <div class="table-responsive">
                                         <table class="table">
@@ -140,18 +145,21 @@
                                                 <td class="persons">{{$room->number}}</td>
                                                 <td class="persons">
                                                     <ul>
-                                                        <li>Adults - {{$room->adults}}<i class="fa fa-user"></i></li>
-                                                        <li>Children - {{$room->Children}}<i class="fa fa-user"></i></li>
+                                                        <li>Adults - {{$room->adults}}
+                                                            @for($i = 0; $i < $room->adults; $i++)
+                                                                <i class="fa fa-user"></i>
+                                                            @endfor
+                                                        </li>
+                                                        <li>Children - {{$room->Children}}
+                                                            @for($i = 0; $i < $room->Children; $i++)
+                                                                <i class="fa fa-user"></i>
+                                                            @endfor
+                                                        </li>
                                                     </ul>
                                                 </td>
-                                                <td class="price">$96</td>
+                                                <td class="price">LKR {{$room->display_price}}</td>
                                                 <td class="rooms">
-                                                    <select class="framed" name="room_1_nights">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                    </select>
+                                                    {{$room->user_choice}}
                                                 </td>
                                                 <td>
                                                     <div class="form-group">
@@ -167,6 +175,7 @@
                                     @endforeach
 
                                 </div>
+                                @endif
                             @endforeach
                             <!--end form-reservations-->
                         </section>

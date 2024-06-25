@@ -86,6 +86,11 @@ class RoomType extends Model
     {
         return $this->belongsTo(PropertyType::class, 'property_type');
     }
+    public function property()
+    {
+        return $this->belongsTo(Properties::class, 'property_id');
+    }
+
 
     public function postedUser()
     {

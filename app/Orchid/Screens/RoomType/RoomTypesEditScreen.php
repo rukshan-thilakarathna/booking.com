@@ -161,14 +161,14 @@ class RoomTypesEditScreen extends Screen
         $roomtype->images = $image ??  $roomtype->images;
         $roomtype->user_id = Auth::user()->id;
         $roomtype->room_size = $request['roomtype.room_size'];
-        $roomtype->bathroom_facilities = $bathroom_facilities_list ?? $roomtype->bathroom_facilities;
+        $roomtype->bathroom_facilities = $bathroom_facilities_list ;
         $roomtype->bedroom_count = $request['roomtype.bedroom_count'] ?? 1;
         $roomtype->washroom_count = $request['roomtype.wshroom_count'] ?? 1;
         $roomtype->kitchen_count = $request['roomtype.kitchen_count'] ?? 0;
-        $roomtype->kitchen_facilities = $kitchen_facilities_list ?? $roomtype->kitchen_facilities;
+        $roomtype->kitchen_facilities = $kitchen_facilities_list;
         $roomtype->disription = $request['roomtype.disription'];
-        $roomtype->room_facilities = $room_facilities_list ?? $roomtype->room_facilities;
-        $roomtype->view_facilities = $view_facilities_list ?? $roomtype->view_facilities;
+        $roomtype->room_facilities = $room_facilities_list ;
+        $roomtype->view_facilities = $view_facilities_list ;
         $roomtype->smoking = $request['roomtype.smoking'] ?? 0;
         $roomtype->status = $request['roomtype.status'] ?? 1;
 

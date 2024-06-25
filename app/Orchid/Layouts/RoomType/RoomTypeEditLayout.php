@@ -47,6 +47,7 @@ class RoomTypeEditLayout extends Rows
                 ->type('hidden'),
 
             Input::make('images')
+                ->required()
                 ->type('file')
                 ->title('Multiple files input example')
                 ->multiple(),
