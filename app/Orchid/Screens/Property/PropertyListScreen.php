@@ -305,6 +305,7 @@ class PropertyListScreen extends Screen
     public function CreateRoomType( Request $request)
     {
 
+
         $validatedData = $request->validate([
             'roomtype.name' => 'nullable|string|max:255',
         ]);

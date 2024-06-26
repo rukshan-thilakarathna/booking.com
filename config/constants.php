@@ -12,6 +12,64 @@ $room_status = ["N/A","Booking Available",'Booked'];
 $review_status = ["Pending","Display web","Not Display web"];
 $open_for_booking = ["Only Rooms","Full Property"];
 $Property_Facility = ["Parking","Free Wifi","Restaurant","Pet friendly","Room service","24-hour front desk","Fitness center","Non-smoking rooms","Airport shuttle","Family rooms","Spa","Electric vehicle charging station","Wheelchair accessible","Swimming pool"];
+$roomfacilities = [
+    "Air conditioning",
+    "Private pool",
+    "Private bathroom",
+    "Kitchen/kitchenette",
+    "Balcony",
+    "Shower",
+    "Refrigerator",
+    "TV",
+    "Toilet",
+    "Hot tub",
+    "Terrace",
+    "Towels",
+    "Toilet paper",
+    "Flat-screen TV",
+    "Bath",
+    "Heating",
+    "Coffee/tea maker",
+    "View",
+    "Washing machine",
+    "Coffee machine",
+    "Spa bath",
+    "Kitchen",
+    "Socket near the bed",
+    "Sofa",
+];
+
+$viewfacilities = [
+    "Balcony",
+    "Mountain view",
+    "Garden view",
+    "City view",
+];
+
+$kitchenfacilities = [
+    "Refrigerator",
+    "Microwave",
+    "Electric kettle",
+    "Outdoor dining area",
+    "Stovetop",
+    "Dining area",
+    "Oven",
+    "Toaster",
+    "Dining table",
+    "Tea/Coffee maker",
+    "Kitchenware",
+    "Outdoor furniture",
+];
+
+$bathroomfacilities = [
+    "Free toiletries",
+    "Slippers",
+    "Bathrobe",
+    "Spa bath",
+    "Bidet",
+    "Bath or shower",
+    "Toilet paper",
+];
 
 return[
     'PropertyStatus'=>$property_status,
@@ -22,6 +80,10 @@ return[
     'RoomStatus'=>$room_status,
     'PropertyFacility'=>$Property_Facility,
     'ReviewStatus'=>$review_status,
+    'RoomFacilities'=>$roomfacilities,
+    'ViewFacilities'=>$viewfacilities,
+    'KitchenFacilities'=>$kitchenfacilities,
+    'BathroomFacilities'=>$bathroomfacilities,
 ];
 
 

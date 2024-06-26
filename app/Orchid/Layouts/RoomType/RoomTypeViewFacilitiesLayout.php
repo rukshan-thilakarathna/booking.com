@@ -26,32 +26,10 @@ class RoomTypeViewFacilitiesLayout extends Rows
     public function fields(): array
     {
         return [
-            \Orchid\Screen\Fields\Group::make([
-                CheckBox::make('viewfacilities[]')
-                    ->value('Balcony')
-                    ->checked(false)
-                    ->placeholder('Balcony'),
-
-                CheckBox::make('viewfacilities[]')
-                    ->value('Mountain view')
-                    ->checked(false)
-                    ->placeholder('Mountain view'),
-
-                CheckBox::make('viewfacilities[]')
-                    ->value('Garden view')
-                    ->checked(false)
-                    ->placeholder('Garden view'),
-            ],),
-            \Orchid\Screen\Fields\Group::make([
-
-                CheckBox::make('viewfacilities[]')
-                    ->value('City view')
-                    ->checked(false)
-                    ->placeholder('City view'),
-            ],),
-
-
-
+            Select::make('viewfacilities')
+                ->allowAdd()
+                ->multiple()
+                ->options(config('constants.ViewFacilities')),
         ];
     }
 }

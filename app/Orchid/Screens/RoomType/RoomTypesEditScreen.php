@@ -19,6 +19,7 @@ use Orchid\Support\Facades\Toast;
 class RoomTypesEditScreen extends Screen
 {
 
+    public $potertytypeid;
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -27,6 +28,7 @@ class RoomTypesEditScreen extends Screen
 
     public function query(RoomType $room_type): iterable
     {
+        $this->potertytypeid = $room_type->property_type;
         return [
             'roomtype' => $room_type
         ];
@@ -80,6 +82,7 @@ class RoomTypesEditScreen extends Screen
                 ->description(__('Update your account\'s profile information and email address.')),
 
             Layout::block(FullPropertyFacilitiesLayout::class)
+                ->canSee($this->potertytypeid != 1)
                 ->title(__(' Full Property Facilities'))
                 ->description(__('Update your account\'s profile information and email address.')),
 
@@ -153,22 +156,23 @@ class RoomTypesEditScreen extends Screen
             $image = $this->store($request);
         }
 
+
+
         // Create a new RoomType instance
         $roomtype = RoomType::findOrFail($request['roomtype.id']);
-
         // Assign validated data to the RoomType instance
         $roomtype->name = $request['roomtype.name'];
         $roomtype->images = $image ??  $roomtype->images;
         $roomtype->user_id = Auth::user()->id;
         $roomtype->room_size = $request['roomtype.room_size'];
-        $roomtype->bathroom_facilities = $bathroom_facilities_list ;
+        $roomtype->bathroom_facilities = $bathroom_facilities_list;
         $roomtype->bedroom_count = $request['roomtype.bedroom_count'] ?? 1;
         $roomtype->washroom_count = $request['roomtype.wshroom_count'] ?? 1;
         $roomtype->kitchen_count = $request['roomtype.kitchen_count'] ?? 0;
         $roomtype->kitchen_facilities = $kitchen_facilities_list;
         $roomtype->disription = $request['roomtype.disription'];
-        $roomtype->room_facilities = $room_facilities_list ;
-        $roomtype->view_facilities = $view_facilities_list ;
+        $roomtype->room_facilities = $room_facilities_list;
+        $roomtype->view_facilities = $view_facilities_list;
         $roomtype->smoking = $request['roomtype.smoking'] ?? 0;
         $roomtype->status = $request['roomtype.status'] ?? 1;
 

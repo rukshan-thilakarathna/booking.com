@@ -42,18 +42,19 @@
                                 <section id="description">
                                     <p>{{$roomType->disription}}</p>
                                 </section>
-                                <section id="facilities">
-                                    @php
-                                        $room_facilities_array = explode(',', $roomType->room_facilities);
-                                    @endphp
-                                    <h2>Room Facilities</h2>
-                                    <ul class="bullets half">
-                                        @foreach($room_facilities_array as $key => $room_facility)
-                                            <li>{{$room_facility}}</li>
-                                        @endforeach
-                                    </ul>
-                                </section>
-
+                                @if(!empty($roomType->room_facilities))
+                                    <section id="facilities">
+                                        @php
+                                            $room_facilities_array = explode(',', $roomType->room_facilities);
+                                        @endphp
+                                        <h2>Room Facilities</h2>
+                                        <ul class="bullets half">
+                                            @foreach($room_facilities_array as $room_facility)
+                                                <li>{{config('constants.RoomFacilities')[trim($room_facility," ")]}}</li>
+                                            @endforeach
+                                        </ul>
+                                    </section>
+                                @endif @if(!empty($roomType->bathroom_facilities))
                                 <section id="facilities">
                                     @php
                                         $bathroom_facilities_array = explode(',', $roomType->bathroom_facilities);
@@ -61,35 +62,37 @@
                                     <h2>Bathroom Facilities</h2>
                                     <ul class="bullets half">
                                         @foreach($bathroom_facilities_array as $key => $bathroom_facilities)
-                                            @if($bathroom_facilities = '')
-                                                <li>{{$bathroom_facilities}}</li>
-                                            @endif
+                                            <li>{{config('constants.BathroomFacilities')[trim($bathroom_facilities," ")]}}</li>
                                         @endforeach
                                     </ul>
                                 </section>
+                                @endif @if(!empty($roomType->view_facilities))
+                                <section id="facilities">
+                                    @php
+                                        $view_facilities_array = explode(',', $roomType->view_facilities);
+                                    @endphp
+                                    <h2>View Facilities</h2>
+                                    <ul class="bullets half">
+                                        @foreach($view_facilities_array as $key => $view_facilities)
+                                            <li>{{config('constants.ViewFacilities')[trim($view_facilities," ")]}}</li>
+                                        @endforeach
+                                    </ul>
+                                </section>
+                                @endif @if(!empty($roomType->kitchen_facilities))
+                                <section id="facilities">
+                                    @php
+                                        $kitchen_facilities_array = explode(',', $roomType->kitchen_facilities);
+                                    @endphp
+                                    <h2>Kitchen Facilities</h2>
+                                    <ul class="bullets half">
+                                        @foreach($kitchen_facilities_array as $key => $kitchen_facilities)
+                                            <li>{{config('constants.KitchenFacilities')[trim($kitchen_facilities," ")]}}</li>
+                                        @endforeach
+                                    </ul>
+                                </section>
+                                @endif
                             </div>
                             <!--end col-md-8-->
-                            <div class="col-md-4">
-                                <div class="sidebar">
-                                    <aside class="box">
-                                        <dl>
-                                            <dt>1-Bed Rooms:</dt>
-                                            <dd>23</dd>
-                                            <dt>2-Bed Rooms:</dt>
-                                            <dd>48</dd>
-                                            <dt>Apartments:</dt>
-                                            <dd>12</dd>
-                                            <dt>Parking:</dt>
-                                            <dd>Free</dd>
-                                            <dt>Swimming:</dt>
-                                            <dd>Yes</dd>
-                                            <dt>Ski Center:</dt>
-                                            <dd>2km</dd>
-                                        </dl>
-                                    </aside>
-                                </div>
-                                <!--end sidebar-->
-                            </div>
                             <!--end col-md-4-->
                         </div>
                         <!--end row-->
