@@ -133,6 +133,7 @@ class RoomTypesListScreen extends Screen
 
         $newRoom->room_type_id = $request->get('room_type_id');
         $newRoom->property_id = $request->get('property_id');
+        $newRoom->user_id = (Auth::user())->id;
         $newRoom->number = $request['room.number'];
         $newRoom->price = $request['room.price'];
         $newRoom->dicecount = $request['room.dicecount'];

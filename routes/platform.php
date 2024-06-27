@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Booking\BookingListScreen;
 use App\Orchid\Screens\Examples\ExampleActionsScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -196,6 +197,13 @@ Route::screen('room/{room_id}/view',RoomCardsScreen::class)
 Route::screen('room/{room_id}/edit',RoomEditScreen::class)
     ->name('room-edit');
 
+
+//Booking///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::screen('bookings',BookingListScreen::class)
+    ->name('bookings')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('Bookings'), route('bookings')));
 
 
 

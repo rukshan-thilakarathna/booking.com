@@ -5,8 +5,8 @@
     <div id="page-content">
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Listing</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="{{route('web.page.list')}}">Listing</a></li>
                 <li class="active">Detail</li>
             </ol>
             <!--end breadcrumb-->

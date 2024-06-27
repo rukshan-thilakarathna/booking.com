@@ -5,9 +5,10 @@
     <div id="page-content">
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Listing</a></li>
-                <li class="active">Detail</li>
+                <li><a href="/">Home</a></li>
+                <li><a href="{{route('web.page.list')}}">Listing</a></li>
+                <li><a href="{{route('web.page.detail',$roomType->property->id)}}">{{$roomType->property->name}}</a></li>
+                <li class="active">Property Type Detail</li>
             </ol>
             <!--end breadcrumb-->
             <div class="row">
@@ -16,7 +17,6 @@
                         <div class="title">
                             <div class="left">
                                 <h1>{{$roomType->name}}</h1>
-                                <h3><a href="#">Austria</a></h3>
                             </div>
                         </div>
                         <!--end title-->

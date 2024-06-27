@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web\page;
 
 use App\Http\Controllers\Controller;
+use App\Models\Districts;
 use App\Models\Properties;
 use App\Models\PropertyType;
 use Illuminate\Http\Request;
@@ -11,10 +12,14 @@ class ListController extends Controller
 {
     public function Index(Request $request)
     {
-        $destination = $request->input('destination');
-        $propertyType = $request->input('propertyType');
+        $destination = $request->input('destination') ?? '';
+        $propertyType = $request->input('pt') ?? [];
+        $PropertyFacility = $request->input('PropertyFacility') ?? [];
+
+
 
         $allPropertyType = PropertyType::all();
+        $destinationList = Districts::all();
 
         $list = Properties::with('propertyType','district','city')
             ->where('status', 1);
@@ -24,7 +29,15 @@ class ListController extends Controller
         }
 
         if (!empty($propertyType)) {
-            $list = $list->where('type', $propertyType);
+            $list = $list->whereIn('type', $propertyType);
+        }
+
+        if (!empty($PropertyFacility)) {
+            $list = $list->where(function ($query) use ($PropertyFacility) {
+                foreach ($PropertyFacility as $facility) {
+                    $query->orWhere('facilities', 'LIKE', '%' . $facility . '%');
+                }
+            });
         }
 
         $list = $list->paginate(10);
@@ -32,6 +45,9 @@ class ListController extends Controller
         return view('web.list')->with([
             'list' => $list,
             'propertyTypes' => $allPropertyType,
+            'UrlPropertyType' => $propertyType,
+            'UrlPropertyFacility' => $PropertyFacility,
+            'destinationList' => $destinationList,
         ]);
     }
 }

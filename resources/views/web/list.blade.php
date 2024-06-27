@@ -5,7 +5,7 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
-                <li><a href="#">Listing</a></li>
+                <li class="active">Listing</li>
             </ol>
             <!--end breadcrumb-->
             <div class="row">
@@ -16,7 +16,12 @@
                             <form id="form-filter" class="labels-uppercase">
                                 <div class="form-group">
                                     <label for="form-filter-destination">Destination</label>
-                                    <input type="text" class="form-control" id="form-filter-destination" name="destination" placeholder="Destination">
+                                    <select class="form-control" id="form-filter-destination" name="destination">
+                                        <option>Select Destination</option>
+                                        @foreach($destinationList as $destination)
+                                            <option value="{{$destination->id}}">{{$destination->name_en}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <!--end form-group-->
                                 <div class="form-group-inline">
@@ -26,8 +31,8 @@
                                     </div>
                                     <!--end form-group-->
                                     <div class="form-group">
-                                        <label for="form-filter-check-out">Nights</label>
-                                        <input type="number" class="form-control" id="form-filter-check-out" name="check-out" placeholder="2">
+                                        <label for="form-filter-check-in">Check Out</label>
+                                        <input type="text" class="form-control date" id="form-filter-check-in" name="check-in" placeholder="Check In">
                                     </div>
                                     <!--end form-group-->
                                 </div>
@@ -37,14 +42,15 @@
                                 </div>
                                 <div class="collapse in" id="filter-advanced-search">
                                     <div class="wrapper">
-                                        <h2>Filter<span data-show-after-time="1000" data-container="body" data-toggle="popover" data-placement="right" title="Try Filters!" data-content="Get better results by using filters. Check what you like and what you don't."></span></h2>
+                                        <h2>Filter<span data-show-after-time="1000" data-container="body" data-toggle="popover" data-placement="right" ></span></h2>
 
                                         <section>
                                             <h3>Property Type </h3>
                                             <ul class="checkboxes">
                                                 @foreach($propertyTypes as $propertyType)
-                                                    <li><label><input type="checkbox" name="pt[]" value="{{$propertyType->id}}">{{$propertyType->name}}</label></li>
+                                                    <li><label><input @if(in_array($propertyType->id,$UrlPropertyType)) checked @endif type="checkbox" name="pt[]" value="{{$propertyType->id}}">{{$propertyType->name}}</label></li>
                                                 @endforeach
+
                                             </ul>
                                         </section>
                                         <!--end section-->
@@ -52,7 +58,7 @@
                                             <h3>Property Facility</h3>
                                             <ul class="checkboxes no-bottom-margin">
                                                 @foreach(config('constants.PropertyFacility') as $key => $PropertyFacility)
-                                                    <li><label><input type="checkbox" name="PropertyFacility[]" value="{{$key}}">{{$PropertyFacility}}</label></li>
+                                                    <li><label><input @if(in_array($key,$UrlPropertyFacility)) checked @endif type="checkbox" name="PropertyFacility[]" value="{{$key}}">{{$PropertyFacility}}</label></li>
                                                 @endforeach
                                             </ul>
                                             <!--end checkboxes-->
@@ -64,6 +70,7 @@
                                 <!--end collapse-->
                                 <div class="form-group center">
                                     <button type="submit" class="btn btn-primary btn-rounded form-control">Search</button>
+                                    <a href="{{route('web.page.list')}}"  class="btn btn-primary btn-rounded form-control">Reset</a>
                                 </div>
                             </form>
                             <!--end form-filter-->
@@ -79,7 +86,7 @@
                             <div class="item list" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
                                 <div class="image-wrapper">
                                     <div class="image">
-                                        <a href="detail.html" class="wrapper">
+                                        <a href="{{route('web.page.detail',$item->id)}}" class="wrapper">
 
                                             <div class="gallery">
                                                 @php
@@ -110,7 +117,7 @@
                                     </div>
                                     <!--end meta-->
                                     <div class="info">
-                                        <a href="detail.html"><h3>{{$item->name}}</h3></a>
+                                        <a href="{{route('web.page.detail',$item->id)}}"><h3>{{$item->name}}</h3></a>
                                         <figure class="location">{{$item->district->name_en}}</figure>
                                         <figure class="label label-info">{{$item->propertyType->name}}</figure>
                                         <p>{{$item->description}}</p>
