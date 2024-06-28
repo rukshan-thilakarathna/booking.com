@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\RoomType;
 
+use App\Models\Availability;
 use App\Models\Reviews;
 use App\Models\Rooms;
 use App\Models\RoomType;
@@ -98,6 +99,8 @@ class RoomTypesListScreen extends Screen
 
     public function statusChange(Request $request): void
     {
+
+
         $roomtype = RoomType::findOrFail($request->get('id'));
 
         $status = $request->get('status') == 1 ? 0 : 1;
@@ -109,7 +112,9 @@ class RoomTypesListScreen extends Screen
     public function CreateRoom(Request $request): void
     {
         $newRoom = New Rooms;
-
+        $request->validate([
+            'room.number' => ['required', 'integer', 'unique:rooms,number'],
+        ]);
 
         if ($request->hasFile('room.images'))
         {
@@ -152,6 +157,14 @@ class RoomTypesListScreen extends Screen
         $roomtype = RoomType::findOrFail($request->get('room_type_id'));
         $roomtype->rooms_added = 1;
         $roomtype->save();
+
+        $availabilities = new Availability();
+        $availabilities->property_id = $request->get('property_id');
+        $availabilities->room_number = $request['room.number'];
+        $availabilities->adults =$request['room.adults'] ?? 1;
+        $availabilities->children = $request['room.Children'] ?? 0;
+        $availabilities->save();
+
         Toast::info(__('Room was Created'));
     }
 

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Booking\BookingCardsScreen;
+use App\Orchid\Screens\Booking\BookingEditScreen;
 use App\Orchid\Screens\Booking\BookingListScreen;
 use App\Orchid\Screens\Examples\ExampleActionsScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
@@ -204,6 +206,18 @@ Route::screen('bookings',BookingListScreen::class)
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push(__('Bookings'), route('bookings')));
+
+Route::screen('bookings/{id}/update',BookingEditScreen::class)
+    ->name('bookings-update')
+    ->breadcrumbs(fn (Trail $trail,$id) => $trail
+        ->parent('platform.index')
+        ->push(__('Update'), route('bookings-update',$id)));
+
+Route::screen('bookings/{id}/view',BookingCardsScreen::class)
+    ->name('bookings-view')
+    ->breadcrumbs(fn (Trail $trail,$id) => $trail
+        ->parent('platform.index')
+        ->push(__('View'), route('bookings-view',$id)));
 
 
 
