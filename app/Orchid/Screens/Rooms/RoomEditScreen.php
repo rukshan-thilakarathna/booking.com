@@ -93,7 +93,7 @@ class RoomEditScreen extends Screen
 
     public function save(Request $request)
     {
-        $newRoom = Rooms::findOrFail($request['room.id']);
+        $newRoom = Rooms::find($request['room.id']);
 
         if ($request->hasFile('room.images'))
         {

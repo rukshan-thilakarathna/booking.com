@@ -27,12 +27,6 @@ class BookingCreateAndEditLayout extends Rows
     public function fields(): array
     {
         return [
-            Select::make('booking.room_id')
-                ->title('Room Number')
-                ->required()
-                ->placeholder('Select Room Number')
-                ->fromQuery(Rooms::where('user_id', '=', (Auth::user())->id), 'number'),
-
             Select::make('booking.user_id')
                 ->title('Is Registered User')
                 ->empty('No select', '')
@@ -57,30 +51,6 @@ class BookingCreateAndEditLayout extends Rows
 
             Input::make('booking.id')
                 ->type('hidden'),
-
-            Input::make('booking.adults')
-                ->type('number')
-                ->required()
-                ->title('Adults')
-                ->placeholder('Enter Adults Count'),
-
-            Input::make('booking.children')
-                ->type('number')
-                ->title('Children')
-                ->placeholder('Enter Children'),
-
-
-            Input::make('booking.check_in_Date')
-                ->type('datetime-local')
-                ->required()
-                ->title('Check In Date')
-                ->placeholder('YYYY-MM-DDTHH:MM'),
-
-            Input::make('booking.check_out_Date')
-                ->type('datetime-local')
-                ->title('Check Out Date')
-                ->required()
-                ->placeholder('YYYY-MM-DDTHH:MM'),
 
             TextArea::make('booking.special_requests')
                 ->title('Special Requests')

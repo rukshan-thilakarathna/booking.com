@@ -30,7 +30,7 @@ class RoomTypeEditLayout extends Rows
     public function fields(): array
     {
         return [
-            Input::make('roomtype.name')
+            Input::make('name')
                 ->type('text')
                 ->max(255)
                 ->required()

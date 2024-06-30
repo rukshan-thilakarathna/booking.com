@@ -29,39 +29,47 @@ class Availability extends Model
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        '1' => 'integer',
-        '2' => 'integer',
-        '3' => 'integer',
-        '4' => 'integer',
-        '5' => 'integer',
-        '6' => 'integer',
-        '7' => 'integer',
-        '8' => 'integer',
-        '9' => 'integer',
-        '10' => 'integer',
-        '11' => 'integer',
-        '12' => 'integer',
-        '13' => 'integer',
-        '14' => 'integer',
-        '15' => 'integer',
-        '16' => 'integer',
-        '17' => 'integer',
-        '18' => 'integer',
-        '19' => 'integer',
-        '20' => 'integer',
-        '21' => 'integer',
-        '22' => 'integer',
-        '23' => 'integer',
-        '24' => 'integer',
-        '25' => 'integer',
-        '26' => 'integer',
-        '27' => 'integer',
-        '28' => 'integer',
-        '29' => 'integer',
-        '30' => 'integer',
-        '31' => 'integer',
-    ];
+    public function ChackAvailability($chackIn,$chackOut,$property_id,$adults=0,$children=0)
+    {
+        $curentDate = strtotime(date("Y-m-d"));
+        if ($curentDate <= $chackIn && $curentDate <= $chackOut && $chackIn <= $chackOut) {
+
+            $dates = $this->getDate($chackIn,$chackOut);
+            $rooms = Availability::whereIn('property_id',$property_id)->select('room_number');
+
+            foreach ($dates['DateList'] as $key => $date){
+                if ($date < 10){
+                    $date = str_replace("0","",$date);
+                }
+                $rooms = $rooms->whereNot($date,'LIKE','%['.$dates['YearMonthDateList'][$key].']%' );
+            }
+
+
+                return $rooms->get();
+
+
+        } else {
+            return false;
+        }
+    }
+
+    public function getDate($chackIn,$chackOut)
+    {
+        $FullDateList = [];
+        $DateList = [];
+        $YearMonthDateList = [];
+        for ($currentTimestamp = $chackIn; $currentTimestamp <= $chackOut; $currentTimestamp = strtotime("+1 day", $currentTimestamp)) {
+            $FullDateList[] = date("Y-m-d", $currentTimestamp);
+            $DateList[] = date("d", $currentTimestamp);
+            $YearMonthDateList[] = date("Y-m", $currentTimestamp);
+        }
+        return [
+            'FullDateList'=>$FullDateList,
+            'DateList'=>$DateList,
+            'YearMonthDateList'=>$YearMonthDateList,
+        ];
+    }
+
 
     // You can add relationships and custom methods here if needed
 }

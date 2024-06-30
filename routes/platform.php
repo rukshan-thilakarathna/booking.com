@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Booking\BookingAvailableListScreen;
 use App\Orchid\Screens\Booking\BookingCardsScreen;
 use App\Orchid\Screens\Booking\BookingEditScreen;
 use App\Orchid\Screens\Booking\BookingListScreen;
@@ -212,6 +213,12 @@ Route::screen('bookings/{id}/update',BookingEditScreen::class)
     ->breadcrumbs(fn (Trail $trail,$id) => $trail
         ->parent('platform.index')
         ->push(__('Update'), route('bookings-update',$id)));
+
+Route::screen('bookings/available',BookingAvailableListScreen::class)
+    ->name('bookings-available')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('bookings')
+        ->push(__('Available Rooms'), route('bookings-available')));
 
 Route::screen('bookings/{id}/view',BookingCardsScreen::class)
     ->name('bookings-view')

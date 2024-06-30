@@ -65,9 +65,7 @@ class BookingListScreen extends Screen
                 ->modal('Chack Availability')
                 ->method('ChackAvailability'),
 
-            ModalToggle::make('Place new booking')
-                ->modal('Place new booking')
-                ->method('CreateBooking'),
+
         ];
     }
 
@@ -80,15 +78,6 @@ class BookingListScreen extends Screen
     {
         return [
             BookingListLayout::class,
-            Layout::modal('Place new booking',
-                [
-                    Layout::block(BookingCreateAndEditLayout::class)
-                    ->title(__(' Information'))
-                    ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.')),
-                ]
-            )->size(Modal::SIZE_LG)->applyButton('Create'),
-
             Layout::modal('Chack Availability',Layout::rows([
 
                 Select::make('properties')
@@ -125,33 +114,27 @@ class BookingListScreen extends Screen
 
         $chackIn = strtotime($request->chack_in);
         $chackOut = strtotime($request->chack_out);
-        $curentDate = strtotime(date("Y-m-d"));
         $adults = $request->adults;
         $children = $request->children;
+        $property_id=$request->properties;
 
-        if ($curentDate <= $chackIn && $curentDate <= $chackOut && $chackIn <= $chackOut) {
-            $FullDateList = [];
-            $DateList = [];
-            $YearMonthDateList = [];
-            for ($currentTimestamp = $chackIn; $currentTimestamp <= $chackOut; $currentTimestamp = strtotime("+1 day", $currentTimestamp)) {
-                $FullDateList[] = date("Y-m-d", $currentTimestamp);
-                $DateList[] = date("d", $currentTimestamp);
-                $YearMonthDateList[] = date("Y-m", $currentTimestamp);
+        $availability = (new Availability)->ChackAvailability($chackIn,$chackOut,$property_id,$adults,$children);
+
+        $perameters='';
+        if (count($availability) >0){
+            foreach ($availability as $key => $room){
+                $oparetor = $key==0 ? '?' : '&';
+                $perameters .= $oparetor.'rooms[]='.$room->room_number;
             }
-
-
-            $rooms = Availability::whereIn('property_id',$request->properties);
-
-            foreach ($DateList as $key => $date){
-                $rooms = $rooms->whereNot($date,'LIKE','%['.$YearMonthDateList[$key].']%' );
-            }
-            $rooms = $rooms->paginate(10);
-
-            dd($rooms);
-
-        } else {
-            return redirect('/');
         }
+
+
+        if ($availability) {
+            return redirect('dashboard/bookings/available'.$perameters.'&chackIn'.$chackIn.'&chackOut'.$chackOut.'&adults'.$adults.'&children'.$children);
+        } else {
+            Toast::info(__('Rooms Not Available'));
+        }
+
     }
 
     public function CreateBooking(Request $request)

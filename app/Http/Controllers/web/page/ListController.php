@@ -29,6 +29,7 @@ class ListController extends Controller
         }
 
         if (!empty($propertyType)) {
+
             $list = $list->whereIn('type', $propertyType);
         }
 
@@ -41,6 +42,7 @@ class ListController extends Controller
         }
 
         $list = $list->paginate(10);
+
 
         return view('web.list')->with([
             'list' => $list,
