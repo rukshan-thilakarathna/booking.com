@@ -10,6 +10,8 @@ use App\Orchid\Layouts\Booking\BookingCreateAndEditLayout;
 use App\Orchid\Layouts\Rooms\AvailableRoomsListLayout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Orchid\Screen\Actions\DropDown;
+use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Components\Cells\DateTimeSplit;
 use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Screen;
@@ -37,6 +39,8 @@ class BookingAvailableListScreen extends Screen
         $this->chackOut = $request['chackOut'] ?? 0;
         $this->adults = $request['adults'] ?? 0;
         $this->children = $request['children'] ?? 0;
+
+
 
         return [
             'rooms' => $room
@@ -74,7 +78,49 @@ class BookingAvailableListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            AvailableRoomsListLayout::class,
+            Layout::table('rooms',[
+                TD::make('id', __('Room Id')),
+                TD::make('number', __('Room Number')),
+                TD::make('roomType.name', __('Room Type')),
+                TD::make('property.name', __('Property Name')),
+                TD::make('price', __('Price')),
+                TD::make('dicecount', __('Discount (%)')),
+                TD::make('display_price', __('Total Price')),
+                TD::make('point_price', __('Point Price'))->defaultHidden(),
+                TD::make('status', __('Availability'))->render(function (Rooms $rooms){
+                    return config('constants.RoomStatus')[$rooms->status];
+                }),
+                TD::make('created_at', __('Created'))
+                    ->usingComponent(DateTimeSplit::class)
+
+                    ->defaultHidden()
+                    ->align(TD::ALIGN_RIGHT),
+
+                TD::make('updated_at', __('Last edit'))
+                    ->usingComponent(DateTimeSplit::class)
+
+                    ->defaultHidden()
+                    ->align(TD::ALIGN_RIGHT),
+
+                TD::make(__('Actions'))
+                    ->align(TD::ALIGN_CENTER)
+                    ->width('100px')
+                    ->render(fn (Rooms $room) => DropDown::make()
+                        ->icon('bs.three-dots-vertical')
+                        ->list([
+                            ModalToggle::make('Place new booking')
+                                ->modal('Place new booking')
+                                ->method('CreateBooking',[
+                                    'roomId'=>$room->id,
+                                    'chackIn'=>$this->chackIn,
+                                    'chackOut'=>$this->chackOut,
+                                    'adults'=>$this->adults,
+                                    'children'=>$this->children,
+
+                                ]),
+
+                        ])),
+            ]),
             Layout::modal('Place new booking',
                 [
                     Layout::block(BookingCreateAndEditLayout::class)
@@ -90,6 +136,7 @@ class BookingAvailableListScreen extends Screen
 
     public function CreateBooking(Request $request)
     {
+
         $BookRoom = Rooms::with('roomType','property')->where('id',$request->get('roomId'))->first();
 
         $newBooking = new Booking();
@@ -101,31 +148,53 @@ class BookingAvailableListScreen extends Screen
         $newBooking->name = $request['booking.name'];
         $newBooking->email = $request['booking.email'] ?? 0;
         $newBooking->phone_number = $request['booking.phone_number'];
-        $newBooking->check_in_Date = date("Y-m-d", $this->chackIn);
+        $newBooking->check_in_Date = $request->get('chackIn');
         $newBooking->room_number = $BookRoom->number;
-        $newBooking->check_out_Date = date("Y-m-d", $this->chackOut);
+        $newBooking->check_out_Date = $request->get('chackOut');
         $newBooking->booking_date =Carbon::now();
         $newBooking->total_amount = $BookRoom->display_price;
         $newBooking->payment_method ='cash';
-        $newBooking->adults = $this->adults;
-        $newBooking->children = $this->children;
+        $newBooking->adults = $request->get('adults');
+        $newBooking->children = $request->get('children');
         $newBooking->special_requests =$request['booking.special_requests'];
         $newBooking->payment_status =0;
         $newBooking->booking_status = 0;
 
-        $availability = (new Availability)->ChackAvailability($this->chackIn,$this->chackOut,$BookRoom->property_id,$this->adults,$this->children);
-dd($availability);
+        $chackIn = strtotime($request->get('chackIn'));
+        $chackOut = strtotime($request->get('chackOut'));
+        $adults = $request->get('adults');
+        $children = $request->get('children');
+        $property_id[] = $BookRoom->property_id;
+
+
+        $availability = (new Availability)->ChackAvailability($chackIn,$chackOut,$property_id,$adults,$children);
+
         $perameters=[];
         if (count($availability) >0){
             foreach ($availability as $key => $room){
-                $perameters[] = $room;
+                $perameters[] = $room->room_number;
             }
         }
 
-        if (in_array($perameters, $BookRoom->number)){
-            Toast::info(__('Booking  Created'));
-        }
+        if (in_array($BookRoom->number,$perameters)){
+            $availabilityDb = Availability::where('room_number',$BookRoom->number)->first();
+            $dates = (new Availability)->getDate($chackIn,$chackOut);
 
+            foreach ($dates['DateList'] as $key => $date){
+                if ($date < 10){
+                    $date = str_replace("0","",$date);
+                }
+                $availabilityDb->$date = $availabilityDb->$date.'['.$dates['YearMonthDateList'][$key].']';
+            }
+
+
+
+            $availabilityDb->save();
+
+            $newBooking->save();
+        }else{
+            Toast::info(__('Rooms Not Available'));
+        }
 
 
 

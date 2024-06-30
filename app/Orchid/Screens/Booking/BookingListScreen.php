@@ -127,10 +127,10 @@ class BookingListScreen extends Screen
                 $perameters .= $oparetor.'rooms[]='.$room->room_number;
             }
         }
-
+dd($availability);
 
         if ($availability) {
-            return redirect('dashboard/bookings/available'.$perameters.'&chackIn'.$chackIn.'&chackOut'.$chackOut.'&adults'.$adults.'&children'.$children);
+            return redirect('dashboard/bookings/available'.$perameters.'&chackIn='.$request->chack_in.'&chackOut='.$request->chack_out.'&adults='.$adults.'&children='.$children);
         } else {
             Toast::info(__('Rooms Not Available'));
         }
