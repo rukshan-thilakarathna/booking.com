@@ -84,9 +84,7 @@ class BookingAvailableListScreen extends Screen
                 TD::make('number', __('Room Number')),
                 TD::make('roomType.name', __('Room Type')),
                 TD::make('property.name', __('Property Name')),
-                TD::make('price', __('Price')),
-                TD::make('dicecount', __('Discount (%)')),
-                TD::make('display_price', __('Total Price')),
+                TD::make('display_price', __('One Day Price')),
                 TD::make('point_price', __('Point Price'))->defaultHidden(),
                 TD::make('status', __('Availability'))->render(function (Rooms $rooms){
                     return config('constants.RoomStatus')[$rooms->status];
@@ -140,27 +138,6 @@ class BookingAvailableListScreen extends Screen
 
         $BookRoom = Rooms::with('roomType','property')->where('id',$request->get('roomId'))->first();
 
-        $newBooking = new Booking();
-
-        $newBooking->property_id = $BookRoom->property_id;
-        $newBooking->room_type = $BookRoom->room_type_id;
-        $newBooking->room_id =  $request->get('roomId');
-        $newBooking->user_id = $request['booking.room_id'] ?? 0;
-        $newBooking->name = $request['booking.name'];
-        $newBooking->email = $request['booking.email'] ?? 0;
-        $newBooking->phone_number = $request['booking.phone_number'];
-        $newBooking->check_in_Date = $request->get('chackIn');
-        $newBooking->room_number = $BookRoom->number;
-        $newBooking->check_out_Date = $request->get('chackOut');
-        $newBooking->booking_date =Carbon::now();
-        $newBooking->total_amount = $BookRoom->display_price;
-        $newBooking->payment_method ='cash';
-        $newBooking->adults = $request->get('adults');
-        $newBooking->children = $request->get('children');
-        $newBooking->special_requests =$request['booking.special_requests'];
-        $newBooking->payment_status =0;
-        $newBooking->booking_status = 0;
-
         $chackIn = strtotime($request->get('chackIn'));
         $chackOut = strtotime($request->get('chackOut'));
         $adults = $request->get('adults');
@@ -189,6 +166,29 @@ class BookingAvailableListScreen extends Screen
             }
 
             $availabilityDb->save();
+
+            $newBooking = new Booking();
+
+            $newBooking->property_id = $BookRoom->property_id;
+            $newBooking->room_type = $BookRoom->room_type_id;
+            $newBooking->room_id =  $request->get('roomId');
+            $newBooking->user_id = $request['booking.room_id'] ?? 0;
+            $newBooking->name = $request['booking.name'];
+            $newBooking->email = $request['booking.email'] ?? 0;
+            $newBooking->phone_number = $request['booking.phone_number'];
+            $newBooking->check_in_Date = $request->get('chackIn');
+            $newBooking->room_number = $BookRoom->number;
+            $newBooking->check_out_Date = $request->get('chackOut');
+            $newBooking->booking_date =Carbon::now();
+            $newBooking->total_amount = $BookRoom->display_price*count($dates['DateList']);
+            $newBooking->payment_method ='cash';
+            $newBooking->adults = $request->get('adults');
+            $newBooking->children = $request->get('children');
+            $newBooking->special_requests =$request['booking.special_requests'];
+            $newBooking->payment_status =0;
+            $newBooking->booking_status = 0;
+
+
 
             $newBooking->save();
             Toast::info(__('Rooms Not Available'));

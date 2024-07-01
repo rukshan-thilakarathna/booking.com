@@ -41,6 +41,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('properties'),
 
             Menu::make(__('Bookings'))
+                ->canSee($user->hasAnyAccess(['view.booking.permissions']))
                 ->route('bookings'),
 
             Menu::make(__('Points'))
@@ -66,7 +67,6 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('role.permissions')
                 ->divider(),
-
         ];
     }
 
@@ -101,6 +101,15 @@ class PlatformProvider extends OrchidServiceProvider
 
             ItemPermission::group(__('Room Type Permissions Manage'))
                 ->addPermission('create.room.type.permissions', __('Create,View,Edit And Delete')),
+
+            ItemPermission::group(__('Booking Permissions Manage'))
+                ->addPermission('main.permissions', __('main'))
+                ->addPermission('create.booking.permissions', __('Create'))
+                ->addPermission('edit.booking.permissions', __('Edit'))
+                ->addPermission('view.booking.permissions', __('View'))
+                ->addPermission('cancel.booking.permissions', __('Cancel'))
+                ->addPermission('payment.booking.permissions', __('payment'))
+                ->addPermission('checkOut.booking.permissions', __('CheckOut')),
 
             ItemPermission::group(__('Property Permissions Manage'))
                 ->addPermission('property.create.permissions', __('Create Property'))

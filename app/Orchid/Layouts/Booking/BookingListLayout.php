@@ -5,6 +5,7 @@ namespace App\Orchid\Layouts\Booking;
 use App\Models\Booking;
 use App\Models\Properties;
 use App\Models\Rooms;
+use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -32,6 +33,7 @@ class BookingListLayout extends Table
      */
     protected function columns(): iterable
     {
+        $user = \App\Models\User::find((Auth::user())->id);
         return [
             TD::make('id', __('Booking Code'))->filter()->sort(),
 
@@ -60,6 +62,10 @@ class BookingListLayout extends Table
                 if ($booking->booking_status == 2){
                     return 'Canceled';
                 }
+
+                if ($booking->booking_status == 3){
+                    return 'Check Out';
+                }
             }),
 
             TD::make('created_at', __('Created At'))
@@ -79,21 +85,29 @@ class BookingListLayout extends Table
                     ->icon('bs.three-dots-vertical')
                     ->list([
                         Link::make(__('Edit'))
+                            ->canSee($user->hasAnyAccess(['edit.booking.permissions']))
                             ->route('bookings-update', $booking->id),
 
                         Link::make(__('View'))
+                            ->canSee($user->hasAnyAccess(['view.booking.permissions']))
                             ->route('bookings-view', $booking->id),
 
                         Button::make('Change Payment Status')
-                            ->canSee($booking->payment_status == 0)
+                            ->canSee($booking->payment_status == 0  && $user->hasAnyAccess(['payment.booking.permissions']))
                             ->method('ChangePaymentStatus',[
                                 'payment_status' => $booking->payment_status,
                                 'id' => $booking->id
                             ]),
 
                         Button::make('Cancel Booking')
-                            ->canSee($booking->booking_status == 1)
+                            ->canSee($booking->booking_status == 1 && $user->hasAnyAccess(['cancel.booking.permissions']))
                             ->method('CancelBooking',[
+                                'id' => $booking->id
+                            ]),
+
+                        Button::make('Check Out')
+                            ->canSee($booking->booking_status == 1 && $user->hasAnyAccess(['checkOut.booking.permissions']))
+                            ->method('ChackOutBooking',[
                                 'id' => $booking->id
                             ]),
 

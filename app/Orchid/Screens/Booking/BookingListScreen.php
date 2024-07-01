@@ -16,6 +16,7 @@ use App\Orchid\Layouts\RoomType\RoomTypeViewFacilitiesLayout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Orchid\Platform\Http\Middleware\Access;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Group;
@@ -35,8 +36,14 @@ class BookingListScreen extends Screen
      */
     public function query(): iterable
     {
-        $bookings = Booking::with('properties','roomType','Room')->filters()
-            ->orderBy('id', 'desc')->paginate(12);
+        $user = \App\Models\User::find((Auth::user())->id);
+        $bookings = Booking::with('properties','roomType','Room');
+
+        if ($user->role == 'user'){
+            $bookings = $bookings->where('user_id',$user->id);
+        }
+        $bookings = $bookings->filters()->orderBy('id', 'desc')->paginate(12);
+
 
         return [
             'bookings' => $bookings
@@ -60,9 +67,11 @@ class BookingListScreen extends Screen
      */
     public function commandBar(): iterable
     {
+        $user = \App\Models\User::find((Auth::user())->id);
         return [
-            ModalToggle::make('Chack Availability')
-                ->modal('Chack Availability')
+            ModalToggle::make('Check Availability')
+                ->modal('Check Availability')
+                ->canSee($user->hasAnyAccess(['create.booking.permissions']))
                 ->method('ChackAvailability'),
         ];
     }
@@ -75,7 +84,7 @@ class BookingListScreen extends Screen
     {
         return [
             BookingListLayout::class,
-            Layout::modal('Chack Availability',Layout::rows([
+            Layout::modal('Check Availability',Layout::rows([
 
                 Select::make('properties')
                     ->fromQuery(Properties::where('user_id',(Auth::user())->id),'name')
@@ -87,12 +96,12 @@ class BookingListScreen extends Screen
                     Input::make('chack_in')
                         ->type('date')
                         ->required()
-                        ->title('Chack In'),
+                        ->title('Check In'),
 
                     Input::make('chack_out')
                         ->type('date')
                         ->required()
-                        ->title('Chack Out')
+                        ->title('Check Out')
                 ],),
                 Group::make([
                     Input::make('adults')
@@ -168,6 +177,32 @@ class BookingListScreen extends Screen
                 }
                 $Availabile->$date = str_replace('['.$dates['YearMonthDateList'][$key].']',"",$Availabile->$date);
             }
+        $Availabile->save();
+        Toast::info(__('Successful'));
+    }
+
+    public function ChackOutBooking(Request $request)
+    {
+        $booking = Booking::findOrFail($request->get('id'));
+        $booking->booking_status = 3;
+        $booking->save();
+
+        $Availabile = Availability::where('room_number' ,$booking->room_number)->first();
+
+        $chackIn = strtotime($booking->check_in_Date);
+        $chackOut = strtotime($booking->check_out_Date);
+
+        $dates = (new Availability)->getDate($chackIn,$chackOut);
+
+
+        $Availabile = Availability::where('room_number' ,$booking->room_number )->first();
+
+        foreach ($dates['DateList'] as $key => $date){
+            if ($date < 10){
+                $date = str_replace("0","",$date);
+            }
+            $Availabile->$date = str_replace('['.$dates['YearMonthDateList'][$key].']',"",$Availabile->$date);
+        }
         $Availabile->save();
         Toast::info(__('Successful'));
     }

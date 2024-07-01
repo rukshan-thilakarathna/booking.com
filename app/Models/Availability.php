@@ -37,6 +37,15 @@ class Availability extends Model
             $dates = $this->getDate($chackIn,$chackOut);
             $rooms = Availability::whereIn('property_id',$property_id)->select('room_number');
 
+            if ($adults != 0){
+                $rooms = $rooms->where('adults',$adults );
+            }
+
+            if ($children != 0){
+                $rooms = $rooms->where('children',$children );
+            }
+
+
             foreach ($dates['DateList'] as $key => $date){
                 if ($date < 10){
                     $date = str_replace("0","",$date);

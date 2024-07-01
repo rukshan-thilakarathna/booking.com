@@ -180,7 +180,15 @@
                                                         </li>
                                                     </ul>
                                                 </td>
-                                                <td class="price">LKR {{$room->display_price}}</td>
+                                                <td class="price">
+                                                    <ul>
+                                                        @php
+                                                            $dates = (new \App\Models\Availability())->getDate(strtotime($UrlData['chackIn']),strtotime($UrlData['chackOut']));
+                                                        @endphp
+                                                        <li>One Date Price - {{$room->display_price}}</li>
+                                                        <li>Total Price ( {{$room->display_price}}X{{count($dates['DateList'])}} ) - {{$room->display_price*count($dates['DateList'])}}</li>
+                                                    </ul>
+                                                </td>
                                                 <td class="rooms">
                                                     {{$room->user_choice}}
                                                 </td>
