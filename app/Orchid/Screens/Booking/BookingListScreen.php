@@ -50,7 +50,7 @@ class BookingListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'BookingListScreen';
+        return 'Booking List Screen';
     }
 
     /**
@@ -64,11 +64,8 @@ class BookingListScreen extends Screen
             ModalToggle::make('Chack Availability')
                 ->modal('Chack Availability')
                 ->method('ChackAvailability'),
-
-
         ];
     }
-
     /**
      * The screen's layout elements.
      *
@@ -121,50 +118,19 @@ class BookingListScreen extends Screen
         $availability = (new Availability)->ChackAvailability($chackIn,$chackOut,$property_id,$adults,$children);
 
         $perameters='';
-        if (count($availability) >0){
-            foreach ($availability as $key => $room){
-                $oparetor = $key==0 ? '?' : '&';
-                $perameters .= $oparetor.'rooms[]='.$room->room_number;
+        if ($availability != false){
+            if (count($availability) > 0) {
+                foreach ($availability as $key => $room){
+                    $oparetor = $key==0 ? '?' : '&';
+                    $perameters .= $oparetor.'rooms[]='.$room->room_number;
+                }
+                return redirect('dashboard/bookings/available'.$perameters.'&chackIn='.$request->chack_in.'&chackOut='.$request->chack_out.'&adults='.$adults.'&children='.$children);
+            } else {
+                Toast::error(__('Rooms Not Available'));
             }
+        }else {
+            Toast::error(__('Invalide Data'));
         }
-dd($availability);
-
-        if ($availability) {
-            return redirect('dashboard/bookings/available'.$perameters.'&chackIn='.$request->chack_in.'&chackOut='.$request->chack_out.'&adults='.$adults.'&children='.$children);
-        } else {
-            Toast::info(__('Rooms Not Available'));
-        }
-
-    }
-
-    public function CreateBooking(Request $request)
-    {
-        $BookRoom = Rooms::with('roomType','property')->where('id',$request['booking.room_id'])->first();
-
-        $newBooking = new Booking();
-
-        $newBooking->property_id = $BookRoom->property_id;
-        $newBooking->room_type = $BookRoom->room_type_id;
-        $newBooking->room_id =  $request['booking.room_id'];
-        $newBooking->user_id = $request['booking.room_id'] ?? 0;
-        $newBooking->name = $request['booking.name'];
-        $newBooking->email = $request['booking.email'] ?? 0;
-        $newBooking->phone_number = $request['booking.phone_number'];
-        $newBooking->check_in_Date = $request['booking.check_in_Date'];
-        $newBooking->room_number = $BookRoom->number;
-        $newBooking->check_out_Date = $request['booking.check_out_Date'];
-        $newBooking->booking_date =Carbon::now();
-        $newBooking->total_amount = $BookRoom->display_price;
-        $newBooking->payment_method ='cash';
-        $newBooking->adults = $request['booking.adults'];
-        $newBooking->children = $request['booking.children'];
-        $newBooking->special_requests =$request['booking.special_requests'];
-        $newBooking->payment_status =0;
-        $newBooking->booking_status = 0;
-
-        $newBooking->save();
-
-        Toast::info(__('Booking  Created'));
 
     }
 
@@ -184,7 +150,25 @@ dd($availability);
     {
         $booking = Booking::findOrFail($request->get('id'));
             $booking->booking_status = 2;
-        $booking->save();
+            $booking->save();
+
+            $Availabile = Availability::where('room_number' ,$booking->room_number)->first();
+
+            $chackIn = strtotime($booking->check_in_Date);
+            $chackOut = strtotime($booking->check_out_Date);
+
+            $dates = (new Availability)->getDate($chackIn,$chackOut);
+
+
+            $Availabile = Availability::where('room_number' ,$booking->room_number )->first();
+
+            foreach ($dates['DateList'] as $key => $date){
+                if ($date < 10){
+                    $date = str_replace("0","",$date);
+                }
+                $Availabile->$date = str_replace('['.$dates['YearMonthDateList'][$key].']',"",$Availabile->$date);
+            }
+        $Availabile->save();
         Toast::info(__('Successful'));
     }
 }

@@ -10,6 +10,7 @@ use App\Orchid\Layouts\Booking\BookingCreateAndEditLayout;
 use App\Orchid\Layouts\Rooms\AvailableRoomsListLayout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Components\Cells\DateTimeSplit;
@@ -66,7 +67,7 @@ class BookingAvailableListScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-
+            \Orchid\Screen\Actions\Link::make('Back')->route('bookings')
         ];
     }
 
@@ -187,13 +188,12 @@ class BookingAvailableListScreen extends Screen
                 $availabilityDb->$date = $availabilityDb->$date.'['.$dates['YearMonthDateList'][$key].']';
             }
 
-
-
             $availabilityDb->save();
 
             $newBooking->save();
-        }else{
             Toast::info(__('Rooms Not Available'));
+        }else{
+            Toast::error(__('Rooms Not Available'));
         }
 
 

@@ -14,25 +14,15 @@
                         <div class="box filter">
                             <h2>Search</h2>
                             <form id="form-filter" class="labels-uppercase">
-                                <div class="form-group">
-                                    <label for="form-filter-destination">Destination</label>
-                                    <select class="form-control" id="form-filter-destination" name="destination">
-                                        <option>Select Destination</option>
-                                        @foreach($destinationList as $destination)
-                                            <option value="{{$destination->id}}">{{$destination->name_en}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <!--end form-group-->
-                                <div class="form-group-inline">
-                                    <div class="form-group">
+                                <div class="form-group-inline" style="display: flex;flex-direction: column">
+                                    <div class="form-group" style="padding: 0;">
                                         <label for="form-filter-check-in">Check In</label>
-                                        <input type="text" class="form-control date" id="form-filter-check-in" name="check-in" placeholder="Check In">
+                                        <input type="date" class="form-control" id="form-filter-check-in" value="{{$checkIn}}" name="checkIn" placeholder="Check In">
                                     </div>
                                     <!--end form-group-->
                                     <div class="form-group">
                                         <label for="form-filter-check-in">Check Out</label>
-                                        <input type="text" class="form-control date" id="form-filter-check-in" name="check-in" placeholder="Check In">
+                                        <input type="date" class="form-control" id="form-filter-check-in" value="{{$checkOut}}" name="checkOut" placeholder="Check In">
                                     </div>
                                     <!--end form-group-->
                                 </div>
@@ -45,12 +35,20 @@
                                         <h2>Filter<span data-show-after-time="1000" data-container="body" data-toggle="popover" data-placement="right" ></span></h2>
 
                                         <section>
+                                            <h3>Destination </h3>
+                                            <ul class="checkboxes">
+                                                @foreach($destinationList as $destination)
+                                                    <li><label><input @if(in_array($destination->id,$UrlDestinationList)) checked @endif type="checkbox" name="destination[]" value="{{$destination->id}}">{{$destination->name_en}}</label></li>
+                                                @endforeach
+                                            </ul>
+                                        </section>
+
+                                        <section>
                                             <h3>Property Type </h3>
                                             <ul class="checkboxes">
                                                 @foreach($propertyTypes as $propertyType)
                                                     <li><label><input @if(in_array($propertyType->id,$UrlPropertyType)) checked @endif type="checkbox" name="pt[]" value="{{$propertyType->id}}">{{$propertyType->name}}</label></li>
                                                 @endforeach
-
                                             </ul>
                                         </section>
                                         <!--end section-->
@@ -130,20 +128,6 @@
                         @endforeach
 
                         <div class="center">
-                            <ul class="pagination">
-                                <li class="prev">
-                                    <a href="#"><i class="arrow_left"></i></a>
-                                </li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li class="next">
-                                    <a href="#"><i class="arrow_right"></i></a>
-                                </li>
-                            </ul>
-                            <!-- end pagination-->
                         </div>
                         <!-- end center-->
                     </div>

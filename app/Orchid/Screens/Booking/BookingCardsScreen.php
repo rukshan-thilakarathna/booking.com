@@ -86,6 +86,7 @@ class BookingCardsScreen extends Screen
                 Sight::make('name' ,'User Name'),
                 Sight::make('email' ,'User Email'),
                 Sight::make('phone_number' ,'User Number'),
+                Sight::make('Room.display_price' ,'Price'),
 
                 Sight::make('adults' ,'Adults'),
                 Sight::make('children' ,'Children'),

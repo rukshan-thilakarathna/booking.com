@@ -88,21 +88,10 @@ class BookingEditScreen extends Screen
         $BookRoom = Rooms::with('roomType','property')->where('id',$request['booking.room_id'])->first();
         $updateBooking = Booking::findOrFail($request->id);
 
-
-
-        $updateBooking->property_id = $BookRoom->property_id;
-        $updateBooking->room_type = $BookRoom->room_type_id;
-        $updateBooking->room_id =  $request['booking.room_id'];
         $updateBooking->user_id = $request['booking.room_id'] ?? 0;
         $updateBooking->name = $request['booking.name'];
         $updateBooking->email = $request['booking.email'] ?? 0;
         $updateBooking->phone_number = $request['booking.phone_number'];
-        $updateBooking->check_in_Date = $request['booking.check_in_Date'];
-        $updateBooking->room_number = $BookRoom->number;
-        $updateBooking->check_out_Date = $request['booking.check_out_Date'];
-        $updateBooking->total_amount = $BookRoom->display_price;
-        $updateBooking->adults = $request['booking.adults'];
-        $updateBooking->children = $request['booking.children'];
         $updateBooking->special_requests =$request['booking.special_requests'];
 
         $updateBooking->save();

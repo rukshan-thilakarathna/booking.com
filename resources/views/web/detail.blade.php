@@ -80,27 +80,47 @@
                             </div>
 
                             <!--end col-md-8-->
-
                         </div>
                         <!--end row-->
 
                         <section id="availability">
                             <h2>Availability</h2>
+                            @if($error != 0)
+                                <div class="alert alert-danger" role="alert">
+                                    {{$error}}
+                                </div>
+                            @endif
+
                             <form style="margin-bottom: 50px; class="labels-uppercase" id="form-availability">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="form-availability-check-in">Check In</label>
-                                            <input type="text" class="form-control date" id="form-availability-check-in" name="check-in" placeholder="Check In">
+                                            <label for="form-availability-check-in">Check In </label>
+                                            <input required style="height: 36px;" value="{{$UrlData['chackIn'] ?? ''}}"  type="date" class="form-control" id="form-availability-check-in" name="checkIn" placeholder="Check In">
                                         </div>
                                     </div>
                                     <!--end col-md-3-->
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="form-availability-check-out">Check In</label>
-                                            <input type="text" class="form-control date" id="form-availability-check-out" name="check-out" placeholder="Check In">
+                                            <label for="form-availability-check-out">Check Out</label>
+                                            <input required style="height: 36px;" value="{{$UrlData['chackOut'] ?? ''}}" type="date" class="form-control" id="form-availability-check-out" name="checkOut" placeholder="Check In">
                                         </div>
                                     </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="form-availability-check-out">Adults</label>
+                                            <input  required type="number" value="{{$UrlData['adults'] ?? 0}}" class="form-control" id="form-availability-check-out" name="adults" placeholder="Check In">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="form-availability-check-out">Children</label>
+                                            <input required type="number" value="{{$UrlData['children'] ?? 0}}" class="form-control" id="form-availability-check-out" name="children" placeholder="Check In">
+                                        </div>
+                                    </div>
+
                                     <!--end col-md-3-->
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -117,7 +137,7 @@
                                 @php
                                     $isHasRooms = Rooms::where('room_type_id',$roomType->id)->count();
                                 @endphp
-                            @if($isHasRooms > 0)
+                            @if($isHasRooms > 0 && $CheckAvailability)
                                 <div style="margin-bottom: 27px;background: #07393f;padding: 26px;color: white;">
                                     <h3>{{$roomType->name}}<a target="_blank" href="{{route('web.page.property-type-detail',$roomType->id)}}" class="btn btn-primary btn-rounded pull-right scroll">More Information</a></h3>
                                 </div>
@@ -138,7 +158,10 @@
                                             </thead>
                                         </table>
                                     </div>
+
                                     @foreach($rooms as $key => $room)
+                                        @if(in_array($room->number , $AvailabileRooms) )
+
                                         <table class="table">
                                             <tbody>
                                             <tr class="room">
@@ -172,8 +195,8 @@
 
                                             </tbody>
                                         </table>
+                                        @endif
                                     @endforeach
-
                                 </div>
                                 @endif
                             @endforeach
