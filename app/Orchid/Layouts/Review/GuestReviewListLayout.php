@@ -68,14 +68,15 @@ class GuestReviewListLayout extends Table
                                     'review'=>$reviews->id
                                 ]),
 
-                            ModalToggle::make('Send Property Review')
-                                ->modal('Send Property Review')
-                                ->canSee($reviews->status == 2)
-                                ->method('SendPropertyReview', [
-                                    'review_id' => $reviews->id,
-                                    'property_id' => $reviews->property_id,
-                                    'sub_property_id' => $reviews->sub_property_id,
-                                ]),
+
+                        ModalToggle::make('Send Property Review')
+                            ->modal('Send Property Review')
+                            ->canSee($reviews->status == 0 && $user->role == 'user')
+                            ->method('SendPropertyReview', [
+                                'booking_id' => $reviews->booking_id,
+                                'property_id' => $reviews->property_id,
+                                'sub_property_id' => $reviews->sub_property_id,
+                            ]),
 
                             Button::make(__('Show On WebSite'))
                                 ->canSee($user->hasAnyAccess(['review.show.hidden.permissions']))

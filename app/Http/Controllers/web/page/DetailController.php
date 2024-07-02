@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web\page;
 use App\Http\Controllers\Controller;
 use App\Models\Availability;
 use App\Models\Properties;
+use App\Models\Reviews;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 
@@ -34,13 +35,11 @@ class DetailController extends Controller
             }
 
         }
-
-
-
-
-
         $property = Properties::with('propertyType','district','city')->find($id);
         $roomTypes = RoomType::where('property_id', $id)->where('status', 1)->get();
+
+
+        $review = Reviews::where('property_id', $id)->where('guest_id', null)->where('status', 1)->get();
 
 
         return view('web.detail')->with([

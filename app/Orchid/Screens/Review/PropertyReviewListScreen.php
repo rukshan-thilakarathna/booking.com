@@ -176,9 +176,17 @@ class PropertyReviewListScreen extends Screen
         Toast::info('Send successfully');
     }
 
+
     public function SendGuestReview( Request $request)
     {
         $user = \App\Models\User::find((Auth::user())->id);
+        $updateReview = Reviews::where('booking_id', $request->get('booking_id'))->first();
+
+        if (!empty($updateReview)) {
+            $updateReview->publish_date = Carbon::now()->toDateTimeString();
+            $updateReview->status = 1;
+            $updateReview->save();
+        }
 
         $newGuestReview = Reviews::create([
             'property_id' => $request->get('property_id'),
@@ -186,17 +194,13 @@ class PropertyReviewListScreen extends Screen
             'sub_property_id' => $request->get('sub_property_id'),
             'guest_id' => $request->get('guest_id'),
             'text' => $request->get('text'),
+            'booking_id' => $request->get('booking_id'),
             'review_date' => Carbon::now()->toDateTimeString(),
-            'publish_date' => Carbon::now()->toDateTimeString(),
-            'status' => 1,
+            'publish_date' =>  !empty($updateReview) ? \Illuminate\Support\Carbon::now()->toDateTimeString() :\Illuminate\Support\Carbon::now()->addDays(14)->toDateTimeString(),
+            'status' => !empty($updateReview) ? 1 : 0,
         ]);
         $newGuestReview->save();
-        if ($newGuestReview) {
-            $updateReview = Reviews::find($request->get('review_id'));
-            $updateReview->publish_date = Carbon::now()->toDateTimeString();
-            $updateReview->$request->get('text');
-            $updateReview->save();
-        }
+
         Toast::info('Send successfully');
     }
 }

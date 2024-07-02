@@ -99,6 +99,25 @@ class BookingListLayout extends Table
                                 'id' => $booking->id
                             ]),
 
+                        ModalToggle::make('Send Property Review')
+                            ->modal('Send Property Review')
+                            ->canSee( $booking->reviewed == 0 && $user->role == 'user')
+                            ->method('SendPropertyReview', [
+                                'booking_id' => $booking->id,
+                                'property_id' => $booking->property_id,
+                                'sub_property_id' => $booking->room_number,
+                            ]),
+
+                        ModalToggle::make('Send Guest Review')
+                            ->modal('Send Guest Review')
+                            ->canSee( $booking->reviewed == 0 && $user->role == 'property-owner')
+                            ->method('SendGuestReview', [
+                                'booking_id' => $booking->id,
+                                'property_id' => $booking->property_id,
+                                'sub_property_id' => $booking->room_number,
+                                'guest_id' => $booking->user_id,
+                            ]),
+
                         Button::make('Cancel Booking')
                             ->canSee($booking->booking_status == 1 && $user->hasAnyAccess(['cancel.booking.permissions']))
                             ->method('CancelBooking',[

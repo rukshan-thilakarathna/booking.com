@@ -63,16 +63,16 @@ class PropertyReviewListLayout extends Table
                     ->list([
                             ModalToggle::make('View Review')
                                 ->modal('Review')
-                                ->canSee($reviews->status == 1)
+                                ->canSee($reviews->status == 1 )
                                 ->asyncParameters([
                                     'review'=>$reviews->id
                                 ]),
 
                             ModalToggle::make('Send Guest Review')
                                 ->modal('Send Guest Review')
-                                ->canSee($reviews->status == 2)
+                                ->canSee($reviews->status == 0 && $user->role == 'property-owner')
                                 ->method('SendGuestReview', [
-                                    'review_id' => $reviews->id,
+                                    'booking_id' => $reviews->booking_id,
                                     'property_id' => $reviews->property_id,
                                     'sub_property_id' => $reviews->sub_property_id,
                                     'guest_id' => $reviews->user_id,

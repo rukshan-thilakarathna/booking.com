@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Review;
 
+use App\Models\Booking;
 use App\Models\Properties;
 use App\Models\Reviews;
 use App\Orchid\Layouts\Review\GuestReviewListLayout;
@@ -174,25 +175,33 @@ class GuesrReviewListScreen extends Screen
 
     public function SendPropertyReview( Request $request)
     {
+
         $user = \App\Models\User::find((Auth::user())->id);
+        $updateReview = Reviews::where('booking_id', $request->get('booking_id'))->first();
+
+        if (!empty($updateReview)) {
+            $updateReview->publish_date = \Carbon\Carbon::now()->toDateTimeString();
+            $updateReview->status = 1;
+            $updateReview->save();
+        }
 
         $newGuestReview = Reviews::create([
             'property_id' => $request->get('property_id'),
             'user_id' => $user->id,
             'sub_property_id' => $request->get('sub_property_id'),
             'text' => $request->get('text'),
-            'review_date' => Carbon::now()->toDateTimeString(),
-            'publish_date' => Carbon::now()->toDateTimeString(),
-            'status' => 1,
+            'booking_id' => $request->get('booking_id'),
+            'review_date' => \Illuminate\Support\Carbon::now()->toDateTimeString(),
+            'publish_date' =>  !empty($updateReview) ? \Illuminate\Support\Carbon::now()->toDateTimeString() :\Illuminate\Support\Carbon::now()->addDays(14)->toDateTimeString(),
+            'status' => !empty($updateReview) ? 1 : 0,
         ]);
 
         $newGuestReview->save();
-        if ($newGuestReview) {
-            $updateReview = Reviews::find($request->get('review_id'));
-            $updateReview->publish_date = Carbon::now()->toDateTimeString();
-            $updateReview->status = 1;
-            $updateReview->save();
-        }
+
+        $booking = Booking::findOrFail($request->get('booking_id'));
+        $booking->reviewed = 1;
+        $booking->save();
+
         Toast::info('Send successfully');
     }
 }
