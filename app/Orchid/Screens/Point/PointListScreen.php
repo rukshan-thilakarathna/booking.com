@@ -57,6 +57,7 @@ class PointListScreen extends Screen
         $user = \App\Models\User::find((Auth::user())->id);
         $points = PointStort::with('user')->where('user_id',$user->id)->first();
 
+
         return [
             Link::make(__('Donations'))
                 ->canSee($user->hasAnyAccess(['point.donations.permissions']) && $points->point_count > 100 && $user->role == "property-owner")

@@ -19,6 +19,11 @@ class ListController extends Controller
         $PropertyFacility = $request->input('PropertyFacility') ?? [];
         $chackIn = strtotime($request->input('checkIn'));
         $chackOut = strtotime($request->input('checkOut'));
+        $adult = $request->input('adult') ?? 0;
+
+        if (!is_array($destination)){
+            $destination = [$destination];
+        }
 
         $allPropertyType = PropertyType::all();
         $destinationList = Districts::all();
@@ -37,9 +42,13 @@ class ListController extends Controller
             $availability = new Availability();
             $checkAvailability = $availability->ChackAvailability($chackIn,$chackOut,$allPropertiesArray);
             $rooms = [];
-            foreach ($checkAvailability as $room){
-                $rooms[] = $room ->room_number;
+
+            if ($checkAvailability != false){
+                foreach ($checkAvailability as $room){
+                    $rooms[] = $room ->room_number;
+                }
             }
+
 
             $propertyIds = Rooms::whereIn('number',$rooms)->select('property_id')->get();
             $id = [];
@@ -50,10 +59,12 @@ class ListController extends Controller
             }
             $list = $list->whereIn('id', $id);
         }
-
-        if (count($destination)>0) {
-            $list = $list->whereIn('main_location',$destination );
+        if (is_array($destination)){
+            if (count($destination)>0) {
+                $list = $list->whereIn('main_location',$destination );
+            }
         }
+
 
         if (count($propertyType)>0) {
             $list = $list->whereIn('type', $propertyType);

@@ -4073,36 +4073,13 @@ ul.half li {
   color: #488f3e;
 }
 
-/* 5. Forms */
-input[type="text"], input[type="email"], input[type="date"], input[type="time"], input[type="search"], input[type="password"],
-input[type="number"], input[type="tel"], textarea.form-control, input[type="date"], input[type="number"] {
-  -moz-box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1), inset 1px 0 5px rgba(0, 0, 0, 0.03);
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1), inset 1px 0 5px rgba(0, 0, 0, 0.03);
-  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1), inset 1px 0 5px rgba(0, 0, 0, 0.03);
-  -moz-border-radius: 1px;
-  -webkit-border-radius: 1px;
-  border-radius: 1px;
-  -moz-transition: 0.3s;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-  -webkit-appearance: none;
-  background-color: #fff;
-  border: none;
-  font-size: 14px;
-  font-weight: 400;
-  outline: none !important;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  width: 100%;
-  height: inherit;
-}
-input[type="text"]:active, input[type="text"]:focus, input[type="email"]:active, input[type="email"]:focus, input[type="date"]:active, input[type="date"]:focus, input[type="time"]:active, input[type="time"]:focus, input[type="search"]:active, input[type="search"]:focus, input[type="password"]:active, input[type="password"]:focus,
-input[type="number"]:active,
-input[type="number"]:focus, input[type="tel"]:active, input[type="tel"]:focus, textarea.form-control:active, textarea.form-control:focus, input[type="date"]:active, input[type="date"]:focus, input[type="number"]:active, input[type="number"]:focus {
-  -moz-box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2), inset 1px 0 5px transparent;
-  -webkit-box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2), inset 1px 0 5px transparent;
-  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2), inset 1px 0 5px transparent;
-}
+
+/*input[type="number"]:active,*/
+/*input[type="number"]:focus, input[type="tel"]:active, input[type="tel"]:focus, textarea.form-control:active, textarea.form-control:focus, input[type="date"]:active, input[type="date"]:focus, input[type="number"]:active, input[type="number"]:focus {*/
+/*  -moz-box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2), inset 1px 0 5px transparent;*/
+/*  -webkit-box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2), inset 1px 0 5px transparent;*/
+/*  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2), inset 1px 0 5px transparent;*/
+/*}*/
 input[type="text"]:hover, input[type="email"]:hover, input[type="date"]:hover, input[type="time"]:hover, input[type="search"]:hover, input[type="password"]:hover,
 input[type="number"]:hover, input[type="tel"]:hover, textarea.form-control:hover, input[type="date"]:hover, input[type="number"]:hover {
   -moz-box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.2), inset 1px 0 5px transparent;

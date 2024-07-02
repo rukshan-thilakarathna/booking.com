@@ -9,7 +9,12 @@
     #zse1::before {content: "";display: block;width: 100%;height: 100%;background: #00000073;}
     .zd2 {padding: 15px 15px;background: white;border-radius: 72px;display: flex;justify-content: space-between;align-items: center;margin-top: 25px;!important;}
     .zd3 {background: white;border-radius: 37px;display: flex;!important;}
-    .zin1 {border: none;outline: none;border-right: 1px solid #D3D3D3;text-align: center;font-size: 15px;color: #4e3636;width: 200px; !important;}
+    .zin1 {border: none;
+        outline: none;
+        border-right: 1px solid #D3D3D3;
+        text-align: center;
+        font-size: 15px;
+        padding: 0 10px;}
     .zin1:last-child {border-right: none;!important;}
 
     #z2se2 {padding: 50px 0;text-align: center;}

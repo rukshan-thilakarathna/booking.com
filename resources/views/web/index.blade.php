@@ -12,13 +12,20 @@
             <h1 class="zh1">Find Your Ideal Stay in <br> Paradise</h1>
             <p>Discover the Perfect Accommodation for Your Dream Vacation</p>
             <div class="zd2">
+                <form action="{{route('web.page.list')}}" method="GET" style="display: flex;align-items: center;width: 100%;justify-content: space-between;">
                 <div class="zd3">
-                    <input type="text" class="zin1" placeholder="Where are you going?">
-                    <input type="date" class="zin1" placeholder="Check in">
-                    <input type="date" class="zin1" placeholder="Check Out">
-                    <input type="number" class="zin1" placeholder="Guest">
+                    <select name="destination" class="zin1">
+                        <option style="width: 160px;text-align: left;" value="">Destinations</option>
+                        @foreach($destinations as $key => $destination)
+                            <option style="text-align: left" value="{{$destination->id}}">{{$destination->name_en}}</option>
+                        @endforeach
+                    </select>
+                    <input name="checkIn" required type="date" class="zin1" placeholder="Check in">
+                    <input name="checkOut" required type="date" class="zin1" placeholder="Check Out">
+                    <input name="adult" required type="number" class="zin1" placeholder="Guest">
                 </div>
-                <button class="bt1">Search</button>
+                <button type="submit" class="bt1">Search</button>
+                </form>
             </div>
         </div>
     </section>
