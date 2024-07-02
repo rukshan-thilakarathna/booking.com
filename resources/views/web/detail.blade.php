@@ -213,7 +213,6 @@
                         <section id="reviews">
                             <div class="title">
                                 <h2 class="pull-left">Reviews</h2>
-                                <a href="#write-a-review" class="btn btn-primary btn-rounded pull-right scroll">Write a Review</a>
                             </div>
                             <div class="reviews">
                                 <div class="review">
