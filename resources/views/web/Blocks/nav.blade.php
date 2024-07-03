@@ -7,15 +7,6 @@
                     <a href="mailto:Barterbed@slt.net" class="a1">Barterbed@slt.net</a>
                 </div>
                 <div class="d1 fsb">
-                    <select class="sl1">
-                        <option value="LKR">LKR</option>
-                        <option value="USD">USD</option>
-                    </select>
-
-                    <select class="sl1">
-                        <option value="ENG">ENG</option>
-                    </select>
-
                     <div class="d2">
                         <img class="i1" src="{{asset('web/img/icons/login-logout.svg')}}" alt="Login-Logout">
                         @if(isset(Session::get('user')['id']))
@@ -39,6 +30,4 @@
             <button class="bt1">List your property</button>
         </div>
     </div>
-
-
 </header>

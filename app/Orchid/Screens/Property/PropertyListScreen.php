@@ -291,7 +291,25 @@ class PropertyListScreen extends Screen
         $property->status = 3; // Set the status to 1
         $property->save();
 
-        Toast::info(__('Property was suspended'));
+        Toast::info(__('Property has suspended'));
+    }
+
+    public function promotion_bar_01(Request $request): void
+    {
+        $property = Properties::findOrFail($request->get('id')); // Find the property by ID
+        $property->promotion_bar_01 = 1; // Set the status to 1
+        $property->save();
+
+        Toast::info(__('Property has promoted'));
+    }
+
+    public function promotion_bar_02(Request $request): void
+    {
+        $property = Properties::findOrFail($request->get('id')); // Find the property by ID
+        $property->promotion_bar_02 = 1; // Set the status to 1
+        $property->save();
+
+        Toast::info(__('Property has promoted'));
     }
 
     public function OpenForBooking( Request $request)

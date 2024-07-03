@@ -40,9 +40,11 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Order Number</th>
+                                            <th scope="col">Date</th>
                                             <th scope="col">User Name</th>
                                             <th scope="col">Point Count</th>
                                             <th scope="col">Price</th>
+                                            <th scope="col">Discount</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -50,9 +52,11 @@
                                     @foreach($bypoints as $key => $bypoint)
                                         <tr>
                                             <th scope="row">{{$key+1}}</th>
+                                            <td>{{$bypoint->created_at}}</td>
                                             <td>{{$bypoint->FromUser->name}}</td>
                                             <td>Points {{$bypoint->point_count}}</td>
                                             <td>LKR {{$bypoint->amount}}</td>
+                                            <td>LKR {{$bypoint->discount_amount}}</td>
                                             <td><button style="
                                                 border: none;
                                                 cursor: pointer;

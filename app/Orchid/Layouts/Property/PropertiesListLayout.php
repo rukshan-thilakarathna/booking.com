@@ -158,6 +158,20 @@ class PropertiesListLayout extends Table
                                 'id' => $properties->id,
                             ]),
 
+                        Button::make(__('promotion_bar_01'))
+                            ->canSee($properties->status == 1 && $user->hasAnyAccess(['property.status.permissions']))
+                            ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                            ->method('promotion_bar_01', [
+                                'id' => $properties->id,
+                            ]),
+
+                        Button::make(__('promotion_bar_02'))
+                            ->canSee($properties->status == 1 && $user->hasAnyAccess(['property.status.permissions']))
+                            ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                            ->method('promotion_bar_02', [
+                                'id' => $properties->id,
+                            ]),
+
                         Button::make(__('Release this property'))
                             ->canSee($properties->status == 3 && $user->hasAnyAccess(['property.status.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
