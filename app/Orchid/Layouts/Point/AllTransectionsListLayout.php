@@ -91,6 +91,16 @@ class AllTransectionsListLayout extends Table
                 ->sort()
                 ->filter(),
 
+            TD::make('selling_status', __('Transactions Status'))
+                ->render(function (Point_transactions $transactions){
+                    if ($transactions->selling_status == 2){
+                        return "Selling";
+                    }else{
+                        return $transactions->selling_status == 1 ? "Sold out" : "Donation" ;
+                    }
+
+                }),
+
             TD::make('created_at', __('Created At'))
                 ->usingComponent(DateTimeSplit::class)
                 ->sort()

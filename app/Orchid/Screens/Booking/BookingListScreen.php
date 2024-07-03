@@ -46,7 +46,6 @@ class BookingListScreen extends Screen
         }
         $bookings = $bookings->filters()->orderBy('id', 'desc')->paginate(12);
 
-
         return [
             'bookings' => $bookings
         ];

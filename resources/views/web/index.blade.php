@@ -92,7 +92,7 @@
                     <p id="z4p1">Unlock More Value with Every Booking!</p>
                     <h1 id="z4h1">Earn and Spend Points on Your Next Getaway!</h1>
                 </hgroup>
-                <a href="#" class="z4a1">Join the Points Revolution!</a>
+                <a href="{{route('points.buy')}}" class="z4a1">Join the Points Revolution!</a>
             </div>
         </div>
     </section>

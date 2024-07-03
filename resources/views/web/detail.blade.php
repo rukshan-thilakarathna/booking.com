@@ -215,63 +215,34 @@
                                 <h2 class="pull-left">Reviews</h2>
                             </div>
                             <div class="reviews">
-                                <div class="review">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <aside class="name">John Doe</aside>
-                                            <aside class="date">10.03.2015</aside>
-                                        </div>
-                                        <!--end col-md-3-->
-                                        <div class="col-md-9">
-                                            <div class="comment">
-
-                                                <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod.
-                                                    Suspendisse at dui sit amet felis commodo dictum. Class aptent taciti
-                                                    sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                                                    Integer commodo eleifend erat, vitae tincidunt urna volutpat et.
-                                                    Mauris laoreet, sem ut sodales sodales, massa turpis posuere lectus, non
-                                                    aliquet massa nisl ac orci.
-                                                </p>
-                                                <!--end options-->
-                                                <div class="answer">
-                                                    <h4>James Green, CEO of the Mountain Paradise Hotel</h4>
-                                                    <p>Phasellus venenatis vel orci et lacinia. Duis sollicitudin arcu et hendrerit
-                                                        tempor. Aliquam at urna fringilla, auctor tellus eget, vehicula lorem.
-                                                        Pellentesque ornare faucibus sapien eget max
-                                                    </p>
+                                @foreach($reviews as $review)
+                                    @if($review->guest_id == null)
+                                        <div class="review">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <aside class="name">{{$review->postedUser->name}}</aside>
+                                                    <aside >{{$review->created_at}}</aside>
                                                 </div>
+                                                <!--end col-md-3-->
+                                                <div class="col-md-9">
+                                                    <div class="comment">
+                                                        <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod.
+                                                            Suspendisse at dui sit amet felis commodo dictum. Class aptent taciti
+                                                            sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                                                            Integer commodo eleifend erat, vitae tincidunt urna volutpat et.
+                                                            Mauris laoreet, sem ut sodales sodales, massa turpis posuere lectus, non
+                                                            aliquet massa nisl ac orci.
+                                                        </p>
+                                                    </div>
+                                                    <!--end comment-->
+                                                </div>
+                                                <!--end col-md-9-->
+                                            </div>
+                                            <!--end row-->
+                                        </div>
+                                    @endif
+                                @endforeach
 
-                                                <!--end nswer-->
-                                            </div>
-                                            <!--end comment-->
-                                        </div>
-                                        <!--end col-md-9-->
-                                    </div>
-                                    <!--end row-->
-                                </div>
-                                <!--end review-->
-                                <div class="review">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <aside class="name">Peter Green</aside>
-                                            <aside class="date">10.03.2015</aside>
-                                        </div>
-                                        <!--end col-md-3-->
-                                        <div class="col-md-9">
-                                            <div class="comment">
-                                                <p>In eleifend odio vel augue mattis, et pharetra dolor ullamcorper. Nulla
-                                                    ut porttitor mauris. Sed tincidunt, urna non cursus suscipit, quam velit
-                                                    laoreet libero, sit amet tincidunt ex nunc eget eros.
-                                                </p>
-                                                <!--end options-->
-                                            </div>
-                                            <!--end comment-->
-                                        </div>
-                                        <!--end col-md-9-->
-                                    </div>
-                                    <!--end row-->
-                                </div>
-                                <!--end review-->
                             </div>
                             <!--end reviews-->
                         </section>

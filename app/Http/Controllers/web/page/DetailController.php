@@ -39,7 +39,8 @@ class DetailController extends Controller
         $property = Properties::with('propertyType','district','city')->find($id);
         $roomTypes = RoomType::where('property_id', $id)->where('status', 1)->get();
 
-        $review = Reviews::where('property_id', $id)->where('publish_date','<=', Carbon::now()->toDateTimeString())->get();
+        $review = Reviews::with('postedUser')->where('property_id', $id)->where('status', 1)->where('publish_date','<=', Carbon::now()->toDateTimeString())->get();
+
 
         return view('web.detail')->with([
             'property' => $property,
