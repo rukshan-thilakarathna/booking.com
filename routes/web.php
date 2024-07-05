@@ -7,6 +7,7 @@ use App\Http\Controllers\web\page\ListController;
 use App\Http\Controllers\web\page\PointController;
 use App\Http\Controllers\web\page\PropertyTypeDetailController;
 use App\Http\Controllers\web\UserController;
+use App\Http\Controllers\web\WishListController;
 use Illuminate\Support\Facades\Route;
 use Orchid\Platform\Http\Controllers\LoginController;
 
@@ -27,6 +28,7 @@ Route::get('points-buy',[PointController::class,'index'])->name('points.buy');
 Route::get('contact-us', function () {return view('web.contact-us');})->name('contact-us');
 Route::get('list',[ListController::class ,'index'])->name('web.page.list');
 Route::get('detail/{id}',[DetailController::class ,'index'])->name('web.page.detail');
+Route::get('user/add-wishlist/{id}',[WishListController::class ,'index'])->name('web.add-wishlist');
 Route::get('property-type-detail/{id}',[PropertyTypeDetailController::class ,'index'])->name('web.page.property-type-detail');
 
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');

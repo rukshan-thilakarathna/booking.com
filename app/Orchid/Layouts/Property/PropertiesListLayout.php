@@ -67,6 +67,18 @@ class PropertiesListLayout extends Table
                 })
                 ->sort(),
 
+            TD::make('promotion_bar_01', __('promotion Bar 01'))
+                ->render(function (Properties $properties){
+                    return $properties->promotion_bar_01 == 0 ? 'Not Promoted' :'Promoted' ;
+                })
+                ->sort(),
+
+            TD::make('promotion_bar_02', __('promotion Bar 02'))
+                ->render(function (Properties $properties){
+                    return $properties->promotion_bar_02 == 0 ? 'Not Promoted' :'Promoted' ;
+                })
+                ->sort(),
+
 
             TD::make('created_at', __('Created At'))
                 ->usingComponent(DateTimeSplit::class)
@@ -135,8 +147,6 @@ class PropertiesListLayout extends Table
                                 'property_id' => $properties->id,
                             ]),
 
-
-
                         Button::make(__('Suspend this property'))
                             ->canSee($properties->status == 4 && $user->hasAnyAccess(['property.suspend.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
@@ -158,15 +168,15 @@ class PropertiesListLayout extends Table
                                 'id' => $properties->id,
                             ]),
 
-                        Button::make(__('promotion_bar_01'))
-                            ->canSee($properties->status == 1 && $user->hasAnyAccess(['property.status.permissions']))
+                        Button::make(__('promotion Bar 01'))
+                            ->canSee($properties->promotion_bar_01 == 0 && $user->hasAnyAccess(['property.status.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('promotion_bar_01', [
                                 'id' => $properties->id,
                             ]),
 
-                        Button::make(__('promotion_bar_02'))
-                            ->canSee($properties->status == 1 && $user->hasAnyAccess(['property.status.permissions']))
+                        Button::make(__('promotion Bar 02'))
+                            ->canSee($properties->promotion_bar_02 == 0 && $user->hasAnyAccess(['property.status.permissions']))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('promotion_bar_02', [
                                 'id' => $properties->id,

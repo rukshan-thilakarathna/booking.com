@@ -124,63 +124,32 @@
     </section>
 
     <section id="z6se1">
-        <div class="w">
-            <h1 class="z5h1">Discover the Latest Hits</h1>
-            <div class="z6d1">
-                <div class="x1d1">
-                    <div class="x1d2"
-                         style="background: url({{asset('web/img/Discover-the-Latest-Hits/2.png')}});  background-size: cover;">
-                        <div class="x1d3">
-                            <span class="x1s1">15%</span>
-                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
-                        </div>
-                        <div class="x1d4">
-                            <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
-                        </div>
-                    </div>
-                    <div class="xid5">
-                        <h2 class="x1h2">Double Suite Rooms</h2>
-                        <span class="x1s4">Ella, Sri Lanka</span>
-                    </div>
-                </div>
+        <div class="w wrapper">
+            <ul class="carousel">
 
-                <div class="x1d1">
-                    <div class="x1d2"
-                         style="background: url({{asset('web/img/Discover-the-Latest-Hits/1.png')}});  background-size: cover;">
-                        <div class="x1d3">
-                            <span class="x1s1">15%</span>
-                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                @foreach($PromotionBar01 as $PromotionCard)
+                    @php
+                        $image_array = explode(',', $PromotionCard->image);
+                        $wishlist_array = explode(',', $userupdateWishList->wishlist);
+                    @endphp
+                    <li class="card">
+                        <div class="x1d1" style="width:100%">
+                            <div class="x1d2" style="background: url({{asset('Property/Images/'.$image_array[0])}});  background-size: cover;">
+                                <div class="x1d3">
+                                </div>
+                                <div class="x1d4">
+                                    <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#91919100'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                                    <img style="margin: 0" src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
+                                </div>
+                            </div>
+                            <div class="xid5">
+                                <h2 class="x1h2">{{$PromotionCard->name}}</h2>
+                                <span style="margin: 2px;" class="x1s4">{{$PromotionCard->district->name_en}} , {{$PromotionCard->city->name_en}}</span>
+                            </div>
                         </div>
-                        <div class="x1d4">
-                            <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
-                        </div>
-                    </div>
-                    <div class="xid5">
-                        <h2 class="x1h2">Double Suite Rooms</h2>
-                        <span class="x1s4">Ella, Sri Lanka</span>
-                    </div>
-                </div>
-
-                <div class="x1d1">
-                    <div class="x1d2"
-                         style="background: url({{asset('web/img/Discover-the-Latest-Hits/3.png')}});  background-size: cover;">
-                        <div class="x1d3">
-                            <span class="x1s1">15%</span>
-                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
-                        </div>
-                        <div class="x1d4">
-                            <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
-                        </div>
-                    </div>
-                    <div class="xid5">
-                        <h2 class="x1h2">Double Suite Rooms</h2>
-                        <span class="x1s4">Ella, Sri Lanka</span>
-                    </div>
-                </div>
-            </div>
+                    </li>
+                @endforeach
+            </ul>
         </div>
     </section>
 
@@ -205,60 +174,36 @@
         <div class="w">
             <h1 class="z5h1">Explore Our Top-rated Stays</h1>
             <div class="z8d1">
-                <div class="x1d1">
-                    <div class="x1d2"
-                         style="background: url({{asset('web/img/Explore-Our-Top-rated-Stays/2.png')}});  background-size: cover;">
-                        <div class="x1d3">
-                            <span class="x1s1">15%</span>
-                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
-                        </div>
-                        <div class="x1d4">
-                            <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
-                        </div>
-                    </div>
-                    <div class="xid5">
-                        <h2 class="x1h2">Double Suite Rooms</h2>
-                        <span class="x1s4">Ella, Sri Lanka</span>
-                    </div>
-                </div>
+                <div class="w wrapper">
+                    <ul class="carousel">
 
-                <div class="x1d1">
-                    <div class="x1d2"
-                         style="background: url({{asset('web/img/Explore-Our-Top-rated-Stays/3.png')}});  background-size: cover;">
-                        <div class="x1d3">
-                            <span class="x1s1">15%</span>
-                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
-                        </div>
-                        <div class="x1d4">
-                            <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
-                        </div>
-                    </div>
-                    <div class="xid5">
-                        <h2 class="x1h2">Double Suite Rooms</h2>
-                        <span class="x1s4">Ella, Sri Lanka</span>
-                    </div>
-                </div>
-
-                <div class="x1d1">
-                    <div class="x1d2"
-                         style="background: url({{asset('web/img/Explore-Our-Top-rated-Stays/1.png')}});  background-size: cover;">
-                        <div class="x1d3">
-                            <span class="x1s1">15%</span>
-                            <img src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
-                        </div>
-                        <div class="x1d4">
-                            <span class="xis2">From $400  <br><span class="xis3">20 Points </span></span>
-                            <img src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
-                        </div>
-                    </div>
-                    <div class="xid5">
-                        <h2 class="x1h2">Double Suite Rooms</h2>
-                        <span class="x1s4">Ella, Sri Lanka</span>
-                    </div>
+                        @foreach($PromotionBar02 as $PromotionCard)
+                            @php
+                                $image_array = explode(',', $PromotionCard->image);
+                                 $wishlist_array = explode(',', $userupdateWishList->wishlist);
+                            @endphp
+                            <li class="card">
+                                <div class="x1d1" style="width:100%">
+                                    <div class="x1d2" style="background: url({{asset('Property/Images/'.$image_array[0])}});  background-size: cover;">
+                                        <div class="x1d3">
+                                        </div>
+                                        <div class="x1d4">
+                                            <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#91919100'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                                            <img style="margin: 0" src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
+                                        </div>
+                                    </div>
+                                    <div class="xid5">
+                                        <h2 class="x1h2">{{$PromotionCard->name}}</h2>
+                                        <span style="margin: 2px;" class="x1s4">{{$PromotionCard->district->name_en}} , {{$PromotionCard->city->name_en}}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 @endsection
+
+

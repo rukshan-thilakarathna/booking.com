@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('web/assets/css/zabuto_calendar.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/css/owl.carousel.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('web/assets/slider/slider.css?fd')}}" type="text/css">
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
@@ -157,6 +158,7 @@
 
 <script type="text/javascript" src="{{asset('web/assets/js/maps.js')}}"></script>
 <script type="text/javascript" src="{{asset('web/assets/js/custom.js')}}"></script>
+<script type="text/javascript" src="{{asset('web/assets/slider/slider.js')}}"></script>
 
 <!--[if lte IE 9]>
 <script src="{{asset('web/assets/js/ie.js')}}"></script>
@@ -168,6 +170,28 @@
     var element = "map-item";
     var useAjax = true;
     bigMap(_latitude,_longitude, element, useAjax);
+
+    var vish_elements = document.querySelectorAll('.x1i1');
+
+    vish_elements.forEach(function(element) {
+        element.addEventListener('click', function() {
+            var dataInfo = this.getAttribute('data-id');
+            var url = this.getAttribute('data-url');
+
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState==4 && this.status==200) {
+                    if (this.responseText){
+                        document.getElementById('id_'+dataInfo).style.background = '#b01010'
+                    }else{
+                        document.getElementById('id_'+dataInfo).style.background = '#91919100'
+                    }
+                }
+            }
+            xmlhttp.open("GET",url,true);
+            xmlhttp.send();
+        });
+    });
 </script>
 </body>
 </html>

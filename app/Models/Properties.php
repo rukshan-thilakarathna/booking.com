@@ -53,7 +53,7 @@ class Properties extends Model
         'deleted_at'    => Like::class,
     ];
     protected $allowedSorts = [
-        'status',
+        'status','promotion_bar_01','promotion_bar_02',
         'id',
         'type',
         'open_for_booking',
