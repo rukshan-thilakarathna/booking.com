@@ -25,6 +25,8 @@
             ->autofocus()
             ->placeholder(__('Enter your password'))
     !!}
+
+
 </div>
 
 <div class="row align-items-center">
@@ -32,6 +34,7 @@
         <a href="{{ route('platform.login.lock') }}" class="small">
             {{__('Sign in with another user.')}}
         </a>
+
     </div>
     <div class="col-md-6 col-xs-12">
         <button id="button-login" type="submit" class="btn btn-default btn-block" tabindex="2">

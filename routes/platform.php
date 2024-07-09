@@ -21,6 +21,7 @@ use App\Orchid\Screens\Point\PointListScreen;
 use App\Orchid\Screens\Point\SellListScreen;
 use App\Orchid\Screens\Property\PropertyCreateAndEditScreen;
 use App\Orchid\Screens\Property\PropertyListScreen;
+use App\Orchid\Screens\Reports\ReportScreen;
 use App\Orchid\Screens\Review\GuesrReviewListScreen;
 use App\Orchid\Screens\Review\PropertyReviewListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
@@ -226,6 +227,13 @@ Route::screen('bookings/{id}/view',BookingCardsScreen::class)
         ->parent('platform.index')
         ->push(__('View'), route('bookings-view',$id)));
 
+
+//Reports///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::screen('reports',ReportScreen::class)
+    ->name('reports')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('Reports'), route('reports')));
 
 
 

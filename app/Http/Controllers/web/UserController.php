@@ -56,6 +56,6 @@ class UserController extends Controller
 
 
 
-        return view('Auth.registration', ['role' => $role])->with('success_message', 'Registration successful!');
+        return redirect()->route('web.login');
     }
 }

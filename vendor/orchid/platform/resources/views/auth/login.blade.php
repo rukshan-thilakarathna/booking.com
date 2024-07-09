@@ -15,5 +15,11 @@
 
         @includeWhen($isLockUser,'platform::auth.lockme')
         @includeWhen(!$isLockUser,'platform::auth.signin')
+
+
+
+        <a href="{{route('user.registration','user')}}" class="small">
+            {{__("Don't have an Account?   Sign Up Now")}}
+        </a>
     </form>
 @endsection

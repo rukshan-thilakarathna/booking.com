@@ -130,7 +130,7 @@
                 @foreach($PromotionBar01 as $PromotionCard)
                     @php
                         $image_array = explode(',', $PromotionCard->image);
-                        $wishlist_array = explode(',', $userupdateWishList->wishlist);
+                        $wishlist_array = Auth::check() ? explode(',', $userupdateWishList->wishlist) : [];
                     @endphp
                     <li class="card">
                         <div class="x1d1" style="width:100%">
@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="x1d4">
                                     <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#91919100'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
-                                    <img style="margin: 0" src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
+{{--                                    <img style="margin: 0" src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">--}}
                                 </div>
                             </div>
                             <div class="xid5">
@@ -180,7 +180,7 @@
                         @foreach($PromotionBar02 as $PromotionCard)
                             @php
                                 $image_array = explode(',', $PromotionCard->image);
-                                 $wishlist_array = explode(',', $userupdateWishList->wishlist);
+                                $wishlist_array = Auth::check() ? explode(',', $userupdateWishList->wishlist) : [];
                             @endphp
                             <li class="card">
                                 <div class="x1d1" style="width:100%">
@@ -189,7 +189,7 @@
                                         </div>
                                         <div class="x1d4">
                                             <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#91919100'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
-                                            <img style="margin: 0" src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">
+{{--                                            <img style="margin: 0" src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">--}}
                                         </div>
                                     </div>
                                     <div class="xid5">

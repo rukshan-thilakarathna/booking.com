@@ -48,6 +48,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('point.permissions')
                 ->route('points'),
 
+            Menu::make(__('Report'))
+                ->permission('link.permissions')
+                ->route('reports'),
+
             Menu::make(__('Reviews'))
                 ->permission('review.permissions')
                 ->route('reviews'),
@@ -98,6 +102,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('review.permissions', __('review'))
                 ->addPermission('review.reply.permissions', __('Review Reply'))
                 ->addPermission('review.show.hidden.permissions', __('Review Show And Hidden')),
+
+            ItemPermission::group(__('Report Permissions Manage'))
+                ->addPermission('link.permissions', __('link')),
 
             ItemPermission::group(__('Room Type Permissions Manage'))
                 ->addPermission('create.room.type.permissions', __('Create,View,Edit And Delete')),

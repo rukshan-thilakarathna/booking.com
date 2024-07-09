@@ -191,7 +191,7 @@ class BookingAvailableListScreen extends Screen
 
 
             $newBooking->save();
-            Toast::info(__('Rooms Not Available'));
+            Toast::info(__('Booking Successful'));
         }else{
             Toast::error(__('Rooms Not Available'));
         }

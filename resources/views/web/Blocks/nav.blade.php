@@ -1,4 +1,4 @@
-<header style="background: white">
+<header style="background: white;position: fixed;width: 100%;z-index: 18;">
     <div class="d0">
         <div class="w">
             <div class="fsb">

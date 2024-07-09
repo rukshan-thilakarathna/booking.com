@@ -98,12 +98,7 @@
     .z8d1 {display: flex;justify-content: space-between;}
 
 
-    #ft {background: #07474B;border-bottom: 55px solid #16BECB;}
-    .s100 {color: white;font-size: 22px;font-weight: 600;}
-    .u100 {list-style: none;}
-    .l100 {margin: 14px 0;}
-    .a100 {text-decoration: none;color: white;}
-    .d101 {width: 13%;}
+
 </style>
 </head>
 <body>
@@ -123,11 +118,12 @@
         <div class="d101">
             <span class="s100">Links</span>
             <ul class="u100">
-                <li class="l100"><a href="" class="a100">Home</a></li>
-                <li class="l100"><a href="" class="a100">About Us</a></li>
-                <li class="l100"><a href="" class="a100">Destinations</a></li>
-                <li class="l100"><a href="" class="a100">Accommodations</a></li>
-                <li class="l100"><a href="" class="a100">Contact Us</a></li>
+                <li class="l100"><a href="{{route('web.page.index')}}" class="a100">Home</a></li>
+                <li class="l100"><a href="{{route('about-us')}}" class="a100">About Us</a></li>
+                <li class="l100"><a href="{{route('web.page.list')}}" class="a100">Destinations</a></li>
+                <li class="l100"><a href="{{route('contact-us')}}" class="a100">Contact Us</a></li>
+                <li class="l100"><a href="{{route('user.registration','property-owner')}}" class="a100">Property Owner Registration</a></li>
+                <li class="l100"><a href="{{route('user.registration','worker')}}" class="a100">Worker Registration</a></li>
             </ul>
         </div>
 

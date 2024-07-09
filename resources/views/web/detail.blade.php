@@ -12,17 +12,6 @@
             <!--end breadcrumb-->
             <div class="row">
                 <div class="col-md-12 col-sm-12">
-                    <div class="quick-navigation" data-fixed-after-touch="">
-                        <div class="wrapper">
-                            <ul>
-                                <li><a href="#description" class="scroll">Description</a></li>
-                                <li><a href="#map" class="scroll">Map</a></li>
-                                <li><a href="#facilities" class="scroll">Facilities</a></li>
-                                <li><a href="#additional-information" class="scroll">Additional Information</a></li>
-                                <li><a href="#reviews" class="scroll">Reviews</a>(23)</li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="main-content">
                         <div class="title">
                             <div class="left">
