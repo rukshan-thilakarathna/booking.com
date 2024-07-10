@@ -123,17 +123,17 @@ class UserEditScreen extends Screen
 
 
 
-//            Layout::block(RolePermissionLayout::class)
-//                ->title(__('Permissions'))
-//                ->description(__('Allow the user to perform some actions that are not provided for by his roles'))
-//                ->canSee(auth()->user()->IsIsRoot())
-//                ->commands(
-//                    Button::make(__('Save'))
-//                        ->type(Color::BASIC)
-//                        ->icon('bs.check-circle')
-//                        ->canSee($this->user->exists)
-//                        ->method('save')
-//                ),
+
+            Layout::block(UserRoleLayout::class)
+                ->title(__('Roles'))
+                ->description(__('A Role defines a set of tasks a user assigned the role is allowed to perform.'))
+                ->commands(
+                    Button::make(__('Save'))
+                        ->type(Color::BASIC)
+                        ->icon('bs.check-circle')
+                        ->canSee($this->user->exists)
+                        ->method('save')
+                ),
 
         ];
     }

@@ -18,6 +18,11 @@
         <nav class="aside-collapse w-100 d-xl-flex flex-column collapse-horizontal" id="headerMenuCollapse">
 
             @include('platform::partials.search')
+            <footer class="position-sticky bottom-0">
+                <div class="bg-dark position-relative overflow-hidden" style="padding-bottom: 10px;">
+                    @includeWhen(Auth::check(), 'platform::partials.profile')
+                </div>
+            </footer>
 
             <ul class="nav flex-column mb-md-1 mb-auto ps-0">
                 {!! Dashboard::renderMenu(\Orchid\Platform\Dashboard::MENU_MAIN) !!}
@@ -36,12 +41,7 @@
                 </div>
             </div>
 
-            <footer class="position-sticky bottom-0">
-                <div class="bg-dark position-relative overflow-hidden" style="padding-bottom: 10px;">
-                    @includeWhen(Auth::check(), 'platform::partials.profile')
-                </div>
 
-            </footer>
         </nav>
     </div>
 @endsection

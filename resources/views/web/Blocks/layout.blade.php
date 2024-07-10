@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name=viewport content="width=device-width, initial-scale=1, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('web/css/css.css')}}">
 
@@ -21,20 +21,37 @@
 
     <title>Document</title>
 <style>
-    #zse1 {background: url({{asset('web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.png')}});height: 70vh;background-size: cover;position: relative;}
+    #zse1 {background: url({{asset('web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.png')}});height: 100vh;background-size: cover;position: relative;}
     .zd1 {position: absolute;width: 50%;display: flex;flex-direction: column;text-align: center;margin: auto;top: 33%;right: 0;left: 0;}
     .zh1 {color: white;font-size: 60px;font-weight:bold;font-family: "Cormorant Garamond", serif;}
 
     #zse1::before {content: "";display: block;width: 100%;height: 100%;background: #00000073;}
-    .zd2 {padding: 15px 15px;background: white;border-radius: 72px;display: flex;justify-content: space-between;align-items: center;margin-top: 25px;!important;}
-    .zd3 {background: white;border-radius: 37px;display: flex;!important;}
-    .zin1 {border: none;
+    .zd2 {
+        padding: 3px 15px;
+        background: white;
+        border-radius: 72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px;
+    }
+    .zd3 {
+        background: white;
+        border-radius: 37px;
+        display: flex;
+        width: 85%;
+    }
+    .zin1 {color: #767676;
+        border: none;
         outline: none;
         border-right: 1px solid #D3D3D3;
         text-align: center;
         font-size: 15px;
-        padding: 0 10px;}
+        padding: 0 10px;
+        width: 28%;
+    }
     .zin1:last-child {border-right: none;!important;}
+    #zfm1{}
 
     #z2se2 {padding: 50px 0;text-align: center;}
     .z2d1 {display: flex;justify-content: space-between;margin: 26px 0;}
@@ -42,7 +59,7 @@
     .z2d1-1 {width: 25%;}
     .z2d1-2 {width: 30%;}
     .z2d1-3 {width: 40%;}
-    .z2h1 {font-size: 35px;font-weight: 400;margin-bottom: 50px;}
+    .z2h1 {font-size: 35px;font-weight: 400;margin-bottom: 15px;}
     #z2d3 {flex-direction: row-reverse;}
     .z2d4 {text-align: left;padding: 20px;position: absolute;bottom: 0;left: 0;}
     .z2h2 {color: white;}
@@ -51,7 +68,7 @@
 
     #z3se1 {text-align: center;margin-bottom: 50px;}
     .z3h1 {font-size: 35px;font-weight: 400;margin-bottom: 50px;}
-    .z3d1 {width: 18%;}
+    .z3d1 {width: 30%;}
     .z3i1 {width: 100%;}
     .z3h2 {font-size: 20px;font-weight: 400;margin: 6px 0;}
 
@@ -87,8 +104,8 @@
     #z7se1 {height: 300px;display: flex;justify-content: center;}
     #z7se1::before {content: "";background: #00000061;height: 300px;background-size: cover;position: absolute;width: 100%;left: 0;z-index: 0;}
     .z7d1 {width: 50%;height: 100%;display: flex;align-items: center;justify-content: center;}
-    #z7d2{background: url({{assert('web/img/section-image/Cheers.png')}});background-size: cover;}
-    #z7d3{background: url({{assert('web/img/section-image/Honeymoon.png')}});background-size: cover;}
+    #z7d2{background: url({{asset('web/img/Cheers.png')}});background-size: cover;}
+    #z7d3{background: url({{asset('web/img/Honeymoon.png')}});background-size: cover;}
     .z7h1 {color: white;font-size: 45px;}
     .z7p1 {padding: 0 0;font-size: 15px;}
     .z7d4 {position: relative;z-index: 3;}
@@ -99,6 +116,78 @@
 
 
 
+    @media screen and (max-width:1570px) {
+        #zfm1 {
+            flex-direction: column;
+        }
+        .zd3 {
+            flex-wrap: wrap;
+            width: 90%;
+            margin-bottom: 16px;
+        }
+       .zin1 {
+           width: 50%;
+           padding: 10px;
+           border: none;
+           margin: 8px 0;
+           border-bottom: 1px solid;
+        }
+        .zd2 {
+            border-radius: 25px;
+        }
+        #sbt{
+            width: 100%;
+        }
+
+        section#z7se1 {
+            flex-direction: column;
+            height: 877px;
+        }
+        #z7se1::before {
+            height: 100% !important;
+        }
+        div.z7d1 {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width:720px) {
+        .zin1 {
+            width: 100%;}
+        .zd1 {
+            top: 23%;
+        }
+        .z3d1 {
+            width: 48%;
+        }
+        .z4d1 {
+            width: 100%;
+        }
+    }
+
+
+    @media screen and (max-width:590px) {
+        section#zse1 {
+            height: 128vh;
+        }
+        .z2d2 {
+            width: 100% !important;
+            margin-bottom: 20px;
+        }
+        .z2d1 {
+            flex-wrap: wrap;
+        }
+
+        .z3d1 {
+            width: 100%;
+        }
+        .z5d1 {
+            flex-wrap: wrap;
+        }
+        .zd5d2 {
+            width: 100%;
+        }
+    }
 </style>
 </head>
 <body>
@@ -110,10 +199,10 @@
 
 
 <footer id="ft">
-    <div class="w fsb">
+    <div class="w fsb" id="footer1"   >
         <div class="d100">
             <img src="{{asset('web/img/icons/Logo.svg')}}" alt="" id="i100">
-            <p class="p100" style="color: white">Stay up to date with our latest news, receive exclusive deals and more.</p>
+            <p class="p100" style="color: white">Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.</p>
         </div>
         <div class="d101">
             <span class="s100">Links</span>
@@ -133,10 +222,16 @@
                 <li class="l100"><a href="" class="a100">barterbed@slt.net</a></li>
                 <li class="l100"><a href="" class="a100">(+94) 11 222 3334</a></li>
                 <li class="l100"><a href="" class="a100">(+94) 11 222 5555</a></li>
-                <li class="l100"><a href="" class="a100">Accommodations</a></li>
+                <li class="l100">
+                    <a href="" class="a100"><img src="{{asset('web/img/icons/Vector.png')}}" alt="" class="i200"></a>
+                    <a href="" class="a100"><img src="{{asset('web/img/icons/Mask group.svg')}}" alt="" class="i200"></a>
+                    <a href="" class="a100"><img src="{{asset('web/img/icons/Mask group (1).svg')}}" alt="" class="i200"></a>
+                    <a href="" class="a100"><img src="{{asset('web/img/icons/Mask group (2).svg')}}" alt="" class="i200"></a>
+                </li>
             </ul>
         </div>
     </div>
+    <span class="s101">Copyright © 2024 Barterbed | Design by SATASME</span>
 </footer>
 <script type="text/javascript" src="{{asset('web/assets/js/jquery-2.2.1.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('web/assets/js/jquery-migrate-1.2.1.min.js')}}"></script>

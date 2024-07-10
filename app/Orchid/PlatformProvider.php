@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Menu;
 use Orchid\Support\Color;
 
@@ -34,6 +35,7 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         $user = \App\Models\User::find((Auth::user())->id);
+        $pointok = \App\Models\PointStort::where('user_id', (Auth::user())->id)->count();
         return [
             Menu::make(__('Properties'))
                 ->canSee($user->profile_verified == 1 || ($user->role == 'root' || $user->role == 'admin' || $user->role == 'superadmin '))
@@ -45,6 +47,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('bookings'),
 
             Menu::make(__('Points'))
+                ->canSee($pointok >0)
                 ->permission('point.permissions')
                 ->route('points'),
 
@@ -59,6 +62,9 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make(__('Profile'))
                 ->route('platform.profile'),
 
+            Menu::make(__('WebSite'))
+                ->route('web.page.index'),
+
             Menu::make(__('Messages'))
                 ->route('user.messages'),
 
@@ -71,6 +77,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('role.permissions')
                 ->divider(),
+
         ];
     }
 

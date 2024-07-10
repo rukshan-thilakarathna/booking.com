@@ -33,13 +33,14 @@ Route::get('property-type-detail/{id}',[PropertyTypeDetailController::class ,'in
 
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
 Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name('user.store');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/messages', function () {
     return redirect('/chatify');
 })->name('user.messages');
 
 Route::get('/web/login', function () {
-    return redirect('/dashboard/login');
+    return redirect('/dashboard/main');
 })->name('web.login');
 
 Route::get('/web/dashboard', function () {

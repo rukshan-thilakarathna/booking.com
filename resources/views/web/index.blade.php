@@ -12,19 +12,20 @@
             <h1 class="zh1">Find Your Ideal Stay in <br> Paradise</h1>
             <p>Discover the Perfect Accommodation for Your Dream Vacation</p>
             <div class="zd2">
-                <form action="{{route('web.page.list')}}" method="GET" style="display: flex;align-items: center;width: 100%;justify-content: space-between;">
+                <form id="zfm1" action="{{route('web.page.list')}}" method="GET" style="display: flex;align-items: center;width: 100%;justify-content: space-between;">
                 <div class="zd3">
-                    <select name="destination" class="zin1">
-                        <option style="width: 160px;text-align: left;" value="">Destinations</option>
+
+                    <input  name="checkIn" required type="date" class="zin1" onfocus="this.placeholder='Select a date'">
+                    <input name="checkOut" required type="date" class="zin1" placeholder="Check Out">
+                    <select name="destination" class="zin1" >
+                        <option class="op" value="">Destinations</option>
                         @foreach($destinations as $key => $destination)
-                            <option style="text-align: left" value="{{$destination->id}}">{{$destination->name_en}}</option>
+                            <option class="op" style="text-align: left" value="{{$destination->id}}">{{$destination->name_en}}</option>
                         @endforeach
                     </select>
-                    <input name="checkIn" required type="date" class="zin1" placeholder="Check in">
-                    <input name="checkOut" required type="date" class="zin1" placeholder="Check Out">
-                    <input name="adult" required type="number" class="zin1" placeholder="Guest">
+                    <input id="Guest"  name="adult" required type="text" class="zin1" placeholder="Guest">
                 </div>
-                <button type="submit" class="bt1">Search</button>
+                <button id="sbt" type="submit" class="bt1">Search</button>
                 </form>
             </div>
         </div>
@@ -35,7 +36,7 @@
     <section id="z2se2">
         <div class="w">
             <h1 class="z2h1">Destinations</h1>
-            <p class="z2p1">The top destinations around the world</p>
+            <p class="z2p1" style="color: #767676">The top destinations around the world</p>
             @php
                 $class = [1,2,3,1,2,3];
             @endphp
@@ -43,7 +44,7 @@
                 @foreach($propertiesDestinations as $key => $PropertyDestination)
                     @if($key <= 2)
                         <div class="z2d2 z2d1-{{$class[$key]}}"
-                             style="background: url({{asset('web/img/Top-Destinations-section-images/Sigiriya.png')}});background-size: cover;background-position: center;">
+                             style="background: url({{asset('web/img/destinations/'.$PropertyDestination->district->url.'.jpg')}});background-size: cover;background-position: center;">
                             <div class="z2d4">
                                 <h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2>
                                 <span class="z2s1">{{$uniquePropertyCount[$PropertyDestination->main_location]}} Properties</span>
@@ -58,7 +59,7 @@
 
                     @if( $key > 2 && $key <= 5)
                         <div class="z2d2 z2d1-{{$class[$key]}}"
-                             style="background: url({{asset('web/img/Top-Destinations-section-images/Sigiriya.png')}});background-size: cover;background-position: center;">
+                             style="background: url({{asset('web/img/destinations/'.$PropertyDestination->district->url.'.jpg')}});;background-size: cover;background-position: center;">
                             <div class="z2d4">
                                 <h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2>
                                 <span class="z2s1">{{$uniquePropertyCount[$PropertyDestination->main_location]}} Properties</span>
@@ -73,7 +74,9 @@
     <section id="z3se1">
         <div class="w">
             <h1 class="z3h1">Find Your Perfect Accommodation</h1>
-            <div class="fsb">
+            <div class="fsb" style="
+    flex-wrap: wrap;
+">
                 @foreach($propertyTypes as $key => $PropertyType)
                     <div class="z3d1">
                         <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Hotels.png')}}"
@@ -81,6 +84,11 @@
                         <h2 class="z3h2">{{$PropertyType->name}}</h2>
                     </div>
                 @endforeach
+                    <div class="z3d1">
+                        <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Hotels.png')}}"
+                             alt="Find-Your-Perfect-Accommodation-Hotels">
+                        <h2 class="z3h2">Hotels</h2>
+                    </div>
             </div>
         </div>
     </section>
@@ -139,12 +147,12 @@
                                 </div>
                                 <div class="x1d4">
                                     <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#91919100'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
-{{--                                    <img style="margin: 0" src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">--}}
+
                                 </div>
                             </div>
                             <div class="xid5">
                                 <h2 class="x1h2">{{$PromotionCard->name}}</h2>
-                                <span style="margin: 2px;" class="x1s4">{{$PromotionCard->district->name_en}} , {{$PromotionCard->city->name_en}}</span>
+                                <span><img src="{{asset('web/img/icons/Location.svg')}}" alt=""><span style="margin: 2px;" class="x1s4">{{$PromotionCard->district->name_en}} , {{$PromotionCard->city->name_en}}</span></span>
                             </div>
                         </div>
                     </li>
@@ -158,14 +166,12 @@
             <div class="z7d4">
                 <h1 class="z7h1">Honeymoon Haven</h1>
                 <p class="z7p1">Romantic Escapes at Unbeatable Prices!</p>
-                <a href="" class="z7a1">Book Now</a>
             </div>
         </div>
         <div class="z7d1" id="z7d2">
             <div class="z7d4">
                 <h1 class="z7h1">Honeymoon Haven</h1>
                 <p class="z7p1">Romantic Escapes at Unbeatable Prices!</p>
-                <a href="" class="z7a1">Book Now</a>
             </div>
         </div>
     </section>
@@ -189,12 +195,11 @@
                                         </div>
                                         <div class="x1d4">
                                             <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#91919100'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
-{{--                                            <img style="margin: 0" src="{{asset('web/img/icons/start.png')}}" alt="hart" class="x1i2">--}}
                                         </div>
                                     </div>
                                     <div class="xid5">
                                         <h2 class="x1h2">{{$PromotionCard->name}}</h2>
-                                        <span style="margin: 2px;" class="x1s4">{{$PromotionCard->district->name_en}} , {{$PromotionCard->city->name_en}}</span>
+                                        <span><img src="{{asset('web/img/icons/Location.svg')}}" alt=""><span style="margin: 2px;" class="x1s4">{{$PromotionCard->district->name_en}} , {{$PromotionCard->city->name_en}}</span></span>
                                     </div>
                                 </div>
                             </li>

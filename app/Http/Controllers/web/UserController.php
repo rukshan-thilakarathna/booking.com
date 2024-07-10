@@ -56,6 +56,8 @@ class UserController extends Controller
 
 
 
+
+
         return redirect()->route('web.login');
     }
 }
