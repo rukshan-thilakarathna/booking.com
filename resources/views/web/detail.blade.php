@@ -215,13 +215,7 @@
                                                 <!--end col-md-3-->
                                                 <div class="col-md-9">
                                                     <div class="comment">
-                                                        <p>Consectetur adipiscing elit. Vivamus nec augue ac dui sodales euismod.
-                                                            Suspendisse at dui sit amet felis commodo dictum. Class aptent taciti
-                                                            sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                                                            Integer commodo eleifend erat, vitae tincidunt urna volutpat et.
-                                                            Mauris laoreet, sem ut sodales sodales, massa turpis posuere lectus, non
-                                                            aliquet massa nisl ac orci.
-                                                        </p>
+                                                        <p>{{$review->text}}</p>
                                                     </div>
                                                     <!--end comment-->
                                                 </div>

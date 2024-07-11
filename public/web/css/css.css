@@ -49,6 +49,16 @@ span.s101 {
 @media screen and (max-width:700px) {
     .n {
         display: none;
+        position: absolute;
+        bottom: -128px;
+        flex-direction: column;
+        right: 0;
+        background: white;
+        padding: 10px;
+        align-items: start;
+    }
+    .a2 {
+        padding: 5px 0;
     }
     #menu{
         display: block;

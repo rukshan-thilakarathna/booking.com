@@ -279,10 +279,24 @@
                     }
                 }
             }
+
             xmlhttp.open("GET",url,true);
             xmlhttp.send();
         });
     });
+    var _ = e => document.getElementById(e);
+    window.addEventListener("click",(e) => {
+        switch(e.target.id){
+            case 'menu' :
+                if(_('topn').style.display == 'flex'){
+                    _('topn').style.display = 'none'
+                }else{
+                    _('topn').style.display = 'flex'
+                }
+                break;
+        }
+    });
+
 </script>
 </body>
 </html>
