@@ -117,7 +117,6 @@ class UserEditScreen extends Screen
                     Button::make(__('Save'))
                         ->type(Color::BASIC)
                         ->icon('bs.check-circle')
-
                         ->method('save')
                 ),
 
@@ -134,7 +133,6 @@ class UserEditScreen extends Screen
                         ->canSee($this->user->exists)
                         ->method('save')
                 ),
-
         ];
     }
 
@@ -167,7 +165,7 @@ class UserEditScreen extends Screen
 
         $user->replaceRoles($request->input('user.roles'));
 
-        Toast::info(__('User was saved.'));
+        Toast::info(__('User saved.'));
 
         return redirect()->route('platform.systems.users');
     }
@@ -181,7 +179,7 @@ class UserEditScreen extends Screen
     {
         $user->delete();
 
-        Toast::info(__('User was removed'));
+        Toast::info(__('User removed'));
 
         return redirect()->route('platform.systems.users');
     }

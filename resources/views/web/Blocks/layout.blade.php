@@ -68,7 +68,7 @@
 
     #z3se1 {text-align: center;margin-bottom: 50px;}
     .z3h1 {font-size: 35px;font-weight: 400;margin-bottom: 50px;}
-    .z3d1 {width: 30%;}
+    .z3d1 {width: 30%;    margin-bottom: 25px;}
     .z3i1 {width: 100%;}
     .z3h2 {font-size: 20px;font-weight: 400;margin: 6px 0;}
 

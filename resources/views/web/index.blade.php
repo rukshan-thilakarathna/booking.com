@@ -46,7 +46,7 @@
                         <div class="z2d2 z2d1-{{$class[$key]}}"
                              style="background: url({{asset('web/img/destinations/'.$PropertyDestination->district->url.'.jpg')}});background-size: cover;background-position: center;">
                             <div class="z2d4">
-                                <h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2>
+                                <a href="list?destination={{$PropertyDestination->id}}"><h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2></a>
                                 <span class="z2s1">{{$uniquePropertyCount[$PropertyDestination->main_location]}} Properties</span>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                         <div class="z2d2 z2d1-{{$class[$key]}}"
                              style="background: url({{asset('web/img/destinations/'.$PropertyDestination->district->url.'.jpg')}});;background-size: cover;background-position: center;">
                             <div class="z2d4">
-                                <h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2>
+                                <a href="list?destination={{$PropertyDestination->id}}"><h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2></a>
                                 <span class="z2s1">{{$uniquePropertyCount[$PropertyDestination->main_location]}} Properties</span>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                     <div class="z3d1">
                         <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Hotels.png')}}"
                              alt="Find-Your-Perfect-Accommodation-Hotels">
-                        <h2 class="z3h2">{{$PropertyType->name}}</h2>
+                        <a href="list?ptpt%5B%5D={{$PropertyType->id}}"><h2 class="z3h2">{{$PropertyType->name}}</h2></a>
                     </div>
                 @endforeach
                     <div class="z3d1">
@@ -151,7 +151,7 @@
                                 </div>
                             </div>
                             <div class="xid5">
-                                <h2 class="x1h2">{{$PromotionCard->name}}</h2>
+                                <a href="{{route('web.page.detail',$PromotionCard->id)}}"><h2 class="x1h2">{{$PromotionCard->name}}</h2></a>
                                 <span><img src="{{asset('web/img/icons/Location.svg')}}" alt=""><span style="margin: 2px;" class="x1s4">{{$PromotionCard->district->name_en}} , {{$PromotionCard->city->name_en}}</span></span>
                             </div>
                         </div>
@@ -198,7 +198,7 @@
                                         </div>
                                     </div>
                                     <div class="xid5">
-                                        <h2 class="x1h2">{{$PromotionCard->name}}</h2>
+                                        <a href="{{route('web.page.detail',$PromotionCard->id)}}"><h2 class="x1h2">{{$PromotionCard->name}}</h2></a>
                                         <span><img src="{{asset('web/img/icons/Location.svg')}}" alt=""><span style="margin: 2px;" class="x1s4">{{$PromotionCard->district->name_en}} , {{$PromotionCard->city->name_en}}</span></span>
                                     </div>
                                 </div>
