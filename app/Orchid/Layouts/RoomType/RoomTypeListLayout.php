@@ -85,6 +85,7 @@ class RoomTypeListLayout extends Table
                             ]),
                         Link::make(__('Manage Rooms'))->route('room', $roomType->id)->canSee($roomType->rooms_added == 1),
 
+
                     ]),
                 ),
 

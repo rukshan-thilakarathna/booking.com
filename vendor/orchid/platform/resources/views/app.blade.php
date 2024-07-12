@@ -17,6 +17,7 @@
     @else
         <link rel="stylesheet" type="text/css" href="{{  mix('/css/orchid.css','vendor/orchid') }}">
     @endif
+        <link rel="stylesheet" type="text/css" href="{{asset('web/Components/RoomsCalendar.css')}}">
 
     @stack('head')
 

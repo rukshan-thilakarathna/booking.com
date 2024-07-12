@@ -28,6 +28,7 @@ use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\Rooms\RoomCardsScreen;
 use App\Orchid\Screens\Rooms\RoomEditScreen;
+use App\Orchid\Screens\Rooms\RoomsCalendarListScreen;
 use App\Orchid\Screens\Rooms\RoomsListScreen;
 use App\Orchid\Screens\RoomType\RoomTypeCardsScreen;
 use App\Orchid\Screens\RoomType\RoomTypesEditScreen;
@@ -36,6 +37,7 @@ use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\User\UserVerificationScreen;
+use App\View\Components\RoomsCalendar;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -235,6 +237,10 @@ Route::screen('reports',ReportScreen::class)
         ->parent('platform.index')
         ->push(__('Reports'), route('reports')));
 
+
+//Calendar///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::screen('calendar/{id}',RoomsCalendarListScreen::class)
+    ->name('calendar');
 
 
 

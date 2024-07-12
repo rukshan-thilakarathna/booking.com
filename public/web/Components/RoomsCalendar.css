@@ -1,0 +1,26 @@
+.zd1 {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    padding: 7px;
+}
+
+.zd2 {
+    background: #afafaf;
+    width: 13%;
+    height: 200px;
+    margin: 5px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.zd3 {
+    margin: 50px 0 35px 15px;
+}
+
+.zd4 {
+    height: 45px;
+    background: #5f5e5e;
+    color: white;
+}
+

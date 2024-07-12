@@ -67,11 +67,15 @@ class RoomsListLayout extends Table
                             ->route('room-edit', $room->id),
                         Link::make(__('View'))
                             ->route('room-view', $room->id),
+
                         Button::make(__('Delete'))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('remove', [
                                 'id' => $room->id,
                             ]),
+
+                        Link::make(__('View Calendar'))
+                            ->route('calendar',$room->id),
 
                     ])),
         ];
