@@ -8,13 +8,12 @@
                 $weekDays[] = $startOfWeek->format('l'); // 'l' is the format character for the full textual representation of the day
                 $startOfWeek->modify('+1 day');
             }
-
             return $weekDays;
         }
 
         // Get the current year and month
         $year = 2024;
-        $month = 8;
+        $month = 7;
         if ($month < 10){
             $month = '0'.$month;
         }
@@ -63,11 +62,15 @@
                 $dateString = '[' . $year . '-' . $month . ']';
             @endphp
 
-            <div
+            <div class="zd2">  
+                <span style="background: white; display: flex;width: 24px;align-items: center;justify-content: center;border-radius: 5px; ">{{ $currentDay }}</span>
+
                 @if(strpos($availability, $dateString))
-                    style="background: red; color: white;"
+                    <span style="border-radius: 26px;background: red;display: block;width: 20px;height: 20px;"></span>
+                @else
+                    <span style="border-radius: 26px;background: #179d35;display: block;width: 20px;height: 20px;"></span>
                 @endif
-                class="zd2"> {{ $currentDay }}</div>
+            </div>
         @endfor
 </div>
 

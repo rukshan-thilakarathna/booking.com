@@ -8,10 +8,13 @@
 .zd2 {
     background: #afafaf;
     width: 13%;
-    height: 200px;
+    height: 90px;
     margin: 5px;
     border-radius: 5px;
     padding: 10px;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
 }
 
 .zd3 {

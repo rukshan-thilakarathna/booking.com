@@ -18,6 +18,7 @@ use Orchid\Support\Facades\Toast;
 
 class RoomsCalendarListScreen extends Screen
 {
+    public $RoomNumber = 0;
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -29,7 +30,7 @@ class RoomsCalendarListScreen extends Screen
         $availabierelities = Availability::where('room_number', $id->number)->get();
 
 
-
+$this->RoomNumber = $id->number;
 
         return [
             'id' => $id->number,
@@ -44,7 +45,7 @@ class RoomsCalendarListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Room number 0014 Booking Calendar';
+        return 'Room number 00'.$this->RoomNumber.' Booking Calendar';
     }
 
     /**
