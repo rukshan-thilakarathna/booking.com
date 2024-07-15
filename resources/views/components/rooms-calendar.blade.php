@@ -17,6 +17,7 @@
         if ($month < 10){
             $month = '0'.$month;
         }
+
         $monthName = date('F', mktime(0, 0, 0, $month, 1));
         // Get the number of days in the current month
         $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $month, $year);
@@ -51,27 +52,31 @@
 <div class="zd3">
     <h1>{{$year}} - {{$month}} ({{$monthName}})</h1>
 </div>
-<div class="zd1">
-    @foreach($weekDaysArray as $day)
-        <div class="zd2 zd4">{{ $day }}</div>
-    @endforeach
-        @for ($i = 0; $i < $all_dates; $i++)
-            @php
-                $currentDay = $Day[$i];
-                $availability = $value->$currentDay;
-                $dateString = '[' . $year . '-' . $month . ']';
-            @endphp
+<form>
+    <div class="zd1">
+        @foreach($weekDaysArray as $day)
+            <div class="zd2 zd4">{{ $day }}</div>
+        @endforeach
+            @for ($i = 0; $i < $all_dates; $i++)
+                @php
+                    $currentDay = $Day[$i];
+                    $availability = $value->$currentDay;
+                    $dateString = '[' . $year . '-' . $month . ']';
+                @endphp
 
-            <div class="zd2">  
-                <span style="background: white; display: flex;width: 24px;align-items: center;justify-content: center;border-radius: 5px; ">{{ $currentDay }}</span>
+                <div class="zd2">  
+                    <span style="background: white; display: flex;width: 24px;align-items: center;justify-content: center;border-radius: 5px; ">{{ $currentDay }}</span>
 
-                @if(strpos($availability, $dateString))
-                    <span style="border-radius: 26px;background: red;display: block;width: 20px;height: 20px;"></span>
-                @else
-                    <span style="border-radius: 26px;background: #179d35;display: block;width: 20px;height: 20px;"></span>
-                @endif
-            </div>
-        @endfor
-</div>
+                    @if ($currentDay != '*')
+                        @if(strpos($availability, $dateString))
+                            <span style="border-radius: 0px 5px 5px 0px;background: #d9a9a9;display: block; width: 100%;padding: 5px 13px;border-left: 2px solid #f14a4a !important;">booked</span>
+                        @else
+                            <span style="border-radius: 0px 5px 5px 0px;background: #83e399;display: block; width: 100%;padding: 5px 13px;border-left: 2px solid #179d35 !important;">available</span>  
+                        @endif
+                    @endif
+                </div>
+            @endfor
+    </div>
+</form>
 
 @endforeach
