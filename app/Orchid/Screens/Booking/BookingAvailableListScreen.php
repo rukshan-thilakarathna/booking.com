@@ -7,7 +7,6 @@ use App\Models\Availability;
 use App\Models\Booking;
 use App\Models\Rooms;
 use App\Orchid\Layouts\Booking\BookingCreateAndEditLayout;
-use App\Orchid\Layouts\Rooms\AvailableRoomsListLayout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Link;

@@ -66,6 +66,9 @@ class BookingListLayout extends Table
                 if ($booking->booking_status == 3){
                     return 'Check Out';
                 }
+                if ($booking->booking_status == 4){
+                    return 'Blocked';
+                }
             }),
 
             TD::make('created_at', __('Created At'))
@@ -101,7 +104,7 @@ class BookingListLayout extends Table
 
                         ModalToggle::make('Send Property Review')
                             ->modal('Send Property Review')
-                            ->canSee( $booking->reviewed == 0 && $user->role == 'user')
+                            ->canSee( $booking->booking_status != 4 && $booking->reviewed == 0 && $user->role == 'user')
                             ->method('SendPropertyReview', [
                                 'booking_id' => $booking->id,
                                 'property_id' => $booking->property_id,
@@ -110,7 +113,7 @@ class BookingListLayout extends Table
 
                         ModalToggle::make('Send Guest Review')
                             ->modal('Send Guest Review')
-                            ->canSee( $booking->reviewed == 0 && $user->role == 'property-owner')
+                            ->canSee( $booking->booking_status != 4 && $booking->reviewed == 0 && $user->role == 'property-owner')
                             ->method('SendGuestReview', [
                                 'booking_id' => $booking->id,
                                 'property_id' => $booking->property_id,
@@ -125,7 +128,7 @@ class BookingListLayout extends Table
                             ]),
 
                         Button::make('Check Out')
-                            ->canSee($booking->booking_status == 1 && $user->hasAnyAccess(['checkOut.booking.permissions']))
+                            ->canSee(($booking->booking_status == 4 || $booking->booking_status == 1) && $user->hasAnyAccess(['checkOut.booking.permissions']))
                             ->method('ChackOutBooking',[
                                 'id' => $booking->id
                             ]),

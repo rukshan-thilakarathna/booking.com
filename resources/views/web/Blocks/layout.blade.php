@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="{{asset('web/assets/css/owl.carousel.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/css/style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/slider/slider.css?fd')}}" type="text/css">
-
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 
@@ -296,6 +295,10 @@
                 break;
         }
     });
+
+    $('#myModal').on('shown.bs.modal', function () {
+        $('.zbt1').trigger('focus')
+      })
 
 </script>
 </body>

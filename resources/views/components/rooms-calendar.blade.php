@@ -1,4 +1,5 @@
 @php
+
         function getWeekDays() {
             $weekDays = [];
             $startOfWeek = new DateTime();
@@ -11,12 +12,16 @@
             return $weekDays;
         }
 
+        $zdateString = $_GET['Date'] ?? date('Y-m');
+        $zdate = DateTime::createFromFormat('Y-m', $zdateString);
+
+        // Extract month and year
+        $zmonth = $zdate->format('m'); // Outputs '12'
+        $zyear = $zdate->format('Y'); // Outputs '2024'
+
         // Get the current year and month
-        $year = 2024;
-        $month = 7;
-        if ($month < 10){
-            $month = '0'.$month;
-        }
+        $year = $zyear;
+        $month = $zmonth;
 
         $monthName = date('F', mktime(0, 0, 0, $month, 1));
         // Get the number of days in the current month
@@ -64,14 +69,15 @@
                     $dateString = '[' . $year . '-' . $month . ']';
                 @endphp
 
-                <div class="zd2">  
+                <div class="zd2">
                     <span style="background: white; display: flex;width: 24px;align-items: center;justify-content: center;border-radius: 5px; ">{{ $currentDay }}</span>
 
                     @if ($currentDay != '*')
                         @if(strpos($availability, $dateString))
                             <span style="border-radius: 0px 5px 5px 0px;background: #d9a9a9;display: block; width: 100%;padding: 5px 13px;border-left: 2px solid #f14a4a !important;">booked</span>
                         @else
-                            <span style="border-radius: 0px 5px 5px 0px;background: #83e399;display: block; width: 100%;padding: 5px 13px;border-left: 2px solid #179d35 !important;">available</span>  
+                        <input type="checkbox" class="zin1" name="dates[]" value="{{$year}}-{{$month}}-{{$currentDay}}">
+                            <span style="border-radius: 0px 5px 5px 0px;background: #83e399;display: block; width: 100%;padding: 5px 13px;border-left: 2px solid #179d35 !important;">available</span>
                         @endif
                     @endif
                 </div>

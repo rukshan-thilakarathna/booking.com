@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\User;
 
-use App\Orchid\Layouts\Role\RolePermissionLayout;
-use App\Orchid\Layouts\User\LegalDocument01Layout;
+
 use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\UserPasswordLayout;
 use App\Orchid\Layouts\User\UserRoleLayout;
