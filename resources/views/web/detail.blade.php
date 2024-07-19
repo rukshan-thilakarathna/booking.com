@@ -4,26 +4,17 @@
 @section('content')
     <div id="page-content">
 
-        <div class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
+
         <div class="container">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @elseif (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
                 <li><a href="{{route('web.page.list')}}">Listing</a></li>
@@ -59,7 +50,6 @@
                                             </div>
                                         @endif
                                     @endforeach
-
                                 </div>
                             </div>
                         </section>
@@ -161,6 +151,8 @@
                                                 <th>Number of Room</th>
                                                 <th>Number of guests</th>
                                                 <th>Today's price</th>
+                                                <th>Total price</th>
+                                                <th>Open Points</th>
                                                 <th>Your choices</th>
                                                 <th></th>
                                             </tr>
@@ -194,16 +186,26 @@
                                                         @php
                                                             $dates = (new \App\Models\Availability())->getDate(strtotime($UrlData['chackIn']),strtotime($UrlData['chackOut']));
                                                         @endphp
-                                                        <li>One Date Price - {{$room->display_price}}</li>
-                                                        <li>Total Price ( {{$room->display_price}}X{{count($dates['DateList'])}} ) - {{$room->display_price*count($dates['DateList'])}}</li>
+                                                        <li>Rs {{$room->display_price}}</li>
                                                     </ul>
+                                                </td>
+                                                <td class="price">
+                                                    <ul>
+                                                        @php
+                                                            $dates = (new \App\Models\Availability())->getDate(strtotime($UrlData['chackIn']),strtotime($UrlData['chackOut']));
+                                                        @endphp
+                                                        <li>Rs {{$room->display_price*count($dates['DateList'])}}</li>
+                                                    </ul>
+                                                </td>
+                                                <td class="price">
+                                                    <input readonly type="checkbox" @if($room->open_point_or_cash == 0) checked @endif>
                                                 </td>
                                                 <td class="rooms">
                                                     {{$room->user_choice}}
                                                 </td>
                                                 <td>
                                                     <div class="form-group">
-                                                        <button type="button" class="zbt1 btn btn-primary btn-rounded">Reserve Now</button>
+                                                        <button type="button"  data-toggle="modal" data-value="{{$room->id}}" data-target="#exampleModalCenter"  class="zbt1 btn btn-primary btn-rounded">Reserve Now</button>
                                                     </div>
                                                     <!--end form-group-->
                                                 </td>
@@ -249,48 +251,7 @@
                             </div>
                             <!--end reviews-->
                         </section>
-{{--                        <section id="write-a-review">--}}
-{{--                            <h2>Write a Review</h2>--}}
-{{--                            <form  class="labels-uppercase clearfix" id="form_reply_1">--}}
-{{--                                @if(!isset(Session::get('user')['id']))--}}
-{{--                                <div class="alert alert-dark fade in center" role="alert">--}}
-{{--                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" data-switch="#review-write">--}}
-{{--                                        <span aria-hidden="true">&times;</span>--}}
-{{--                                    </button>--}}
-{{--                                    <span class="sr-only">Error:</span>--}}
-{{--                                    <a target="_blank" href="{{route('web.login')}}" >Please Sign in to write a review</a>--}}
-{{--                                </div>--}}
-{{--                                @endif--}}
 
-{{--                                <div class="review write  @if(!isset(Session::get('user')['id'])) switch @endif" id="review-write">--}}
-{{--                                    <aside class="name"> @if(!isset(Session::get('user')['id'])) write a review @else {{Session::get('user')['name']}} @endif </aside>--}}
-{{--                                    <div class="comment">--}}
-{{--                                        <div class="row">--}}
-{{--                                            <div class="col-md-12">--}}
-{{--                                                <div class="comment-title">--}}
-{{--                                                    <h4>Review Your Stay</h4>--}}
-{{--                                                </div>--}}
-{{--                                                <!--end title-->--}}
-{{--                                                <div class="form-group">--}}
-{{--                                                    <label for="form_reply_1-message">Your Review<em>*</em></label>--}}
-{{--                                                    <textarea class="form-control" id="form_reply_1-message" rows="8" name="answer" required="" placeholder="Describe your stay"></textarea>--}}
-{{--                                                </div>--}}
-{{--                                                <!--end form-group-->--}}
-{{--                                                <div class="form-group pull-right">--}}
-{{--                                                    <button type="submit" class="btn btn-primary btn-rounded">Send Review</button>--}}
-{{--                                                </div>--}}
-{{--                                                <!--end form-group-->--}}
-{{--                                            </div>--}}
-
-{{--                                        </div>--}}
-{{--                                        <!--end row-->--}}
-{{--                                    </div>--}}
-{{--                                    <!--end comment-->--}}
-{{--                                </div>--}}
-{{--                                <!--end review-->--}}
-{{--                            </form>--}}
-{{--                            <!--end form-->--}}
-{{--                        </section>--}}
                     </div>
                     <!--end main-content-->
                 </div>
@@ -301,4 +262,99 @@
         <!--end container-->
     </div>
     <!--end page-content-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" id="modalbody">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+
+    // Function to create a new anchor tag
+    function createAnchor(href, textContent, parentElementId) {
+        // Create the new anchor element
+        var newAnchor = document.createElement('a');
+        // Set the href attribute of the new anchor
+        newAnchor.href = href;
+         newAnchor.style.marginRight = '10px';
+        // Set the text content of the new anchor
+        newAnchor.textContent = textContent;
+        // Get the parent element by its ID
+        var parentElement = document.getElementById(parentElementId);
+        newAnchor.className = 'btn btn-primary btn-lg active';
+        // Append the new anchor to the parent element
+       
+        parentElement.appendChild(newAnchor);
+    }
+
+    
+</script>
+
+  <script>
+    var modalbody = document.getElementById('modalbody')
+    document.addEventListener('DOMContentLoaded', function() {
+    // Add event listener to the document or a parent element that contains the button
+    document.addEventListener('click', function(event) {
+        // Check if the clicked element is the "Reserve Now" button
+        if (event.target.matches('.zbt1[data-value]')) {
+            // Get the data-value attribute of the clicked button
+            var dataValue = event.target.getAttribute('data-value');
+
+            // Clear the modal body
+            while (modalbody.firstChild) {
+                modalbody.removeChild(modalbody.firstChild);
+            }
+
+            // Dynamically add anchors based on PHP logic
+            @php
+                $start_date = new DateTime(date('Y-m-d'));
+                $end_date = new DateTime($UrlData['chackIn']);
+
+                // Include end date in the interval count
+                $end_date->modify('+1 day');
+
+                // Create an interval of 1 day
+                $interval = new DateInterval('P1D');
+
+                // Create a date period
+                $daterange = new DatePeriod($start_date, $interval, $end_date);
+
+                // Count the number of dates
+                $date_count = iterator_count($daterange);
+
+                $payNowUrl = route('web.page.index');
+                $payLaterUrl = route('web.booking.confourm', [
+                    'id' => 'DATA_VALUE_PLACEHOLDER',
+                    'chackIn' => $UrlData['chackIn'] ?? 0,
+                    'chackOut' => $UrlData['chackOut'] ?? 0,
+                    'adults' => $UrlData['adults'] ?? 0,
+                    'children' => $UrlData['children'] ?? 0,
+                ]);
+            @endphp
+
+            @if($date_count > 14 && isset(Session::get('user')['id']))
+                createAnchor('{{ $payNowUrl }}', 'Pay Now', 'modalbody');
+                createAnchor('{{ $payLaterUrl }}'.replace('DATA_VALUE_PLACEHOLDER', dataValue), 'Pay Later', 'modalbody');
+            @else
+                createAnchor('{{ $payNowUrl }}', 'Pay Now', 'modalbody');
+            @endif
+        }
+    });
+});
+    </script>
+
 @endsection

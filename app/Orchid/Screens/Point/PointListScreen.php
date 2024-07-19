@@ -6,7 +6,6 @@ use App\Models\Point_transactions;
 use App\Models\PointStort;
 use App\Orchid\Layouts\Point\AllTransectionsListLayout;
 use App\Orchid\Layouts\Point\PointCountLayout;
-use App\Orchid\Layouts\User\VerifyPendingLayout;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -29,6 +28,7 @@ class PointListScreen extends Screen
                     ->orWhere('from', '=', $user->id);
             })
             ->with('ToUser', 'FromUser')
+            ->orderBy('id', 'desc')
             ->paginate(5);
 
         return [

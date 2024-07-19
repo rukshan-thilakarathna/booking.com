@@ -36,6 +36,7 @@ class SellListScreen extends Screen
             })
             ->with('ToUser', 'FromUser')
             ->where('donations', '=', 0)
+            ->orderBy('id', 'desc')
             ->paginate(5);
 
 

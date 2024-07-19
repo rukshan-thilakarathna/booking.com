@@ -3,20 +3,13 @@
 namespace App\Orchid\Screens\Booking;
 
 use App\Models\Booking;
-use App\Models\Rooms;
-use App\Models\RoomType;
-use Illuminate\Http\Request;
-use JetBrains\PhpStorm\NoReturn;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
-use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Components\Cells\DateTimeSplit;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Sight;
-use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class BookingCardsScreen extends Screen
 {
@@ -86,7 +79,7 @@ class BookingCardsScreen extends Screen
                 Sight::make('name' ,'User Name'),
                 Sight::make('email' ,'User Email'),
                 Sight::make('phone_number' ,'User Number'),
-                Sight::make('Room.display_price' ,'Price'),
+                Sight::make('total_amount' ,'Price'),
 
                 Sight::make('adults' ,'Adults'),
                 Sight::make('children' ,'Children'),

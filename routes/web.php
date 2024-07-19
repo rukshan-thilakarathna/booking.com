@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\web\DestinationsController;
+use App\Http\Controllers\web\page\BookingConforumController;
 use App\Http\Controllers\web\page\DetailController;
 use App\Http\Controllers\web\page\IndexController;
 use App\Http\Controllers\web\page\ListController;
@@ -30,6 +31,7 @@ Route::get('list',[ListController::class ,'index'])->name('web.page.list');
 Route::get('detail/{id}',[DetailController::class ,'index'])->name('web.page.detail');
 Route::get('user/add-wishlist/{id}',[WishListController::class ,'index'])->name('web.add-wishlist');
 Route::get('property-type-detail/{id}',[PropertyTypeDetailController::class ,'index'])->name('web.page.property-type-detail');
+Route::get('Booking-confourm/{id}/{chackIn}/{chackOut}/{adults}/{children}',[BookingConforumController::class ,'index'])->name('web.booking.confourm');
 
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
 Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name('user.store');

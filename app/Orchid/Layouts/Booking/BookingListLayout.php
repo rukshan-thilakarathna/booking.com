@@ -102,9 +102,16 @@ class BookingListLayout extends Table
                                 'id' => $booking->id
                             ]),
 
+                            Button::make('Make Payment')
+                            ->canSee($booking->payment_status == 0 && $user->role == 'user')
+                            ->method('ChangePaymentStatus',[
+                                'payment_status' => $booking->payment_status,
+                                'id' => $booking->id
+                            ]),
+
                         ModalToggle::make('Send Property Review')
                             ->modal('Send Property Review')
-                            ->canSee( $booking->booking_status != 4 && $booking->reviewed == 0 && $user->role == 'user')
+                            ->canSee( $booking->booking_status == 3 && $booking->reviewed == 0 && $user->role == 'user')
                             ->method('SendPropertyReview', [
                                 'booking_id' => $booking->id,
                                 'property_id' => $booking->property_id,
@@ -113,7 +120,7 @@ class BookingListLayout extends Table
 
                         ModalToggle::make('Send Guest Review')
                             ->modal('Send Guest Review')
-                            ->canSee( $booking->booking_status != 4 && $booking->reviewed == 0 && $user->role == 'property-owner')
+                            ->canSee( $booking->booking_status == 3 && $booking->reviewed == 0 && $user->role == 'property-owner')
                             ->method('SendGuestReview', [
                                 'booking_id' => $booking->id,
                                 'property_id' => $booking->property_id,

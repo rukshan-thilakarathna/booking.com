@@ -37,6 +37,7 @@ class DonationsListScreen extends Screen
             })
             ->with('ToUser', 'FromUser')
             ->where('donations', 1)
+            ->orderBy('id', 'desc')
             ->paginate(5);
 
         return [
