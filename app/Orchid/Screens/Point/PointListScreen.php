@@ -57,14 +57,28 @@ class PointListScreen extends Screen
         $user = \App\Models\User::find((Auth::user())->id);
         $points = PointStort::with('user')->where('user_id',$user->id)->first();
 
+        $cansee = false;
+
+        if($user->role == "property-owner"){
+            if ($points->point_count > 100){
+                $cansee = true;
+            }
+        }elseif ($user->role == "user"){
+            $cansee = true;
+        }
+
 
         return [
             Link::make(__('Donations'))
-                ->canSee($user->hasAnyAccess(['point.donations.permissions']) && $points->point_count > 100 && $user->role == "property-owner")
+                ->canSee($user->hasAnyAccess(['point.donations.permissions']) && $cansee )
             ->href(route('point.donations')),
 
+            Link::make(__('Amount Due'))
+                ->canSee($user->role == "super-admin" || $user->role == "root")
+                ->href(route('amount.due')),
+
             Link::make(__('Sell Your Points'))
-                ->canSee($user->hasAnyAccess(['point.Sell.permissions']) && $points->point_count > 100 && $user->role == "property-owner")
+                ->canSee($user->hasAnyAccess(['point.Sell.permissions']) && $cansee)
                 ->href(route('point.sell'))
         ];
     }

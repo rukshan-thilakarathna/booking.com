@@ -124,17 +124,20 @@ class DonationsListScreen extends Screen
 
                         if ($user_role == 'property-owner') {
                             $FromUserPointCountq = $FromUserPointCount-100;
+                        }else{
+                            $FromUserPointCountq = $FromUserPointCount;
                         }
 
                     if ($FromUserPointCountq >= $request->point_count) {
                         $AfterFromUserPointCountF = $FromUserPointCount - $request->point_count;
                         $AfterToUserPointCountF = $ToUserPointCount + $request->point_count;
 
-                        PointStort::where('user_id', $user->id)->update(['point_count' => $AfterFromUserPointCountF]);
+                        PointStort::where('user_id', $user->id)->update(['point_count' => $AfterFromUserPointCountF ,'wallet' => $AfterFromUserPointCountF]);
 //
 
                         $pointStort = PointStort::where('user_id', $request->user)->firstOrNew();
                         $pointStort->point_count = $AfterToUserPointCountF;
+                        $pointStort->wallet = $AfterToUserPointCountF;
                         $pointStort->user_id = $request->user;
                         $pointStort->save();
 

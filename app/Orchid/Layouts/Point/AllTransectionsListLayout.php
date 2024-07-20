@@ -92,11 +92,17 @@ class AllTransectionsListLayout extends Table
                 ->filter(),
 
             TD::make('selling_status', __('Transactions Status'))
-                ->render(function (Point_transactions $transactions){
+                ->render(function (Point_transactions $transactions ){
+                    $user = \App\Models\User::find((Auth::user())->id);
                     if ($transactions->selling_status == 2){
                         return "Selling";
                     }else{
-                        return $transactions->selling_status == 1 ? "Sold out" : "Donation" ;
+                        if ($transactions->to == $user->id){
+                            return $transactions->selling_status == 1 ? "Buy" : "Donation" ;
+                        }else{
+                            return $transactions->selling_status == 1 ? "Sold out" : "Donation" ;
+                        }
+
                     }
 
                 }),

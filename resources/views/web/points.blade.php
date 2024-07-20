@@ -3,6 +3,16 @@
 @section('content')
     <div id="page-content">
         <div class="container">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @elseif (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
                 <li><a href="{{route('points')}}">Points</a></li>
@@ -52,14 +62,17 @@
                                         <tbody>
                                         @foreach($bypoints as $key => $bypoint)
                                             <tr>
-                                                <th scope="row">{{$key+1}}</th>
-                                                <td>{{$bypoint->created_at}}</td>
-                                                <td>{{$bypoint->FromUser->name}}</td>
-                                                <td>Points {{$bypoint->point_count}}</td>
-                                                <td>LKR {{$bypoint->amount}}</td>
-                                                <td>LKR {{$bypoint->discount_amount}}</td>
-                                                <td><button style="border: none;cursor: pointer;padding: 5px 8px;background: #218b15;color: white;border-radius: 4px;
-                                                ">Buy Now</button></td>
+                                                <form action="{{route('get-point')}}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{$bypoint->id}}">
+                                                    <th scope="row">{{$key+1}}</th>
+                                                    <td>{{$bypoint->created_at}}</td>
+                                                    <td>{{$bypoint->FromUser->name}}</td>
+                                                    <td>Points {{$bypoint->point_count}}</td>
+                                                    <td>LKR {{$bypoint->amount}}</td>
+                                                    <td>LKR {{$bypoint->discount_amount}}</td>
+                                                    <td><button type="submit" style="border: none;cursor: pointer;padding: 5px 8px;background: #218b15;color: white;border-radius: 4px;">Buy Now</button></td>
+                                                </form>
                                             </tr>
                                         @endforeach
                                         </tbody>

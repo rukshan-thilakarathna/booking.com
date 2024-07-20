@@ -28,11 +28,24 @@ class PointCountLayout extends Rows
                     ->placeholder(0)
                     ->style('border: none; font-size: 35px; background: white; color: black;font-weight: bold;')
                     ->title('Point Count'),
-                Input::make('points.point_count')
+                Input::make('points.wallet')
                     ->readonly()
                     ->placeholder(0)
                     ->style('border: none; font-size: 35px; background: white; color: black;font-weight: bold;')
-                    ->title('Point Value (USD)')
+                    ->title('Point Value (USD)'),
+
+                 Input::make('points.locked_points')
+                     ->readonly()
+                     ->placeholder(0)
+                     ->style('border: none; font-size: 35px; background: white; color: black;font-weight: bold;')
+                     ->title('Pending selling Points'),
+
+                Input::make('points.pending_wallet')
+                    ->readonly()
+                    ->placeholder(0)
+                    ->style('border: none; font-size: 35px; background: white; color: black;font-weight: bold;')
+                    ->title('pending amount (USD)'),
+
             ],),
 
 

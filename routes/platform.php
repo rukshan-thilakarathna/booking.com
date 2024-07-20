@@ -7,6 +7,7 @@ use App\Orchid\Screens\Booking\BookingCardsScreen;
 use App\Orchid\Screens\Booking\BookingEditScreen;
 use App\Orchid\Screens\Booking\BookingListScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Point\AmountDueListScreen;
 use App\Orchid\Screens\Point\DonationsListScreen;
 use App\Orchid\Screens\Point\PointListScreen;
 use App\Orchid\Screens\Point\SellListScreen;
@@ -144,6 +145,12 @@ Route::screen('sell-points',SellListScreen::class)
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('points')
         ->push(__('Sell Your Points'), route('points')));
+
+Route::screen('amount-due',AmountDueListScreen::class)
+    ->name('amount.due')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('points')
+        ->push(__('Amount Due'), route('points')));
 
 
 //Reviews////////////////////////////////////////////////////////////////////////////////////////////////////////////////

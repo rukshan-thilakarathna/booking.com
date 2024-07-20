@@ -33,6 +33,8 @@ Route::get('user/add-wishlist/{id}',[WishListController::class ,'index'])->name(
 Route::get('property-type-detail/{id}',[PropertyTypeDetailController::class ,'index'])->name('web.page.property-type-detail');
 Route::get('Booking-confourm/{id}/{chackIn}/{chackOut}/{adults}/{children}',[BookingConforumController::class ,'index'])->name('web.booking.confourm');
 
+Route::post('/get-points' ,[PointController::class ,'buy'])->name('get-point');
+
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
 Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name('user.store');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');

@@ -105,6 +105,7 @@ class SellListScreen extends Screen
         $user = \App\Models\User::find((Auth::user())->id);
         $user_role = $user->role;
 
+
         // Validate the request data
         $request->validate([
             'Price' => 'required|integer|min:1|not_regex:/\./',
@@ -116,9 +117,17 @@ class SellListScreen extends Screen
 
         if (Hash::check($request->password, $user->password)) {
             $FromUserPointCount = PointStort::where('user_id', $user->id)->value('point_count');
+            $FromUserpendingwallet = PointStort::where('user_id', $user->id)->value('pending_wallet');
+            $locpoint = PointStort::where('user_id', $user->id)->value('locked_points');
+
+
+
+
 
             if ($user_role == 'property-owner') {
                 $FromUserPointCountq = $FromUserPointCount-100;
+            }else{
+                $FromUserPointCountq = $FromUserPointCount;
             }
 
             if ($FromUserPointCountq >= $request->point_count) {
@@ -129,7 +138,7 @@ class SellListScreen extends Screen
                 if($RealPointAmount >= $request->Price){
                     $AfterFromUserPointCountF = $FromUserPointCount - $request->point_count;
 
-                    PointStort::where('user_id', $user->id)->update(['point_count' => $AfterFromUserPointCountF,'locked_points' => $request->point_count]);
+                    PointStort::where('user_id', $user->id)->update(['point_count' => $AfterFromUserPointCountF,'locked_points' => $locpoint + $request->point_count ,'wallet' => $AfterFromUserPointCountF ,'pending_wallet' => $FromUserpendingwallet + ($request->Price*90/100)]);
 
                     $discount_amount =$RealPointAmount - $request->Price;
                     $discount_percentage = ($request->Price / $RealPointAmount)*100;
