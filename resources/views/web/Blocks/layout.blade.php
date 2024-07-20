@@ -200,7 +200,7 @@
 <footer id="ft">
     <div class="w fsb" id="footer1"   >
         <div class="d100">
-            <img src="{{asset('web/img/icons/Logo.svg')}}" alt="" id="i100">
+            <a href="/"><img src="{{asset('web/img/icons/Logo.svg')}}" alt="" id="i100"></a>
             <p class="p100" style="color: white">Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.</p>
         </div>
         <div class="d101">
@@ -208,7 +208,7 @@
             <ul class="u100">
                 <li class="l100"><a href="{{route('web.page.index')}}" class="a100">Home</a></li>
                 <li class="l100"><a href="{{route('about-us')}}" class="a100">About Us</a></li>
-                <li class="l100"><a href="{{route('web.page.list')}}" class="a100">Destinations</a></li>
+                <li class="l100"><a href="{{route('web.page.list')}}" class="a100">Property List</a></li>
                 <li class="l100"><a href="{{route('contact-us')}}" class="a100">Contact Us</a></li>
                 <li class="l100"><a href="{{route('user.registration','property-owner')}}" class="a100">Property Owner Registration</a></li>
                 <li class="l100"><a href="{{route('user.registration','worker')}}" class="a100">Worker Registration</a></li>

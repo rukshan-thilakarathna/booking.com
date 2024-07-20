@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\User;
 
 
+use App\Models\Roles;
 use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\UserPasswordLayout;
 use App\Orchid\Layouts\User\UserRoleLayout;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Orchid\Access\Impersonation;
 use Orchid\Platform\Models\User;
@@ -141,7 +143,6 @@ class UserEditScreen extends Screen
      */
     public function save(User $user, Request $request)
     {
-
         $request->validate([
             'user.email' => [
                 'required',
@@ -164,6 +165,13 @@ class UserEditScreen extends Screen
             ->save();
 
         $user->replaceRoles($request->input('user.roles'));
+
+        $rol = Roles::where('id',$request->input('user.roles'))->first();
+
+        $user->url = Str::slug($user->name);
+        $user->role =$rol->slug;
+        $user->save();
+
 
         Toast::info(__('User saved.'));
 

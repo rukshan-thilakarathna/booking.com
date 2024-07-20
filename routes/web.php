@@ -9,6 +9,9 @@ use App\Http\Controllers\web\page\PointController;
 use App\Http\Controllers\web\page\PropertyTypeDetailController;
 use App\Http\Controllers\web\UserController;
 use App\Http\Controllers\web\WishListController;
+use App\Mail\smsMail;
+use App\Models\Booking;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Orchid\Platform\Http\Controllers\LoginController;
 
@@ -22,6 +25,7 @@ use Orchid\Platform\Http\Controllers\LoginController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 Route::get('/',[IndexController::class ,'index'])->name('web.page.index');
 Route::get('about-us', function () {return view('web.about-us');})->name('about-us');
