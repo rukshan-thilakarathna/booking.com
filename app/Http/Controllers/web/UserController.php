@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Models\PointStort;
 use App\Models\Roles;
 use App\Models\User;
 use App\Models\UserHasRoles;
@@ -53,6 +54,16 @@ class UserController extends Controller
         $createuserrole->user_id = $userId;
         $createuserrole->role_id = $roleId->id;
         $createuserrole->save();
+
+
+        $pointStrt = PointStort::create([
+            'user_id' => $createuserrole->id,
+            'point_count' => 0,
+            'wallet' => 0,
+            'locked_points' => 0,
+            'locked_wallet' => 0,
+            'pending_wallet' => 0,
+        ]);
 
 
 

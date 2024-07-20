@@ -32,46 +32,43 @@
                                 posuere augue. Proin fermentum mattis sem vel ultrices. Donec porta turpis non hendrerit porttitor.
                             </p>
                         </section>
-                        <section>
-                            <h2>Point Stort</h2>
-                            <div class="row">
-                                <table class="table">
-                                    <caption>You Can Buy Now</caption>
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Order Number</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">User Name</th>
-                                            <th scope="col">Point Count</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Discount</th>
-                                            <th scope="col">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($bypoints as $key => $bypoint)
-                                        <tr>
-                                            <th scope="row">{{$key+1}}</th>
-                                            <td>{{$bypoint->created_at}}</td>
-                                            <td>{{$bypoint->FromUser->name}}</td>
-                                            <td>Points {{$bypoint->point_count}}</td>
-                                            <td>LKR {{$bypoint->amount}}</td>
-                                            <td>LKR {{$bypoint->discount_amount}}</td>
-                                            <td><button style="
-                                                border: none;
-                                                cursor: pointer;
-                                                padding: 5px 8px;
-                                                background: #218b15;
-                                                color: white;
-                                                border-radius: 4px;
-                                            ">Buy Now</button></td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!--end row-->
-                        </section>
+                        @if(isset(Session::get('user')['id']))
+                            <section>
+                                <h2>Point Stort</h2>
+                                <div class="row">
+                                    <table class="table">
+                                        <caption>You Can Buy Now</caption>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Order Number</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">User Name</th>
+                                                <th scope="col">Point Count</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Discount</th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($bypoints as $key => $bypoint)
+                                            <tr>
+                                                <th scope="row">{{$key+1}}</th>
+                                                <td>{{$bypoint->created_at}}</td>
+                                                <td>{{$bypoint->FromUser->name}}</td>
+                                                <td>Points {{$bypoint->point_count}}</td>
+                                                <td>LKR {{$bypoint->amount}}</td>
+                                                <td>LKR {{$bypoint->discount_amount}}</td>
+                                                <td><button style="border: none;cursor: pointer;padding: 5px 8px;background: #218b15;color: white;border-radius: 4px;
+                                                ">Buy Now</button></td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!--end row-->
+                            </section>
+                        @endif
+
                     </div>
                     <!--end main-content-->
                 </div>
