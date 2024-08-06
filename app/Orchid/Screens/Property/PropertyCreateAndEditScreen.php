@@ -148,6 +148,7 @@ class PropertyCreateAndEditScreen extends Screen
                 'name' => $request->input('property.name'),
                 'main_location' => $request->input('property.main_location'),
                 'sub_location' => $request->input('property.sub_location'),
+                'ocation' => $request->input('property.map'),
                 'address' => $request->input('property.address'),
                 'type' => $request->input('property.type'),
                 'email' => $request->input('property.email'),
@@ -192,6 +193,7 @@ class PropertyCreateAndEditScreen extends Screen
             $property->main_location = $request->property['main_location'];
             $property->sub_location = $request->property['sub_location'];
             $property->address = $request->property['address'];
+            $property->location = $request->property['map'];
             $property->type = $request->property['type'];
             $property->email = $request->property['email'];
             $property->review_id = $request->property['review_id'] ?? 0;

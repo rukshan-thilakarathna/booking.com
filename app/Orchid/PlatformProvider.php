@@ -63,6 +63,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.profile'),
 
             Menu::make(__('WebSite'))
+                ->style(
+                    '    background: #b5b5b500;'
+                )
                 ->route('web.page.index'),
 
             Menu::make(__('Messages'))

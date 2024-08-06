@@ -8,7 +8,9 @@ use App\Models\Districts;
 use App\Models\Properties;
 use App\Models\PropertyType;
 use App\Models\Rooms;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ListController extends Controller
 {
@@ -79,13 +81,19 @@ class ListController extends Controller
         }
 
         $list = $list->paginate(10);
-
+        if (Auth::check()) {
+            $userupdateWishList = User::find(Auth::user()->id);
+            // Now you can safely use $userupdateWishList
+        } else {
+            $userupdateWishList = [];
+        }
 
         return view('web.list')->with([
             'list' => $list,
             'propertyTypes' => $allPropertyType,
             'UrlPropertyType' => $propertyType,
             'UrlPropertyFacility' => $PropertyFacility,
+            'userupdateWishList' => $userupdateWishList,
             'destinationList' => $destinationList,
             'UrlDestinationList' => $destination,
             'checkIn' => $request->input('checkIn'),

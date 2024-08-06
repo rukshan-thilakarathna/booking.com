@@ -40,6 +40,10 @@ class LocationCreateAndEditLayout extends Rows
             Input::make('property.address')
                 ->type('text')
                 ->title('Address'),
+
+            Input::make('property.map')
+                ->type('text')
+                ->title('Map Link'),
         ];
     }
 }

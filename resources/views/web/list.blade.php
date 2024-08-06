@@ -89,6 +89,7 @@
                                             <div class="gallery">
                                                 @php
                                                     $image_array = explode(',', $item->image);
+                                                    $wishlist_array = Auth::check() ? explode(',', $userupdateWishList->wishlist) : [];
                                                 @endphp
                                                 <img {{count($image_array)}} src="{{asset('Property/Images/'.$image_array[0])}}" alt="">
 
@@ -111,7 +112,7 @@
                                 <!--end image-->
                                 <div class="description">
                                     <div class="meta">
-                                        <span><i class="fa fa-star"></i>8.9</span>
+                                       <img id="id_{{$item->id}}" style="background: {{in_array($item->id,$wishlist_array) ? '#b01010' : '#161515ad'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $item->id) }}"  data-id="{{$item->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
                                     </div>
                                     <!--end meta-->
                                     <div class="info">
@@ -140,4 +141,5 @@
         <!--end container-->
     </div>
     <!--end page-content-->
+
 @endsection

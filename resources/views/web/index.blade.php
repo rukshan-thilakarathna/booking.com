@@ -23,7 +23,7 @@
                             <option class="op" style="text-align: left" value="{{$destination->id}}">{{$destination->name_en}}</option>
                         @endforeach
                     </select>
-                    <input id="Guest"  name="adult" required type="text" class="zin1" placeholder="Guest">
+                    <input id="Guest"  name="adult" required type="number" class="zin1" placeholder="Guest">
                 </div>
                 <button id="sbt" type="submit" class="bt1">Search</button>
                 </form>
@@ -36,7 +36,6 @@
     <section id="z2se2">
         <div class="w">
             <h1 class="z2h1">Destinations</h1>
-            <p class="z2p1" style="color: #767676">The top destinations around the world</p>
             @php
                 $class = [1,2,3,1,2,3];
             @endphp
@@ -79,16 +78,11 @@
 ">
                 @foreach($propertyTypes as $key => $PropertyType)
                     <div class="z3d1">
-                        <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Hotels.png')}}"
+                        <img class="z3i1" src="{{asset('web/img/property-type/'.$PropertyType->name.'.jpg')}}"
                              alt="Find-Your-Perfect-Accommodation-Hotels">
-                        <a href="list?ptpt%5B%5D={{$PropertyType->id}}"><h2 class="z3h2">{{$PropertyType->name}}</h2></a>
+                        <a  href="list?ptpt%5B%5D={{$PropertyType->id}}"><h2 style="color: black;font-weight: 600;margin-top: 0px;background: #cbcbcb;padding: 6px 0;"  class="z3h2">{{$PropertyType->name}}</h2></a>
                     </div>
                 @endforeach
-                    <div class="z3d1">
-                        <img class="z3i1" src="{{asset('web/img/Find-Your-Perfect-Accommodation/Hotels.png')}}"
-                             alt="Find-Your-Perfect-Accommodation-Hotels">
-                        <h2 class="z3h2">Hotels</h2>
-                    </div>
             </div>
         </div>
     </section>
@@ -146,8 +140,7 @@
                                 <div class="x1d3">
                                 </div>
                                 <div class="x1d4">
-                                    <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#91919100'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
-
+                                    <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#161515ad'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
                                 </div>
                             </div>
                             <div class="xid5">
@@ -194,7 +187,7 @@
                                         <div class="x1d3">
                                         </div>
                                         <div class="x1d4">
-                                            <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#91919100'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                                            <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#161515ad'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
                                         </div>
                                     </div>
                                     <div class="xid5">
@@ -209,6 +202,8 @@
             </div>
         </div>
     </section>
+
+
 @endsection
 
 

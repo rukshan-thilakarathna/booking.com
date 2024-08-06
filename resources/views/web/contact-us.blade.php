@@ -12,12 +12,11 @@
                 <div class="col-md-3">
                     <div class="sidebar">
                         <div class="box filter">
-                            <h2>About Us</h2>
+                            <h2>Contact Us</h2>
                             <ul class="links">
                                 <li ><a href="{{route('about-us')}}">About Us</a></li>
-                                <li><a href="become-an-affiliate.html">Destinations</a></li>
-                                <li><a href="terms-and-conditions.html">Accommodations</a></li>
-                                <li class="active"><a href="{{route('contact-us')}}">Contact Us</a></li>
+                                <li><a  href="{{route('web.page.list')}}" >Property List</a></li>
+                                <li class="active"> <a href="{{route('contact-us')}}">Contact Us</a></li>
                             </ul>
                         </div>
                         <!--end filter-->

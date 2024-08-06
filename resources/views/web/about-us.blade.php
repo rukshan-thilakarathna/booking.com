@@ -15,8 +15,7 @@
                             <h2>About Us</h2>
                             <ul class="links">
                                 <li class="active"><a href="{{route('about-us')}}">About Us</a></li>
-                                <li><a href="become-an-affiliate.html">Destinations</a></li>
-                                <li><a href="terms-and-conditions.html">Accommodations</a></li>
+                                <li><a  href="{{route('web.page.list')}}" >Property List</a></li>
                                 <li><a href="{{route('contact-us')}}">Contact Us</a></li>
                             </ul>
                         </div>
@@ -48,112 +47,7 @@
                                 posuere augue. Proin fermentum mattis sem vel ultrices. Donec porta turpis non hendrerit porttitor.
                             </p>
                         </section>
-                        <section>
-                            <h2>Our Team</h2>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="member">
-                                        <div class="image"><img src="assets/img/person-01.jpg" alt=""></div>
-                                        <div class="description">
-                                            <h3>Kate Brown</h3>
-                                            <h4>Company CEO</h4>
-                                            <div class="info">
-                                                <dl>
-                                                    <dt>Phone:</dt>
-                                                    <dd>(123) 456 789</dd>
-                                                    <dt>Mobile Phone:</dt>
-                                                    <dd>888 123 456 789</dd>
-                                                    <dt>Email:</dt>
-                                                    <dd><a href="mailto:kate.brown@example.com">kate.brown@example.com</a></dd>
-                                                    <dt>Skype:</dt>
-                                                    <dd>kate.brown</dd>
-                                                </dl>
-                                            </div>
-                                            <!--end info-->
-                                        </div>
-                                        <!--end description-->
-                                    </div>
-                                    <!--member-->
-                                </div>
-                                <!--col-md-6-->
-                                <div class="col-md-6">
-                                    <div class="member">
-                                        <div class="image"><img src="assets/img/person-02.jpg" alt=""></div>
-                                        <div class="description">
-                                            <h3>Jone Doe</h3>
-                                            <h4>PR Manager</h4>
-                                            <div class="info">
-                                                <dl>
-                                                    <dt>Phone:</dt>
-                                                    <dd>(123) 456 789</dd>
-                                                    <dt>Mobile Phone:</dt>
-                                                    <dd>888 123 456 789</dd>
-                                                    <dt>Email:</dt>
-                                                    <dd><a href="mailto:kate.brown@example.com">kate.brown@example.com</a></dd>
-                                                    <dt>Skype:</dt>
-                                                    <dd>kate.brown</dd>
-                                                </dl>
-                                            </div>
-                                            <!--end info-->
-                                        </div>
-                                        <!--end description-->
-                                    </div>
-                                    <!--member-->
-                                </div>
-                                <!--col-md-6-->
-                                <div class="col-md-6">
-                                    <div class="member">
-                                        <div class="image"><img src="assets/img/person-03.jpg" alt=""></div>
-                                        <div class="description">
-                                            <h3>Kate Brown</h3>
-                                            <h4>Marketing Guru</h4>
-                                            <div class="info">
-                                                <dl>
-                                                    <dt>Phone:</dt>
-                                                    <dd>(123) 456 789</dd>
-                                                    <dt>Mobile Phone:</dt>
-                                                    <dd>888 123 456 789</dd>
-                                                    <dt>Email:</dt>
-                                                    <dd><a href="mailto:kate.brown@example.com">kate.brown@example.com</a></dd>
-                                                    <dt>Skype:</dt>
-                                                    <dd>kate.brown</dd>
-                                                </dl>
-                                            </div>
-                                            <!--end info-->
-                                        </div>
-                                        <!--end description-->
-                                    </div>
-                                    <!--member-->
-                                </div>
-                                <!--col-md-6-->
-                                <div class="col-md-6">
-                                    <div class="member">
-                                        <div class="image"><img src="assets/img/person-04.jpg" alt=""></div>
-                                        <div class="description">
-                                            <h3>John Doe</h3>
-                                            <h4>Support Ninja</h4>
-                                            <div class="info">
-                                                <dl>
-                                                    <dt>Phone:</dt>
-                                                    <dd>(123) 456 789</dd>
-                                                    <dt>Mobile Phone:</dt>
-                                                    <dd>888 123 456 789</dd>
-                                                    <dt>Email:</dt>
-                                                    <dd><a href="mailto:kate.brown@example.com">kate.brown@example.com</a></dd>
-                                                    <dt>Skype:</dt>
-                                                    <dd>kate.brown</dd>
-                                                </dl>
-                                            </div>
-                                            <!--end info-->
-                                        </div>
-                                        <!--end description-->
-                                    </div>
-                                    <!--member-->
-                                </div>
-                                <!--col-md-6-->
-                            </div>
-                            <!--end row-->
-                        </section>
+
                     </div>
                     <!--end main-content-->
                 </div>

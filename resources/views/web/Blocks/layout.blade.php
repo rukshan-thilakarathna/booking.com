@@ -58,7 +58,7 @@
     .z2d1-1 {width: 25%;}
     .z2d1-2 {width: 30%;}
     .z2d1-3 {width: 40%;}
-    .z2h1 {font-size: 35px;font-weight: 400;margin-bottom: 15px;}
+    .z2h1 {font-size: 35px;font-weight: 400;margin-bottom: 65px;}
     #z2d3 {flex-direction: row-reverse;}
     .z2d4 {text-align: left;padding: 20px;position: absolute;bottom: 0;left: 0;}
     .z2h2 {color: white;}
@@ -66,7 +66,7 @@
     .z2d2::before {content: "";display: block;width: 100%;height: 100%;background:url({{asset('web/img/effect/top-destination-effect.png')}});border-radius: 10px;background-size: cover;background-position-y: 300px;}
 
     #z3se1 {text-align: center;margin-bottom: 50px;}
-    .z3h1 {font-size: 35px;font-weight: 400;margin-bottom: 50px;}
+    .z3h1 {font-size: 35px;font-weight: 400;margin-bottom: 90px;}
     .z3d1 {width: 30%;    margin-bottom: 25px;}
     .z3i1 {width: 100%;}
     .z3h2 {font-size: 20px;font-weight: 400;margin: 6px 0;}
@@ -201,7 +201,11 @@
     <div class="w fsb" id="footer1"   >
         <div class="d100">
             <a href="/"><img src="{{asset('web/img/icons/Logo.svg')}}" alt="" id="i100"></a>
-            <p class="p100" style="color: white">Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.</p>
+            <div>
+                <p class="p100" style="color: white">Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.</p>
+                <p class="p100" style="color: white">Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.Stay up to date with our latest news, receive exclusive deals and more.</p>
+
+            </div>
         </div>
         <div class="d101">
             <span class="s100">Links</span>
@@ -250,13 +254,10 @@
 <script type="text/javascript" src="{{asset('web/assets/js/custom.js')}}"></script>
 <script type="text/javascript" src="{{asset('web/assets/slider/slider.js')}}"></script>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<!--[if lte IE 9]>
+
 <script src="{{asset('web/assets/js/ie.js')}}"></script>
-<![endif]-->
+
 
 <script>
     var _latitude = 48.47292127;
@@ -278,7 +279,7 @@
                     if (this.responseText){
                         document.getElementById('id_'+dataInfo).style.background = '#b01010'
                     }else{
-                        document.getElementById('id_'+dataInfo).style.background = '#91919100'
+                        document.getElementById('id_'+dataInfo).style.background = '#161515ad'
                     }
                 }
             }

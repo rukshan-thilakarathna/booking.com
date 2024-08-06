@@ -3727,15 +3727,15 @@ ul.half li {
   border: none;
 }
 .sidebar ul.links li.active {
-  background-color: #488f3e;
+  background-color: #ACD24B;
   border-bottom: none;
   padding-left: 15px;
 }
 .sidebar ul.links li.active:before {
-  background-color: #488f3e;
+  background-color: #ACD24B;
 }
 .sidebar ul.links li.active:after {
-  border-color: transparent transparent transparent #488f3e;
+  border-color: transparent transparent transparent #ACD24B;
 }
 .sidebar ul.links li.active a {
   color: #fff;

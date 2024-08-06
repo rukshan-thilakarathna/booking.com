@@ -35,6 +35,8 @@ div#footer1 {
 }
 .d100 {
     width: 50%;
+    display: flex;
+    height: 100%;
 }
 span.s101 {
     display: block;

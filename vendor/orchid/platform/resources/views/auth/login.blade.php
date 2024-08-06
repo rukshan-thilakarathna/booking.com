@@ -17,9 +17,9 @@
         @includeWhen(!$isLockUser,'platform::auth.signin')
 
 
+<span class="text-muted" style="width: 80%;display: block;margin: 16px auto -1px;"> {{__("Don't have an Account?")}}  <a href="{{route('user.registration','user')}}" style="cursor: pointer ; font-weight: bold" class="small">
+            {{__("Sign Up Now")}}
+        </a></span>
 
-        <a href="{{route('user.registration','user')}}" class="small">
-            {{__("Don't have an Account?   Sign Up Now")}}
-        </a>
     </form>
 @endsection

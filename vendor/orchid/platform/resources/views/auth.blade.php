@@ -51,6 +51,8 @@
     <style>
         .rik_login{
             background:url({{asset('web/img/bg_login.jpg')}});
+            background-size: cover;
+
         }
     </style>
 </head>

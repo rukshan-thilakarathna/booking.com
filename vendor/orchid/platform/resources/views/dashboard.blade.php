@@ -1,7 +1,7 @@
 @extends(config('platform.workspace', 'platform::workspace.compact'))
 
 @section('aside')
-    <div class="aside col-xs-12 col-xxl-2 bg-dark d-flex flex-column me-auto" data-controller="menu">
+    <div style="background: @if(Auth::user()->role == 'root') #000000b5 @elseif(Auth::user()->role == 'worker') #480035 @elseif(Auth::user()->role == 'user') #12353a @elseif(Auth::user()->role == 'property-owner') #01282e @endif  !important;" class="aside col-xs-12 col-xxl-2 bg-dark d-flex flex-column me-auto" data-controller="menu">
         <header class="d-xl-block p-3 mt-xl-4 w-100 d-flex align-items-center">
             <a href="#" class="header-toggler d-xl-none me-auto order-first d-flex align-items-center lh-1"
                data-action="click->menu#toggle">
@@ -23,6 +23,8 @@
                     @includeWhen(Auth::check(), 'platform::partials.profile')
                 </div>
             </footer>
+
+            {{Auth::user()->role}}
 
             <ul class="nav flex-column mb-md-1 mb-auto ps-0">
                 {!! Dashboard::renderMenu(\Orchid\Platform\Dashboard::MENU_MAIN) !!}

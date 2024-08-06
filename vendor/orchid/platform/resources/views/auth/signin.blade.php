@@ -37,8 +37,10 @@
 {{--            <span class="form-check-label"> {{__('Remember Me')}}</span>--}}
 {{--        </label>--}}
     </div>
-    <div class="col-md-6 col-xs-12">
-        <button id="button-login" type="submit" class="btn btn-default btn-block" tabindex="3">
+    <div class="col-md-6 col-xs-12" style="width: 100%">
+        <button style="       background: #16BECB !important;
+    color: white !important;
+    font-weight: bold;" id="button-login" type="submit" class="btn btn-default btn-block" tabindex="3">
             <x-orchid-icon path="bs.box-arrow-in-right" class="small me-2"/>
             {{__('Login')}}
         </button>

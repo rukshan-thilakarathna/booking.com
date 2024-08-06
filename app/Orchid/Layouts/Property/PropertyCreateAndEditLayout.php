@@ -44,7 +44,7 @@ class PropertyCreateAndEditLayout extends Rows
 
             Input::make('image')
                 ->type('file')
-                ->title('Multiple files input example')
+                ->title('Multiple Images')
                 ->multiple(),
         ];
     }

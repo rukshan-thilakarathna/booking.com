@@ -3,8 +3,6 @@
 
 @section('content')
     <div id="page-content">
-
-
         <div class="container">
             @if (session('success'))
                 <div class="alert alert-success">
@@ -20,13 +18,16 @@
                 <li><a href="{{route('web.page.list')}}">Listing</a></li>
                 <li class="active">Detail</li>
             </ol>
+                @php
+                    $wishlist_array = Auth::check() ? explode(',', $userupdateWishList->wishlist) : [];
+                @endphp
             <!--end breadcrumb-->
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="main-content">
                         <div class="title">
                             <div class="left">
-                                <h1>{{$property->name}}<span class="rating"><i class="fa fa-star"></i>9.9</span></h1>
+                                <h1>{{$property->name}}<span class="rating"><img id="id_{{$property->id}}" style="background: {{in_array($property->id,$wishlist_array) ? '#b01010' : '#161515ad'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $property->id) }}"  data-id="{{$property->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1"></span></h1>
                                 <h3><a href="#">{{$property->district->name_en}}</a></h3>
                             </div>
                             <div class="right">
@@ -72,10 +73,14 @@
                                         @endforeach
                                     </ul>
                                 </section>
+                                @if($property->location != null)
                                 <section id="map">
                                     <h2>Map</h2>
-                                    <div id="map-item" class="map height-300 box"></div>
+                                    <div>
+                                        <iframe src="{{$property->location}}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
                                 </section>
+                                @endif
                             </div>
 
                             <!--end col-md-8-->
@@ -297,11 +302,11 @@
         var parentElement = document.getElementById(parentElementId);
         newAnchor.className = 'btn btn-primary btn-lg active';
         // Append the new anchor to the parent element
-       
+
         parentElement.appendChild(newAnchor);
     }
 
-    
+
 </script>
 
   <script>

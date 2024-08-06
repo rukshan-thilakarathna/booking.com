@@ -7,8 +7,10 @@ use App\Models\Availability;
 use App\Models\Properties;
 use App\Models\Reviews;
 use App\Models\RoomType;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DetailController extends Controller
 {
@@ -40,12 +42,18 @@ class DetailController extends Controller
         $roomTypes = RoomType::where('property_id', $id)->where('status', 1)->get();
 
         $review = Reviews::with('postedUser')->where('property_id', $id)->where('status', 1)->where('publish_date','<=', Carbon::now()->toDateTimeString())->get();
-
+        if (Auth::check()) {
+            $userupdateWishList = User::find(Auth::user()->id);
+            // Now you can safely use $userupdateWishList
+        } else {
+            $userupdateWishList = [];
+        }
 
         return view('web.detail')->with([
             'property' => $property,
             'CheckAvailability' => $availability,
             'AvailabileRooms' => $rooms ?? [],
+            'userupdateWishList' => $userupdateWishList,
             'error' =>$error ?? 0,
             'reviews' => $review,
             'UrlData' => [
