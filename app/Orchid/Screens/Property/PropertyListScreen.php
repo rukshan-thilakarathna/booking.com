@@ -11,6 +11,8 @@ use App\Orchid\Layouts\RoomType\RoomTypeEditLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeKitchenFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeRoomFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeViewFacilitiesLayout;
+use App\View\Components\ManageImage;
+use App\View\Components\RoomsCalendar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -114,6 +116,8 @@ class PropertyListScreen extends Screen
 
         return [
 
+
+
            PropertiesListLayout::class,
              Layout::modal('View Property',Layout::rows([
 
@@ -187,68 +191,56 @@ class PropertyListScreen extends Screen
             Layout::modal('Create Room Type',
                 [Layout::block(RoomTypeEditLayout::class)
                     ->title(__(' Information'))
-                    ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.')),
+                    ->vertical(),
 
 
                 Layout::block(RoomTypeRoomFacilitiesLayout::class)
                     ->title(__('Room Facilities'))
-                    ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.')),
+                    ->vertical(),
 
                 Layout::block(RoomTypeBathRoomFacilitiesLayout::class)
                     ->title(__('BathRoom Facilities'))
-                    ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.')),
+                    ->vertical(),
 
                 Layout::block(RoomTypeViewFacilitiesLayout::class)
                     ->title(__('View Facilities'))
-                    ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.')),
+                    ->vertical(),
 
                 Layout::block(RoomTypeKitchenFacilitiesLayout::class)
                     ->title(__('Kitchen Facilities'))
-                    ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.')),]
+                    ->vertical(),]
             )->size(Modal::SIZE_LG),
 
             Layout::modal('Create Full Property Room Type',
                 [Layout::block(RoomTypeEditLayout::class)
                     ->title(__(' Information'))
-                    ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.')),
+                    ->vertical(),
 
                     Layout::block(FullPropertyFacilitiesLayout::class)
                         ->title(__(' Full Property Facilities'))
-                        ->vertical()
-                        ->description(__('Update your account\'s profile information and email address.')),
+                        ->vertical(),
 
                     Layout::block(RoomTypeRoomFacilitiesLayout::class)
                         ->title(__('Room Facilities'))
-                        ->vertical()
-                        ->description(__('Update your account\'s profile information and email address.')),
+                        ->vertical(),
 
                     Layout::block(RoomTypeBathRoomFacilitiesLayout::class)
                         ->title(__('BathRoom Facilities'))
-                        ->vertical()
-                        ->description(__('Update your account\'s profile information and email address.')),
+                        ->vertical(),
 
                     Layout::block(RoomTypeViewFacilitiesLayout::class)
                         ->title(__('View Facilities'))
-                        ->vertical()
-                        ->description(__('Update your account\'s profile information and email address.')),
+                        ->vertical(),
 
                     Layout::block(RoomTypeKitchenFacilitiesLayout::class)
                         ->title(__('Kitchen Facilities'))
-                        ->vertical()
-                        ->description(__('Update your account\'s profile information and email address.')),]
+                        ->vertical(),]
             )->size(Modal::SIZE_LG),
 
             Layout::modal('Create Room',
                 [Layout::block(RoomCreateAndUpdateLayout::class)
                     ->title(__(' Information'))
-                    ->vertical()
-                    ->description(__('Update your account\'s profile information and email address.'))]
+                    ->vertical()]
             )->size(Modal::SIZE_LG),
         ];
     }

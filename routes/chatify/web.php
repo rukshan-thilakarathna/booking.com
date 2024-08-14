@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', 'MessagesController@index')->name(config('chatify.routes.prefix'));
 
+//Route::get('/', function () {
+//    return redirect('/dashboard/main');
+//})->name('chatify.routes.prefix');
+
 /**
  *  Fetch info for specific id [user/group]
  */

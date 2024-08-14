@@ -90,28 +90,22 @@ class PropertyCreateAndEditScreen extends Screen
 
             \Orchid\Support\Facades\Layout::block(PropertyAddUserLayout::class)
                 ->title(__('Property Owner Information'))
-                ->canSee($user->hasAnyAccess(['property.admin_create.permissions']))
-                ->description(__('Update your account\'s profile information and email address.')),
+                ->canSee($user->hasAnyAccess(['property.admin_create.permissions'])),
 
             \Orchid\Support\Facades\Layout::block(PropertyCreateAndEditLayout::class)
-            ->title(__('Property Information'))
-            ->description(__('Update your account\'s profile information and email address.')),
+            ->title(__('Property Information')),
 
             \Orchid\Support\Facades\Layout::block(ContactCreateAndEditLayout::class)
-                ->title(__('Contact Information'))
-                ->description(__('Update your account\'s profile information and email address.')),
+                ->title(__('Contact Information')),
 
             \Orchid\Support\Facades\Layout::block(LocationCreateAndEditLayout::class)
-                ->title(__('Location Information'))
-                ->description(__('Update your account\'s profile information and email address.')),
+                ->title(__('Location Information')),
 
             \Orchid\Support\Facades\Layout::block(PropertyFacilitiesLayout::class)
-                ->title(__('Property Facilities'))
-                ->description(__('Update your account\'s profile information and email address.')),
+                ->title(__('Property Facilities')),
 
             \Orchid\Support\Facades\Layout::block(SocialMediaCreateAndEditLayout::class)
-                ->title(__('Social Media Information'))
-                ->description(__('Update your account\'s profile information and email address.')),
+                ->title(__('Social Media Information')),
         ];
     }
 

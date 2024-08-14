@@ -30,7 +30,12 @@
                 <a href="{{route('contact-us')}}" class="a2">Contact Us</a>
             </nav>
             <img id="menu" src="{{asset('web/img/icons/menu.png')}}" alt="Logo">
-            <a class="bt1" href="{{route('web.dashboard')}}">List your property</a>
+            @if(isset(Session::get('user')['role']) && Session::get('user')['role'] == 'property-owner')
+                <a class="bt1" href="{{route('web.dashboard')}}">List your property</a>
+            @else
+                <a class="bt1" href="{{route('web.page.list')}}">Book Now property</a>
+            @endif
+
 
         </div>
     </div>

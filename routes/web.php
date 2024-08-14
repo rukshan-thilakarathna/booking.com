@@ -40,6 +40,8 @@ Route::get('Booking-confourm/{id}/{chackIn}/{chackOut}/{adults}/{children}',[Boo
 Route::post('/get-points' ,[PointController::class ,'buy'])->name('get-point');
 
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
+Route::get('/forgot-password', [UserController::class ,'forgotPassword'])->name('user.forgot.password');
+Route::post('/forgot-password', [UserController::class ,'forgotPasswordSend'])->name('user.forgot.password.post');
 Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name('user.store');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -54,4 +56,7 @@ Route::get('/web/login', function () {
 Route::get('/web/dashboard', function () {
     return redirect('/dashboard/main');
 })->name('web.dashboard');
+
+
+Route::get('deleteImage/{image}', [IndexController::class, 'deleteImage'])->name('DeleteImage');
 

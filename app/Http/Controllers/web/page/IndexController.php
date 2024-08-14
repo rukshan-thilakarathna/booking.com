@@ -8,6 +8,7 @@ use App\Models\Districts;
 use App\Models\Properties;
 use App\Models\PropertyType;
 use App\Models\User;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
@@ -48,6 +49,11 @@ class IndexController extends Controller
             'destinations' => $destinations,
             'uniquePropertyCount' =>$uniquePropertyCount
         ]);
+    }
+
+    public function deleteImage(Request $request)
+    {
+
     }
 }
 

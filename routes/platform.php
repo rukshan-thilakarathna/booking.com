@@ -11,6 +11,7 @@ use App\Orchid\Screens\Point\AmountDueListScreen;
 use App\Orchid\Screens\Point\DonationsListScreen;
 use App\Orchid\Screens\Point\PointListScreen;
 use App\Orchid\Screens\Point\SellListScreen;
+use App\Orchid\Screens\Property\ImagesListScreen;
 use App\Orchid\Screens\Property\PropertyCreateAndEditScreen;
 use App\Orchid\Screens\Property\PropertyListScreen;
 use App\Orchid\Screens\Reports\ReportScreen;
@@ -29,6 +30,7 @@ use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\User\UserVerificationScreen;
+use App\Orchid\Screens\WishList\WishListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -238,6 +240,14 @@ Route::screen('reports',ReportScreen::class)
 //Calendar///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::screen('calendar/{id}',RoomsCalendarListScreen::class)
     ->name('calendar');
+
+//Calendar///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::screen('manage-image/{id}',ImagesListScreen::class)
+    ->name('manage-image');
+
+//Calendar///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::screen('wish-list',WishListScreen::class)
+    ->name('wish-list');
 
 
 
