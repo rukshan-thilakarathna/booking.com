@@ -30,7 +30,6 @@ class IndexController extends Controller
         $promotinalPropertyPromotionBar01 = Properties::where('promotion_bar_01',1)->with('propertyType','district','city')->get();
         $promotinalPropertyPromotionBar02 = Properties::where('promotion_bar_02',1)->with('propertyType','district','city')->get();
 
-
         if (Auth::check()) {
             $userupdateWishList = User::find(Auth::user()->id);
             // Now you can safely use $userupdateWishList
@@ -53,7 +52,7 @@ class IndexController extends Controller
 
     public function deleteImage(Request $request)
     {
-
+        return 'ryjsgab';
     }
 }
 
