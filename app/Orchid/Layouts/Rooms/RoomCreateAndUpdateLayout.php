@@ -75,10 +75,6 @@ class RoomCreateAndUpdateLayout extends Rows
                 ->value('0')
                 ->checked(false)
                 ->placeholder('Open Point'),
-
-            Input::make('room.images')
-                ->type('file')
-                ->title('One Image input '),
         ];
     }
 }

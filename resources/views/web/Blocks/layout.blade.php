@@ -272,14 +272,17 @@
         element.addEventListener('click', function() {
             var dataInfo = this.getAttribute('data-id');
             var url = this.getAttribute('data-url');
+            var baseUrl = @json(config('app.url'));
 
             var xmlhttp=new XMLHttpRequest();
             xmlhttp.onreadystatechange=function() {
                 if (this.readyState==4 && this.status==200) {
                     if (this.responseText){
-                        document.getElementById('id_'+dataInfo).style.background = '#b01010'
+                        // document.getElementById('id_'+dataInfo).style.background = '#b01010'
+                        document.getElementById('id_' + dataInfo).src = baseUrl+'/web/heart.png';
                     }else{
-                        document.getElementById('id_'+dataInfo).style.background = '#161515ad'
+                        // document.getElementById('id_'+dataInfo).style.background = '#161515ad'
+                        document.getElementById('id_' + dataInfo).src = baseUrl+'/web/heart2.png';
                     }
                 }
             }

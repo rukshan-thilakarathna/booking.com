@@ -46,11 +46,7 @@ class RoomTypeEditLayout extends Rows
             Input::make('roomtype.id')
                 ->type('hidden'),
 
-            Input::make('images')
-                ->required()
-                ->type('file')
-                ->title('Multiple files input example')
-                ->multiple(),
+
 
             TextArea::make('roomtype.disription')
                 ->title(' Description')

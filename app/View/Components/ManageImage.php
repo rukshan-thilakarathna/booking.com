@@ -13,7 +13,8 @@ class ManageImage extends Component
      */
     public function __construct(
         public $ImageArray,
-        public $propertyId
+        public $propertyId,
+        public $path
     )
     {
         //

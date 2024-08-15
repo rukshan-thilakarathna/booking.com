@@ -2,10 +2,10 @@
     @foreach($ImageArray as $key => $image)
         @if($image != null)
             <div id="div{{$key+1}}" style="height: 200px;margin: 15px;position: relative">
-                <button style="background: black;color: white;text-decoration: none;position: absolute;top: 0;right: 0;" data-controller="button" data-turbo="true" class="btn btn-link" type="submit" form="post-form" formaction="{{ config('app.url') }}/dashboard/properties/deleteimage?image={{ $image }}&id={{ $propertyId }}">
+                <button style="background: black;color: white;text-decoration: none;position: absolute;top: 0;right: 0;" data-controller="button" data-turbo="true" class="btn btn-link" type="submit" form="post-form" formaction="{{ config('app.url') }}/dashboard/properties/deleteimage?image={{ $image }}&id={{ $propertyId }}&path={{ $path }}">
                     <span>X</span>
                 </button>
-                <img style="width: 100%;height: 100%" src="{{ asset('Property/Images/'.$image) }}" alt="">
+                <img style="width: 100%;height: 100%" src="{{ asset('Property/'.$path.'/'.$image) }}" alt="">
             </div>
         @endif
     @endforeach

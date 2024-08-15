@@ -140,7 +140,7 @@
                                 <div class="x1d3">
                                 </div>
                                 <div class="x1d4">
-                                    <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#161515ad'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                                    <img id="id_{{$PromotionCard->id}}" style="border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{in_array($PromotionCard->id,$wishlist_array) ? asset('web/heart.png') : asset('web/heart2.png')}}" alt="hart" class="x1i1">
                                 </div>
                             </div>
                             <div class="xid5">
@@ -187,7 +187,7 @@
                                         <div class="x1d3">
                                         </div>
                                         <div class="x1d4">
-                                            <img id="id_{{$PromotionCard->id}}" style="background: {{in_array($PromotionCard->id,$wishlist_array) ? '#b01010' : '#161515ad'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                                        <img id="id_{{$PromotionCard->id}}" style="border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{in_array($PromotionCard->id,$wishlist_array) ? asset('web/heart.png') : asset('web/heart2.png')}}" alt="hart" class="x1i1">
                                         </div>
                                     </div>
                                     <div class="xid5">

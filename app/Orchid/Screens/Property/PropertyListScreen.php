@@ -2,6 +2,7 @@
 namespace App\Orchid\Screens\Property;
 
 use App\Models\Properties;
+use App\Models\Rooms;
 use App\Models\RoomType;
 use App\Orchid\Layouts\Property\PropertiesListLayout;
 use App\Orchid\Layouts\Rooms\RoomCreateAndUpdateLayout;
@@ -413,10 +414,19 @@ class PropertyListScreen extends Screen
     public function deleteimage(Request $request)
     {
         $image = $request->get('image');
-        $property = Properties::findOrFail($request->get('id')); // Find the property by ID
+        $path = $request->get('path');
 
-        // Trim any trailing commas from the string
-        $imageString = rtrim($property->image, ',');
+        if ($path == 'Images') {
+            $data = Properties::findOrFail($request->get('id'));
+            $imageString = rtrim($data->image, ',');
+        }elseif ($path == 'Rooms') {
+            $data = Rooms::findOrFail($request->get('id'));
+            $imageString = rtrim($data->image, ',');
+        }elseif ($path == 'RoomType') {
+            $data = RoomType::findOrFail($request->get('id'));
+            $imageString = rtrim($data->images, ',');
+        }
+
 
         // Convert the string to an array
         $imageArray = explode(',', $imageString);
@@ -433,8 +443,14 @@ class PropertyListScreen extends Screen
 
         $filteredImages = $imagesString = implode(',', array_values($filteredImages)); ;
 
-        $property->image = $filteredImages;
-        $property->save();
+        if ($path == 'Images') {
+            $data->image = $filteredImages;
+        }elseif ($path == 'Rooms') {
+            $data->image = $filteredImages;
+        }elseif ($path == 'RoomType') {
+            $data->images = $filteredImages;
+        }
+        $data->save();
 
         Toast::info(__('Image deleted'));
     }

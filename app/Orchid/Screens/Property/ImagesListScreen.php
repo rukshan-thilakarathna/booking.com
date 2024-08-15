@@ -3,6 +3,8 @@
 namespace App\Orchid\Screens\Property;
 
 use App\Models\Properties;
+use App\Models\Rooms;
+use App\Models\RoomType;
 use App\View\Components\ManageImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,17 +18,37 @@ use function Symfony\Component\Translation\t;
 class ImagesListScreen extends Screen
 {
     public $properties;
+    public $dbname;
+    public $data;
     /**
      * Fetch data to be displayed on the screen.
      *
      * @return array
      */
-    public function query(Properties $id): iterable
+    public function query($id , $dbname = 'Properties'): iterable
     {
+        $this->dbname = $dbname;
+        $path ="";
+        if ($dbname == 'Properties') {
+            $id = Properties::find($id);
+            $imageString = rtrim($id->image, ',');
+            $path = 'Images';
+
+        }elseif ($dbname == 'Rooms') {
+            $id = Rooms::find($id);
+            $imageString = rtrim($id->image, ',');
+            $path = 'Rooms';
+        }elseif ($dbname == 'RoomType') {
+            $id = RoomType::find($id);
+            $imageString = rtrim($id->images, ',');
+            $path = 'RoomType';
+        }
 
 
-        // Remove any trailing comma
-        $imageString = rtrim($id->image, ',');
+        $this->data = $id;
+
+        // Remove any trailing commaProperties
+
 
         // Convert the string to an array
         $imageArray = explode(',', $imageString);
@@ -36,7 +58,8 @@ class ImagesListScreen extends Screen
 
         return [
             'ImageArray' => $imageArray,
-            'propertyId' => $id->id
+            'propertyId' => $id->id,
+            'path' => $path
         ];
     }
 
@@ -47,7 +70,7 @@ class ImagesListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Images';
+        return $this->dbname.' Images';
     }
 
     /**
@@ -62,6 +85,7 @@ class ImagesListScreen extends Screen
                 ->modal('upload')
                 ->method('upload', [
                     'id' => $this->properties,
+                    'name' => $this->dbname,
                 ]),
         ];
     }
@@ -86,19 +110,55 @@ class ImagesListScreen extends Screen
         ];
     }
 
+
+
     public function upload(Request $request)
     {
 
+
             if($request->hasfile('image')) {
-                $image = $this->store($request);
+                $image = $this->store($request,$request->get('name'));
             }
 
 
+        if ($request->get('name') == 'Properties') {
             $propertyq = Properties::find($request->get('id'));
+            if ($propertyq->image == null || $propertyq->image == '') {
+                $propertyData = [
+                    'image' => $image,
+                ];
+            }else{
+                $propertyData = [
+                    'image' => $propertyq->image.','.$image,
+                ];
+            }
 
-            $propertyData = [
-                'image' => $propertyq->image.','.$image,
-            ];
+        }elseif ($request->get('name') == 'Rooms') {
+            $propertyq = Rooms::find($request->get('id'));
+            if ($propertyq->image == null || $propertyq->image == '') {
+                $propertyData = [
+                    'image' => $image,
+                ];
+            }else{
+                $propertyData = [
+                    'image' => $propertyq->image.','.$image,
+                ];
+            }
+
+
+        }elseif ($request->get('name') == 'RoomType') {
+            $propertyq = RoomType::find($request->get('id'));
+            if ($propertyq->images == null || $propertyq->images == '') {
+                $propertyData = [
+                    'images' => $image,
+                ];
+            }else{
+                $propertyData = [
+                    'images' => $propertyq->images.','.$image,
+                ];
+            }
+
+        }
 
             $propertyq->update($propertyData);
 
@@ -106,7 +166,7 @@ class ImagesListScreen extends Screen
 
     }
 
-    public function store(Request $request)
+    public function store(Request $request ,$path)
     {
         $request->validate([
             'images.*' => 'mimes:jpg,jpeg,png,bmp|max:20000'
@@ -114,12 +174,12 @@ class ImagesListScreen extends Screen
 
         if($request->hasfile('image'))
         {
-
             $gb_image_name = '';
             foreach($request->file('image') as $file)
             {
+                $path = $path=='Properties'?'Images':$path;
                 $name =time() . random_int(1, 100) . '.' . $file->extension();
-                $file->move(public_path('Property/Images'), $name);
+                $file->move(public_path('Property/'.$path), $name);
                 $gb_image_name .= $name . ',';
             }
         }

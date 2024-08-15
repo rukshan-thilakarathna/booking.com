@@ -68,6 +68,9 @@ class RoomsListLayout extends Table
                         Link::make(__('View'))
                             ->route('room-view', $room->id),
 
+                        Link::make(__('Manage Image'))
+                            ->route('manage-image', [$room->id,'Rooms']),
+
                         Button::make(__('Delete'))
                             ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                             ->method('remove', [

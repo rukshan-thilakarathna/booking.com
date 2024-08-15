@@ -243,10 +243,8 @@ Route::screen('calendar/{id}',RoomsCalendarListScreen::class)
     ->name('calendar');
 
 //Calendar///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-Route::screen('manage-image/{id}',ImagesListScreen::class)
+Route::screen('manage-image/{id}/{dbname?}',ImagesListScreen::class)
     ->name('manage-image');
-
-Route::get('/delete/{image}', [IndexController::class, 'delete'])->name('DeleteImage');
 
 //Calendar///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::screen('wish-list',WishListScreen::class)

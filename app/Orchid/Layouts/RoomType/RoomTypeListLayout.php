@@ -77,6 +77,9 @@ class RoomTypeListLayout extends Table
                                 'status' => $roomType->status,
                             ]),
 
+                        Link::make(__('Manage Image'))
+                            ->route('manage-image', [$roomType->id,'RoomType']),
+
                         ModalToggle::make('Create Room')
                             ->modal('Create Room')
                             ->method('CreateRoom', [

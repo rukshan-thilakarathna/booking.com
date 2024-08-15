@@ -58,5 +58,5 @@ Route::get('/web/dashboard', function () {
 })->name('web.dashboard');
 
 
-Route::get('deleteImage/{image}', [IndexController::class, 'deleteImage'])->name('DeleteImage');
+Route::get('deleteImage/{image}/{dbname?}', [IndexController::class, 'deleteImage'])->name('DeleteImage');
 

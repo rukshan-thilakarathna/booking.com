@@ -112,7 +112,7 @@
                                 <!--end image-->
                                 <div class="description">
                                     <div class="meta">
-                                       <img id="id_{{$item->id}}" style="background: {{in_array($item->id,$wishlist_array) ? '#b01010' : '#161515ad'}} ;border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $item->id) }}"  data-id="{{$item->id}}" src="{{asset('web/img/icons/Vector.svg')}}" alt="hart" class="x1i1">
+                                       <img id="id_{{$item->id}}" style="border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $item->id) }}"  data-id="{{$item->id}}" src="{{in_array($item->id,$wishlist_array) ? asset('web/heart.png') : asset('web/heart2.png')}}" alt="hart" class="x1i1">
                                     </div>
                                     <!--end meta-->
                                     <div class="info">
