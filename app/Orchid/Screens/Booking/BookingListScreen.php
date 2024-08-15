@@ -41,9 +41,10 @@ class BookingListScreen extends Screen
         $user = \App\Models\User::find((Auth::user())->id);
         $bookings = Booking::with('properties','roomType','Room');
 
-        if ($user->role == 'user'){
+        if ($user->role == 'user' || $user->role == 'property-owner'){
             $bookings = $bookings->where('user_id',$user->id);
         }
+
         $bookings = $bookings->filters()->orderBy('id', 'desc')->paginate(12);
 
         return [

@@ -192,6 +192,20 @@ class UserListScreen extends Screen
 
         $users->update($userData);
 
+        $ispoined = PointStort::where('user_id',$request->get('id'))->count();
+
+
+        if($users->role == "property-owner" && ispoined == 0){
+            $point = new PointStort();
+
+            $point->user_id = $users->id;
+            $point->point_count = 100;
+
+            $point->save();
+        }
+
+        
+
         Toast::info(__(config('constants.PropertyOwnerVerificationStatus')[$request->get('status')]));
     }
 }

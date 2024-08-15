@@ -179,9 +179,19 @@ class UserProfileScreen extends Screen
 
         ]);
 
-        $request->user()
-            ->fill($request->get('user'))
-            ->save();
+        $profile_image = $request->file('user.profile_image');
+        $profile_image_db = $this->storeImage($profile_image,'ProfileImage');
+
+        $user = $request->user();
+        $userData = $request->get('user');
+    
+        // Include the profile image path in the user data if available
+        if ($profile_image_db) {
+            $userData['profile_image'] = $profile_image_db;
+        }
+    
+        // Fill and save the user data
+        $user->fill($userData)->save();
 
         Toast::info(__('Profile updated.'));
     }
@@ -205,4 +215,26 @@ class UserProfileScreen extends Screen
 
         Toast::info(__('Password changed.'));
     }
+
+    private function storeImage($image,$place)
+    {
+        $imageName = time() . random_int(1, 100) . '.' . $image->extension();
+
+        switch ($place) {
+            case 'ProfileImage':
+                $image->move(public_path('User/ProfileImage'), $imageName);
+                break;
+            case 'BusinessRegistrationDocument':
+                $image->move(public_path('User/BusinessRegistrationDocument'), $imageName);
+                break;
+            case 'NIC':
+                $image->move(public_path('User/NIC'), $imageName);
+                break;
+        }
+
+
+        return $imageName;
+
+    }
+
 }

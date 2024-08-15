@@ -118,7 +118,6 @@ class UserVerificationScreen extends Screen
         $users = \App\Models\User::find($request->input('user.id'));
 
         $rules = [
-            'user.profile_image' => 'required|image',
             'user.nic_or_passport_front_image' => 'required|image',
             'user.nic_or_passport_back_image' => 'required|image',
         ];
@@ -165,12 +164,7 @@ class UserVerificationScreen extends Screen
 
         $users->update($userData);
 
-        $point = new PointStort();
-
-        $point->user_id = $users->id;
-        $point->point_count = 100;
-
-        $point->save();
+       
 
 
         Toast::info(__('Verify request sended. And sended point 100. '));

@@ -33,6 +33,10 @@ class UserEditLayout extends Rows
                 ->required()
                 ->title(__('Email'))
                 ->placeholder(__('Email')),
+
+            Input::make('user.profile_image')
+                ->type('file')
+                ->title('Profile Image'),
         ];
     }
 }
