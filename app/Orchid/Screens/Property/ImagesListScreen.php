@@ -4,10 +4,18 @@ namespace App\Orchid\Screens\Property;
 
 use App\Models\Properties;
 use App\View\Components\ManageImage;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Orchid\Screen\Actions\ModalToggle;
+use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
+use function Symfony\Component\Translation\t;
 
 class ImagesListScreen extends Screen
 {
+    public $properties;
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -15,8 +23,7 @@ class ImagesListScreen extends Screen
      */
     public function query(Properties $id): iterable
     {
-        // Assuming $id contains the string of filenames
-        $imageString = "171921273323.jpg,171921273363.jpg,171921273374.jpg,171921273375.jpg,171921273357.jpg,";
+
 
         // Remove any trailing comma
         $imageString = rtrim($id->image, ',');
@@ -24,10 +31,12 @@ class ImagesListScreen extends Screen
         // Convert the string to an array
         $imageArray = explode(',', $imageString);
 
+        $this->properties = $id->id;
 
 
         return [
-            'ImageArray' => $imageArray
+            'ImageArray' => $imageArray,
+            'propertyId' => $id->id
         ];
     }
 
@@ -48,7 +57,13 @@ class ImagesListScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            ModalToggle::make('Upload more images')
+                ->modal('upload')
+                ->method('upload', [
+                    'id' => $this->properties,
+                ]),
+        ];
     }
 
     /**
@@ -60,6 +75,71 @@ class ImagesListScreen extends Screen
     {
         return [
             \Orchid\Support\Facades\Layout::component(ManageImage::class),
+            Layout::modal('upload',Layout::rows([
+
+                Input::make('image')
+                    ->type('file')
+                    ->title('Multiple Images')
+                    ->multiple(),
+
+            ]))->applyButton('Upload'),
         ];
     }
+
+    public function upload(Request $request)
+    {
+
+            if($request->hasfile('image')) {
+                $image = $this->store($request);
+            }
+
+
+            $propertyq = Properties::find($request->get('id'));
+
+            $propertyData = [
+                'image' => $propertyq->image.','.$image,
+            ];
+
+            $propertyq->update($propertyData);
+
+        Toast::info(__('Images have been uploaded.'));
+
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'images.*' => 'mimes:jpg,jpeg,png,bmp|max:20000'
+        ]);
+
+        if($request->hasfile('image'))
+        {
+
+            $gb_image_name = '';
+            foreach($request->file('image') as $file)
+            {
+                $name =time() . random_int(1, 100) . '.' . $file->extension();
+                $file->move(public_path('Property/Images'), $name);
+                $gb_image_name .= $name . ',';
+            }
+        }
+
+        return rtrim($gb_image_name, ',');
+    }
+//
+//172370251576.jpg,
+//172370251517.jpg,
+//172370251592.jpg,
+//172370268381.jpg,
+//172370268344.jpg,
+//172370268366.jpg,
+//172370270911.jpg,
+//172370270947.jpg,
+//172370270983.jpg,
+//172370270989.jpg,
+//172370281746.jpg,
+//172370281747.jpg,
+//172370281719.jpg,
+//172370281740.jpg,
+//172370281738.jpg,
 }

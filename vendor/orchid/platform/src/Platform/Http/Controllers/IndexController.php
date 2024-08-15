@@ -21,8 +21,10 @@ class IndexController extends Controller
     /**
      * @return Factory|View
      */
-//    public function fallback()
-//    {
-//        return view('platform::errors.404');
-//    }
+    public function delete()
+    {
+        // Logic to delete the image from storage
+
+        return response()->json(['success' => true]);
+    }
 }

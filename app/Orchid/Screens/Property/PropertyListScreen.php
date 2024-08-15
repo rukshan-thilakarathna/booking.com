@@ -410,5 +410,34 @@ class PropertyListScreen extends Screen
         return $gb_image_name;
     }
 
+    public function deleteimage(Request $request)
+    {
+        $image = $request->get('image');
+        $property = Properties::findOrFail($request->get('id')); // Find the property by ID
+
+        // Trim any trailing commas from the string
+        $imageString = rtrim($property->image, ',');
+
+        // Convert the string to an array
+        $imageArray = explode(',', $imageString);
+
+        // Filter out the image that needs to be removed
+        $filteredImages = array_filter($imageArray, function($imageArray) use ($image) {
+            return $imageArray !== $image;
+        });
+
+        // Optional: Re-index the array
+        $filteredImages = array_values($filteredImages);
+
+
+
+        $filteredImages = $imagesString = implode(',', array_values($filteredImages)); ;
+
+        $property->image = $filteredImages;
+        $property->save();
+
+        Toast::info(__('Image deleted'));
+    }
+
 
 }

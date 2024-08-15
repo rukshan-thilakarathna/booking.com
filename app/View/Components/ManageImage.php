@@ -12,7 +12,8 @@ class ManageImage extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public $ImageArray
+        public $ImageArray,
+        public $propertyId
     )
     {
         //

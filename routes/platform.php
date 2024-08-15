@@ -32,6 +32,7 @@ use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\User\UserVerificationScreen;
 use App\Orchid\Screens\WishList\WishListScreen;
 use Illuminate\Support\Facades\Route;
+use Orchid\Platform\Http\Controllers\IndexController;
 use Tabuna\Breadcrumbs\Trail;
 
 /*
@@ -244,6 +245,8 @@ Route::screen('calendar/{id}',RoomsCalendarListScreen::class)
 //Calendar///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::screen('manage-image/{id}',ImagesListScreen::class)
     ->name('manage-image');
+
+Route::get('/delete/{image}', [IndexController::class, 'delete'])->name('DeleteImage');
 
 //Calendar///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::screen('wish-list',WishListScreen::class)

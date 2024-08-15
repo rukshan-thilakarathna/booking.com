@@ -50,10 +50,8 @@ class IndexController extends Controller
         ]);
     }
 
-    public function deleteImage(Request $request)
-    {
-        return 'ryjsgab';
-    }
+
+
 }
 
 
