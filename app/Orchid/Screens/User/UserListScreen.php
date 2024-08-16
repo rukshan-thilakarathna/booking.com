@@ -118,6 +118,10 @@ class UserListScreen extends Screen
                     ->type('text')
                     ->title(__('Url')),
 
+                Link::make(__('NIC Card Front Image '))
+                    ->icon('bs.plus-circle')
+                    ->route('platform.systems.users.create'),
+
                 Input::make('user.service')
                     ->type('text')
                     ->title(__('Service')),

@@ -22,11 +22,6 @@ class LegalDocument01Layout extends Rows
             Input::make('user.id')
                 ->type('hidden'),
 
-            Input::make('user.profile_image')
-                ->required()
-                ->type('file')
-                ->title('Profile Image'),
-
             Input::make('user.nic_or_passport_front_image')
                 ->type('file')
                 ->required()

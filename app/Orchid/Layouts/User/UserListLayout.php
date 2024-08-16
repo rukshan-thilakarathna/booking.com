@@ -90,16 +90,20 @@ class UserListLayout extends Table
                 }),
 
 
-            TD::make('created_at', __('Created'))
+           
+                TD::make('created_at', __('Created'))
                 ->usingComponent(DateTimeSplit::class)
                 ->align(TD::ALIGN_RIGHT)
                 ->defaultHidden()
                 ->sort(),
 
-            TD::make('updated_at', __('Last edit'))
+            
+                TD::make('updated_at', __('Last edit'))
                 ->usingComponent(DateTimeSplit::class)
                 ->align(TD::ALIGN_RIGHT)
                 ->sort(),
+
+
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
