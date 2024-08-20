@@ -11,7 +11,7 @@ p {font-size: 15px;padding: 10px;line-height: 1.5;letter-spacing: 0.5px;}
 .i1 {width: 20px;margin-right: 7px;}
 .i2 {width: 100px;}
 .n {display: flex;align-items: center;}
-.a2 {margin: 0 15px;text-decoration: none;color: #000000;}
+.a2 {margin: 0 15px;text-decoration: none;color: #000000;    position: relative;}
 .bt1 {border: none;padding: 14px 32px;background: #ACD24B;color: white;border-radius: 30px;font-size: 15px;}
 #menu{
     width: 35px;
@@ -28,7 +28,7 @@ p {font-size: 15px;padding: 10px;line-height: 1.5;letter-spacing: 0.5px;}
 .a100 {text-decoration: none;color: white;}
 .d101 {width: 13%;}
 #page-content {
-    padding: 170px 0 0 0;
+    padding: 145px 0 0 0;
 }
 div#footer1 {
     align-items: start;

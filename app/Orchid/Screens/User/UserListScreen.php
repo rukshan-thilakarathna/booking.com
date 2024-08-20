@@ -208,7 +208,7 @@ class UserListScreen extends Screen
             $point->save();
         }
 
-        
+
 
         Toast::info(__(config('constants.PropertyOwnerVerificationStatus')[$request->get('status')]));
     }

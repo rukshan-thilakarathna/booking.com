@@ -1,6 +1,19 @@
 @extends('web.Blocks.layout')
 
 @section('content')
+    <style>
+        #_3:before{
+            content: '';
+            position: absolute;
+            width: 120%;
+            bottom: 0;
+            height: 4px;
+            left: 0;
+            background: var(--cyan);
+            z-index: 1;
+            margin-left: -4px;
+        }
+    </style>
     <div id="page-content">
         <div class="container">
             <ol class="breadcrumb">

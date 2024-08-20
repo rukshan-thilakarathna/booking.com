@@ -1,7 +1,24 @@
 @extends('web.Blocks.layout')
 
 @section('content')
+    <style>
+        #_2:before{
+            content: '';
+            position: absolute;
+            width: 120%;
+            bottom: 0;
+            height: 4px;
+            left: 0;
+            background: var(--cyan);
+            z-index: 1;
+            margin-left: -4px;
+        }
+    </style>
+
     <div id="page-content">
+        <div style="width: 100%;height: 256px;background: url(http://localhost:8000/web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.png);background-size: cover;background-position: 0;">
+
+        </div>
         <div class="container">
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>

@@ -75,7 +75,7 @@
     .z4d1 {width: 36%;height: 500px;display: flex;flex-direction: column;justify-content: space-around;}
     #z4p1 {padding: 15px 0 4px;font-size: 15px;}
     #z4h1 {color: white;font-size: 35px;letter-spacing: 1px;margin: 0;}
-    .z4a1 {text-decoration: navajowhite;border: 2px solid white;padding: 10px 32px;background: #f000;color: white;border-radius: 35px;width: max-content;}
+    .z4a1 {text-decoration: navajowhite;border: 2px solid white;padding: 10px 32px;background: #322121;color: white;border-radius: 35px;width: max-content;}
 
     #z5se1 {text-align: center;padding: 50px 0;background: #F6F6F6;}
     .z5d1 {display: flex;justify-content: space-between;}

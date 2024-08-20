@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\User;
 
+use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
@@ -41,9 +42,40 @@ class UserListLayout extends Table
                 ->filter(Input::make()),
 
             TD::make('email', __('Email'))
+                ->defaultHidden()
                 ->sort()
-                ->cantHide()
                 ->filter(Input::make()),
+
+            TD::make('id', __('Nic Front Image'))->render(function (User $user) {
+                if ($user->nic_or_passport_front_image != null) {
+                    return view('components.image-link', [
+                        'imageUrl' => '/User/NIC/'.$user->nic_or_passport_front_image,
+                    ]);
+                }else{
+                    return 'No Image';
+                }
+
+            }),
+
+            TD::make('id', __('Nic Back Image'))->render(function (User $user) {
+                if ($user->nic_or_passport_back_image != null) {
+                    return view('components.image-link', [
+                        'imageUrl' => '/User/NIC/'.$user->nic_or_passport_back_image,
+                    ]);
+                }else{
+                    return 'No Image';
+                }
+            }),
+
+            TD::make('id', __('BR Image'))->render(function (User $user) {
+                if ($user->br_image != null) {
+                    return view('components.image-link', [
+                        'imageUrl' => '/User/BusinessRegistrationDocument/'.$user->br_image,
+                    ]);
+                }else{
+                    return 'No Image';
+                }
+            }),
 
             TD::make('profile_verified', __('Status'))
                 ->sort()
@@ -90,18 +122,18 @@ class UserListLayout extends Table
                 }),
 
 
-           
+
                 TD::make('created_at', __('Created'))
                 ->usingComponent(DateTimeSplit::class)
                 ->align(TD::ALIGN_RIGHT)
                 ->defaultHidden()
                 ->sort(),
 
-            
-                TD::make('updated_at', __('Last edit'))
-                ->usingComponent(DateTimeSplit::class)
-                ->align(TD::ALIGN_RIGHT)
-                ->sort(),
+
+//                TD::make('updated_at', __('Last edit'))
+//                ->usingComponent(DateTimeSplit::class)
+//                ->align(TD::ALIGN_RIGHT)
+//                ->sort(),
 
 
 

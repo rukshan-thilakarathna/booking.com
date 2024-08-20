@@ -24,10 +24,10 @@
         <div class="fsb" id="heder2" >
             <a href="/" ><img class="i2" src="{{asset('web/img/icons/Logo.svg')}}" alt="Logo"></a>
             <nav id="topn" class="n">
-                <a href="/" class="a2">Home</a>
-                <a href="{{route('about-us')}}" class="a2">About Us</a>
-                <a href="{{route('web.page.list')}}" class="a2">Property List</a>
-                <a href="{{route('contact-us')}}" class="a2">Contact Us</a>
+                <a id="_1" href="/" class="a2">Home</a>
+                <a id="_2" href="{{route('about-us')}}" class="a2">About Us</a>
+                <a id="_3" href="{{route('web.page.list')}}" class="a2">Property List</a>
+                <a id="_4" href="{{route('contact-us')}}" class="a2">Contact Us</a>
             </nav>
             <img id="menu" src="{{asset('web/img/icons/menu.png')}}" alt="Logo">
             @if(isset(Session::get('user')['role']) && Session::get('user')['role'] == 'property-owner')

@@ -3,6 +3,17 @@
 @section('content')
     <style>
         p{color: white}
+        #_1:before{
+            content: '';
+            position: absolute;
+            width: 120%;
+            bottom: 0;
+            height: 4px;
+            left: 0;
+            background: var(--cyan);
+            z-index: 1;
+            margin-left: -4px;
+        }
     </style>
 
 {{--{{dd(Session::get('user'))}}--}}
@@ -163,8 +174,8 @@
         </div>
         <div class="z7d1" id="z7d2">
             <div class="z7d4">
-                <h1 class="z7h1">Honeymoon Haven</h1>
-                <p class="z7p1">Romantic Escapes at Unbeatable Prices!</p>
+                <h1 class="z7h1">Weekend Getaway Bonanza</h1>
+                <p class="z7p1">Your Ticket To Relaxation!</p>
             </div>
         </div>
     </section>
