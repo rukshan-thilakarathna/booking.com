@@ -37,8 +37,19 @@
                                         <label for="form-filter-check-in">Check Out</label>
                                         <input type="date" class="form-control" id="form-filter-check-in" value="{{$checkOut}}" name="checkOut" placeholder="Check In">
                                     </div>
-                                    <!--end form-group-->
                                 </div>
+
+                                <div class="form-group-inline">
+                                        <div class="form-group">
+                                            <label for="form-filter-check-in">Min Price</label>
+                                            <input type="number" class="form-control" id="form-filter-check-out" value="{{$minPrice}}" name="min" placeholder="Min">
+                                        </div>
+                                        <!--end form-group-->
+                                        <div class="form-group">
+                                            <label for="form-filter-check-out">Max Price</label>
+                                            <input type="number" class="form-control" id="form-filter-check-out" value="{{$maxPrice}}" name="max" placeholder="Max">
+                                        </div>
+                                    </div>
                                 <!--end form-group-inline-->
                                 <div class="center">
                                     <a href="#filter-advanced-search" class="link icon" data-toggle="collapse" aria-expanded="false" aria-controls="filter-advanced-search">Advanced Search<i class="fa fa-plus"></i></a>

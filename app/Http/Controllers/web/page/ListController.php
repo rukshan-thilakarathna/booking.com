@@ -16,12 +16,38 @@ class ListController extends Controller
 {
     public function Index(Request $request)
     {
+
+        
         $destination = $request->input('destination') ?? [];
         $propertyType = $request->input('pt') ?? [];
         $PropertyFacility = $request->input('PropertyFacility') ?? [];
         $chackIn = strtotime($request->input('checkIn'));
         $chackOut = strtotime($request->input('checkOut'));
         $adult = $request->input('adult') ?? 0;
+        $minPrice = intval($request->input('min')) ?? 0;
+        $maxPrice = intval($request->input('max')) ?? 0;
+        $IsPrice = false;
+
+        if($minPrice || $maxPrice){
+            $IsPrice = true;
+            $rooms = Rooms::query();
+
+            if ($minPrice && $maxPrice) {
+                $rooms->where('display_price', '>=', $minPrice)
+                    ->where('display_price', '<=', $maxPrice);
+            }elseif($minPrice && !$maxPrice){
+                $rooms->where('display_price', '>=', $minPrice);
+            }elseif(!$minPrice && $maxPrice){
+                $rooms->where('display_price', '<=', $maxPrice);
+            }
+
+            $rooms = $rooms->distinct()->select('property_id')->get();
+            $room_property_id = [];
+            foreach($rooms as $key => $room){
+                $room_property_id[$key] = $room->property_id;
+            }
+        }
+     
 
         if (!is_array($destination)){
             $destination = [$destination];
@@ -61,6 +87,11 @@ class ListController extends Controller
             }
             $list = $list->whereIn('id', $id);
         }
+
+        if ($IsPrice){
+            $list = $list->whereIn('id',$room_property_id );
+        }
+
         if (is_array($destination)){
             if (count($destination)>0) {
                 $list = $list->whereIn('main_location',$destination );
@@ -98,6 +129,8 @@ class ListController extends Controller
             'UrlDestinationList' => $destination,
             'checkIn' => $request->input('checkIn'),
             'checkOut' => $request->input('checkOut'),
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice,
         ]);
     }
 }
