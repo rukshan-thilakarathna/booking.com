@@ -135,8 +135,8 @@ class UserVerificationScreen extends Screen
         $request->validate($rules);
 
         // profile Image
-        $profile_image = $request->file('user.profile_image');
-        $profile_image_db = $this->storeImage($profile_image,'ProfileImage');
+        // $profile_image = $request->file('user.profile_image');
+        // $profile_image_db = $this->storeImage($profile_image,'ProfileImage');
 
         if($users->role == 'property-owner'){
             $br_image = $request->file('user.br_image');
@@ -158,13 +158,13 @@ class UserVerificationScreen extends Screen
             'br_image' => $br_image_db ?? 0,
             'nic_or_passport_front_image' => $nic_or_passport_front_image_db,
             'nic_or_passport_back_image' => $nic_or_passport_back_image_db ,
-            'profile_image' => $profile_image_db,
+            // 'profile_image' => $profile_image_db,
             'profile_verified' => 2,
         ];
 
         $users->update($userData);
 
-       
+
 
 
         Toast::info(__('Verify request sended. And sended point 100. '));

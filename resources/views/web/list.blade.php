@@ -129,7 +129,7 @@
                                     </div>
                                     <!--end meta-->
                                     <div class="info">
-                                        <a href="{{route('web.page.detail',$item->id)}}"><h3>{{$item->name}}</h3></a>
+                                        <a href="{{route('web.page.detail',$item->id)}}"><h3 style="font-size: 20px">{{$item->name}}</h3></a>
                                         <figure class="location">{{$item->district->name_en}}</figure>
                                         <figure class="label label-info">{{$item->propertyType->name}}</figure>
                                         <p>{{$item->description}}</p>

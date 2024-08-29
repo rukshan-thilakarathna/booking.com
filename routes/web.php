@@ -38,6 +38,7 @@ Route::get('property-type-detail/{id}',[PropertyTypeDetailController::class ,'in
 Route::get('Booking-confourm/{id}/{chackIn}/{chackOut}/{adults}/{children}',[BookingConforumController::class ,'index'])->name('web.booking.confourm');
 
 Route::post('/get-points' ,[PointController::class ,'buy'])->name('get-point');
+Route::redirect('post-property','/dashboard/property/create')->name('post-property');
 
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
 Route::get('/forgot-password', [UserController::class ,'forgotPassword'])->name('user.forgot.password');

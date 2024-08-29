@@ -114,6 +114,9 @@ class ImagesListScreen extends Screen
 
     public function upload(Request $request)
     {
+        $request->validate([
+            'image' => 'required',
+        ]);
 
 
             if($request->hasfile('image')) {

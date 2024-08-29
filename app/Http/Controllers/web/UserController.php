@@ -85,16 +85,16 @@ class UserController extends Controller
         $createuserrole->role_id = $roleId->id;
         $createuserrole->save();
 
-
+        if($role=='user'){
         $pointStrt = PointStort::create([
-            'user_id' => $createuserrole->id,
+            'user_id' => $userId,
             'point_count' => 0,
             'wallet' => 0,
             'locked_points' => 0,
             'locked_wallet' => 0,
             'pending_wallet' => 0,
         ]);
-
+}
 
 
 

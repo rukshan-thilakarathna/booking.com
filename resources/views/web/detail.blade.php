@@ -155,7 +155,7 @@
                                             <tr>
                                                 <th>Number of Room</th>
                                                 <th>Number of guests</th>
-                                                <th>Today's price</th>
+                                                <th>Today price</th>
                                                 <th>Total price</th>
                                                 <th>Open Points</th>
                                                 <th>Your choices</th>

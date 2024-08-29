@@ -135,17 +135,17 @@ class ReportScreen extends Screen
 
         return [
             Layout::split([
-                Layout::view('platform::dummy.block', ['title' => 'This Month Barterbed Confirm Booking Revenue','text' => 'LKR '.$this->BarterbedConfirmBookingRevenue]),
+                Layout::view('platform::dummy.block', ['title' => ' This month barterbed completed booking revenue','text' => 'LKR '.$this->BarterbedConfirmBookingRevenue]),
                 Layout::view('platform::dummy.block', ['title' => 'This Month Barterbed Pending Booking Revenue','text' => 'LKR '.$this->BarterbedPendingBookingRevenue]),
 
                 Layout::view('platform::dummy.block', ['title' => 'This Month All Booking Count','text' => $this->AllBookingCount]),
-                Layout::view('platform::dummy.block', ['title' => 'This Month Confirm Booking Count','text' => $this->ConfirmBookingCount]),
+                Layout::view('platform::dummy.block', ['title' => 'This month completed booking count','text' => $this->ConfirmBookingCount]),
 
-                Layout::view('platform::dummy.block', ['title' => 'This Month Property Owner Pending Booking Revenue','text' => 'LKR '.$this->PropertyPendingBookingRevenue]),
+                Layout::view('platform::dummy.block', ['title' => 'This month property owner completed booking revenue','text' => 'LKR '.$this->PropertyPendingBookingRevenue]),
                 Layout::view('platform::dummy.block', ['title' => 'This Month Property Owner Confirm Booking Revenue','text' => 'LKR '.$this->PropertyConfirmBookingRevenue]),
 
                 Layout::view('platform::dummy.block', ['title' => 'This Month Pending Booking Count','text' => $this->PendingBookingCount]),
-                Layout::view('platform::dummy.block', ['title' => 'This Month CheckOut Booking Count','text' => $this->CheckOutBooking]),
+                Layout::view('platform::dummy.block', ['title' => 'This month confirmed booking count','text' => $this->CheckOutBooking]),
             ])->ratio('50/50')->reverseOnPhone(),
 
             Layout::modal('Report Feilter',Layout::rows([

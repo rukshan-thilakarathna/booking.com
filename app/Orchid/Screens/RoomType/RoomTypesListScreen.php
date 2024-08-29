@@ -116,20 +116,20 @@ class RoomTypesListScreen extends Screen
             'room.number' => ['required', 'integer', 'unique:rooms,number'],
         ]);
 
-        if ($request->hasFile('room.images'))
-        {
-            // Get the uploaded file
-            $file = $request->file('room.images');
+        // if ($request->hasFile('room.images'))
+        // {
+        //     // Get the uploaded file
+        //     $file = $request->file('room.images');
 
-            // Generate a unique name for the file
-            $name = time() . random_int(1, 100) . '.' . $file->extension();
+        //     // Generate a unique name for the file
+        //     $name = time() . random_int(1, 100) . '.' . $file->extension();
 
-            // Move the file to the 'Property/Rooms' directory
-            $file->move(public_path('Property/Rooms'), $name);
+        //     // Move the file to the 'Property/Rooms' directory
+        //     $file->move(public_path('Property/Rooms'), $name);
 
-            // Set the generated file name
-            $gb_image_name = $name;
-        }
+        //     // Set the generated file name
+        //     // $gb_image_name = $name;
+        // }
         $fullprice = $request['room.price'];
         if(!empty($request['room.dicecount'])){
             $fullprice =  $fullprice-(($fullprice*$request['room.dicecount'])/100);
@@ -149,7 +149,7 @@ class RoomTypesListScreen extends Screen
         $newRoom->user_choice = $request['room.user_choice'] ?? 1;
         $newRoom->open_point_or_cash = $request['room.open_point_or_cash'] ?? 1;
         $newRoom->first_payment_price = $first_payment_price;
-        $newRoom->image = $gb_image_name ?? 0;
+        // $newRoom->image = $gb_image_name ?? 0;
         $newRoom->status = 1;
 
         $newRoom->save();

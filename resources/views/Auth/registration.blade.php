@@ -16,6 +16,59 @@
             background:url({{asset('web/img/bg_login.jpg')}});
             background-size: cover;
         }
+        @if($role == 'user')
+            #rika1{
+            width: 49%;
+            background: #16BECB;
+            border-radius: 7px 0 0 0;
+            margin: 3px;
+            padding: 10px;
+            justify-content: center;
+            display: flex;
+        }
+        #rika2{
+            width: 49%;
+            background: white;
+            border: 2px solid #16BECB;
+            border-radius: 0px 7px 0 0;
+            margin: 3px;
+            padding: 10px;
+            justify-content: center;
+            display: flex;
+        }
+        @else
+        #rika1{
+            width: 49%;
+            background: white;
+            border: 2px solid #16BECB;
+            border-radius: 7px 0 0 0;
+            margin: 3px;
+            padding: 10px;
+            justify-content: center;
+            display: flex;
+        }
+        #rika2{
+            width: 49%;
+            background: white;
+            background: #16BECB;
+            border-radius: 0px 7px 0 0;
+            margin: 3px;
+            padding: 10px;
+            justify-content: center;
+            display: flex;
+        }
+        @endif
+
+
+        #rika1:hover{
+            background: #0F8D8D;
+            font-weight: bold;
+        }
+        #rika2:hover{
+            background: #0F8D8D;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body >
@@ -23,13 +76,13 @@
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11" style="display: flex;justify-content: center;">
-                <div class="card text-black" style="border-radius: 10px;
-  width: 40%;
-  background: white;
-  padding-right: 20px;">
+                <div class="card text-black" style="border-radius: 10px;width: 40%;background: white;">
+                    <div style="display: flex;width: 100%;">
+                        <a id="rika1" href="{{route('user.registration','user')}}">user register</a>
+                        <a id="rika2" href="{{route('user.registration','property-owner')}}">property owner register</a>
+                    </div>
 
-                    <div class="card-body " style="border-radius: 10px;
-  padding: 0;">
+                    <div class="card-body " style="border-radius: 10px;padding: 0;">
                             <div style="width: 100%;" class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                                 <h1 style="margin: 25px 0 0 36px;" class="h4 text-black mb-4">{{__('Sign up now - ' . $role)}}</h1>
 
@@ -105,20 +158,20 @@
                                         </button>
                                     </div>
 
-                                    <span class="text-muted" style="    width: 62%;
-    display: block;
-    margin: 20px auto;"> {{__("Sign Up - ")}}
-                                        <a href="{{route('user.registration','user')}}" style="cursor: pointer ; font-weight: bold" class="small">
-                                            {{__("User")}}
-                                        </a>
-                                        /
-                                         <a href="{{route('user.registration','property-owner')}}" style="cursor: pointer ; font-weight: bold" class="small">
-                                            {{__("Property Owner")}}
-                                        </a>
-                                        /
-                                         <a href="{{route('user.registration','worker')}}" style="cursor: pointer ; font-weight: bold" class="small">
-                                            {{__("Worker")}}
-                                        </a>
+{{--                                    <span class="text-muted" style="    width: 62%;--}}
+{{--    display: block;--}}
+{{--    margin: 20px auto;"> {{__("Sign Up - ")}}--}}
+{{--                                        <a href="{{route('user.registration','user')}}" style="cursor: pointer ; font-weight: bold" class="small">--}}
+{{--                                            {{__("User")}}--}}
+{{--                                        </a>--}}
+{{--                                        /--}}
+{{--                                         <a href="{{route('user.registration','property-owner')}}" style="cursor: pointer ; font-weight: bold" class="small">--}}
+{{--                                            {{__("Property Owner")}}--}}
+{{--                                        </a>--}}
+{{--                                        /--}}
+{{--                                         <a href="{{route('user.registration','worker')}}" style="cursor: pointer ; font-weight: bold" class="small">--}}
+{{--                                            {{__("Worker")}}--}}
+{{--                                        </a>--}}
 
                                 </form>
 

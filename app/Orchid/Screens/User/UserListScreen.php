@@ -9,6 +9,7 @@ use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\UserFiltersLayout;
 use App\Orchid\Layouts\User\UserListLayout;
 use http\Exception\RuntimeException;
+use App\Models\PointStort;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -87,10 +88,10 @@ class UserListScreen extends Screen
     {
         $user = \App\Models\User::find((Auth::user())->id);
         return [
-            Link::make(__('Add'))
-                ->icon('bs.plus-circle')
-                ->canSee($user->hasAnyAccess(['user.create.permissions']))
-                ->route('platform.systems.users.create'),
+            // Link::make(__('Add'))
+            //     ->icon('bs.plus-circle')
+            //     ->canSee($user->hasAnyAccess(['user.create.permissions']))
+            //     ->route('platform.systems.users.create'),
         ];
     }
 
@@ -197,9 +198,11 @@ class UserListScreen extends Screen
         $users->update($userData);
 
         $ispoined = PointStort::where('user_id',$request->get('id'))->count();
+        
+    
 
 
-        if($users->role == "property-owner" && ispoined == 0){
+        if($users->role == "property-owner" && $ispoined == 0){
             $point = new PointStort();
 
             $point->user_id = $users->id;

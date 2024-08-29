@@ -12,22 +12,13 @@ use App\Orchid\Layouts\RoomType\RoomTypeEditLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeKitchenFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeRoomFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeViewFacilitiesLayout;
-use App\View\Components\ManageImage;
-use App\View\Components\RoomsCalendar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Actions\Menu;
-use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Screen;
-use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
@@ -323,7 +314,7 @@ class PropertyListScreen extends Screen
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $bathroom_facilities_list = '';
-        $bathroom_facilities = $request->input('bathroomfacilities');
+        $bathroom_facilities = $request->input('roomtype.bathroomfacilities_item');
 
         if (!empty($bathroom_facilities)) {
             // Ensure each facility item is converted to a string using htmlspecialchars
@@ -333,7 +324,7 @@ class PropertyListScreen extends Screen
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $room_facilities_list = '';
-        $room_facilities = $request->input('roomfacilities');
+        $room_facilities = $request->input('roomtype.roomfacilities_item');
 
         if (!empty($room_facilities)) {
             // Ensure each facility item is converted to a string using htmlspecialchars
@@ -343,7 +334,7 @@ class PropertyListScreen extends Screen
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $kitchen_facilities_list = '';
-        $kitchen_facilities = $request->input('kitchenfacilities');
+        $kitchen_facilities = $request->input('roomtype.kitchenfacilities_item');
 
         if (!empty($kitchen_facilities)) {
             // Ensure each facility item is converted to a string using htmlspecialchars
@@ -353,7 +344,7 @@ class PropertyListScreen extends Screen
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $view_facilities_list = '';
-        $view_facilities = $request->input('viewfacilities');
+        $view_facilities = $request->input('roomtype.viewfacilities_item');
 
         if (!empty($view_facilities)) {
             // Ensure each facility item is converted to a string using htmlspecialchars
@@ -361,7 +352,7 @@ class PropertyListScreen extends Screen
             $view_facilities_list = implode(', ', $view_sanitized_facilities);
         }
 
-        $image =$this->store($request);
+        // $image =$this->store($request);
 
 
         // Create a new RoomType instance
@@ -369,7 +360,7 @@ class PropertyListScreen extends Screen
 
         // Assign validated data to the RoomType instance
         $roomtype->name = $request['roomtype.name'];
-        $roomtype->images = $image;
+        // $roomtype->images = $image;
         $roomtype->user_id = Auth::user()->id;
         $roomtype->room_size = $request['roomtype.room_size'];
         $roomtype->bathroom_facilities = $bathroom_facilities_list;

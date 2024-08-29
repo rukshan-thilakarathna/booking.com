@@ -2,7 +2,11 @@
 
 namespace App\Orchid\Screens\RoomType;
 
+use App\Models\BathRoomFacilities;
+use App\Models\KitchenFacilities;
+use App\Models\RoomFacilities;
 use App\Models\RoomType;
+use App\Models\ViewFacilities;
 use App\Orchid\Layouts\RoomType\FullPropertyFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeBathRoomFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeEditLayout;
@@ -26,13 +30,37 @@ class RoomTypesEditScreen extends Screen
      * @return array
      */
 
-    public function query(RoomType $room_type): iterable
-    {
-        $this->potertytypeid = $room_type->property_type;
-        return [
-            'roomtype' => $room_type
-        ];
-    }
+     public function query(RoomType $room_type): iterable
+     {
+         $this->potertytypeid = $room_type->property_type;
+
+         // Function to fetch facilities based on IDs
+         $fetchFacilities = function (string $facilities, $model) {
+             $ids = explode(", ", $facilities);
+             return $model::whereIn('id', $ids)->get();
+         };
+
+         // Attach room facilities
+         $roomfacilities = $fetchFacilities($room_type->room_facilities, RoomFacilities::class);
+         $room_type->setRelation('roomfacilities_item', $roomfacilities);
+
+         // Attach bathroom facilities
+         $bathroomfacilities = $fetchFacilities($room_type->bathroom_facilities, BathRoomFacilities::class);
+         $room_type->setRelation('bathroomfacilities_item', $bathroomfacilities);
+
+         // Attach kitchen facilities
+         $kitchenfacilities = $fetchFacilities($room_type->kitchen_facilities, KitchenFacilities::class);
+         $room_type->setRelation('kitchenfacilities_item', $kitchenfacilities);
+
+         // Attach view facilities
+         $viewfacilities = $fetchFacilities($room_type->view_facilities, ViewFacilities::class);
+         $room_type->setRelation('viewfacilities_item', $viewfacilities);
+
+         return [
+             'roomtype' => $room_type
+         ];
+     }
+
 
     /**
      * The name of the screen displayed in the header.
@@ -115,7 +143,7 @@ class RoomTypesEditScreen extends Screen
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $bathroom_facilities_list = '';
-        $bathroom_facilities = $request->input('bathroomfacilities');
+        $bathroom_facilities = $request->input('roomtype.bathroomfacilities_item');
 
         if (!empty($bathroom_facilities)) {
             // Ensure each facility item is converted to a string using htmlspecialchars
@@ -125,7 +153,8 @@ class RoomTypesEditScreen extends Screen
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $room_facilities_list = '';
-        $room_facilities = $request->input('roomfacilities');
+        $room_facilities = $request->input('roomtype.roomfacilities_item');
+
 
         if (!empty($room_facilities)) {
             // Ensure each facility item is converted to a string using htmlspecialchars
@@ -135,7 +164,7 @@ class RoomTypesEditScreen extends Screen
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $kitchen_facilities_list = '';
-        $kitchen_facilities = $request->input('kitchenfacilities');
+        $kitchen_facilities = $request->input('roomtype.kitchenfacilities_item');
 
         if (!empty($kitchen_facilities)) {
             // Ensure each facility item is converted to a string using htmlspecialchars
@@ -145,7 +174,7 @@ class RoomTypesEditScreen extends Screen
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $view_facilities_list = '';
-        $view_facilities = $request->input('viewfacilities');
+        $view_facilities = $request->input('roomtype.viewfacilities_item');
 
         if (!empty($view_facilities)) {
             // Ensure each facility item is converted to a string using htmlspecialchars

@@ -5,19 +5,14 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\User;
 
 use App\Orchid\Layouts\User\ContactLayout;
-use App\Orchid\Layouts\User\LegalDocumen02tLayout;
-use App\Orchid\Layouts\User\LegalDocument01Layout;
 use App\Orchid\Layouts\User\LocationLayout;
 use App\Orchid\Layouts\User\ProfilePasswordLayout;
 use App\Orchid\Layouts\User\ServiceLayout;
 use App\Orchid\Layouts\User\UserEditLayout;
-use App\Orchid\Layouts\User\VerifiedLayout;
-use App\Orchid\Layouts\User\VerifyPendingLayout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Orchid\Access\Impersonation;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
@@ -174,22 +169,25 @@ class UserProfileScreen extends Screen
             'user.name'  => 'required|string',
             'user.email' => [
                 'required',
-                Rule::unique(User::class, 'email')->ignore($request->user()),
+                Rule::unique(User::class, 'email')->ignore($request->user()->id),
             ],
 
         ]);
 
-        $profile_image = $request->file('user.profile_image');
-        $profile_image_db = $this->storeImage($profile_image,'ProfileImage');
+        if($request->file('user.profile_image')){
+            $profile_image = $request->file('user.profile_image');
+            $profile_image_db = $this->storeImage($profile_image,'ProfileImage');
+
+        }
 
         $user = $request->user();
         $userData = $request->get('user');
-    
+
         // Include the profile image path in the user data if available
-        if ($profile_image_db) {
+        if (isset($profile_image_db)) {
             $userData['profile_image'] = $profile_image_db;
         }
-    
+
         // Fill and save the user data
         $user->fill($userData)->save();
 

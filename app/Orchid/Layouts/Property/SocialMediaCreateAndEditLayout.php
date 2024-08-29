@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Property;
 
-use App\Models\User;
-use Orchid\Platform\Models\Role;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Rows;
 
 class SocialMediaCreateAndEditLayout extends Rows

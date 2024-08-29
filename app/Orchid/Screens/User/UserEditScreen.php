@@ -39,12 +39,10 @@ class UserEditScreen extends Screen
     public function query(User $user): iterable
     {
         $user->load(['roles']);
-
         return [
             'user'       => $user,
             'permission' => $user->getStatusPermission(),
         ];
-
     }
 
     /**
@@ -135,6 +133,7 @@ class UserEditScreen extends Screen
                         ->canSee($this->user->exists)
                         ->method('save')
                 ),
+
         ];
     }
 

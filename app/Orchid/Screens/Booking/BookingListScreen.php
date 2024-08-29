@@ -7,24 +7,15 @@ use App\Models\Booking;
 use App\Models\Properties;
 use App\Models\Reviews;
 use App\Models\Rooms;
-use App\Orchid\Layouts\Booking\BookingCreateAndEditLayout;
 use App\Orchid\Layouts\Booking\BookingListLayout;
-use App\Orchid\Layouts\RoomType\RoomTypeBathRoomFacilitiesLayout;
-use App\Orchid\Layouts\RoomType\RoomTypeEditLayout;
-use App\Orchid\Layouts\RoomType\RoomTypeKitchenFacilitiesLayout;
-use App\Orchid\Layouts\RoomType\RoomTypeRoomFacilitiesLayout;
-use App\Orchid\Layouts\RoomType\RoomTypeViewFacilitiesLayout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Orchid\Platform\Http\Middleware\Access;
-use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Layouts\Modal;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
@@ -39,10 +30,20 @@ class BookingListScreen extends Screen
     public function query(): iterable
     {
         $user = \App\Models\User::find((Auth::user())->id);
+        $UserProperty = Properties::where('user_id',$user->id)->get();
+        $prid = [];
+        foreach($UserProperty as $key => $pid){
+            $prid[$key] = $pid->id;
+        }
+
         $bookings = Booking::with('properties','roomType','Room');
 
-        if ($user->role == 'user' || $user->role == 'property-owner'){
+        if ($user->role == 'user' ){
             $bookings = $bookings->where('user_id',$user->id);
+        }
+
+        if ($user->role == 'property-owner'){
+            $bookings = $bookings->whereIn('property_id',$prid);
         }
 
         $bookings = $bookings->filters()->orderBy('id', 'desc')->paginate(12);

@@ -56,7 +56,7 @@
                         <div class="z2d2 z2d1-{{$class[$key]}}"
                              style="background: url({{asset('web/img/destinations/'.$PropertyDestination->district->url.'.jpg')}});background-size: cover;background-position: center;">
                             <div class="z2d4">
-                                <a href="list?destination={{$PropertyDestination->id}}"><h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2></a>
+                                <a href="list?destination={{$PropertyDestination->district->id}}"><h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2></a>
                                 <span class="z2s1">{{$uniquePropertyCount[$PropertyDestination->main_location]}} Properties</span>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
         </div>
     </section>
 
-    <section id="z8se1">
+    {{--  <section id="z8se1">
         <div class="w">
             <h1 class="z5h1">Explore Our Top-rated Stays</h1>
             <div class="z8d1">
@@ -212,7 +212,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>  --}}
 
 
 @endsection

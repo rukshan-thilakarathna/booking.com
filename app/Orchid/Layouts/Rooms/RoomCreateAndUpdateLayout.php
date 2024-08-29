@@ -50,6 +50,10 @@ class RoomCreateAndUpdateLayout extends Rows
                 ->required()
                 ->title(__('Point Price'))
                 ->placeholder(__('Point Price')),
+                CheckBox::make('room.open_point_or_cash')
+                ->value('0')
+                ->checked(false)
+                ->placeholder('Open Point'),
 
             Input::make('room.adults')
                 ->type('number')
@@ -64,17 +68,14 @@ class RoomCreateAndUpdateLayout extends Rows
 
             Input::make('room.dicecount')
                 ->type('string')
-                ->title(__('Dicecount'))
-                ->placeholder(__('Dicecount')),
+                ->title(__('Discount %'))
+                ->placeholder(__('Discount %')),
 
             TextArea::make('room.user_choice')
                 ->rows(5)
                 ->title(__('User Choice')),
 
-            CheckBox::make('room.open_point_or_cash')
-                ->value('0')
-                ->checked(false)
-                ->placeholder('Open Point'),
+
         ];
     }
 }

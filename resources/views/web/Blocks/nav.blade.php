@@ -31,9 +31,9 @@
             </nav>
             <img id="menu" src="{{asset('web/img/icons/menu.png')}}" alt="Logo">
             @if(isset(Session::get('user')['role']) && Session::get('user')['role'] == 'property-owner')
-                <a class="bt1" href="{{route('web.dashboard')}}">List your property</a>
+                <a style="    color: #686565;" class="bt1" href="{{route('post-property')}}">List your property</a>
             @else
-                <a class="bt1" href="{{route('web.page.list')}}">Book Now property</a>
+                <a style="    color: #686565;" class="bt1" href="{{route('web.page.list')}}">Book Now property</a>
             @endif
 
 

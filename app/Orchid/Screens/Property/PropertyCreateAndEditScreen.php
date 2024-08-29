@@ -3,25 +3,19 @@
 namespace App\Orchid\Screens\Property;
 
 use App\Models\Properties;
+use App\Models\PropertyFacilities;
 use App\Orchid\Layouts\Property\ContactCreateAndEditLayout;
 use App\Orchid\Layouts\Property\PropertyCreateAndEditLayout;
 use App\Orchid\Layouts\Property\LocationCreateAndEditLayout;
 use App\Orchid\Layouts\Property\PropertyAddUserLayout;
 use App\Orchid\Layouts\Property\PropertyFacilitiesLayout;
 use App\Orchid\Layouts\Property\SocialMediaCreateAndEditLayout;
-use App\Orchid\Layouts\User\UserEditLayout;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
-use Orchid\Support\Color;
 use Orchid\Support\Facades\Toast;
 
 class PropertyCreateAndEditScreen extends Screen
@@ -33,12 +27,27 @@ class PropertyCreateAndEditScreen extends Screen
      * @return array
      */
 
-    public function query(Properties $property): iterable
-    {
-        return [
-            'property' => $property,
-        ];
-    }
+     public function query(Properties $property): iterable
+     {
+         // Convert the facilities attribute to an array of IDs
+         $numbers_array = explode(", ", $property->facilities);
+
+         // Retrieve the corresponding PropertyFacilities records
+         $fe = PropertyFacilities::whereIn('id', $numbers_array)->get();
+
+         // Attach the facilities to the property relations
+         $property->setRelation('facilities_item', $fe);
+
+         // Debugging line (remove in production)
+         // dd($property->relations);
+
+         // Return the property with its associated relations
+
+
+         return [
+             'property' => $property,
+         ];
+     }
 
     /**
      * The name of the screen displayed in the header.
@@ -112,25 +121,27 @@ class PropertyCreateAndEditScreen extends Screen
     public function save(Request $request , $property = null)
     {
 
+
         if ($this->property->exists && $property != null){
             $request->validate([
                 'property.type'     => 'required',
-                'property.name'    => 'required|string',
+                'property.name'    => 'required|string|max:40',
                 'property.email'   => 'required|email',
                 'property.contact_number' => 'required|string|regex:/^0[1-9]\d{8}$/',
             ]);
 
-            $facilities_list = '';
-            $facilities = $request->input('facilities');
+
 
             $facilities_list = '';
-            $facilities = $request->input('facilities');
+            $facilities = $request->input('property.facilities_item');
 
             if (!empty($facilities)) {
                 // Ensure each facility item is converted to a string using htmlspecialchars
                 $sanitized_facilities = array_map('htmlspecialchars', $facilities);
                 $facilities_list = implode(', ', $sanitized_facilities);
             }
+
+
             if($request->hasfile('image')) {
                 $image = $this->store($request);
             }
@@ -163,13 +174,13 @@ class PropertyCreateAndEditScreen extends Screen
         }else{
             $request->validate([
                 'property.type'     => 'required',
-                'property.name'    => 'required|string',
+                'property.name'    => 'required|string|max:40',
                 'property.email'   => 'required|email|unique:properties,email',
                 'property.contact_number' => 'required|string|regex:/^0[1-9]\d{8}$/',
             ]);
 
             $facilities_list = '';
-            $facilities = $request->input('facilities');
+            $facilities = $request->input('property.facilities_item');
 
             if (!empty($facilities)) {
                 // Ensure each facility item is converted to a string using htmlspecialchars
