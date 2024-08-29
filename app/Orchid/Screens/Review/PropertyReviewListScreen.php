@@ -73,6 +73,16 @@ class PropertyReviewListScreen extends Screen
 
     }
 
+    public function description(): ?string
+    {
+    
+
+            return 'Until both of you shared yours reviews (user/property owner), you will not be able to view the review that you received.';
+
+     
+       
+    }
+
     /**
      * The screen's action buttons.
      *

@@ -67,7 +67,20 @@ class UserListScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'A comprehensive list of all registered users, including their profiles and privileges.';
+        if(Auth::user()->role == 'user'){
+
+            return 'Until you verified your account with your identity card images, you cannot book any property so click on verify now button.';
+
+        }elseif(Auth::user()->role == 'property-owner'){
+
+            return 'Click on verify now button to verify your account with your identity card and BR images.';
+
+        }else{
+
+            return 'A comprehensive list of all registered users, including their profiles and privileges.';
+
+        }
+       
     }
 
     public function permission(): ?iterable

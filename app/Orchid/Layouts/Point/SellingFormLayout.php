@@ -27,10 +27,10 @@ class SellingFormLayout extends Rows
                 ->placeholder('Enter Point Count')
                 ->title('Point Count'),
 
-            Input::make('Price')
+            Input::make('Price (Dollars-$)')
                 ->type('number')
                 ->required()
-                ->placeholder('Enter Price')
+                ->placeholder('Enter Price (Dollars-$)')
                 ->title('Price'),
 
             Password::make('password')

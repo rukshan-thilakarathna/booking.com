@@ -65,9 +65,21 @@ class PropertyListScreen extends Screen
 
     public function description(): ?string
     {
-        return 'Welcome to your Orchid application.';
-    }
+        if(Auth::user()->role == 'user'){
 
+            return 'Until you verified your account with your identity card images, you cannot book any property so click on verify now button.';
+
+        }elseif(Auth::user()->role == 'property-owner'){
+
+            return "To get started with managing your property on Barterbed.com, you'll first need to create a property listing. Once your property is set up, the next step is to create room types for that property. To do this, simply click on the action button next to the relevant property and select the option to create a room type. After your room types are created, you can then proceed to add individual rooms under each room type. To add rooms, navigate to the 'Manage Room Types' section, find the relevant room type, and click on the action button. From there, you'll be able to create and manage the rooms associated with each room type.";
+
+        }else{
+
+            // return 'A comprehensive list of all registered users, including their profiles and privileges.';
+
+        }
+       
+    }
 
     public function permission(): ?iterable
     {

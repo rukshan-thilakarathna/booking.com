@@ -138,7 +138,7 @@ class SellListScreen extends Screen
                 if($RealPointAmount >= $request->Price){
                     $AfterFromUserPointCountF = $FromUserPointCount - $request->point_count;
 
-                    PointStort::where('user_id', $user->id)->update(['point_count' => $AfterFromUserPointCountF,'locked_points' => $locpoint + $request->point_count ,'wallet' => $AfterFromUserPointCountF ,'pending_wallet' => $FromUserpendingwallet + ($request->Price*90/100)]);
+                    PointStort::where('user_id', $user->id)->update(['point_count' => $AfterFromUserPointCountF,'locked_points' => $locpoint + $request->point_count ,'pending_wallet' => $FromUserpendingwallet + ($request->Price*90/100)]);
 
                     $discount_amount =$RealPointAmount - $request->Price;
                     $discount_percentage = ($request->Price / $RealPointAmount)*100;

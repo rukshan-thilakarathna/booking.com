@@ -191,7 +191,7 @@
                                                         @php
                                                             $dates = (new \App\Models\Availability())->getDate(strtotime($UrlData['chackIn']),strtotime($UrlData['chackOut']));
                                                         @endphp
-                                                        <li>Rs {{$room->display_price}}</li>
+                                                        <li>$ {{$room->display_price}}</li>
                                                     </ul>
                                                 </td>
                                                 <td class="price">
@@ -199,7 +199,7 @@
                                                         @php
                                                             $dates = (new \App\Models\Availability())->getDate(strtotime($UrlData['chackIn']),strtotime($UrlData['chackOut']));
                                                         @endphp
-                                                        <li>Rs {{$room->display_price*count($dates['DateList'])}}</li>
+                                                        <li>$ {{$room->display_price*count($dates['DateList'])}}</li>
                                                     </ul>
                                                 </td>
                                                 <td class="price">
@@ -352,7 +352,7 @@
             @endphp
 
             @if($date_count > 14 && isset(Session::get('user')['id']))
-                createAnchor('{{ $payNowUrl }}', 'Pay Now', 'modalbody');
+                //createAnchor('{{ $payNowUrl }}', 'Pay Now', 'modalbody');
                 createAnchor('{{ $payLaterUrl }}'.replace('DATA_VALUE_PLACEHOLDER', dataValue), 'Pay Later', 'modalbody');
             @else
                 createAnchor('{{ $payNowUrl }}', 'Pay Now', 'modalbody');

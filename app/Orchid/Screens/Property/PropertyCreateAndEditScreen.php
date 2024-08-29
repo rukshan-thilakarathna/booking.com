@@ -105,16 +105,16 @@ class PropertyCreateAndEditScreen extends Screen
             ->title(__('Property Information')),
 
             \Orchid\Support\Facades\Layout::block(ContactCreateAndEditLayout::class)
-                ->title(__('Contact Information')),
+                ->title(__('Property owner contact details')),
 
             \Orchid\Support\Facades\Layout::block(LocationCreateAndEditLayout::class)
-                ->title(__('Location Information')),
+                ->title(__('Property location details')),
 
             \Orchid\Support\Facades\Layout::block(PropertyFacilitiesLayout::class)
                 ->title(__('Property Facilities')),
 
-            \Orchid\Support\Facades\Layout::block(SocialMediaCreateAndEditLayout::class)
-                ->title(__('Social Media Information')),
+            // \Orchid\Support\Facades\Layout::block(SocialMediaCreateAndEditLayout::class)
+            //     ->title(__('Social Media Information')),
         ];
     }
 

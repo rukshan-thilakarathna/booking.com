@@ -47,6 +47,16 @@ class PointListScreen extends Screen
         return 'Point Management';
     }
 
+    public function description(): ?string
+    {
+    
+
+            return 'You are unable to sell your first 100 of points. ';
+
+     
+       
+    }
+
     /**
      * The screen's action buttons.
      *

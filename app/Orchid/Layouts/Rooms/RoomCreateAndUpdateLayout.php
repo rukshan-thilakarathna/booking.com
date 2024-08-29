@@ -42,8 +42,8 @@ class RoomCreateAndUpdateLayout extends Rows
             Input::make('room.price')
                 ->type('string')
                 ->required()
-                ->title(__('Price'))
-                ->placeholder(__('Price')),
+                ->title(__('Price (Dollars-$)'))
+                ->placeholder(__('Price (Dollars-$)')),
 
             Input::make('room.point_price')
                 ->type('string')

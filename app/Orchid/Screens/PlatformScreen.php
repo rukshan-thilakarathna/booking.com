@@ -32,7 +32,7 @@ class PlatformScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Welcome to your Orchid application.';
+        return 'Welcome to your application on Barterbed.com!';
     }
 
     /**
@@ -54,7 +54,7 @@ class PlatformScreen extends Screen
     {
         return [
             Layout::view('platform::partials.update-assets'),
-            // Layout::view('platform::partials.welcome'),
+            Layout::view('platform::partials.welcome'),
         ];
     }
 }

@@ -137,7 +137,7 @@ class DonationsListScreen extends Screen
 
                         $pointStort = PointStort::where('user_id', $request->user)->firstOrNew();
                         $pointStort->point_count = $AfterToUserPointCountF;
-                        $pointStort->wallet = $AfterToUserPointCountF;
+                        $pointStort->wallet = 0;
                         $pointStort->user_id = $request->user;
                         $pointStort->save();
 

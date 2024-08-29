@@ -43,6 +43,7 @@ class LocationCreateAndEditLayout extends Rows
 
             Input::make('property.map')
                 ->type('text')
+                ->help("To add a location using Google Maps, start by finding your desired location on Google Maps. Once you've located it, click on the share icon. In the share menu, navigate to the 'Embed a map' section. Here, you'll see a link enclosed in quotation marks. Carefully copy only the part of the link that begins with 'https...' and is located between the quotation marks. It's important not to copy the entire link—only the portion between the quotation marks—otherwise, the location might not be embedded correctly.")
                 ->title('Map Link'),
         ];
     }
