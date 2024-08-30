@@ -22,14 +22,30 @@ class PointListScreen extends Screen
     {
         $user = \App\Models\User::find((Auth::user())->id);
         $points = PointStort::with('user')->where('user_id',$user->id)->first();
-        $transections =Point_transactions::filters()
-            ->where(function ($query) use ($user) {
-                $query->orWhere('to', '=', $user->id)
-                    ->orWhere('from', '=', $user->id);
-            })
-            ->with('ToUser', 'FromUser')
-            ->orderBy('id', 'desc')
-            ->paginate(5);
+        // $transections =Point_transactions::filters()
+        //     ->where(function ($query) use ($user) {
+        //         $query->orWhere('to', '=', $user->id)
+        //             ->orWhere('from', '=', $user->id);
+        //     })
+        //     ->with('ToUser', 'FromUser')
+        //     ->orderBy('id', 'desc')
+        //     ->paginate(5);
+
+            if( $user->role == 'root' ){
+                $transections =Point_transactions::filters()
+                    ->with('ToUser', 'FromUser')
+                    ->orderBy('id', 'desc')
+                    ->paginate(5);
+            }else{
+                $transections =Point_transactions::filters()
+                    ->where(function ($query) use ($user) {
+                        $query->orWhere('to', '=', $user->id)
+                            ->orWhere('from', '=', $user->id);
+                    })
+                    ->with('ToUser', 'FromUser')
+                    ->orderBy('id', 'desc')
+                    ->paginate(5);
+            }
 
         return [
             'points' => $points,
