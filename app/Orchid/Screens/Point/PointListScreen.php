@@ -95,6 +95,7 @@ class PointListScreen extends Screen
 
 
         return [
+
             Link::make(__('Donations'))
                 ->canSee($user->hasAnyAccess(['point.donations.permissions']) && $cansee )
             ->href(route('point.donations')),
@@ -106,6 +107,7 @@ class PointListScreen extends Screen
             Link::make(__('Sell Your Points'))
                 ->canSee($user->hasAnyAccess(['point.Sell.permissions']) && $cansee)
                 ->href(route('point.sell'))
+
         ];
     }
 
