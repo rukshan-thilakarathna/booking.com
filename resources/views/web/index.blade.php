@@ -1,22 +1,93 @@
 @extends('web.Blocks.layout')
 
-@section('content')
-    <style>
-        p{color: white}
-        #_1:before{
-            content: '';
-            position: absolute;
-            width: 120%;
-            bottom: 0;
-            height: 4px;
-            left: 0;
-            background: var(--cyan);
-            z-index: 1;
-            margin-left: -4px;
-        }
-    </style>
+@section('links')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
 
-{{--{{dd(Session::get('user'))}}--}}
+    <link rel="stylesheet" href="{{asset('web/assets/css/owl.carousel.css')}}" type="text/css"> 
+    <link rel="stylesheet" href="{{asset('web/assets/css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('web/assets/slider/slider.css?fd')}}" type="text/css"> 
+
+@endsection
+
+@section('style')
+    <style>
+        #zse1 {background: url("{{asset('web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.png')}}");height: 50vh;background-size: cover;position: relative;}
+        .zd1 {position: absolute;width: 50%;display: flex;flex-direction: column;text-align: center;margin: auto;top: 25%;right: 0;left: 0;}
+        .zh1 {color: white;font-size: 60px;font-weight:bold;font-family: "Cormorant Garamond", serif;}
+        #zse1::before {content: "";display: block;width: 100%;height: 100%;background: #00000073;}
+        .zd2 {padding: 3px 15px;background: white;border-radius: 72px;display: flex;justify-content: space-between;align-items: center;margin-top: 25px;}
+        .zd3 {background: white;border-radius: 37px;display: flex;width: 85%;}
+        .zin1 {color: #767676;border: none;outline: none;border-right: 1px solid #D3D3D3;text-align: center;font-size: 15px;padding: 0 10px;width:30%; }
+        .zin1:last-child {border-right: none!important;}
+        #z2se2 {padding: 50px 0;text-align: center;}
+        .z2d1 {display: flex;justify-content: space-between;margin: 26px 0;}
+        .z2d2 {background: red;height: 300px;border-radius: 10px;position: relative;}
+        .z2d1-1 {width: 25%;}
+        .z2d1-2 {width: 30%;}
+        .z2d1-3 {width: 40%;}
+        .z2h1 {font-size: 35px;font-weight: 400;margin-bottom: 65px;}
+        #z2d3 {flex-direction: row-reverse;}
+        .z2d4 {text-align: left;padding: 20px;position: absolute;bottom: 0;left: 0;}
+        .z2h2 {color: white;}
+        .z2s1 {color: white;font-weight: 500;}
+        .z2d2::before {content: "";display: block;width: 100%;height: 100%;background:url("{{asset('web/img/effect/top-destination-effect.png')}}");border-radius: 10px;background-size: cover;background-position-y: 300px;}
+        #z3se1 {text-align: center;margin-bottom: 50px;}
+        .z3h1 {font-size: 35px;font-weight: 400;margin-bottom: 90px;}
+        .z3d1 {width: 30%;    margin-bottom: 25px;}
+        .z3i1 {width: 100%;}
+        .z3h2 {font-size: 20px;font-weight: 400;margin: 6px 0;}
+        #z4se1 {background: url("{{asset('web/img/section-image/Earn-and-Spend-Points-on-Your-Next-Getaway.png')}}");margin-top: 80px;padding: 55px 0;background-size: cover;}
+        .z4d1 {width: 36%;height: 500px;display: flex;flex-direction: column;justify-content: space-around;}
+        #z4p1 {padding: 15px 0 4px;font-size: 15px;}
+        #z4h1 {color: white;font-size: 35px;letter-spacing: 1px;margin: 0;}
+        .z4a1 {text-decoration: navajowhite;border: 2px solid white;padding: 10px 32px;background: #322121;color: white;border-radius: 35px;width: max-content;}
+        #z5se1 {text-align: center;padding: 50px 0;background: #F6F6F6;}
+        .z5d1 {display: flex;justify-content: space-between;}
+        .zd5d2 {width: 32%;}
+        .z5h1{font-size: 35px;font-weight: 400;margin-bottom: 50px;}
+        .z5i1 {width: 80px;}
+        .z5h2 {font-size: 25px;}
+        .z5p1 {color: #2f2f2f;font-family: "Cormorant Garamond", serif;font-size: 21px;}
+        #z6se1 {text-align: center;padding:  50px 0;}
+        .z6d1 {display: flex;justify-content: space-between;}
+        .x1d1 {width: 32%;}
+        .x1d2{position: relative;padding: 15px;height: 340px;display: flex;flex-direction: column;justify-content: space-between;}
+        .x1d3 {display: flex;justify-content: space-between;position: relative;z-index: 10;}
+        .x1s1 {background: #ACD24B;padding: 4px 15px;border-radius: 20px;color: white;}
+        .x1i1 {width: 25px;}
+        .x1d4 {display: flex;justify-content: space-between;position: relative;z-index: 10;}
+        .xis2 {color: white;text-align: left;font-weight: 600;}
+        .x1i2 {width: 90px;height: 23px;margin-top: 20px;}
+        .x1d2::before {content: "";background: url("{{assert('web/img/effect/top-destination-effect.png')}}");position: absolute;left: 0;width: 100%;height: 100%;bottom: 0;z-index: 0;}
+        .x1s4 {color: #7b7b7b;margin-left: 20px;position: relative;}
+        .x1h2 {font-weight: 500;}
+        .xid5 {background: #F2F1F1;border-radius: 0 0 10px 10px;padding: 15px;text-align: left;border: 1px solid #eeebeb;}
+        #z7se1 {height: 300px;display: flex;justify-content: center;}
+        #z7se1::before {content: "";background: #00000061;height: 300px;background-size: cover;position: absolute;width: 100%;left: 0;z-index: 0;}
+        .z7d1 {width: 50%;height: 100%;display: flex;align-items: center;justify-content: center;}
+        #z7d2{background: url("{{asset('web/img/Cheers.png')}}");background-size: cover;}
+        #z7d3{background: url("{{asset('web/img/Honeymoon.png')}}");background-size: cover;}
+        .z7h1 {color: white;font-size: 45px;}
+        .z7p1 {padding: 0 0;font-size: 15px;}
+        .z7d4 {position: relative;z-index: 3;}
+        .z7a1 {text-decoration: none;color: white;margin-top: 32px;display: block;border: 4px solid white;width: max-content;padding: 10px 20px;border-radius: 42px;font-size: 16px;}
+        #z8se1 {text-align: center;padding:  50px 0;}
+        .z8d1 {display: flex;justify-content: space-between;}
+        p{color: white}
+        #_1:before{content: '';position: absolute;width: 120%;bottom: 0;height: 4px;left: 0;background: var(--cyan);z-index: 1;margin-left: -4px;}
+
+
+
+        @media screen and (max-width:1570px) {#zfm1 {flex-direction: column;}.zd3 {flex-wrap: wrap;width: 90%;margin-bottom: 16px;}.zin1 {width: 50%;padding: 10px;border: none;margin: 8px 0;border-bottom: 1px solid;}.zd2 {border-radius: 25px;}#sbt{width: 100%;}section#z7se1 {flex-direction: column;height: 877px;}#z7se1::before {height: 100% !important;}div.z7d1 {width: 100%;}}
+        @media screen and (max-width:720px) {.zin1 {width: 100%;}.zd1 {top: 23%;}.z3d1 {width: 48%;}.z4d1 {width: 100%;}}
+        @media screen and (max-width:590px) {section#zse1 {height: 128vh;}.z2d2 {width: 100% !important;margin-bottom: 20px;}.z2d1 {flex-wrap: wrap;}.z3d1 {width: 100%;}.z5d1 {flex-wrap: wrap;}.zd5d2 {width: 100%;}}
+    </style>
+@endsection
+
+@section('content')
+
 
     <section id="zse1">
         <div class="zd1">
@@ -27,7 +98,8 @@
                 <div class="zd3">
 
                     <!-- <input  name="checkIn" required type="date" class="zin1" onfocus="this.placeholder='Select a date'">-->
-                    <input onfocus="show()" name="dates" required type="text" id="dates" class="zin1" placeholder="Select a date">
+                    <!-- <input onfocus="show" name="dates" required type="text" id="dates" class="zin1" placeholder="Select a date"> -->
+                    <input type="text" class="form-control date zin1" >
                     <select name="destination" class="zin1" >
                         <option class="op" value="">Destinations</option>
                         @foreach($destinations as $key => $destination)
@@ -38,166 +110,9 @@
                 </div>
                 <button id="sbt" type="submit" class="bt1">Search</button>
                 </form>
-                
             </div>
         </div>
     </section>
-
-    <script>
-
-$(function(){
-  
-  var startDate, endDate;
-  
-  var datepicker = {
-        container: $("#datepicker"),
-        dateFormat: 'mm/dd/yy',
-        dates: [null, null],
-        status: null,
-        inputs: {
-            checkin: $('#checkin'),
-            checkout: $('#checkout'),
-            dates: $('#dates')
-        }
-    };
-
-datepicker.container.datepicker({
-  numberOfMonths: 2,
-  dateFormat: datepicker.dateFormat,
-  minDate: 0,
-  maxDate: null,
-
-  beforeShowDay: function(date) {
-    var highlight = false,
-        currentTime = date.getTime(),
-        selectedTime = datepicker.dates,
-        checkin_date = selectedTime[0] ? new Date(selectedTime[0]) : null,
-        checkout_date = selectedTime[1] ? new Date(selectedTime[1]) : null,
-        checkin_timestamp,
-        checkout_timestamp,
-        classes = 'ui-datepicker-highlight';
-    
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0);
-    date.setMilliseconds(0);
-
-    currentTime = date.getTime();
-    
-    // CHECKIN/CHECKOUT CLASSES
-     if(checkin_date) {
-       checkin_date.setHours(0);
-       checkin_date.setMinutes(0);
-       checkin_date.setSeconds(0);
-       checkin_date.setMilliseconds(0);
-       checkin_timestamp = checkin_date.getTime();
-
-       startDate = checkin_timestamp;
-     }
-
-    if(checkout_date) {
-      checkout_date.setHours(0);
-      checkout_date.setMinutes(0);
-      checkout_date.setSeconds(0);
-      checkout_date.setMilliseconds(0);
-      checkout_timestamp = checkout_date.getTime();
-
-      endDate = checkout_timestamp;
-    }
-
-    if ( checkin_timestamp && currentTime == checkin_timestamp ) {
-      classes = 'ui-datepicker-highlight ui-checkin';
-    } else if (checkout_timestamp && currentTime == checkout_timestamp) {
-      classes = 'ui-datepicker-highlight ui-checkout';
-    }
-
-    // Highlight date range
-    if ((selectedTime[0] && selectedTime[0] == currentTime) || (selectedTime[1] && (currentTime >= selectedTime[0] && currentTime <= selectedTime[1]))) highlight = true;
-
-    return [true, highlight ? classes : ""];
-  },
-  onSelect: function(dateText) {
-
-    if (!datepicker.dates[0] || datepicker.dates[1] !== null) {
-      // CHOOSE FIRST DATE
-      
-      // fill dates array with first chosen date
-      datepicker.dates[0] = $.datepicker.parseDate(datepicker.dateFormat, dateText).getTime();
-      datepicker.dates[1] = null;
-      
-      // clear all inputs
-	    datepicker.inputs.checkin.val('');
-      datepicker.inputs.checkout.val('');
-	    datepicker.inputs.dates.val('');
-      
-      // set current datepicker state
-      datepicker.status = 'checkin-selected';
-      
-      // create mouseover for table cell
-      $('#datepicker').delegate('.ui-datepicker td', 'mouseover', function(){
-        
-        // if it doesn't have year data (old month or unselectable date)
-        if ($(this).data('year') == undefined) return;
-        
-        // datepicker state is not in date range select, depart date wasn't chosen, or return date already chosen then exit
-        if (datepicker.status != 'checkin-selected') return;
-        
-        // get date from hovered cell
-        var hoverDate = $(this).data('year')+'-'+($(this).data('month')+1)+'-'+$('a',this).html();
-        
-        // parse hovered date into milliseconds
-        hoverDate = $.datepicker.parseDate('yy-mm-dd', hoverDate).getTime();
-        
-        $('#datepicker td').each(function(){
-          
-          // compare each table cell if it's date is in date range between selected date and hovered
-          if ($(this).data('year') == undefined) return;
-          
-          var year = $(this).data('year'),
-              month = $(this).data('month'),
-              day = $('a', this).html();
-            
-          var cellDate = $(this).data('year')+'-'+($(this).data('month')+1)+'-'+$('a',this).html();
-          
-          // convert cell date into milliseconds for further comparison
-          cellDate = $.datepicker.parseDate('yy-mm-dd', cellDate).getTime();
-
-          if ( (cellDate >= datepicker.dates[0] && cellDate <= hoverDate) || (cellDate <= datepicker.dates[0] && cellDate >= hoverDate) ) {
-              $(this).addClass('ui-datepicker-hover');
-            } else {
-              $(this).removeClass('ui-datepicker-hover');
-            }
-
-        });
-      });
-
-  } else {
-    // CHOOSE SECOND DATE
-    
-    // push second date into dates array
-    datepicker.dates[1] = $.datepicker.parseDate(datepicker.dateFormat, dateText).getTime();
-    
-    // sort array dates
-	  datepicker.dates.sort();
-
-    var checkInDate = $.datepicker.parseDate('@', datepicker.dates[0]);
-    var checkOutDate = $.datepicker.parseDate('@', datepicker.dates[1]);
-    
-    datepicker.status = 'checkout-selected';
-	            
-//fill input fields
-   datepicker.inputs.checkin.val($.datepicker.formatDate(datepicker.dateFormat, checkInDate));
-	            datepicker.inputs.checkout.val($.datepicker.formatDate(datepicker.dateFormat, checkOutDate)).change();
-	            datepicker.inputs.dates.val(datepicker.inputs.checkin.val() + ' - ' + datepicker.inputs.checkout.val());
-
-            }
-        }
-    });
-});
-
-    </script>
-
-
 
     <section id="z2se2">
         <div class="w">
@@ -239,9 +154,7 @@ datepicker.container.datepicker({
     <section id="z3se1">
         <div class="w">
             <h1 class="z3h1">Find Your Perfect Accommodation</h1>
-            <div class="fsb" style="
-    flex-wrap: wrap;
-">
+            <div class="fsb" style="flex-wrap: wrap;">
                 @foreach($propertyTypes as $key => $PropertyType)
                     <div class="z3d1">
                         <img class="z3i1" src="{{asset('web/img/property-type/'.$PropertyType->name.'.jpg')}}"
@@ -335,21 +248,21 @@ datepicker.container.datepicker({
         </div>
     </section>
 
-    {{--  <section id="z8se1">
+   <section id="z8se1">
         <div class="w">
             <h1 class="z5h1">Explore Our Top-rated Stays</h1>
             <div class="z8d1">
                 <div class="w wrapper">
                     <ul class="carousel">
 
-                        @foreach($PromotionBar02 as $PromotionCard)
+                        @foreach($PromotionBar01 as $PromotionCard)
                             @php
                                 $image_array = explode(',', $PromotionCard->image);
                                 $wishlist_array = Auth::check() ? explode(',', $userupdateWishList->wishlist) : [];
                             @endphp
                             <li class="card">
                                 <div class="x1d1" style="width:100%">
-                                    <div class="x1d2" style="background: url({{asset('Property/Images/'.$image_array[0])}});  background-size: cover;">
+                                    <div class="x1d2" style="background: url('{{asset("Property/Images/".$image_array[0])}} ');  background-size: cover;">
                                         <div class="x1d3">
                                         </div>
                                         <div class="x1d4">
@@ -367,8 +280,22 @@ datepicker.container.datepicker({
                 </div>
             </div>
         </div>
-    </section>  --}}
+    </section> 
 
+@endsection
+
+@section('js')
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+     <script src="{{asset('web/js/js.js')}}"></script>
+
+
+    <script type="text/javascript" src="{{asset('web/assets/slider/slider.js')}}"></script>
+
+    
 
 @endsection
 
