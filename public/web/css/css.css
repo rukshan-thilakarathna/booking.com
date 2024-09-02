@@ -3,9 +3,12 @@
 .fsb{display: flex;align-items: center;justify-content: space-between}
 p {font-size: 15px;padding: 10px;line-height: 1.5;letter-spacing: 0.5px;}
 
-.d0 {background: #16BECB;padding: 15px 0;}
+.d0 {}
 
-.a1 {text-decoration: none;color: white;margin-right: 40px;font-size: 14px;}
+.a1 {    text-decoration: none;
+    color: #303030;
+    margin-right: 40px;
+    font-size: 16px;}
 .sl1 {background: none;border: none;color: white;outline: none;}
 .d2 {display: flex;align-items: center;}
 .i1 {width: 20px;margin-right: 7px;}

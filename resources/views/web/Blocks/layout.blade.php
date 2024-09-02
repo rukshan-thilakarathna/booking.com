@@ -20,8 +20,8 @@
 
     <title>Document</title>
 <style>
-    #zse1 {background: url({{asset('web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.png')}});height: 100vh;background-size: cover;position: relative;}
-    .zd1 {position: absolute;width: 50%;display: flex;flex-direction: column;text-align: center;margin: auto;top: 33%;right: 0;left: 0;}
+    #zse1 {background: url({{asset('web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.png')}});height: 50vh;background-size: cover;position: relative;}
+    .zd1 {position: absolute;width: 50%;display: flex;flex-direction: column;text-align: center;margin: auto;top: 25%;right: 0;left: 0;}
     .zh1 {color: white;font-size: 60px;font-weight:bold;font-family: "Cormorant Garamond", serif;}
 
     #zse1::before {content: "";display: block;width: 100%;height: 100%;background: #00000073;}
@@ -47,9 +47,9 @@
         text-align: center;
         font-size: 15px;
         padding: 0 10px;
-        width: 28%;
+        width:30%;
     }
-    .zin1:last-child {border-right: none;!important;}
+    .zin1:last-child {border-right: none!important;}
     #zfm1{}
 
     #z2se2 {padding: 50px 0;text-align: center;}
