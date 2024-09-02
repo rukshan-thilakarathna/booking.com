@@ -6,8 +6,8 @@
            format: 'DD-MM-YYYY'
      },
      "alwaysShowCalendars": true,
-     "minDate": currentDate,
-     "maxDate": moment().add('months', 3),
+     "minDate": 'checkin',
+     "maxDate": 'checkout',
      autoApply: true,
      autoUpdateInput: true
  }, function(start, end, label) {

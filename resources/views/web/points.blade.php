@@ -1,5 +1,15 @@
 @extends('web.Blocks.layout')
 
+@section('links')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{{asset('web/assets/fonts/font-awesome.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('web/assets/fonts/elegant-fonts.css')}}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{asset('web/assets/bootstrap/css/bootstrap.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('web/assets/css/zabuto_calendar.min.css')}}" type="text/css">
+@endsection
+
+
 @section('content')
     <div id="page-content">
         <div class="container">
@@ -91,4 +101,25 @@
         </div>
         <!--end container-->
     </div>
+@endsection
+
+
+
+@section('js')
+    <script type="text/javascript" src="{{asset('web/assets/js/jquery-2.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/jquery-migrate-1.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/infobox.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/markerclusterer_packed.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/richmarker-compiled.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/markerwithlabel_packed.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/jquery.validate.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/bootstrap-datepicker.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/icheck.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/owl.carousel.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/masonry.pkgd.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/custom.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/maps.js')}}"></script>
+    <script src="{{asset('web/assets/js/ie.js')}}"></script>
 @endsection

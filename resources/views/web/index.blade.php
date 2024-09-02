@@ -5,10 +5,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
 
-    <link rel="stylesheet" href="{{asset('web/assets/css/owl.carousel.css')}}" type="text/css"> 
+    <link rel="stylesheet" href="{{asset('web/assets/css/owl.carousel.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/css/style.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('web/assets/slider/slider.css?fd')}}" type="text/css"> 
-
+    <link rel="stylesheet" href="{{asset('web/assets/slider/slider.css?fd')}}" type="text/css">
 @endsection
 
 @section('style')
@@ -87,8 +86,6 @@
 @endsection
 
 @section('content')
-
-
     <section id="zse1">
         <div class="zd1">
             <h1 class="zh1">Find Your Ideal Stay in <br> Paradise</h1>
@@ -100,6 +97,11 @@
                     <!-- <input  name="checkIn" required type="date" class="zin1" onfocus="this.placeholder='Select a date'">-->
                     <!-- <input onfocus="show" name="dates" required type="text" id="dates" class="zin1" placeholder="Select a date"> -->
                     <input type="text" class="form-control date zin1" >
+                    <input type="text" id="search_checkin" class="form-control" placeholder="Use this hidden">
+      </div>
+    <div clas="col">
+      <input type="text" id="search_checkout" class="form-control" placeholder="Use this hidden">
+      </div> 
                     <select name="destination" class="zin1" >
                         <option class="op" value="">Destinations</option>
                         @foreach($destinations as $key => $destination)
@@ -280,23 +282,17 @@
                 </div>
             </div>
         </div>
-    </section> 
+    </section>
 
 @endsection
 
 @section('js')
-
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
      <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
      <script src="{{asset('web/js/js.js')}}"></script>
-
-
     <script type="text/javascript" src="{{asset('web/assets/slider/slider.js')}}"></script>
-
-    
-
 @endsection
 
 

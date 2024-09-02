@@ -287,79 +287,95 @@
     </div>
     </div>
 
+@endsection
+
+@section('js')
     <script>
+        // Function to create a new anchor tag
+        function createAnchor(href, textContent, parentElementId) {
+            // Create the new anchor element
+            var newAnchor = document.createElement('a');
+            // Set the href attribute of the new anchor
+            newAnchor.href = href;
+            newAnchor.style.marginRight = '10px';
+            // Set the text content of the new anchor
+            newAnchor.textContent = textContent;
+            // Get the parent element by its ID
+            var parentElement = document.getElementById(parentElementId);
+            newAnchor.className = 'btn btn-primary btn-lg active';
+            // Append the new anchor to the parent element
 
-    // Function to create a new anchor tag
-    function createAnchor(href, textContent, parentElementId) {
-        // Create the new anchor element
-        var newAnchor = document.createElement('a');
-        // Set the href attribute of the new anchor
-        newAnchor.href = href;
-         newAnchor.style.marginRight = '10px';
-        // Set the text content of the new anchor
-        newAnchor.textContent = textContent;
-        // Get the parent element by its ID
-        var parentElement = document.getElementById(parentElementId);
-        newAnchor.className = 'btn btn-primary btn-lg active';
-        // Append the new anchor to the parent element
-
-        parentElement.appendChild(newAnchor);
-    }
-
-
-</script>
-
-  <script>
-    var modalbody = document.getElementById('modalbody')
-    document.addEventListener('DOMContentLoaded', function() {
-    // Add event listener to the document or a parent element that contains the button
-    document.addEventListener('click', function(event) {
-        // Check if the clicked element is the "Reserve Now" button
-        if (event.target.matches('.zbt1[data-value]')) {
-            // Get the data-value attribute of the clicked button
-            var dataValue = event.target.getAttribute('data-value');
-
-            // Clear the modal body
-            while (modalbody.firstChild) {
-                modalbody.removeChild(modalbody.firstChild);
-            }
-
-            // Dynamically add anchors based on PHP logic
-            @php
-                $start_date = new DateTime(date('Y-m-d'));
-                $end_date = new DateTime($UrlData['chackIn']);
-
-                // Include end date in the interval count
-                $end_date->modify('+1 day');
-
-                // Create an interval of 1 day
-                $interval = new DateInterval('P1D');
-
-                // Create a date period
-                $daterange = new DatePeriod($start_date, $interval, $end_date);
-
-                // Count the number of dates
-                $date_count = iterator_count($daterange);
-
-                $payNowUrl = route('web.page.index');
-                $payLaterUrl = route('web.booking.confourm', [
-                    'id' => 'DATA_VALUE_PLACEHOLDER',
-                    'chackIn' => $UrlData['chackIn'] ?? 0,
-                    'chackOut' => $UrlData['chackOut'] ?? 0,
-                    'adults' => $UrlData['adults'] ?? 0,
-                    'children' => $UrlData['children'] ?? 0,
-                ]);
-            @endphp
-
-            @if($date_count > 14 && isset(Session::get('user')['id']))
-                //createAnchor('{{ $payNowUrl }}', 'Pay Now', 'modalbody');
-                createAnchor('{{ $payLaterUrl }}'.replace('DATA_VALUE_PLACEHOLDER', dataValue), 'Pay Later', 'modalbody');
-            @else
-                createAnchor('{{ $payNowUrl }}', 'Pay Now', 'modalbody');
-            @endif
+            parentElement.appendChild(newAnchor);
         }
-    });
-});
     </script>
 
+    <script>
+        var modalbody = document.getElementById('modalbody')
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listener to the document or a parent element that contains the button
+            document.addEventListener('click', function(event) {
+                // Check if the clicked element is the "Reserve Now" button
+                if (event.target.matches('.zbt1[data-value]')) {
+                    // Get the data-value attribute of the clicked button
+                    var dataValue = event.target.getAttribute('data-value');
+
+                    // Clear the modal body
+                    while (modalbody.firstChild) {
+                        modalbody.removeChild(modalbody.firstChild);
+                    }
+
+                    // Dynamically add anchors based on PHP logic
+                    @php
+                        $start_date = new DateTime(date('Y-m-d'));
+                        $end_date = new DateTime($UrlData['chackIn']);
+
+                        // Include end date in the interval count
+                        $end_date->modify('+1 day');
+
+                        // Create an interval of 1 day
+                        $interval = new DateInterval('P1D');
+
+                        // Create a date period
+                        $daterange = new DatePeriod($start_date, $interval, $end_date);
+
+                        // Count the number of dates
+                        $date_count = iterator_count($daterange);
+
+                        $payNowUrl = route('web.page.index');
+                        $payLaterUrl = route('web.booking.confourm', [
+                            'id' => 'DATA_VALUE_PLACEHOLDER',
+                            'chackIn' => $UrlData['chackIn'] ?? 0,
+                            'chackOut' => $UrlData['chackOut'] ?? 0,
+                            'adults' => $UrlData['adults'] ?? 0,
+                            'children' => $UrlData['children'] ?? 0,
+                        ]);
+                    @endphp
+
+                    @if($date_count > 14 && isset(Session::get('user')['id']))
+                        //createAnchor('{{ $payNowUrl }}', 'Pay Now', 'modalbody');
+                        createAnchor('{{ $payLaterUrl }}'.replace('DATA_VALUE_PLACEHOLDER', dataValue), 'Pay Later', 'modalbody');
+                    @else
+                        createAnchor('{{ $payNowUrl }}', 'Pay Now', 'modalbody');
+                    @endif
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" src="{{asset('web/assets/js/jquery-2.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/jquery-migrate-1.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/infobox.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/markerclusterer_packed.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/richmarker-compiled.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/markerwithlabel_packed.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/jquery.validate.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/bootstrap-datepicker.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/icheck.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/owl.carousel.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/masonry.pkgd.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/custom.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/js/maps.js')}}"></script>
+    <script src="{{asset('web/assets/js/ie.js')}}"></script>
 @endsection
