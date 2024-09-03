@@ -6,22 +6,16 @@
                 <div style="display: flex;">
                    
                     <div class="d1 fsb">
-                        @if(isset(Session::get('user')['id']))
-                            <a href="{{route('web.page.list')}}" class="a1">List your property</a>
-                            <a href="" class="a1">Bookings</a>
-                        @else
-                            <a href="{{route('web.login')}}" class="a1">List your property</a>
-                            <a href="{{route('web.login')}}" class="a1">Bookings</a>
-                        @endif
+                     
+                            <a href="{{route('post-property')}}" class="a1">List your property</a>
+                            <a href="{{route('web.page.list')}}" class="a1">Bookings</a>
 
                         <a href="" class="a1">Support</a>
                         <div class="d2">
-                           
                             @if(isset(Session::get('user')['id']))
-                                <a class="a1" href="{{route('web.dashboard')}}">{{Session::get('user')['name']}} <span style=" font-size: 12px;" >({{Session::get('user')['role']}})</span></a>
-                                <a class="a1" href="{{route('logout')}}">Sign out</a>
+                                <a class="a1" style="background: #136eff;color: white;padding: 15px;border-radius: 6px;" href="{{route('web.dashboard')}}">Hello {{Session::get('user')['name']}} </a>
                             @else
-                                <a class="a1" href="{{route('web.login')}}">Sign in  |  Sign Up</a>
+                                <a class="a1" style="background: #136eff;color: white;padding: 15px;border-radius: 6px;"  href="{{route('web.login')}}">Sign in  |  Sign Up</a>
                             @endif
                         </div>
                         

@@ -53,11 +53,11 @@ div#footer1 {
 }
 span.s101 {
     display: block;
-    width: 100%;
+    width: max-content;
     text-align: center;
     position: absolute;
     color: white;
-    bottom: -35px;
+    bottom: -40px;
 }
 .i200{}
 @media screen and (max-width:1240px) {.w {width: 93%;margin: 0 3.5%}}

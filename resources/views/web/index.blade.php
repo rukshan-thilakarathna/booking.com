@@ -83,6 +83,9 @@
         #_1:before{content: '';position: absolute;width: 120%;bottom: 0;height: 4px;left: 0;background: var(--cyan);z-index: 1;margin-left: -4px;}
 
 
+        .rikd1 {background: #ffdb23;padding: 30px 5px;border-radius: 10px;}
+        .rikh1 {font-size: 30px;text-align: left;padding: 0 0 0 31px;}
+        .rik1 {width: 25%;background: #ffffffb8;height: 100px;margin: 0 5px;border-radius: 10px;display: flex;align-items: center;padding: 0 50px;}
 
         @media screen and (max-width:1570px) {#zfm1 {flex-direction: column;}.zd3 {flex-wrap: wrap;width: 90%;margin-bottom: 16px;}.zin1 {width: 50%;padding: 10px;border: none;margin: 8px 0;border-bottom: 1px solid;}.zd2 {border-radius: 25px;}#sbt{width: 100%;}section#z7se1 {flex-direction: column;height: 877px;}#z7se1::before {height: 100% !important;}div.z7d1 {width: 100%;}}
         @media screen and (max-width:720px) {.zin1 {width: 100%;}.zd1 {top: 23%;}.z3d1 {width: 48%;}.z4d1 {width: 100%;}}
@@ -98,9 +101,6 @@
             <div class="zd2">
             <form id="zfm1" action="{{route('web.page.list')}}" method="GET" style="display: flex;align-items: center;width: 100%;justify-content: space-between;">
                 <div class="zd3">
-
-                 
-         
                     <input type="text" class="zin1" id="dates" placeholder="checkin/checkout" />
                     <input type="hidden" name="checkIn" id="checkin" />
                     <input type="hidden" name="checkOut" id="checkout" />
@@ -128,28 +128,29 @@
             @php
                 $class = [1,2,3,1,2,3];
             @endphp
-            <div class="z2d1" style="    margin-top: 40px;">
+            <div class="z2d1"style="margin-top: 40px;">
                 @foreach($propertiesDestinations as $key => $PropertyDestination)
                     @if($key <= 2)
-                        <div class="z2d2 z2d1-{{$class[$key]}}"
-                             style="background: url({{asset('web/img/destinations/'.$PropertyDestination->district->url.'.jpg')}});background-size: cover;background-position: center;">
-                            <div class="z2d4">
-                                <a href="list?destination={{$PropertyDestination->district->id}}"><h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2></a>
-                                <span class="z2s1">{{$uniquePropertyCount[$PropertyDestination->main_location]}} Properties</span>
+                        <!-- <a style="all: unset;" href="list?destination={{$PropertyDestination->id}}">  -->
+                            <div onclick="window.location.href='list?destination={{ $PropertyDestination->id }}';" class="z2d2 z2d1-{{$class[$key]}}"
+                                style="cursor:pointer;background: url('{{asset('web/img/destinations/'.$PropertyDestination->district->url.'.jpg')}}');background-size: cover;background-position: center;">
+                                <div class="z2d4">
+                                    <h2  class="z2h2">{{$PropertyDestination->district->name_en}}</h2>
+                                    <span class="z2s1">{{$uniquePropertyCount[$PropertyDestination->main_location]}} Properties</span>
+                                </div>
                             </div>
-                        </div>
+                        <!-- </a> -->
                     @endif
                 @endforeach
             </div>
             <div class="z2d1" id="z2d3">
-
                 @foreach($propertiesDestinations as $key => $PropertyDestination)
-
                     @if( $key > 2 && $key <= 5)
-                        <div class="z2d2 z2d1-{{$class[$key]}}"
-                             style="background: url({{asset('web/img/destinations/'.$PropertyDestination->district->url.'.jpg')}});;background-size: cover;background-position: center;">
+                   
+                        <div onclick="window.location.href='list?destination={{ $PropertyDestination->id }}';" class="z2d2 z2d1-{{$class[$key]}}"
+                             style="cursor:pointer;background: url({{asset('web/img/destinations/'.$PropertyDestination->district->url.'.jpg')}});;background-size: cover;background-position: center;">
                             <div class="z2d4">
-                                <a href="list?destination={{$PropertyDestination->id}}"><h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2></a>
+                               <h2 class="z2h2">{{$PropertyDestination->district->name_en}}</h2>
                                 <span class="z2s1">{{$uniquePropertyCount[$PropertyDestination->main_location]}} Properties</span>
                             </div>
                         </div>
@@ -161,14 +162,33 @@
 
     <section id="z3se1">
         <div class="w">
+            <!-- <h1 class="z3h1">Why Book with us?</h1>
+            <p style="color: #000000;">Discover the Perfect Accommodation for Your Dream Vacation</p> -->
+            <div class="fsb rikd1">
+                <h1 class="rikh1">Why Book with us?</h1>
+                <div class="rik1">
+                    Find Your Perfect Stay Easily with Booking.com’s Advanced Search Options
+                </div>
+                <div class="rik1">
+                    Explore a Wide Variety of Accommodations
+                </div>
+                <div class="rik1">
+                    Experience the User-Friendly Features 
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="z3se1">
+        <div class="w">
             <h1 class="z3h1">Find Your Perfect Accommodation</h1>
             <p style="color: #000000;">Discover the Perfect Accommodation for Your Dream Vacation</p>
             <div class="fsb" style="flex-wrap: wrap;    margin-top: 40px;">
                 @foreach($propertyTypes as $key => $PropertyType)
-                    <div class="z3d1">
+                    <div style="cursor:pointer;" onclick="window.location.href='list?pt%5B%5D={{$PropertyType->id}}';" class="z3d1">
                         <img class="z3i1" src="{{asset('web/img/property-type/'.$PropertyType->name.'.jpg')}}"
                              alt="Find-Your-Perfect-Accommodation-Hotels">
-                        <a  href="list?ptpt%5B%5D={{$PropertyType->id}}"><h2 style="color: black;font-weight: 400;margin-top: 0px;padding: 6px 0;"  class="z3h2">{{$PropertyType->name}}</h2></a>
+                        <h2 style="color: black;font-weight: 400;margin-top: 0px;padding: 6px 0;"  class="z3h2">{{$PropertyType->name}}</h2>
                     </div>
                 @endforeach
             </div>
@@ -199,7 +219,7 @@
                         $image_array = explode(',', $PromotionCard->image);
                         $wishlist_array = Auth::check() ? explode(',', $userupdateWishList->wishlist) : [];
                     @endphp
-                    <li class="card">
+                    <li    class="card">
                         <div class="x1d1" style="width:100%">
                             <div class="x1d2" style="background: url({{asset('Property/Images/'.$image_array[0])}});  background-size: cover;">
                                 <div class="x1d3">
@@ -209,7 +229,7 @@
                                 </div>
                             </div>
                             <div class="xid5">
-                                <a href="{{route('web.page.detail',$PromotionCard->id)}}"><h2 class="x1h2">{{$PromotionCard->name}}</h2></a>
+                                <h2 onclick="window.location.href='{{route('web.page.detail',$PromotionCard->id)}}';" class="x1h2">{{$PromotionCard->name}}</h2>
                                 <span><img src="{{asset('web/img/icons/Location.svg')}}" alt=""><span style="margin: 2px;font-size: 16px;" class="x1s4">{{$PromotionCard->district->name_en}} , {{$PromotionCard->city->name_en}}</span></span>
                             </div>
                         </div>
@@ -265,7 +285,7 @@
                                     <h2 class="name">{{$PromotionCard->name}}</h2>
                                     <p class="description">{{$PromotionCard->description}}</p>
 
-                                    <button class=" bt1">View More</button>
+                                    <button onclick="window.location.href='{{route('web.page.detail',$PromotionCard->id)}}';" class=" bt1">View More</button>
                                 </div>
                             </div>
                         @endforeach

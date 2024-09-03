@@ -1,3 +1,4 @@
+@php use App\Models\PropertyFacilities; @endphp
 @extends('web.Blocks.layout')
 
 @section('links')
@@ -94,7 +95,7 @@
                                 <!--end collapse-->
                                 <div class="form-group center">
                                     <button type="submit" class="btn btn-primary btn-rounded form-control">Search</button>
-                                    <a href="{{route('web.page.list')}}"  class="btn btn-primary btn-rounded form-control">Reset</a>
+                                    
                                 </div>
                             </form>
                             <!--end form-filter-->
@@ -107,16 +108,22 @@
                     <div class="main-content">
 
                         @foreach($list as $item)
-                            <div class="item list" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
+
+                            @php
+                                $image_array = explode(',', $item->image);
+                                $wishlist_array = Auth::check() ? explode(',', $userupdateWishList->wishlist) : [];
+                            @endphp
+                            <div class="item list" style="border: 1px solid #b7b7b7;
+    border-radius: 10px;" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
                                 <div class="image-wrapper" style="border-radius: 10px 0px 0px 10px;overflow: hidden;">
-                                    <div class="image">
+                                    <div class="image" style="position: relative;">
+                                    <div class="meta" style="position: absolute;z-index: 5;right: 0;">
+                                       <img id="id_{{$item->id}}" style="border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $item->id) }}"  data-id="{{$item->id}}" src="{{in_array($item->id,$wishlist_array) ? asset('web/heart.png') : asset('web/heart2.png')}}" alt="hart" class="x1i1">
+                                    </div>
                                         <a href="{{route('web.page.detail',$item->id)}}" class="wrapper">
 
                                             <div class="gallery">
-                                                @php
-                                                    $image_array = explode(',', $item->image);
-                                                    $wishlist_array = Auth::check() ? explode(',', $userupdateWishList->wishlist) : [];
-                                                @endphp
+                                                
                                                 <img {{count($image_array)}} src="{{asset('Property/Images/'.$image_array[0])}}" alt="">
 
                                                 @foreach($image_array as $key => $image)
@@ -137,15 +144,29 @@
                                 </div>
                                 <!--end image-->
                                 <div class="description">
-                                    <div class="meta">
-                                       <img id="id_{{$item->id}}" style="border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $item->id) }}"  data-id="{{$item->id}}" src="{{in_array($item->id,$wishlist_array) ? asset('web/heart.png') : asset('web/heart2.png')}}" alt="hart" class="x1i1">
-                                    </div>
+                                    
                                     <!--end meta-->
                                     <div class="info">
-                                        <a href="{{route('web.page.detail',$item->id)}}"><h3 style="font-size: 20px">{{$item->name}}</h3></a>
-                                        <figure class="location">{{$item->district->name_en}}</figure>
-                                        <figure class="label label-info">{{$item->propertyType->name}}</figure>
-                                        <p>{{$item->description}}</p>
+                                        <a href="{{route('web.page.detail',$item->id)}}"><h3 style="font-size: 20px;font-weight: 400;color: #060724;">{{$item->name}}</h3></a>
+                                        <figure class="location">{{$item->district->name_en}}/{{$item->propertyType->name}}</figure>
+
+                                        @php
+
+                                            $propertyFacility = explode(',', $item->facilities);
+
+                                            $fnames = PropertyFacilities::inRandomOrder()->whereIn('id',$propertyFacility)->limit(7)->get();
+
+                                        @endphp
+
+                                        
+
+                                        <div style="display: flex;flex-wrap: wrap;">
+                                            @forEach($fnames as  $fname)
+                                                <figure style="background: #6c6c70;color: #ffffff;padding: 4px 8px;margin: 2px;" class="label label-info">{{$fname->name}}</figure>
+                                            @endforeach
+                                        </div>
+                                        
+                                        <p style="font-size: 11px !important;">{{$item->description}}</p>
                                         <a href="{{route('web.page.detail',$item->id)}}" class="btn btn-rounded btn-default btn-framed btn-small">View detail</a>
                                     </div>
                                     <!--end info-->

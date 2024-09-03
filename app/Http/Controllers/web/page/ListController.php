@@ -119,6 +119,8 @@ class ListController extends Controller
             $userupdateWishList = [];
         }
 
+        
+
         return view('web.list')->with([
             'list' => $list,
             'propertyTypes' => $allPropertyType,

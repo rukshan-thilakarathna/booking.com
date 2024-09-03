@@ -103,7 +103,7 @@ class PropertyListScreen extends Screen
                 ->canSee($user->hasAnyAccess(['create.room.type.permissions']))
                 ->href(route('room-types')),
 
-            Link::make(__('Create New Property'))
+            Link::make(__('List property'))
                 ->canSee($user->hasAnyAccess(['property.create.permissions']) || $user->hasAnyAccess(['property.admin_create.permissions']))
                 ->href(route('property.create')),
         ];
