@@ -8,6 +8,105 @@
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{asset('web/assets/bootstrap/css/bootstrap.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/css/zabuto_calendar.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+@endsection
+
+@section('style')
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
+
+.photos-grid-container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 0;
+  align-items: start;
+}
+@media (max-width: 580px) {
+  .photos-grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+.photos-grid-container .img-box {
+  border: 1px solid #ffffff;
+  position: relative;
+}
+.photos-grid-container .img-box:hover .transparent-box {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.photos-grid-container .img-box:hover .caption {
+  transform: translateY(-5px);
+}
+.photos-grid-container img {
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+.photos-grid-container .caption {
+  color: white;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  font-size: 1.5rem;
+}
+.photos-grid-container .transparent-box {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.photos-grid-container .main-photo {
+  grid-row: 1;
+  grid-column: 1;
+}
+.photos-grid-container .sub {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 0em;
+}
+.photos-grid-container .sub:nth-child(0) {
+  grid-column: 1;
+  grid-row: 1;
+}
+.photos-grid-container .sub:nth-child(1) {
+  grid-column: 2;
+  grid-row: 1;
+}
+.photos-grid-container .sub:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+.photos-grid-container .sub:nth-child(3) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.hide-element {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    margin: 0 auto;
+    width: 1250px;
+  }
+}
+    </style>
 @endsection
 
 @section('content')
@@ -44,8 +143,40 @@
                                 <a href="#availability" class="btn btn-primary btn-rounded scroll">Reserve Today</a>
                             </div>
                         </div>
+                        <main>
+                            <div class="container">
+                            <div id="gallery" class="photos-grid-container gallery">
+                                <div class="main-photo img-box">
+                                <a href="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=1200&&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&h=1800&&q=80" alt="image" /></a>
+                                </div>
+                                <div>
+                                <div class="sub">
+                                    <div class="img-box"><a href="https://images.unsplash.com/photo-1588186941799-f9a4fc54ff1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1588186941799-f9a4fc54ff1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&h=900&q=80" alt="image" /></a></div>
+                                    <div class="img-box"><a href="https://images.unsplash.com/photo-1593409981958-562665d407cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1593409981958-562665d407cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&h=900&q=60" alt="image" /></a></div>
+                                    <div class="img-box"><a href="https://images.unsplash.com/photo-1587538639284-aec1076ba9c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1587538639284-aec1076ba9c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&h=900&q=60" alt="image" /></a></div>
+                                    <div id="multi-link" class="img-box">
+                                    <a href="https://images.unsplash.com/photo-1591557304122-513e396f9feb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image">
+                                        <img src="https://images.unsplash.com/photo-1591557304122-513e396f9feb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&h=900&q=80" alt="image" />
+                                        <div class="transparent-box">
+                                        <div class="caption">
+                                            +3
+                                        </div>
+                                        </div>
+                                    </a>
+                                    </div>
+                                </div>
+                                </div>
+                                <div id="more-img" class="extra-images-container hide-element">
+                                <a href="https://images.unsplash.com/photo-1523450001312-faa4e2e37f0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODF8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1523450001312-faa4e2e37f0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODF8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&h=900&q=60" alt="image" /></a>
+                                <a href="https://images.unsplash.com/photo-1484081064812-86e90e107fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ4fHx3b21lbiUyMHNob3BwaW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1484081064812-86e90e107fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ4fHx3b21lbiUyMHNob3BwaW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=900&h=900&q=60" alt="image" /></a>
+                                <a href="https://images.unsplash.com/photo-1466695108335-44674aa2058b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1466695108335-44674aa2058b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&h=900&q=80" alt="image" /></a>
+                        
+                                </div>
+                            </div>
+                            </div>
+                        </main>
                         <!--end title-->
-                        <section id="gallery">
+                        <!-- <section id="gallery">
                             <div class="gallery-detail">
                                 <div class="one-item-carousel">
                                     @php
@@ -62,7 +193,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                        </section>
+                        </section> -->
                         <h2>Description</h2>
                         <div class="row">
                             <div class="col-md-12">
@@ -387,4 +518,14 @@
     <script type="text/javascript" src="{{asset('web/assets/js/custom.js')}}"></script>
     <script type="text/javascript" src="{{asset('web/assets/js/maps.js')}}"></script>
     <script src="{{asset('web/assets/js/ie.js')}}"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+ const lightbox = GLightbox({
+  touchNavigation: true,
+  loop: true,
+  width: "90vw",
+  height: "90vh"
+});
+</script>
 @endsection
