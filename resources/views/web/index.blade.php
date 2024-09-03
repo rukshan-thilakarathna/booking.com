@@ -98,8 +98,7 @@
                 <form id="zfm1" action="{{route('web.page.list')}}" method="GET" style="display: flex;align-items: center;width: 100%;justify-content: space-between;">
                 <div class="zd3">
 
-                    <!-- <input  name="checkIn" required type="date" class="zin1" onfocus="this.placeholder='Select a date'">-->
-                    <!-- <input onfocus="show" name="dates" required type="text" id="dates" class="zin1" placeholder="Select a date"> -->
+                 
                     <input type="text" class="form-control date zin1" >
                     
                     <input type="hidden" id="search_checkin" name="checkIn" class="form-control" placeholder="Use this hidden">
@@ -116,7 +115,9 @@
                 <button id="sbt" type="submit" class="bt1">Search</button>
                 </form>
             </div>
+
         </div>
+            
     </section>
 
     <section id="z2se2">
