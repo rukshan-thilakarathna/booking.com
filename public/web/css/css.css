@@ -10,7 +10,7 @@
 .fsb{display: flex;align-items: center;justify-content: space-between}
 p {font-size: 16px !important;padding: 10px;line-height: 1.5;letter-spacing: 0.5px;}
 
-.d0 {}
+.d0 {box-shadow: 0px 3px 20px 0px #0c0c0c;}
 
 .a1 {    text-decoration: none;
     color: #303030;
@@ -29,8 +29,9 @@ p {font-size: 16px !important;padding: 10px;line-height: 1.5;letter-spacing: 0.5
     cursor: pointer;
 }
 
-#ft {background: #07474B;position: relative;
-    border-bottom: 55px solid #16BECB;
+#ft {    background: #666565;
+    position: relative;
+    border-bottom: 55px solid #1c1d1e;
     padding: 27px 0px;}
 .s100 {color: white;font-size: 22px;font-weight: 600;}
 .u100 {list-style: none;padding: 0;}
@@ -47,6 +48,7 @@ div#footer1 {
     width: 50%;
     display: flex;
     height: 100%;
+    box-shadow: 0px 5px 20px 0px #4f4d4d;
 }
 span.s101 {
     display: block;

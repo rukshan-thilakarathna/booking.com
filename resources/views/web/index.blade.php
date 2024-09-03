@@ -16,7 +16,7 @@
 
 @section('style')
     <style>
-        #zse1 {background: url("{{asset('web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.jpg')}}");height: 50vh;background-size: cover;position: relative;}
+        #zse1 {background: url("{{asset('web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.jpg')}}");height: 60vh;background-size: cover;position: relative;}
         .zd1 {position: absolute;width: 50%;display: flex;flex-direction: column;text-align: center;margin: auto;top: 25%;right: 0;left: 0;}
         .zh1 {color: white;font-size: 60px;font-weight:bold;font-family: "Cormorant Garamond", serif !important;}
         #zse1::before {content: "";display: block;width: 100%;height: 100%;background: #00000073;}

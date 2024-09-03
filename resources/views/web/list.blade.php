@@ -108,7 +108,7 @@
 
                         @foreach($list as $item)
                             <div class="item list" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
-                                <div class="image-wrapper">
+                                <div class="image-wrapper" style="border-radius: 10px 0px 0px 10px;overflow: hidden;">
                                     <div class="image">
                                         <a href="{{route('web.page.detail',$item->id)}}" class="wrapper">
 
