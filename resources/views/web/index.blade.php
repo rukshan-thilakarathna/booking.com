@@ -15,6 +15,7 @@
     
 @endsection
 
+@section('style')
     <style>
         #zse1 {background: url("{{asset('web/img/section-image/Find-Your-Ideal-Stay-in-Paradise.jpg')}}");height: 60vh;background-size: cover;position: relative;}
         .zd1 {position: absolute;width: 50%;display: flex;flex-direction: column;text-align: center;margin: auto;top: 25%;right: 0;left: 0;}
@@ -82,9 +83,9 @@
         #_1:before{content: '';position: absolute;width: 120%;bottom: 0;height: 4px;left: 0;background: var(--cyan);z-index: 1;margin-left: -4px;}
 
 
-        .rikd1 {background: #ffdb23;padding: 30px 5px;border-radius: 10px;}
-        .rikh1 {font-size: 30px;text-align: left;padding: 0 0 0 31px;}
-        .rik1 {width: 25%;background: #ffffffb8;height: 100px;margin: 0 5px;border-radius: 10px;display: flex;align-items: center;padding: 0 50px;}
+    .rikd1 {background: #ffdb23;padding: 30px 5px;border-radius: 10px;}
+    .rikh1 {font-size: 30px;text-align: left;padding: 0 0 0 31px;}
+    .rik1 {width: 25%;background: #ffffffb8;height: 100px;margin: 0 5px;border-radius: 10px;display: flex;align-items: center;padding: 0 50px;}
 
         @media screen and (max-width:1570px) {#zfm1 {flex-direction: column;}.zd3 {flex-wrap: wrap;width: 90%;margin-bottom: 16px;}.zin1 {width: 50%;padding: 10px;border: none;margin: 8px 0;border-bottom: 1px solid;}.zd2 {border-radius: 25px;}#sbt{width: 100%;}section#z7se1 {flex-direction: column;height: 877px;}#z7se1::before {height: 100% !important;}div.z7d1 {width: 100%;}}
         @media screen and (max-width:720px) {.zin1 {width: 100%;}.zd1 {top: 23%;}.z3d1 {width: 48%;}.z4d1 {width: 100%;}}
