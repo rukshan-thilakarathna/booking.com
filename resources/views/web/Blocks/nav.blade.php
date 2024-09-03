@@ -13,6 +13,8 @@
                             <a href="{{route('web.login')}}" class="a1">List your property</a>
                             <a href="{{route('web.login')}}" class="a1">Bookings</a>
                         @endif
+
+                        <a href="" class="a1">Support</a>
                         <div class="d2">
                            
                             @if(isset(Session::get('user')['id']))
@@ -22,7 +24,7 @@
                                 <a class="a1" href="{{route('web.login')}}">Sign in  |  Sign Up</a>
                             @endif
                         </div>
-                        <a href="" class="a1">Support</a>
+                        
                     </div>
                 </div>
             </div>

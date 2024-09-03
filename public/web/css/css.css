@@ -29,14 +29,15 @@ p {font-size: 16px !important;padding: 10px;line-height: 1.5;letter-spacing: 0.5
     cursor: pointer;
 }
 
-#ft {    background: #666565;
+#ft {       background: #ffffff;
     position: relative;
     border-bottom: 55px solid #1c1d1e;
-    padding: 27px 0px;}
-.s100 {color: white;font-size: 22px;font-weight: 600;}
+    padding: 27px 0px;
+    border-top: 1px solid #000000;}
+.s100 {color: rgb(92, 92, 92);;font-size: 22px;font-weight: 600;}
 .u100 {list-style: none;padding: 0;}
 .l100 {margin: 14px 0;}
-.a100 {text-decoration: none;color: white;}
+.a100 {text-decoration: none;color: rgb(92, 92, 92);cursor: pointer;}
 .d101 {width: 13%;}
 #page-content {
     padding: 145px 0 0 0;

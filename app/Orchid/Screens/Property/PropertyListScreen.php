@@ -63,16 +63,8 @@ class PropertyListScreen extends Screen
     }
 
 
-<<<<<<<<<<<<<<  ✨ Codeium Command 🌟  >>>>>>>>>>>>>>>>
-    /**
-     * The description of the screen displayed in the header.
-     *
-     * @return string|null
-     */
     public function description(): ?string
     {
-        // If the user is a guest, display this message
-        if (Auth::user()->role === 'user') {
         if(Auth::user()->role == 'user'){
 
             return 'Until you verified your account with your identity card images, you cannot book any property so click on verify now button.';
@@ -88,7 +80,6 @@ class PropertyListScreen extends Screen
         }
        
     }
-<<<<<<<  c260211a-9337-4da4-86ca-b7e1c31bf21b  >>>>>>>
 
     public function permission(): ?iterable
     {

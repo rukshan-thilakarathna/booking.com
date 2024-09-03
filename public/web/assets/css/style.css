@@ -2401,8 +2401,9 @@ ul.half li {
   font-size: 12px;
   line-height: 16px;
   margin: 10px 0;
-  max-height: 30px;
+  max-height: 32px;
   overflow: hidden;
+  padding: 0px;
 }
 .item.list .meta {
   text-align: left;

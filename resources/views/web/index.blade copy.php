@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="{{asset('web/assets/css/style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/slider/slider.css?fd')}}" type="text/css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
-    <link rel="stylesheet" href="{{asset('web/css/slide2.css?fd')}}" type="text/css">
+   
     <link rel="stylesheet" href="{{asset('web/css/dates.css?fd')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('web/css/slide2.css?fd')}}" type="text/css">
     
 @endsection
 
@@ -96,7 +96,7 @@
             <h1 class="zh1">Find Your Ideal Stay in <br> Paradise</h1>
             <p>Discover the Perfect Accommodation for Your Dream Vacation</p>
             <div class="zd2">
-            <form id="zfm1" action="{{route('web.page.list')}}" method="GET" style="display: flex;align-items: center;width: 100%;justify-content: space-between;">
+                <form id="zfm1" action="{{route('web.page.list')}}" method="GET" style="display: flex;align-items: center;width: 100%;justify-content: space-between;">
                 <div class="zd3">
 
                  
@@ -317,6 +317,8 @@
             });
         });
     </script>
+
+
 @endsection
 
 

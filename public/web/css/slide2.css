@@ -68,6 +68,8 @@
   font-size: 14px;
   color: #707070;
   text-align: center;
+  height: 65px;
+  overflow: hidden;
 }
 .button{
   border: none;
