@@ -4,6 +4,7 @@
             <div class="fsb" id="heder1">
                 <a href="/" ><img class="i2" src="{{asset('web/img/icons/Logo.svg')}}" alt="Logo"></a>
                 <div style="display: flex;">
+                   
                     <div class="d1 fsb">
                         @if(isset(Session::get('user')['id']))
                             <a href="{{route('web.page.list')}}" class="a1">List your property</a>
@@ -12,10 +13,8 @@
                             <a href="{{route('web.login')}}" class="a1">List your property</a>
                             <a href="{{route('web.login')}}" class="a1">Bookings</a>
                         @endif
-                    </div>
-                    <div class="d1 fsb">
                         <div class="d2">
-                            <img class="i1" src="{{asset('web/img/icons/login-logout.svg')}}" alt="Login-Logout">
+                           
                             @if(isset(Session::get('user')['id']))
                                 <a class="a1" href="{{route('web.dashboard')}}">{{Session::get('user')['name']}} <span style=" font-size: 12px;" >({{Session::get('user')['role']}})</span></a>
                                 <a class="a1" href="{{route('logout')}}">Sign out</a>

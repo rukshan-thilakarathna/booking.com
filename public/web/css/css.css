@@ -1,7 +1,14 @@
-*{margin: 0;padding: 0;box-sizing: border-box;font-family: "DM Sans", sans-serif;}
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
+
+*{margin: 0;padding: 0;box-sizing: border-box;font-family: "Rubik", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;}
 .w{width: 1200px;margin: 0 auto}
 .fsb{display: flex;align-items: center;justify-content: space-between}
-p {font-size: 15px;padding: 10px;line-height: 1.5;letter-spacing: 0.5px;}
+p {font-size: 16px !important;padding: 10px;line-height: 1.5;letter-spacing: 0.5px;}
 
 .d0 {}
 
@@ -15,7 +22,7 @@ p {font-size: 15px;padding: 10px;line-height: 1.5;letter-spacing: 0.5px;}
 .i2 {width: 100px;}
 .n {display: flex;align-items: center;}
 .a2 {margin: 0 15px;text-decoration: none;color: #000000;    position: relative;}
-.bt1 {border: none;padding: 14px 32px;background: #ACD24B;color: white;border-radius: 30px;font-size: 15px;}
+.bt1 {border: none;padding: 14px 32px;background:  #136eff;color: white;border-radius: 30px;font-size: 15px;}
 #menu{
     width: 35px;
     display: none;

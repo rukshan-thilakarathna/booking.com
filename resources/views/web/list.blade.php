@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{asset('web/assets/bootstrap/css/bootstrap.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/css/zabuto_calendar.min.css')}}" type="text/css">
 @endsection
-
+ 
 @section('style')
     <style>
         #_3:before{content: '';position: absolute;width: 120%;bottom: 0;height: 4px;left: 0;background: var(--cyan);z-index: 1;margin-left: -4px;}
@@ -188,4 +188,33 @@
     <script type="text/javascript" src="{{asset('web/assets/js/custom.js')}}"></script>
     <script type="text/javascript" src="{{asset('web/assets/js/maps.js')}}"></script>
     <script src="{{asset('web/assets/js/ie.js')}}"></script>
+
+
+    <script>
+        var vish_elements = document.querySelectorAll('.x1i1');
+
+            vish_elements.forEach(function(element) {
+            element.addEventListener('click', function() {
+                var dataInfo = this.getAttribute('data-id');
+                var url = this.getAttribute('data-url');
+                var baseUrl = "https:\/\/test.satasmewebdev.online";
+
+                var xmlhttp=new XMLHttpRequest();
+                xmlhttp.onreadystatechange=function() {
+                    if (this.readyState==4 && this.status==200) {
+                        if (this.responseText){
+                            // document.getElementById('id_'+dataInfo).style.background = '#b01010'
+                            document.getElementById('id_' + dataInfo).src = baseUrl+'/web/heart.png';
+                        }else{
+                            // document.getElementById('id_'+dataInfo).style.background = '#161515ad'
+                            document.getElementById('id_' + dataInfo).src = baseUrl+'/web/heart2.png';
+                        }
+                    }
+                }
+
+                xmlhttp.open("GET",url,true);
+                xmlhttp.send();
+            });
+        });
+    </script>
 @endsection
