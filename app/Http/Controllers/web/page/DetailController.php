@@ -48,11 +48,12 @@ class DetailController extends Controller
         } else {
             $userupdateWishList = [];
         }
-
+        $promotinalPropertyPromotionBar01 = Properties::where('promotion_bar_01',1)->with('propertyType','district','city')->get();
         return view('web.detail')->with([
             'property' => $property,
             'CheckAvailability' => $availability,
             'AvailabileRooms' => $rooms ?? [],
+            'PromotionBar01' => $promotinalPropertyPromotionBar01,
             'userupdateWishList' => $userupdateWishList,
             'error' =>$error ?? 0,
             'reviews' => $review,

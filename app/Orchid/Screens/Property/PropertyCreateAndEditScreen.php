@@ -128,6 +128,7 @@ class PropertyCreateAndEditScreen extends Screen
                 'property.name'    => 'required|string|max:40',
                 'property.email'   => 'required|email',
                 'property.contact_number' => 'required|string|regex:/^0[1-9]\d{8}$/',
+                
             ]);
 
 
@@ -177,7 +178,10 @@ class PropertyCreateAndEditScreen extends Screen
                 'property.name'    => 'required|string|max:40',
                 'property.email'   => 'required|email|unique:properties,email',
                 'property.contact_number' => 'required|string|regex:/^0[1-9]\d{8}$/',
+                
             ]);
+
+           
 
             $facilities_list = '';
             $facilities = $request->input('property.facilities_item');

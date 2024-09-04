@@ -2109,7 +2109,7 @@ ul.half li {
   display: block;
 }
 .item .image .wrapper img, .item .image-wrapper .wrapper img {
-  height: 200px;
+  height: 320px;
   width: auto;
 }
 .item .image.show-nav .owl-navigation, .item .image-wrapper.show-nav .owl-navigation {
@@ -4454,11 +4454,15 @@ button:hover, button:active, button:focus {
   color: #488f3e;
 }
 .btn.btn-primary {
-  background-color: #488f3e;
+  background-color: #136eff;
   color: #fff;
+  border: none;
+  font-size: 17px;
+  padding: 10px 34px;
+  border-radius: 6px;
 }
 .btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus {
-  background-color: #3f7d36;
+  background-color: #136eff;
 }
 .btn.btn-large {
   padding: 10px 20px 11px 20px;

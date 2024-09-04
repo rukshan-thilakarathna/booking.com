@@ -115,7 +115,7 @@ class ImagesListScreen extends Screen
     public function upload(Request $request)
     {
         $request->validate([
-            'image' => 'required',
+            'image' => 'required|array|min:5'
         ]);
 
 
@@ -172,9 +172,18 @@ class ImagesListScreen extends Screen
     public function store(Request $request ,$path)
     {
         $request->validate([
-            'images.*' => 'mimes:jpg,jpeg,png,bmp|max:20000'
+       
+            'image.*' => [
+                'mimes:jpg,jpeg,png,avif', // Ensure file type is allowed
+                'max:20000', // Limit file size to 20MB
+                function ($attribute, $value, $fail) {
+                    $dimensions = getimagesize($value);
+                    if ($dimensions[0] != 1800 || $dimensions[1] != 1800) {
+                        $fail("The $attribute dimensions must be 1800x1800 pixels.");
+                    }
+                },
+            ],
         ]);
-
         if($request->hasfile('image'))
         {
             $gb_image_name = '';

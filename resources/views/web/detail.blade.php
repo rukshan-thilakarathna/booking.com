@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="{{asset('web/assets/bootstrap/css/bootstrap.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/css/zabuto_calendar.min.css')}}" type="text/css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+
+    <link rel="stylesheet" href="{{asset('web/assets/css/owl.carousel.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('web/assets/css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('web/assets/slider/slider.css?fd')}}" type="text/css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
+    <link rel="stylesheet" href="{{asset('web/css/slide2.css?fd')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('web/css/dates.css?fd')}}" type="text/css">
 @endsection
 
 @section('style')
@@ -103,9 +115,35 @@
 @media screen and (min-width: 1280px) {
   .container {
     margin: 0 auto;
-    width: 1250px;
+    padding: 0;
+    width: 1110px;
   }
 }
+
+.z6d1 {display: flex;justify-content: space-between;}
+        .x1d1 {width: 32%;}
+        .x1d2{position: relative;padding: 15px;height: 175px;display: flex;flex-direction: column;justify-content: space-between;border-radius: 10px;}
+        .x1d3 {display: flex;justify-content: space-between;position: relative;z-index: 10;}
+        .x1s1 {background: #ACD24B;padding: 4px 15px;border-radius: 20px;color: white;}
+        .x1i1 {width: 25px;}
+        .x1d4 {display: flex;justify-content: space-between;position: relative;z-index: 10;}
+        .xis2 {color: white;text-align: left;font-weight: 400;}
+        .x1i2 {width: 90px;height: 23px;margin-top: 20px;}
+        .x1d2::before {content: "";background: url("{{assert('web/img/effect/top-destination-effect.png')}}");position: absolute;left: 0;width: 100%;height: 100%;bottom: 0;z-index: 0;}
+        .x1s4 {color: #7b7b7b;margin-left: 20px;position: relative;}
+        .x1h2 {font-size: 20px !important; margin: 0 5px !important;font-weight: normal !important;color: #000000 !important;}
+        .xid5 {background: #ffffff70;padding: 15px;text-align: left;position: absolute;top: 0;width: 100%;}
+        #z7se1 {height: 300px;display: flex;justify-content: center;}
+        #z7se1::before {content: "";background: #00000061;height: 300px;background-size: cover;position: absolute;width: 100%;left: 0;z-index: 0;}
+        .z7d1 {width: 50%;height: 100%;display: flex;align-items: center;justify-content: center;}
+        #z7d2{background: url("{{asset('web/img/Cheers.png')}}");background-size: cover;}
+        #z7d3{background: url("{{asset('web/img/Honeymoon.png')}}");background-size: cover;}
+        .z7h1 {color: white;font-size: 45px;}
+        .z7p1 {padding: 0 0;font-size: 16px;}
+        .z7d4 {position: relative;z-index: 3;}
+        .z7a1 {text-decoration: none;color: white;margin-top: 32px;display: block;border: 4px solid white;width: max-content;padding: 10px 20px;border-radius: 42px;font-size: 16px;}
+        #z8se1 {text-align: center;padding:  50px 0;}
+        .z8d1 {display: flex;justify-content: space-between;}
     </style>
 @endsection
 
@@ -133,68 +171,72 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="main-content">
-                        <div class="title">
-                            <div class="left">
-                                <h1>{{$property->name}}<span class="rating"><img id="id_{{$property->id}}" style="border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $property->id) }}"  data-id="{{$property->id}}" src="{{in_array($property->id,$wishlist_array) ? asset('web/heart.png') : asset('web/heart2.png')}}" alt="hart" class="x1i1"></span></h1>
-                                <h3><a href="#">{{$property->district->name_en}}</a></h3>
-                            </div>
-                            <div class="right">
-                                <a href="#map" class="icon scroll"><i class="fa fa-map-marker"></i>See on the map</a>
-                                <a href="#availability" class="btn btn-primary btn-rounded scroll">Reserve Today</a>
-                            </div>
-                        </div>
-                        <main>
+                        
+                        <main style="margin-bottom: 30px;position: relative;">
+                            <span style="position: absolute;top: 0;z-index: 5;right: 0;" class="rating"><img id="id_{{$property->id}}" style="border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $property->id) }}"  data-id="{{$property->id}}" src="{{in_array($property->id,$wishlist_array) ? asset('web/heart.png') : asset('web/heart2.png')}}" alt="hart" class="x1i1"></span>
+                                    @php
+                                        $image_array = explode(',', $property->image);
+                                    @endphp 
                             <div class="container">
-                            <div id="gallery" class="photos-grid-container gallery">
-                                <div class="main-photo img-box">
-                                <a href="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=1200&&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&h=1800&&q=80" alt="image" /></a>
-                                </div>
+                                <div id="gallery" class="photos-grid-container gallery">
+                                    <div class="main-photo img-box" style="background: url('{{asset('Property/Images/'.$image_array[1])}}');">
+                                        <a href="{{asset('Property/Images/'.$image_array[0])}}" class="glightbox" data-glightbox="type: image">
+                                            <img src="{{asset('Property/Images/'.$image_array[0])}}" alt="">  
+                                        </a>
+                                    </div>
                                 <div>
                                 <div class="sub">
-                                    <div class="img-box"><a href="https://images.unsplash.com/photo-1588186941799-f9a4fc54ff1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1588186941799-f9a4fc54ff1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&h=900&q=80" alt="image" /></a></div>
-                                    <div class="img-box"><a href="https://images.unsplash.com/photo-1593409981958-562665d407cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1593409981958-562665d407cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&h=900&q=60" alt="image" /></a></div>
-                                    <div class="img-box"><a href="https://images.unsplash.com/photo-1587538639284-aec1076ba9c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1587538639284-aec1076ba9c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&h=900&q=60" alt="image" /></a></div>
+                                    <div class="img-box">
+                                        <a href="{{asset('Property/Images/'.$image_array[1])}}" class="glightbox" data-glightbox="type: image">
+                                            <img src="{{asset('Property/Images/'.$image_array[1])}}" alt="image" />
+                                        </a>
+                                    </div>
+                                    <div class="img-box">
+                                        <a href="{{asset('Property/Images/'.$image_array[2])}}" class="glightbox" data-glightbox="type: image">
+                                            <img src="{{asset('Property/Images/'.$image_array[2])}}" alt="image" />
+                                        </a>
+                                    </div>
+                                    <div class="img-box">
+                                        <a href="{{asset('Property/Images/'.$image_array[3])}}" class="glightbox" data-glightbox="type: image">
+                                            <img src="{{asset('Property/Images/'.$image_array[3])}}" alt="image" />
+                                        </a>
+                                    </div>
                                     <div id="multi-link" class="img-box">
-                                    <a href="https://images.unsplash.com/photo-1591557304122-513e396f9feb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image">
-                                        <img src="https://images.unsplash.com/photo-1591557304122-513e396f9feb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&h=900&q=80" alt="image" />
-                                        <div class="transparent-box">
-                                        <div class="caption">
-                                            +3
-                                        </div>
-                                        </div>
-                                    </a>
+                                        <a href="{{asset('Property/Images/'.$image_array[4])}}" class="glightbox" data-glightbox="type: image">
+                                            <img src="{{asset('Property/Images/'.$image_array[4])}}" alt="image" />
+                                            @if (count($image_array) > 5)
+                                                <div class="transparent-box">
+                                                    <div class="caption">
+                                                        +{{count($image_array) - 5}}
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            
+                                        </a>
                                     </div>
                                 </div>
                                 </div>
                                 <div id="more-img" class="extra-images-container hide-element">
-                                <a href="https://images.unsplash.com/photo-1523450001312-faa4e2e37f0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODF8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1523450001312-faa4e2e37f0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODF8fHdvbWVuJTIwc2hvcHBpbmd8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=900&h=900&q=60" alt="image" /></a>
-                                <a href="https://images.unsplash.com/photo-1484081064812-86e90e107fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ4fHx3b21lbiUyMHNob3BwaW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1484081064812-86e90e107fa8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ4fHx3b21lbiUyMHNob3BwaW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=900&h=900&q=60" alt="image" /></a>
-                                <a href="https://images.unsplash.com/photo-1466695108335-44674aa2058b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=1200&q=80" class="glightbox" data-glightbox="type: image"><img src="https://images.unsplash.com/photo-1466695108335-44674aa2058b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=900&h=900&q=80" alt="image" /></a>
-                        
-                                </div>
-                            </div>
-                            </div>
-                        </main>
-                        <!--end title-->
-                        <!-- <section id="gallery">
-                            <div class="gallery-detail">
-                                <div class="one-item-carousel">
-                                    @php
-                                        $image_array = explode(',', $property->image);
-                                    @endphp
-                                    <img {{count($image_array)}} src="{{asset('Property/Images/'.$image_array[0])}}" alt="">
-
                                     @foreach($image_array as $key => $image)
                                         @if($key>0)
-                                            <div class="image">
-                                                <img src="{{asset('Property/Images/'.$image)}}" alt="">
-                                            </div>
+                                        <a href="{{asset('Property/Images/'.$image_array[4])}}" class="glightbox" data-glightbox="type: image"><img src="{{asset('Property/Images/'.$image_array[4])}}" alt="image" /></a>
                                         @endif
                                     @endforeach
                                 </div>
                             </div>
-                        </section> -->
-                        <h2>Description</h2>
+                            </div>
+                        </main>
+
+                        <div class="title">
+                            <div class="left">
+                                <h1>{{$property->name}} In {{$property->district->name_en}}</h1>
+                                <h3><a href="#">{{$property->propertyType->name}}</a></h3>
+                            </div>
+                            <div class="right">
+                                <a href="#map" class="btn btn-primary btn-rounded scroll">See on the map</a>
+                                <a href="#availability" class="btn btn-primary btn-rounded scroll">Reserve Now</a>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <section id="description">
@@ -226,8 +268,14 @@
                             <!--end col-md-8-->
                         </div>
                         <!--end row-->
-
-                        <section id="availability">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="background: #ffdb23;padding-top: 16px;margin-bottom: 40px;">
+        <div class="container">
+        <section id="availability">
                             <h2>Availability</h2>
                             @if($error != 0)
                                 <div class="alert alert-danger" role="alert">
@@ -238,38 +286,38 @@
                             <form style="margin-bottom: 50px; class="labels-uppercase" id="form-availability">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <div class="form-group">
+                                        <div class="form-group" style="background:#f5f5f5a3;padding: 15px;border-radius: 6px;margin: 0;">
                                             <label for="form-availability-check-in">Check In </label>
                                             <input required style="height: 34px;" value="{{$UrlData['chackIn'] ?? ''}}"  type="date" class="form-control" id="form-availability-check-in" name="checkIn" placeholder="Check In">
                                         </div>
                                     </div>
                                     <!--end col-md-3-->
                                     <div class="col-md-3">
-                                        <div class="form-group">
+                                        <div class="form-group" style="background:#f5f5f5a3;padding: 15px;border-radius: 6px;margin: 0;">
                                             <label for="form-availability-check-out">Check Out</label>
                                             <input required style="height: 34px;" value="{{$UrlData['chackOut'] ?? ''}}" type="date" class="form-control" id="form-availability-check-out" name="checkOut" placeholder="Check In">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <div class="form-group">
+                                        <div class="form-group" style="background:#f5f5f5a3;padding: 15px;border-radius: 6px;margin: 0;">   
                                             <label for="form-availability-check-out">Adults</label>
                                             <input  required type="number" value="{{$UrlData['adults'] ?? 0}}" class="form-control" id="form-availability-check-out" name="adults" placeholder="Check In">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <div class="form-group">
+                                        <div class="form-group" style="background:#f5f5f5a3;padding: 15px;border-radius: 6px;margin: 0;">
                                             <label for="form-availability-check-out">Children</label>
                                             <input required type="number" value="{{$UrlData['children'] ?? 0}}" class="form-control" id="form-availability-check-out" name="children" placeholder="Check In">
                                         </div>
                                     </div>
 
                                     <!--end col-md-3-->
-                                    <div class="col-md-3">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="invisible">Hidden label</label>
-                                            <button type="submit" class="btn btn-primary btn-rounded btn-framed form-control">Search</button>
+                                            <button type="submit" style="height: 45px;" class="btn btn-primary form-control">Search</button>
                                         </div>
                                     </div>
                                     <!--end col-md-3-->
@@ -282,9 +330,10 @@
                                     $isHasRooms = Rooms::where('room_type_id',$roomType->id)->count();
                                 @endphp
                             @if($isHasRooms > 0 && $CheckAvailability)
-                                <div style="margin-bottom: 27px;background: #07393f;padding: 26px;color: white;">
-                                    <h3>{{$roomType->name}}<a target="_blank" href="{{route('web.page.property-type-detail',$roomType->id)}}" class="btn btn-primary btn-rounded pull-right scroll">More Information</a></h3>
-                                </div>
+                                <div style="margin-bottom: 27px;background: #ffdb23;padding: 26px;color: #000000;border-radius: 10px;">
+                                    <h3 style="display: flex;justify-content: space-between;align-items: center;font-size: 25px;">{{$roomType->name}}<a target="_blank" href="{{route('web.page.property-type-detail',$roomType->id)}}" class="btn btn-primary btn-rounded pull-right scroll">More Information</a></h3>
+                                    <p style="padding: 7px 0;">{{$roomType->disription}}</p>
+                                </div> 
                                 @php
                                     $rooms = Rooms::where('room_type_id',$roomType->id)->get();
                                 @endphp
@@ -315,14 +364,10 @@
                                                 <td class="persons">
                                                     <ul>
                                                         <li>Adults - {{$room->adults}}
-                                                            @for($i = 0; $i < $room->adults; $i++)
-                                                                <i class="fa fa-user"></i>
-                                                            @endfor
+                                                            
                                                         </li>
                                                         <li>Children - {{$room->Children}}
-                                                            @for($i = 0; $i < $room->Children; $i++)
-                                                                <i class="fa fa-user"></i>
-                                                            @endfor
+                                                           
                                                         </li>
                                                     </ul>
                                                 </td>
@@ -366,6 +411,15 @@
                             @endforeach
                             <!--end form-reservations-->
                         </section>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="main-content">
+                        
+                        
                         <section id="reviews">
                             <div class="title">
                                 <h2 class="pull-left">Reviews</h2>
@@ -397,6 +451,38 @@
                             <!--end reviews-->
                         </section>
 
+                        <section id="z6se1">
+                            <div class="w wrapper" style="width: 100%;">
+
+                                <h1 class="z5h1">Top rated hotels</h1>
+                                <p style="color: #000000;">Enjoy your valuable days with comfortable zone</p>
+                                <ul class="carousel" style="    margin-top: 40px;">
+
+                                    @foreach($PromotionBar01 as $PromotionCard)
+                                        @php
+                                            $image_array = explode(',', $PromotionCard->image);
+                                            $wishlist_array = Auth::check() ? explode(',', $userupdateWishList->wishlist) : [];
+                                        @endphp
+                                        <li    class="card">
+                                            <div class="x1d1" style="width:100%">
+                                                <div class="x1d2" style="background: url({{asset('Property/Images/'.$image_array[0])}});  background-size: cover;">
+                                                    <div class="x1d3">
+                                                    </div>
+                                                    <div class="x1d4">
+                                                        <img id="id_{{$PromotionCard->id}}" style="border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $PromotionCard->id) }}"  data-id="{{$PromotionCard->id}}" src="{{in_array($PromotionCard->id,$wishlist_array) ? asset('web/heart.png') : asset('web/heart2.png')}}" alt="hart" class="x1i1">
+                                                    </div>
+                                                </div>
+                                                <div class="xid5">
+                                                    <h2 onclick="window.location.href='{{route('web.page.detail',$PromotionCard->id)}}';" class="x1h2">{{$PromotionCard->name}}</h2>
+                                                    <span><img src="{{asset('web/img/icons/Location.svg')}}" alt=""><span style="margin: 2px;font-size: 16px;" class="x1s4">{{$PromotionCard->district->name_en}} , {{$PromotionCard->city->name_en}}</span></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </section>
+
                     </div>
                     <!--end main-content-->
                 </div>
@@ -413,7 +499,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Booking Now</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -518,14 +604,47 @@
     <script type="text/javascript" src="{{asset('web/assets/js/custom.js')}}"></script>
     <script type="text/javascript" src="{{asset('web/assets/js/maps.js')}}"></script>
     <script src="{{asset('web/assets/js/ie.js')}}"></script>
-
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+
+
+    <script>
+    const lightbox = GLightbox({
+    touchNavigation: true,
+    loop: true,
+    width: "90vw",
+    height: "90vh"
+    });
+    </script>
+
 <script>
- const lightbox = GLightbox({
-  touchNavigation: true,
-  loop: true,
-  width: "90vw",
-  height: "90vh"
-});
-</script>
+        var vish_elements = document.querySelectorAll('.x1i1');
+
+            vish_elements.forEach(function(element) {
+            element.addEventListener('click', function() {
+                var dataInfo = this.getAttribute('data-id');
+                var url = this.getAttribute('data-url');
+                var baseUrl = "https:\/\/test.satasmewebdev.online";
+
+                var xmlhttp=new XMLHttpRequest();
+                xmlhttp.onreadystatechange=function() {
+                    if (this.readyState==4 && this.status==200) {
+                        if (this.responseText){
+                            // document.getElementById('id_'+dataInfo).style.background = '#b01010'
+                            document.getElementById('id_' + dataInfo).src = baseUrl+'/web/heart.png';
+                        }else{
+                            // document.getElementById('id_'+dataInfo).style.background = '#161515ad'
+                            document.getElementById('id_' + dataInfo).src = baseUrl+'/web/heart2.png';
+                        }
+                    }
+                }
+
+                xmlhttp.open("GET",url,true);
+                xmlhttp.send();
+            });
+        });
+    </script>
+     <script src="{{asset('web/js/slide2.js')}}"></script>
+     <script src="{{asset('web/js/js.js')}}"></script>
+     <script src="{{asset('web/js/slide2.js')}}"></script>
+    <script type="text/javascript" src="{{asset('web/assets/slider/slider.js')}}"></script>
 @endsection

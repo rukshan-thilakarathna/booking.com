@@ -12,22 +12,24 @@
         <link rel="stylesheet" type="text/css" href="{{  mix('/css/orchid.css','vendor/orchid') }}">
     @endif
     <style>
-        
+        .rik_login{
+            background:url({{asset('web/img/bg_login.jpg')}});
+            background-size: cover;
+        }
     </style>
 </head>
 <body >
-<section class="vh-100 rik_login" style="background-color: #ffffff;">
-<div class="col-12 rik_login" >
-                <div class="row" style="
-    height: 100vh;
-    display: flex;
-    align-items: center;
-">
-                    <div class="container-md col-8" style="background:url('http://localhost:8000/web/img/69ca67f002.jpg');background-size: cover;background-position: 0 -190px;position: relative;height: 100vh;">
-                        <a href="/" style=" background: #ffffff; padding: 10px;font-size: 16px; border-radius: 10px;top: 14px;position: absolute;">Back To Home</a>
-                    </div>
-                    <div class="card text-black col-lg-4" style="border-radius: 10px;background: white;">
-                    <div class="card-body " style="border-radius: 10px;padding: 0;">
+<section class="vh-100 rik_login" style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11" style="display: flex;justify-content: center;">
+                <div class="card text-black" style="border-radius: 10px;
+  width: 40%;
+  background: white;
+  padding-right: 20px;">
+
+                    <div class="card-body " style="border-radius: 10px;
+  padding: 0;">
                             <div style="width: 100%;" class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                                 <h1 style="margin: 25px 0 0 36px;" class="h4 text-black mb-4">{{__('Forgot Password')}}</h1>
                                 @if (session('success'))
@@ -42,7 +44,7 @@
 
                                 <form class="mx-1 mx-md-4" method="post" action="{{route('user.forgot.password.post')}}">
                                     @csrf
-                                    <div class="d-flex flex-row align-items-center mb-4" >
+                                    <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div data-mdb-input-init class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="form3Example3c">Email</label>
@@ -56,7 +58,9 @@
                                     </div>
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button style="       background: #16BECB !important;color: white !important; font-weight: bold;" id="button-login" type="submit" class="btn btn-default btn-block" tabindex="3">
+                                        <button style="       background: #16BECB !important;
+    color: white !important;
+    font-weight: bold;" id="button-login" type="submit" class="btn btn-default btn-block" tabindex="3">
                                             <x-orchid-icon path="bs.box-arrow-in-right" class="small me-2"/>
                                             {{__('Forgot')}}
                                         </button>
@@ -65,17 +69,12 @@
 
                             </div>
 
-                        </div>
                     </div>
-               </div>
+                </div>
             </div>
+        </div>
+    </div>
 </section>
-<script>
-    function inputerror(x) {
-        document.getElementById(x).style.display = 'none';
-    }
-</script>
-
 <script>
     function inputerror(x) {
         document.getElementById(x).style.display = 'none';
