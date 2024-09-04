@@ -17,56 +17,63 @@
             background-size: cover;
         }
         @if($role == 'user')
-            #rika1{
+        #rika1 {
             width: 49%;
-            background: #16BECB;
+            background: #136eff;
             border-radius: 7px 0 0 0;
             margin: 3px;
+            color: white;
             padding: 10px;
             justify-content: center;
             display: flex;
         }
-        #rika2{
+        #rika2 {
             width: 49%;
             background: white;
-            border: 2px solid #16BECB;
+            border: 1px solid #136eff;
             border-radius: 0px 7px 0 0;
             margin: 3px;
+            
             padding: 10px;
             justify-content: center;
             display: flex;
         }
         @else
-        #rika1{
-            width: 49%;
-            background: white;
-            border: 2px solid #16BECB;
-            border-radius: 7px 0 0 0;
-            margin: 3px;
-            padding: 10px;
-            justify-content: center;
-            display: flex;
-        }
-        #rika2{
-            width: 49%;
-            background: white;
-            background: #16BECB;
-            border-radius: 0px 7px 0 0;
-            margin: 3px;
-            padding: 10px;
-            justify-content: center;
-            display: flex;
-        }
+        #rika1 {
+    width: 49%;
+    background: white;
+    border: 1px solid #136eff;
+    border-radius: 7px 0 0 0;
+    margin: 3px;
+    padding: 10px;
+   
+    justify-content: center;
+    display: flex;
+}
+#rika2 {
+    width: 49%;
+    background: white;
+    background: #136eff;
+    border-radius: 0px 7px 0 0;
+    color: white;
+    margin: 3px;
+    padding: 10px;
+    justify-content: center;
+    
+    display: flex;
+}
         @endif
 
 
         #rika1:hover{
-            background: #0F8D8D;
+            background: #136eff;
             font-weight: bold;
+            color: white;
         }
         #rika2:hover{
-            background: #0F8D8D;
+            background: #136eff;
             font-weight: bold;
+            color: white;
         }
 
     </style>
@@ -78,14 +85,22 @@
             <div class="col-lg-12 col-xl-11" style="display: flex;justify-content: center;">
                 <div class="card text-black" style="border-radius: 10px;width: 40%;background: white;">
                     <div style="display: flex;width: 100%;">
-                        <a id="rika1" href="{{route('user.registration','user')}}">user register</a>
-                        <a id="rika2" href="{{route('user.registration','property-owner')}}">property owner register</a>
+                        <a id="rika1" href="{{route('user.registration','user')}}">Guest register</a>
+                        <a id="rika2" href="{{route('user.registration','property-owner')}}">Host register</a>
                     </div>
 
                     <div class="card-body " style="border-radius: 10px;padding: 0;">
                             <div style="width: 100%;" class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                                <h1 style="margin: 25px 0 0 36px;" class="h4 text-black mb-4">{{__('Sign up now - ' . $role)}}</h1>
-
+                                <h1 style="margin: 25px 0 0 36px;" class="h4 text-black mb-4">{{__('Sign up now - ' . ($role == 'user' ? 'Guest' : ($role == 'property-owner' ? 'Host' : 'Worker')))}}</h1>
+                                @if (session('success'))
+                                    <div style="margin: 0 0 14px 36px;" class="alert alert-success">
+                                        {{ session('success') }} 
+                                    </div>
+                                @elseif (session('error'))
+                                    <div style="margin: 0 0 14px 36px;" class="alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                @endif
                                 <form class="mx-1 mx-md-4" method="post" action="{{route('user.store',$role)}}">
                                     @csrf
                                     <input type="hidden"  value="{{$role}}" name="role">
@@ -150,9 +165,11 @@
                                     </span>
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button style="       background: #16BECB !important;
+                                        <button style="
+    background: #136eff !important;
     color: white !important;
-    font-weight: bold;" id="button-login" type="submit" class="btn btn-default btn-block" tabindex="3">
+    font-weight: bold;
+    " id="button-login" type="submit" class="btn btn-default btn-block" tabindex="3">
                                             <x-orchid-icon path="bs.box-arrow-in-right" class="small me-2"/>
                                             {{__('Register')}}
                                         </button>

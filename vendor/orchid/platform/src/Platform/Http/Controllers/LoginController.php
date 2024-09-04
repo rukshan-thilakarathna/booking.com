@@ -60,23 +60,43 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
+       
+
         $request->validate([
             'email'    => 'required|string',
             'password' => 'required|string',
         ]);
 
-        $auth = $this->guard->attempt(
-            $request->only(['email', 'password']),
-            $request->filled('remember')
-        );
+        $user = User::where('email', $request->email)->first();
 
-        if ($auth) {
-            return $this->sendLoginResponse($request);
+        if(isset($user->email_verified_at)){
+            if($user->email_verified_at != null){
+                $auth = $this->guard->attempt(
+                    $request->only(['email', 'password']),
+                    $request->filled('remember')
+                );
+        
+                if ($auth) {
+                    return $this->sendLoginResponse($request);
+                }
+        
+                throw ValidationException::withMessages([
+                    'email' => __('The details you entered did not match our records. Please double-check and try again.'),
+                ]);
+            }else{
+                throw ValidationException::withMessages([
+                    'email' => __('Unverified Email. Chack Your Email And Verify Your Email'),
+                ]);
+            }
+        }else{
+            throw ValidationException::withMessages([
+                'email' => __('The details you entered did not match our records. Please double-check and try again.'),
+            ]);
         }
 
-        throw ValidationException::withMessages([
-            'email' => __('The details you entered did not match our records. Please double-check and try again.'),
-        ]);
+        
+
+        
     }
 
     /**

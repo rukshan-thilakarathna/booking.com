@@ -25,12 +25,12 @@ class LegalDocument01Layout extends Rows
             Input::make('user.nic_or_passport_front_image')
                 ->type('file')
                 ->required()
-                ->title('NIC Card Front Image'),
+                ->title('NIC Card Front Image or Passport Front Image'),
 
             Input::make('user.nic_or_passport_back_image')
                 ->type('file')
                 ->required()
-                ->title('NIC Card Back Image'),
+                ->title('NIC Card Back Image or Passport Back Image'),
         ];
     }
 }

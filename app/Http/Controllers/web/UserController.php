@@ -8,6 +8,7 @@ use App\Models\PointStort;
 use App\Models\Roles;
 use App\Models\User;
 use App\Models\UserHasRoles;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -50,6 +51,11 @@ class UserController extends Controller
             $user->save();
 
             $data = ['message' => 'New Password: '.$newPassword];
+            $data = [
+                'subject' => 'Barterbed forgot password',
+                'message' => 'New Password: '.$newPassword,
+                'ISeMAIL' => 0
+            ];
             Mail::to($request->email)->send(new smsMail($data));
             return redirect()->route('user.forgot.password')->with(['success' => 'We have emailed your new password!']);
         }else{
@@ -94,10 +100,36 @@ class UserController extends Controller
             'locked_wallet' => 0,
             'pending_wallet' => 0,
         ]);
-}
+    }
+
+        function generateEmailVerificationToken($length = 32) {
+            return bin2hex(random_bytes($length / 2));
+        }
+
+        $userId = 1;
+        $token = generateEmailVerificationToken();
+        
+        $link = route('user.email.verification',[$token,'thilakarathnarukshan9@gmail.com']);
 
 
+        $data = [
+            'subject' => 'Barterbed Email Verification',
+            'message' => 'Verification Your Email Click this Link',
+            'url' => $link,
+            'urltext' => 'Click This And verify now',
+            'ISeMAIL' => 1
+        ];
+        Mail::to($request->email)->send(new smsMail($data));
+        return redirect()->route('user.registration',$role)->with(['success' => 'success! Check Your Email And Verify Your Email.']);
 
+        // return redirect()->route('web.login');
+    }
+
+    public function emailVerification(Request $request ,$token ,$email){
+
+        $user = User::where('email', $email)->first();
+        $user->email_verified_at = Carbon::now();
+        $user->save();
 
         return redirect()->route('web.login');
     }

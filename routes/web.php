@@ -41,6 +41,7 @@ Route::post('/get-points' ,[PointController::class ,'buy'])->name('get-point');
 Route::redirect('post-property','/dashboard/properties')->name('post-property');
 
 Route::get('/{role}/registration', [UserController::class ,'Registration'])->name('user.registration');
+
 Route::get('/forgot-password', [UserController::class ,'forgotPassword'])->name('user.forgot.password');
 Route::post('/forgot-password', [UserController::class ,'forgotPasswordSend'])->name('user.forgot.password.post');
 Route::post('/{role}/registration', [UserController::class ,'StoreUser'])->name('user.store');
@@ -61,3 +62,6 @@ Route::get('/web/dashboard', function () {
 
 Route::get('deleteImage/{image}/{dbname?}', [IndexController::class, 'deleteImage'])->name('DeleteImage');
 
+Route::get('/email-verification/{token}/{email}', [UserController::class ,'emailVerification'])->name('user.email.verification');
+
+http://localhost:8000/email-verification/%242y%2412%24GCjXIlzTDcBkdcMgbQHZ0.FTG2uhn5VlJF/rlGp0eUzzkQ50K8pjO/thilakarathnarukshan9@gmail.com

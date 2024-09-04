@@ -40,7 +40,7 @@
     <span class="text-muted" style="width: 69%;display: block;margin: -9px 3px 11px;background: white;"> {{__("")}}  <a href="{{route('user.forgot.password')}}" style="cursor: pointer ; font-weight: bold" class="small">{{__("Forgot Password")}}</a></span>
 
     <div class="col-md-6 col-xs-12" style="width: 100%">
-        <button style="       background: #16BECB !important;
+        <button style="       background: #136eff !important;
     color: white !important;
     font-weight: bold;" id="button-login" type="submit" class="btn btn-default btn-block" tabindex="3">
             <x-orchid-icon path="bs.box-arrow-in-right" class="small me-2"/>
