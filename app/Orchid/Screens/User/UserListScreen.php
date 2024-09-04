@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\User;
 
 use App\Models\UserHasRoles;
+use App\Notifications\PropertyNotification;
 use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\UserFiltersLayout;
 use App\Orchid\Layouts\User\UserListLayout;
@@ -80,7 +81,7 @@ class UserListScreen extends Screen
             return 'A comprehensive list of all registered users, including their profiles and privileges.';
 
         }
-       
+
     }
 
     public function permission(): ?iterable
@@ -211,8 +212,8 @@ class UserListScreen extends Screen
         $users->update($userData);
 
         $ispoined = PointStort::where('user_id',$request->get('id'))->count();
-        
-    
+
+
 
 
         if($users->role == "property-owner" && $ispoined == 0){
@@ -225,6 +226,7 @@ class UserListScreen extends Screen
         }
 
 
+        $users->notify(new PropertyNotification('Account Notification' ,__(config('constants.PropertyOwnerVerificationStatus')[$request->get('status')])));
 
         Toast::info(__(config('constants.PropertyOwnerVerificationStatus')[$request->get('status')]));
     }

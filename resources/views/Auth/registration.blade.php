@@ -79,20 +79,39 @@
     </style>
 </head>
 <body >
-<section class="vh-100 rik_login" style="background-color: #eee;">
-    <div class="container h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-12 col-xl-11" style="display: flex;justify-content: center;">
-                <div class="card text-black" style="border-radius: 10px;width: 40%;background: white;">
-                    <div style="display: flex;width: 100%;">
+<section class="vh-100 rik_login" style="background-color: #ffffff;">
+<div class="col-12 rik_login" style="
+    background: #ffffff;position: relative;
+">
+   <a href="/" style="
+           background: #ffffff;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    top: 14px;
+    position: absolute;
+    z-index: 4;
+    right: 16px;
+        "><img src="{{asset('web/img/home-button.png')}}" style="width: 40px;"></a>
+                <div class="row" style="
+    height: 100vh;
+    display: flex;
+    align-items: center;
+">
+                <div class="container-md col-8" style="background:url('http://localhost:8000/web/img/69ca67f002.jpg');background-size: cover;background-position:center;position: relative;height: 100vh;">
+                 
+                    </div>
+                    <div class="card text-black col-lg-4" style="border-radius: 10px;background: white;">
+                        <div style="display: flex;width: 100%;">
                         <a id="rika1" href="{{route('user.registration','user')}}">Guest register</a>
                         <a id="rika2" href="{{route('user.registration','property-owner')}}">Host register</a>
-                    </div>
+                        </div>
 
-                    <div class="card-body " style="border-radius: 10px;padding: 0;">
-                            <div style="width: 100%;" class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                                <h1 style="margin: 25px 0 0 36px;" class="h4 text-black mb-4">{{__('Sign up now - ' . ($role == 'user' ? 'Guest' : ($role == 'property-owner' ? 'Host' : 'Worker')))}}</h1>
-                                @if (session('success'))
+                        <div class="card-body " style="border-radius: 10px;padding: 0;width: 70%;
+    margin: 0 auto;">
+                        <div style="width: 100%;" class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                        <h1 style="margin: 25px 0 0 36px;" class="h4 text-black mb-4">{{__('Sign up now - ' . ($role == 'user' ? 'Guest' : ($role == 'property-owner' ? 'Host' : 'Worker')))}}</h1>
+                        @if (session('success'))
                                     <div style="margin: 0 0 14px 36px;" class="alert alert-success">
                                         {{ session('success') }} 
                                     </div>
@@ -101,104 +120,101 @@
                                         {{ session('error') }}
                                     </div>
                                 @endif
-                                <form class="mx-1 mx-md-4" method="post" action="{{route('user.store',$role)}}">
-                                    @csrf
-                                    <input type="hidden"  value="{{$role}}" name="role">
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                            <label class="form-label" for="form3Example1c">Name</label>
-                                            <input placeholder="Enter your name" type="text" onfocus="inputerror('name')" id="form3Example1c" name="name" class="form-control" value="{{old('name') ?? ""}}" />
-                                            @if ($errors->has('name'))
-                                                <div class="alert" style="color: red;margin: 0;padding: 0;" id="name"  >
-                                                    {{ $errors->first('name') }}
-                                                </div>
-                                            @endif
+                                    <form class="mx-1 mx-md-4" method="post" action="{{route('user.store',$role)}}">
+                                        @csrf
+                                        <input type="hidden"  value="{{$role}}" name="role">
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="form3Example1c">Name</label>
+                                                <input placeholder="Enter your name" type="text" onfocus="inputerror('name')" id="form3Example1c" name="name" class="form-control" value="{{old('name') ?? ""}}" />
+                                                @if ($errors->has('name'))
+                                                    <div class="alert" style="color: red;margin: 0;padding: 0;" id="name"  >
+                                                        {{ $errors->first('name') }}
+                                                    </div>
+                                                @endif
+                                            </div>
+
                                         </div>
 
-                                    </div>
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="form3Example3c">Email</label>
+                                                <input placeholder="Enter your email" type="email" onfocus="inputerror('email')" id="form3Example3c" name="email" class="form-control" value="{{old('email') ?? ""}}" />
+                                                @if ($errors->has('email'))
+                                                    <div class="alert" style="color: red;margin: 0;padding: 0;" id="email" >
+                                                        {{ $errors->first('email') }}
+                                                    </div>
+                                                @endif
+                                            </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                            <label class="form-label" for="form3Example3c">Email</label>
-                                            <input placeholder="Enter your email" type="email" onfocus="inputerror('email')" id="form3Example3c" name="email" class="form-control" value="{{old('email') ?? ""}}" />
-                                            @if ($errors->has('email'))
-                                                <div class="alert" style="color: red;margin: 0;padding: 0;" id="email" >
-                                                    {{ $errors->first('email') }}
-                                                </div>
-                                            @endif
                                         </div>
 
-                                    </div>
+                                        <div class="d-flex flex-row align-items-center mb-4">
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="form3Example4c">Password</label>
+                                                <input placeholder="Enter your password" type="password" onfocus="inputerror('passwd')" name="passwd" id="form3Example4c" class="form-control" value="{{old('passwd') ?? ""}}" />
+                                                @if ($errors->has('passwd'))
+                                                    <div class="alert" style="color: red;margin: 0;padding: 0;" id="passwd" >
+                                                        {{ $errors->first('passwd') }}
+                                                    </div>
+                                                @endif
+                                            </div>
 
-                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                            <label class="form-label" for="form3Example4c">Password</label>
-                                            <input placeholder="Enter your password" type="password" onfocus="inputerror('passwd')" name="passwd" id="form3Example4c" class="form-control" value="{{old('passwd') ?? ""}}" />
-                                            @if ($errors->has('passwd'))
-                                                <div class="alert" style="color: red;margin: 0;padding: 0;" id="passwd" >
-                                                    {{ $errors->first('passwd') }}
-                                                </div>
-                                            @endif
                                         </div>
 
-                                    </div>
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                                <label class="form-label" for="form3Example4cd">Repeat password</label>
+                                                <input placeholder="Enter Repeat password" type="password" onfocus="inputerror('repasswd')" name="repasswd" id="form3Example4cd" class="form-control" value="{{old('repasswd') ?? ""}}" />
+                                                @if ($errors->has('repasswd'))
+                                                    <div class="alert" style="color: red;margin: 0;padding: 0;" id="repasswd" >
+                                                        {{ $errors->first('repasswd') }}
+                                                    </div>
+                                                @endif
+                                            </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
-                                            <label class="form-label" for="form3Example4cd">Repeat password</label>
-                                            <input placeholder="Enter Repeat password" type="password" onfocus="inputerror('repasswd')" name="repasswd" id="form3Example4cd" class="form-control" value="{{old('repasswd') ?? ""}}" />
-                                            @if ($errors->has('repasswd'))
-                                                <div class="alert" style="color: red;margin: 0;padding: 0;" id="repasswd" >
-                                                    {{ $errors->first('repasswd') }}
-                                                </div>
-                                            @endif
                                         </div>
 
-                                    </div>
 
+                                        </span>
 
-                                    </span>
+                                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                            <button style="       background: #136eff !important;
+        color: white !important;
+        font-weight: bold;" id="button-login" type="submit" class="btn btn-default btn-block" tabindex="3">
+                                                <x-orchid-icon path="bs.box-arrow-in-right" class="small me-2"/>
+                                                {{__('Register')}}
+                                            </button>
+                                        </div>
 
-                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button style="
-    background: #136eff !important;
-    color: white !important;
-    font-weight: bold;
-    " id="button-login" type="submit" class="btn btn-default btn-block" tabindex="3">
-                                            <x-orchid-icon path="bs.box-arrow-in-right" class="small me-2"/>
-                                            {{__('Register')}}
-                                        </button>
-                                    </div>
+    {{--                                    <span class="text-muted" style="    width: 62%;--}}
+    {{--    display: block;--}}
+    {{--    margin: 20px auto;"> {{__("Sign Up - ")}}--}}
+    {{--                                        <a href="{{route('user.registration','user')}}" style="cursor: pointer ; font-weight: bold" class="small">--}}
+    {{--                                            {{__("User")}}--}}
+    {{--                                        </a>--}}
+    {{--                                        /--}}
+    {{--                                         <a href="{{route('user.registration','property-owner')}}" style="cursor: pointer ; font-weight: bold" class="small">--}}
+    {{--                                            {{__("Property Owner")}}--}}
+    {{--                                        </a>--}}
+    {{--                                        /--}}
+    {{--                                         <a href="{{route('user.registration','worker')}}" style="cursor: pointer ; font-weight: bold" class="small">--}}
+    {{--                                            {{__("Worker")}}--}}
+    {{--                                        </a>--}}
 
-{{--                                    <span class="text-muted" style="    width: 62%;--}}
-{{--    display: block;--}}
-{{--    margin: 20px auto;"> {{__("Sign Up - ")}}--}}
-{{--                                        <a href="{{route('user.registration','user')}}" style="cursor: pointer ; font-weight: bold" class="small">--}}
-{{--                                            {{__("User")}}--}}
-{{--                                        </a>--}}
-{{--                                        /--}}
-{{--                                         <a href="{{route('user.registration','property-owner')}}" style="cursor: pointer ; font-weight: bold" class="small">--}}
-{{--                                            {{__("Property Owner")}}--}}
-{{--                                        </a>--}}
-{{--                                        /--}}
-{{--                                         <a href="{{route('user.registration','worker')}}" style="cursor: pointer ; font-weight: bold" class="small">--}}
-{{--                                            {{__("Worker")}}--}}
-{{--                                        </a>--}}
+                                    </form>
 
-                                </form>
+                                </div>
 
-                            </div>
-
+                        </div>
                     </div>
-                </div>
+               </div>
             </div>
-        </div>
-    </div>
 </section>
 <script>
     function inputerror(x) {

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css">
     <link rel="stylesheet" href="{{asset('web/css/slide2.css?fd')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/css/dates.css?fd')}}" type="text/css">
-    
+
 @endsection
 
 @section('style')
@@ -97,28 +97,28 @@
     <section id="zse1">
         <div class="zd1">
             <h1 class="zh1">Find Your Ideal Stay in <br> Paradise</h1>
-            <p>Discover the Perfect Accommodation for Your Dream Vacation</p>
+            <p>Discover the Perfect Accommodation for Your Dream Vacation {{session('chackIn')}}</p>
             <div class="zd2">
             <form id="zfm1" action="{{route('web.page.list')}}" method="GET" style="display: flex;align-items: center;width: 100%;justify-content: space-between;">
                 <div class="zd3">
-                    <input type="text" class="zin1" id="dates" placeholder="checkin/checkout" />
+                    <input type="text"  class="zin1" id="dates"   @if(session('checkIn') && session('checkOut'))placeholder="{{session('checkIn')}}/{{session('checkOut')}}" @else placeholder="checkin/checkout"  @endif  />
                     <input type="hidden" name="checkIn" id="checkin" />
                     <input type="hidden" name="checkOut" id="checkout" />
                     <div id="datepicker"></div>
                     <select name="destination" class="zin1" id="city" >
                         <option class="op" value="">City</option>
                         @foreach($destinations as $key => $destination)
-                            <option class="op" style="text-align: left" value="{{$destination->id}}">{{$destination->name_en}}</option>
+                            <option @if(session('destination')) selected @endif  class="op" style="text-align: left" value="{{$destination->id}}">{{$destination->name_en}}</option>
                         @endforeach
                     </select>
-                    <input id="Guest"  name="adult" required type="number" class="zin1" placeholder="Number of Guest">
+                    <input id="Guest"  name="adult" required type="number" class="zin1"  @if(session('adult')) placeholder="{{session('adult')}}" @else pplaceholder="Number of Guest"  @endif >
                 </div>
                 <button id="sbt" type="submit" class="bt1">Search</button>
                 </form>
             </div>
 
         </div>
-            
+
     </section>
 
     <section id="z2se2">
@@ -146,7 +146,7 @@
             <div class="z2d1" id="z2d3">
                 @foreach($propertiesDestinations as $key => $PropertyDestination)
                     @if( $key > 2 && $key <= 5)
-                   
+
                         <div onclick="window.location.href='list?destination={{ $PropertyDestination->id }}';" class="z2d2 z2d1-{{$class[$key]}}"
                              style="cursor:pointer;background: url({{asset('web/img/destinations/'.$PropertyDestination->district->url.'.jpg')}});;background-size: cover;background-position: center;">
                             <div class="z2d4">
@@ -173,7 +173,7 @@
                     Explore a Wide Variety of Accommodations
                 </div>
                 <div class="rik1">
-                    Experience the User-Friendly Features 
+                    Experience the User-Friendly Features
                 </div>
             </div>
         </div>
@@ -258,12 +258,12 @@
         <div class="w">
             <h1 class="z5h1">Explore Our Top-rated Stays</h1>
             <p style="color: #000000;">Discover the Perfect Accommodation for Your Dream Vacation</p>
-            
+
 
             <div class="slide-container swiper">
             <div class="slide-content">
                 <div class="card-wrapper swiper-wrapper">
-                   
+
                         @foreach($PromotionBar01 as $PromotionCard)
                             @php
                                 $image_array = explode(',', $PromotionCard->image);
@@ -278,7 +278,7 @@
 
                                  <div class="card-image">
                                     <!-- <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxivAs4UknzmDfLBXGMxQkayiZDhR2ftB4jcIV7LEnIEStiUyMygioZnbLXCAND-I_xWQpVp0jv-dv9NVNbuKn4sNpXYtLIJk2-IOdWQNpC2Ldapnljifu0pnQqAWU848Ja4lT9ugQex-nwECEh3a96GXwiRXlnGEE6FFF_tKm66IGe3fzmLaVIoNL/s1600/img_avatar.png" alt="" class="card-img"> -->
-                                    </div> 
+                                    </div>
                                 </div>
 
                                 <div class="card-content">
@@ -294,7 +294,7 @@
         </div>
         </div>
     </section>
-    
+
 @endsection
 
 @section('js')

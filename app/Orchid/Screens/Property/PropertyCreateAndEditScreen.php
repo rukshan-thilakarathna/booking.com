@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Property;
 
+use App\Mail\smsMail;
 use App\Models\Properties;
 use App\Models\PropertyFacilities;
 use App\Orchid\Layouts\Property\ContactCreateAndEditLayout;
@@ -12,6 +13,7 @@ use App\Orchid\Layouts\Property\PropertyFacilitiesLayout;
 use App\Orchid\Layouts\Property\SocialMediaCreateAndEditLayout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Layout;
@@ -128,7 +130,7 @@ class PropertyCreateAndEditScreen extends Screen
                 'property.name'    => 'required|string|max:40',
                 'property.email'   => 'required|email',
                 'property.contact_number' => 'required|string|regex:/^0[1-9]\d{8}$/',
-                
+
             ]);
 
 
@@ -178,10 +180,10 @@ class PropertyCreateAndEditScreen extends Screen
                 'property.name'    => 'required|string|max:40',
                 'property.email'   => 'required|email|unique:properties,email',
                 'property.contact_number' => 'required|string|regex:/^0[1-9]\d{8}$/',
-                
+
             ]);
 
-           
+
 
             $facilities_list = '';
             $facilities = $request->input('property.facilities_item');
@@ -219,6 +221,14 @@ class PropertyCreateAndEditScreen extends Screen
             $property->added_user = Auth::user()->id;
 
             $property->save();
+             $user = User::find(19);
+             $user->notify(new PropertyNotification(' New Property' ,Auth::user()->name.' created new property '.$request->property['name']));
+
+            $data = [
+                'subject' => 'New Property',
+                'message' => Auth::user()->name.' created new property '.$request->property['name'],
+            ];
+            Mail::to($user->email)->send(new smsMail($data));
         }
 
 

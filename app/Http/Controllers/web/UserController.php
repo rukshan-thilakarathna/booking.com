@@ -8,6 +8,7 @@ use App\Models\PointStort;
 use App\Models\Roles;
 use App\Models\User;
 use App\Models\UserHasRoles;
+use App\Notifications\PropertyNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -108,7 +109,7 @@ class UserController extends Controller
 
         $userId = 1;
         $token = generateEmailVerificationToken();
-        
+
         $link = route('user.email.verification',[$token,'thilakarathnarukshan9@gmail.com']);
 
 
@@ -130,6 +131,9 @@ class UserController extends Controller
         $user = User::where('email', $email)->first();
         $user->email_verified_at = Carbon::now();
         $user->save();
+
+        $user = \Orchid\Platform\Models\User::find(19);
+        $user->notify(new PropertyNotification('Create New Account ' ,$user->name));
 
         return redirect()->route('web.login');
     }

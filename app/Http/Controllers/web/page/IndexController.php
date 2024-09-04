@@ -8,6 +8,7 @@ use App\Models\Districts;
 use App\Models\Properties;
 use App\Models\PropertyType;
 use App\Models\User;
+use App\Notifications\PropertyNotification;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,6 +40,8 @@ class IndexController extends Controller
 
         $propertyType = PropertyType::all();
 
+      
+
         return view('web.index')->with([
             'propertiesDestinations' => $propertiesDestinations,
             'PromotionBar01' => $promotinalPropertyPromotionBar01,
@@ -48,6 +51,8 @@ class IndexController extends Controller
             'destinations' => $destinations,
             'uniquePropertyCount' =>$uniquePropertyCount
         ]);
+
+
     }
 
 

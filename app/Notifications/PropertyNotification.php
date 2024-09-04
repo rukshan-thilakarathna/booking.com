@@ -5,7 +5,9 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Orchid\Platform\Notifications\DashboardChannel;
 use Illuminate\Notifications\Notification;
+use Orchid\Platform\Notifications\DashboardMessage;
 
 class PropertyNotification extends Notification
 {
@@ -28,9 +30,16 @@ class PropertyNotification extends Notification
      *
      * @return array<int, string>
      */
-    public function via(object $notifiable): array
+    public function via($notifiable)
     {
-        return ['mail'];
+        return [DashboardChannel::class];
+    }
+
+    public function toDashboard($notifiable)
+    {
+        return (new DashboardMessage)
+            ->title($this->title)
+            ->message( $this->text);
     }
 
     /**

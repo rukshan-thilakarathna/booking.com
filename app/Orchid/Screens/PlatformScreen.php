@@ -6,6 +6,8 @@ namespace App\Orchid\Screens;
 
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use App\Models\User;
+use App\Notifications\PropertyNotification;
 
 class PlatformScreen extends Screen
 {
@@ -52,6 +54,10 @@ class PlatformScreen extends Screen
      */
     public function layout(): iterable
     {
+
+        // $user = User::find(19);
+        // $user->notify(new PropertyNotification('text' ,'hi rukshan'));
+
         return [
             Layout::view('platform::partials.update-assets'),
             Layout::view('platform::partials.welcome'),

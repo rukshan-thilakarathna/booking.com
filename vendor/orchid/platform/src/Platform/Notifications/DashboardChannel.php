@@ -9,6 +9,10 @@ use Illuminate\Notifications\Notification;
 
 class DashboardChannel extends DatabaseChannel
 {
+
+
+   
+
     /**
      * Build an array payload for the DatabaseNotification model.
      *

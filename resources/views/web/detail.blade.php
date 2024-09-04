@@ -171,17 +171,17 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="main-content">
-                        
+
                         <main style="margin-bottom: 30px;position: relative;">
                             <span style="position: absolute;top: 0;z-index: 5;right: 0;" class="rating"><img id="id_{{$property->id}}" style="border-radius: 17px;width: 35px;height: 35px;padding: 7px;" data-url="{{ route('web.add-wishlist', $property->id) }}"  data-id="{{$property->id}}" src="{{in_array($property->id,$wishlist_array) ? asset('web/heart.png') : asset('web/heart2.png')}}" alt="hart" class="x1i1"></span>
                                     @php
                                         $image_array = explode(',', $property->image);
-                                    @endphp 
+                                    @endphp
                             <div class="container">
                                 <div id="gallery" class="photos-grid-container gallery">
                                     <div class="main-photo img-box" style="background: url('{{asset('Property/Images/'.$image_array[1])}}');">
                                         <a href="{{asset('Property/Images/'.$image_array[0])}}" class="glightbox" data-glightbox="type: image">
-                                            <img src="{{asset('Property/Images/'.$image_array[0])}}" alt="">  
+                                            <img src="{{asset('Property/Images/'.$image_array[0])}}" alt="">
                                         </a>
                                     </div>
                                 <div>
@@ -211,7 +211,7 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                            
+
                                         </a>
                                     </div>
                                 </div>
@@ -227,14 +227,14 @@
                             </div>
                         </main>
 
-                        <div class="title">
+                        <div class="title" style="    margin-bottom: 20px;">
                             <div class="left">
                                 <h1>{{$property->name}} In {{$property->district->name_en}}</h1>
-                                <h3><a href="#">{{$property->propertyType->name}}</a></h3>
+{{--                                <h3><a href="#">{{$property->propertyType->name}}</a></h3>--}}
                             </div>
                             <div class="right">
-                                <a href="#map" class="btn btn-primary btn-rounded scroll">See on the map</a>
-                                <a href="#availability" class="btn btn-primary btn-rounded scroll">Reserve Now</a>
+                                <a href="#map" class="btn btn-primary btn-rounded scroll">map</a>
+                                <a href="#availability" class="btn btn-primary btn-rounded scroll" style="    background: #ff4f4f;">Book Now</a>
                             </div>
                         </div>
                         <div class="row">
@@ -288,28 +288,28 @@
                                     <div class="col-md-3">
                                         <div class="form-group" style="background:#f5f5f5a3;padding: 15px;border-radius: 6px;margin: 0;">
                                             <label for="form-availability-check-in">Check In </label>
-                                            <input required style="height: 34px;" value="{{$UrlData['chackIn'] ?? ''}}"  type="date" class="form-control" id="form-availability-check-in" name="checkIn" placeholder="Check In">
+                                            <input required style="height: 34px;" value="{{session('chackIn') ?? $UrlData['chackIn'] ?? ''}}"  type="date" class="form-control" id="form-availability-check-in" name="checkIn" placeholder="Check In">
                                         </div>
                                     </div>
                                     <!--end col-md-3-->
                                     <div class="col-md-3">
                                         <div class="form-group" style="background:#f5f5f5a3;padding: 15px;border-radius: 6px;margin: 0;">
                                             <label for="form-availability-check-out">Check Out</label>
-                                            <input required style="height: 34px;" value="{{$UrlData['chackOut'] ?? ''}}" type="date" class="form-control" id="form-availability-check-out" name="checkOut" placeholder="Check In">
+                                            <input required style="height: 34px;" value="{{session('chackOut') ?? $UrlData['chackOut'] ?? ''}}" type="date" class="form-control" id="form-availability-check-out" name="checkOut" placeholder="Check In">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
-                                        <div class="form-group" style="background:#f5f5f5a3;padding: 15px;border-radius: 6px;margin: 0;">   
+                                        <div class="form-group" style="background:#f5f5f5a3;padding: 15px;border-radius: 6px;margin: 0;">
                                             <label for="form-availability-check-out">Adults</label>
-                                            <input  required type="number" value="{{$UrlData['adults'] ?? 0}}" class="form-control" id="form-availability-check-out" name="adults" placeholder="Check In">
+                                            <input  required type="number" value="{{ session('adults') ?? $UrlData['adults'] ?? 0}}" class="form-control" id="form-availability-check-out" name="adults" placeholder="Check In">
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group" style="background:#f5f5f5a3;padding: 15px;border-radius: 6px;margin: 0;">
                                             <label for="form-availability-check-out">Children</label>
-                                            <input required type="number" value="{{$UrlData['children'] ?? 0}}" class="form-control" id="form-availability-check-out" name="children" placeholder="Check In">
+                                            <input required type="number" value="{{ session('children') ?? $UrlData['children'] ?? 0}}" class="form-control" id="form-availability-check-out" name="children" placeholder="Check In">
                                         </div>
                                     </div>
 
@@ -333,7 +333,7 @@
                                 <div style="margin-bottom: 27px;background: #ffdb23;padding: 26px;color: #000000;border-radius: 10px;">
                                     <h3 style="display: flex;justify-content: space-between;align-items: center;font-size: 25px;">{{$roomType->name}}<a target="_blank" href="{{route('web.page.property-type-detail',$roomType->id)}}" class="btn btn-primary btn-rounded pull-right scroll">More Information</a></h3>
                                     <p style="padding: 7px 0;">{{$roomType->disription}}</p>
-                                </div> 
+                                </div>
                                 @php
                                     $rooms = Rooms::where('room_type_id',$roomType->id)->get();
                                 @endphp
@@ -364,10 +364,10 @@
                                                 <td class="persons">
                                                     <ul>
                                                         <li>Adults - {{$room->adults}}
-                                                            
+
                                                         </li>
                                                         <li>Children - {{$room->Children}}
-                                                           
+
                                                         </li>
                                                     </ul>
                                                 </td>
@@ -418,12 +418,13 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="main-content">
-                        
-                        
+
+                        @if(count($reviews) > 0)
                         <section id="reviews">
                             <div class="title">
                                 <h2 class="pull-left">Reviews</h2>
                             </div>
+
                             <div class="reviews">
                                 @foreach($reviews as $review)
                                     @if($review->guest_id == null)
@@ -450,13 +451,13 @@
                             </div>
                             <!--end reviews-->
                         </section>
-
+                        @endif
                         <section id="z6se1">
                             <div class="w wrapper" style="width: 100%;">
 
-                                <h1 class="z5h1">Top rated hotels</h1>
-                                <p style="color: #000000;">Enjoy your valuable days with comfortable zone</p>
-                                <ul class="carousel" style="    margin-top: 40px;">
+                                <h1 class="z5h1">Find another property</h1>
+                                <p style="color: #000000;    padding-left: 0;">Enjoy your valuable days with comfortable zone</p>
+                                <ul class="carousel" style="    margin-top: 15px;">
 
                                     @foreach($PromotionBar01 as $PromotionCard)
                                         @php

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{asset('web/assets/bootstrap/css/bootstrap.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/css/zabuto_calendar.min.css')}}" type="text/css">
 @endsection
- 
+
 @section('style')
     <style>
         #_3:before{content: '';position: absolute;width: 120%;bottom: 0;height: 4px;left: 0;background: var(--cyan);z-index: 1;margin-left: -4px;}
@@ -32,25 +32,25 @@
                             <form id="form-filter" class="labels-uppercase">
                                 <div class="form-group-inline" style="display: flex;flex-direction: column">
                                     <div class="form-group" style="padding: 0;">
-                                        <label for="form-filter-check-in">Check In</label>
-                                        <input type="date" class="form-control" id="form-filter-check-in" value="{{$checkIn}}" name="checkIn" placeholder="Check In">
+                                        <label for="form-filter-check-in">Check In </label>
+                                        <input type="date" class="form-control" id="form-filter-check-in" value="{{ session('checkIn') ?? $checkIn}}" name="checkIn" placeholder="Check In">
                                     </div>
                                     <!--end form-group-->
                                     <div class="form-group">
                                         <label for="form-filter-check-in">Check Out</label>
-                                        <input type="date" class="form-control" id="form-filter-check-in" value="{{$checkOut}}" name="checkOut" placeholder="Check In">
+                                        <input type="date" class="form-control" id="form-filter-check-in" value="{{session('checkOut') ??  $checkOut}}" name="checkOut" placeholder="Check In">
                                     </div>
                                 </div>
 
                                 <div class="form-group-inline">
                                         <div class="form-group">
                                             <label for="form-filter-check-in">Min Price</label>
-                                            <input type="number" class="form-control" id="form-filter-check-out" value="{{$minPrice}}" name="min" placeholder="Min">
+                                            <input type="number" class="form-control" id="form-filter-check-out" value="{{session('minPrice') ?? $minPrice}}" name="min" placeholder="Min">
                                         </div>
                                         <!--end form-group-->
                                         <div class="form-group">
                                             <label for="form-filter-check-out">Max Price</label>
-                                            <input type="number" class="form-control" id="form-filter-check-out" value="{{$maxPrice}}" name="max" placeholder="Max">
+                                            <input type="number" class="form-control" id="form-filter-check-out" value="{{session('maxPrice') ??  $maxPrice}}" name="max" placeholder="Max">
                                         </div>
                                     </div>
                                 <!--end form-group-inline-->
@@ -95,7 +95,7 @@
                                 <!--end collapse-->
                                 <div class="form-group center">
                                     <button type="submit" class="btn btn-primary btn-rounded form-control">Search</button>
-                                    
+
                                 </div>
                             </form>
                             <!--end form-filter-->
@@ -123,7 +123,7 @@
                                         <a href="{{route('web.page.detail',$item->id)}}" class="wrapper">
 
                                             <div class="gallery">
-                                                
+
                                                 <img {{count($image_array)}} src="{{asset('Property/Images/'.$image_array[0])}}" alt="">
 
                                                 @foreach($image_array as $key => $image)
@@ -144,7 +144,7 @@
                                 </div>
                                 <!--end image-->
                                 <div class="description">
-                                    
+
                                     <!--end meta-->
                                     <div class="info">
                                         <a href="{{route('web.page.detail',$item->id)}}"><h3 style="font-size: 20px;font-weight: 400;color: #060724;">{{$item->name}}</h3></a>
@@ -158,14 +158,14 @@
 
                                         @endphp
 
-                                        
+
 
                                         <div style="display: flex;flex-wrap: wrap;">
                                             @forEach($fnames as  $fname)
                                                 <figure style="background: #6c6c70;color: #ffffff;padding: 4px 8px;margin: 2px;" class="label label-info">{{$fname->name}}</figure>
                                             @endforeach
                                         </div>
-                                        
+
                                         <p style="font-size: 11px !important;">{{$item->description}}</p>
                                         <a href="{{route('web.page.detail',$item->id)}}" class="btn btn-rounded btn-default btn-framed btn-small">View detail</a>
                                     </div>

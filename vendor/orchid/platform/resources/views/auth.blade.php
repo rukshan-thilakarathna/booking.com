@@ -50,7 +50,7 @@
     @endif
     <style>
         .rik_login{
-            background:url({{asset('web/img/bg_login.jpg')}});
+            background:url('{{asset('web/img/69ca67f002.jpg')}}');
             background-size: cover;
 
         }
@@ -64,16 +64,25 @@
     <div class="row justify-content-center d-md-flex h-100">
         @yield('aside')
 
-        <div class="col-xxl col-xl-9 col-12 rik_login" >
-            <div class="container-md" >
+        <div class="col-xxl col-xl-9 col-12 rik_login" style="position: relative;">
+        <a href="/" style="
+  background: #ffffff;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    top: 14px;
+    position: absolute;
+    right: 22px;
+"><img src="{{asset('web/img/home-button.png')}}" style="width: 40px;"></a>
+            <div class="row" >
+           
+            <div class="container-md col-8" style=" background:url('{{asset('web/img/69ca67f002.jpg')}}');background-size: cover;    background-position: center;">
+           
+            </div>
+            <div class="container-md col-4"  style="background: #ffffff;">
                 <div class="form-signin h-full min-vh-100 d-flex flex-column justify-content-center">
-
-                    <a class="d-flex justify-content-center mb-4 p-0 px-sm-5" href="{{Dashboard::prefix()}}">
-                        @includeFirst([config('platform.template.header'), 'platform::header'])
-                    </a>
-
                     <div class="row justify-content-center">
-                        <div class="col-md-10 col-lg-5 col-xxl-5 px-md-5">
+                        <div class="col-md-10  px-md-5">
                             <div class="bg-white p-4 p-sm-5 rounded shadow-sm">
                                 @yield('content')
                             </div>
@@ -81,6 +90,7 @@
                     </div>
                     @includeFirst([config('platform.template.footer'), 'platform::footer'])
                 </div>
+            </div>
             </div>
         </div>
     </div>

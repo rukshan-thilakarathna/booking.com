@@ -1,9 +1,12 @@
 <?php
 namespace App\Orchid\Screens\Property;
 
+use App\Mail\smsMail;
 use App\Models\Properties;
 use App\Models\Rooms;
 use App\Models\RoomType;
+use App\Models\User;
+use App\Notifications\PropertyNotification;
 use App\Orchid\Layouts\Property\PropertiesListLayout;
 use App\Orchid\Layouts\Rooms\RoomCreateAndUpdateLayout;
 use App\Orchid\Layouts\RoomType\FullPropertyFacilitiesLayout;
@@ -14,6 +17,7 @@ use App\Orchid\Layouts\RoomType\RoomTypeRoomFacilitiesLayout;
 use App\Orchid\Layouts\RoomType\RoomTypeViewFacilitiesLayout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
@@ -78,7 +82,7 @@ class PropertyListScreen extends Screen
             return 'A comprehensive list of all registered users, including their profiles and privileges.';
 
         }
-       
+
     }
 
     public function permission(): ?iterable
@@ -274,11 +278,20 @@ class PropertyListScreen extends Screen
 
     public function actve(Request $request): void
     {
-        $property = Properties::findOrFail($request->get('id')); // Find the property by ID
+        $property = Properties::with('propertyOwner')->findOrFail($request->get('id')); // Find the property by ID
         $property->status = 1; // Set the status to 1
         $property->save();
 
-        Toast::info(__('Property was Actve'));
+         $user = User::find($property->user_id);
+         $user->notify(new PropertyNotification('Property approved',$property->name.' is activated'));
+
+        $data = [
+            'subject' => 'Property approved',
+            'message' => $property->name.' is activated',
+        ];
+        Mail::to($property->propertyOwner->email)->send(new smsMail($data));
+
+        Toast::info(__('Property Has Actve'));
     }
 
     public function hold(Request $request): void
@@ -286,6 +299,15 @@ class PropertyListScreen extends Screen
         $property = Properties::findOrFail($request->get('id')); // Find the property by ID
         $property->status = 3; // Set the status to 1
         $property->save();
+
+        $user = User::find($property->user_id);
+        $user->notify(new PropertyNotification('Property Hold',$property->name.' is hold'));
+
+        $data = [
+            'subject' => 'Property Hold',
+            'message' => $property->name.' is hold',
+        ];
+        Mail::to($property->propertyOwner->email)->send(new smsMail($data));
 
         Toast::info(__('Property has suspended'));
     }

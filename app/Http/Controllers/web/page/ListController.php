@@ -17,7 +17,7 @@ class ListController extends Controller
     public function Index(Request $request)
     {
 
-        
+
         $destination = $request->input('destination') ?? [];
         $propertyType = $request->input('pt') ?? [];
         $PropertyFacility = $request->input('PropertyFacility') ?? [];
@@ -27,6 +27,23 @@ class ListController extends Controller
         $minPrice = intval($request->input('min')) ?? 0;
         $maxPrice = intval($request->input('max')) ?? 0;
         $IsPrice = false;
+
+        // Save to session
+        session([
+            'destination' => $destination,
+            'propertyType' => $propertyType,
+            'PropertyFacility' => $PropertyFacility,
+            'checkIn' => $request->input('checkIn'),
+            'checkOut' => $request->input('checkOut'),
+            'adult' => $adult,
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice,
+            'IsPrice' => $IsPrice
+        ]);
+
+//        dd(session()->all());
+
+
 
         if($minPrice || $maxPrice){
             $IsPrice = true;
@@ -47,7 +64,7 @@ class ListController extends Controller
                 $room_property_id[$key] = $room->property_id;
             }
         }
-     
+
 
         if (!is_array($destination)){
             $destination = [$destination];
@@ -119,7 +136,7 @@ class ListController extends Controller
             $userupdateWishList = [];
         }
 
-        
+
 
         return view('web.list')->with([
             'list' => $list,
