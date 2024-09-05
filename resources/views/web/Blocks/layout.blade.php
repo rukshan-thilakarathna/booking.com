@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{asset('web/css/css.css')}}">
     <link rel="stylesheet" href="{{asset('web/assets/css/owl.carousel.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('web/assets/css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.css">
 
     @yield('links')
 

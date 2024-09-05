@@ -30,27 +30,30 @@
                         <div class="box filter">
                             <h2>Search</h2>
                             <form id="form-filter" class="labels-uppercase">
+
+                           
                                 <div class="form-group-inline" style="display: flex;flex-direction: column">
                                     <div class="form-group" style="padding: 0;">
-                                        <label for="form-filter-check-in">Check In </label>
-                                        <input type="date" class="form-control" id="form-filter-check-in" value="{{ session('checkIn') ?? $checkIn}}" name="checkIn" placeholder="Check In">
+                                        <label for="form-filter-check-in">Check In</label>
+                                        <input type="date" class="form-control" id="form-filter-check-in" value="{{ $checkIn}}" name="checkIn" placeholder="Check In">
                                     </div>
                                     <!--end form-group-->
+
                                     <div class="form-group">
-                                        <label for="form-filter-check-in">Check Out</label>
-                                        <input type="date" class="form-control" id="form-filter-check-in" value="{{session('checkOut') ??  $checkOut}}" name="checkOut" placeholder="Check In">
+                                        <label for="form-filter-check-out">Check Out</label>
+                                        <input type="date" class="form-control" id="form-filter-check-out" value="{{ $checkOut }}" name="checkOut" placeholder="Check Out">
                                     </div>
                                 </div>
 
                                 <div class="form-group-inline">
                                         <div class="form-group">
                                             <label for="form-filter-check-in">Min Price</label>
-                                            <input type="number" class="form-control" id="form-filter-check-out" value="{{session('minPrice') ?? $minPrice}}" name="min" placeholder="Min">
+                                            <input type="number" class="form-control" id="form-filter-check-out" value="{{$minPrice}}" name="min" placeholder="Min">
                                         </div>
                                         <!--end form-group-->
                                         <div class="form-group">
                                             <label for="form-filter-check-out">Max Price</label>
-                                            <input type="number" class="form-control" id="form-filter-check-out" value="{{session('maxPrice') ??  $maxPrice}}" name="max" placeholder="Max">
+                                            <input type="number" class="form-control" id="form-filter-check-out" value="{{$maxPrice}}" name="max" placeholder="Max">
                                         </div>
                                     </div>
                                 <!--end form-group-inline-->
@@ -113,8 +116,7 @@
                                 $image_array = explode(',', $item->image);
                                 $wishlist_array = Auth::check() ? explode(',', $userupdateWishList->wishlist) : [];
                             @endphp
-                            <div class="item list" style="border: 1px solid #b7b7b7;
-    border-radius: 10px;" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
+                            <div class="item list" style="border: 1px solid #b7b7b7;border-radius: 10px;" data-map-latitude="48.87" data-map-longitude="2.29" data-id="1">
                                 <div class="image-wrapper" style="border-radius: 10px 0px 0px 10px;overflow: hidden;">
                                     <div class="image" style="position: relative;">
                                     <div class="meta" style="position: absolute;z-index: 5;right: 0;">
@@ -238,4 +240,6 @@
             });
         });
     </script>
+
+
 @endsection

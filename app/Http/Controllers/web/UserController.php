@@ -107,10 +107,10 @@ class UserController extends Controller
             return bin2hex(random_bytes($length / 2));
         }
 
-        $userId = 1;
+      
         $token = generateEmailVerificationToken();
 
-        $link = route('user.email.verification',[$token,'thilakarathnarukshan9@gmail.com']);
+        $link = route('user.email.verification',[$token,$request->email]);
 
 
         $data = [
@@ -120,6 +120,7 @@ class UserController extends Controller
             'urltext' => 'Click This And verify now',
             'ISeMAIL' => 1
         ];
+        
         Mail::to($request->email)->send(new smsMail($data));
         return redirect()->route('user.registration',$role)->with(['success' => 'success! Check Your Email And Verify Your Email.']);
 

@@ -28,20 +28,28 @@ class ListController extends Controller
         $maxPrice = intval($request->input('max')) ?? 0;
         $IsPrice = false;
 
-        // Save to session
-        session([
-            'destination' => $destination,
-            'propertyType' => $propertyType,
-            'PropertyFacility' => $PropertyFacility,
-            'checkIn' => $request->input('checkIn'),
-            'checkOut' => $request->input('checkOut'),
-            'adult' => $adult,
-            'minPrice' => $minPrice,
-            'maxPrice' => $maxPrice,
-            'IsPrice' => $IsPrice
-        ]);
+        // dd($chackIn);
 
-//        dd(session()->all());
+        if(!empty($request->input('checkIn')) && !empty($request->input('checkOut')) ){
+
+            // dd($request->input('checkIn').'/'.$request->input('checkOut'));
+            session([
+                'destination' => $destination,
+                'propertyType' => $propertyType,
+                'PropertyFacility' => $PropertyFacility,
+                'checkIn' => $request->input('checkIn'),
+                'checkOut' => $request->input('checkOut'),
+                'adult' => $adult,
+                'minPrice' => $minPrice,
+                'maxPrice' => $maxPrice,
+                'IsPrice' => $IsPrice
+            ]);
+        }
+
+        // Save to session
+        
+
+    //    dd(session()->all());
 
 
 

@@ -9,6 +9,7 @@ use App\Orchid\Layouts\User\LegalDocumen02tLayout;
 use App\Orchid\Layouts\User\LegalDocument01Layout;
 use App\Orchid\Layouts\User\VerifiedLayout;
 use App\Orchid\Layouts\User\VerifyPendingLayout;
+use App\Notifications\PropertyNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Platform\Models\User;
@@ -165,7 +166,8 @@ class UserVerificationScreen extends Screen
         $users->update($userData);
 
 
-
+        $user = User::find(19);
+        $user->notify(new PropertyNotification(' New User Verify pending' ,Auth::user()->name.' pending  verification'));
 
         Toast::info(__('Verify request sended. And sended point 100. '));
     }

@@ -240,7 +240,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <section id="description">
-                                    <p>{{$property->description}}</p>
+                                    <p style="    padding-left: 0;">{{$property->description}}</p>
                                 </section>
                                 <section id="facilities">
                                     <h2>Facilities</h2>
@@ -394,9 +394,16 @@
                                                     {{$room->user_choice}}
                                                 </td>
                                                 <td>
-                                                    <div class="form-group">
-                                                        <button type="button"  data-toggle="modal" data-value="{{$room->id}}" data-target="#exampleModalCenter"  class="zbt1 btn btn-primary btn-rounded">Reserve Now</button>
-                                                    </div>
+                                                    @if (Auth()->user())
+                                                        <div class="form-group">
+                                                            <button type="button"  data-toggle="modal" data-value="{{$room->id}}" data-target="#exampleModalCenter"  class="zbt1 btn btn-primary btn-rounded">Reserve Now</button>
+                                                        </div>
+                                                    @else
+                                                        <div class="form-group">
+                                                            <button type="button" onclick="window.location.href='{{route('web.login')}}';"   class="zbt1 btn btn-primary btn-rounded">Reserve Now</button>
+                                                        </div>
+                                                    @endif
+                                                    
                                                     <!--end form-group-->
                                                 </td>
 
@@ -496,7 +503,7 @@
     <!--end page-content-->
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter" style="    opacity: 1;" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -644,8 +651,6 @@
             });
         });
     </script>
-     <script src="{{asset('web/js/slide2.js')}}"></script>
-     <script src="{{asset('web/js/js.js')}}"></script>
      <script src="{{asset('web/js/slide2.js')}}"></script>
     <script type="text/javascript" src="{{asset('web/assets/slider/slider.js')}}"></script>
 @endsection

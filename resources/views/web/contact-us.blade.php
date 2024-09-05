@@ -73,7 +73,9 @@
                                 <!--end col-md-8-->
                                 <div class="col-md-8">
                                     <h2>Map</h2>
-                                    <div id="contact-map" class="map"></div>
+                                    <div id="contact-map" class="map" style="    overflow: hidden;">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31740.421209992346!2d80.1913974458916!3d6.055933837852633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae173bb6932fce3%3A0x4a35b903f9c64c03!2sGalle!5e0!3m2!1sen!2slk!4v1725519637885!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    </div>
                                     <!--end contact-map-->
                                 </div>
                                 <!--end col-md-8-->

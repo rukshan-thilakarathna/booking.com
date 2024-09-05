@@ -101,17 +101,17 @@
             <div class="zd2">
             <form id="zfm1" action="{{route('web.page.list')}}" method="GET" style="display: flex;align-items: center;width: 100%;justify-content: space-between;">
                 <div class="zd3">
-                    <input type="text"  class="zin1" id="dates"   @if(session('checkIn') && session('checkOut'))placeholder="{{session('checkIn')}}/{{session('checkOut')}}" @else placeholder="checkin/checkout"  @endif  />
-                    <input type="hidden" name="checkIn" id="checkin" />
-                    <input type="hidden" name="checkOut" id="checkout" />
+                    <input type="text"  class="zin1" id="dates"   placeholder="checkin/checkout"  />
+                    <input type="hidden" name="checkIn" value="{{session('checkIn') ?? ''}}" id="checkin" />
+                    <input type="hidden" name="checkOut" value="{{session('checkOut') ?? ''}}" id="checkout" />
                     <div id="datepicker"></div>
                     <select name="destination" class="zin1" id="city" >
                         <option class="op" value="">City</option>
                         @foreach($destinations as $key => $destination)
-                            <option @if(session('destination')) selected @endif  class="op" style="text-align: left" value="{{$destination->id}}">{{$destination->name_en}}</option>
+                            <option  class="op" style="text-align: left" value="{{$destination->id}}">{{$destination->name_en}}</option>
                         @endforeach
                     </select>
-                    <input id="Guest"  name="adult" required type="number" class="zin1"  @if(session('adult')) placeholder="{{session('adult')}}" @else pplaceholder="Number of Guest"  @endif >
+                    <input id="Guest"  name="adult" value="" required type="number" class="zin1"   placeholder="Number of Guest"   >
                 </div>
                 <button id="sbt" type="submit" class="bt1">Search</button>
                 </form>
@@ -167,7 +167,7 @@
             <div class="fsb rikd1">
                 <h1 class="rikh1">Why Book with us?</h1>
                 <div class="rik1">
-                    Find Your Perfect Stay Easily with Booking.com’s Advanced Search Options
+                    Find Your Perfect Stay Easily with Barterbed.com’s Advanced Search Options
                 </div>
                 <div class="rik1">
                     Explore a Wide Variety of Accommodations
